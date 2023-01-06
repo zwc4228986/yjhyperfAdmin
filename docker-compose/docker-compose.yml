@@ -1,0 +1,62 @@
+version: '3.4'
+services:
+  hyperf:
+    build:
+      args:
+        ALPINE_VERSION: 3.16
+        PHP_BUILD_VERSION: 8.1
+        COMPOSER_VERSION: 2.3.10
+        SW_VERSION: v5.0.0
+      context: ./hyperf
+      dockerfile: Dockerfile
+    command: top
+    container_name: hyperf
+    environment:
+      - APP_ENV=dev
+      - TIMEZONE=Asia/Shanghais
+    restart: always
+    ports:
+      - "9703:9703"
+    volumes:
+      - ./hyperf/resolv.conf:/etc/resolv.conf
+      - ../api-service:/opt/www
+    links:
+      - mysql
+      - redis
+    depends_on:
+      - mysql
+      - redis
+    networks:
+      app_net:
+        ipv4_address: 192.168.10.2
+  mysql:
+    container_name: hyperf-mysql
+#    image: "mysql:5.7.39"
+    image: daocloud.io/library/mysql:5.7.5-m15 #M1芯片可以采用这个镜像
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+    volumes:
+      - "./mysql/data:/var/lab/mysql"
+    networks:
+      app_net:
+        ipv4_address: 192.168.10.1
+  redis:
+    container_name: hyperf-redis
+    image: redis:4-alpine
+    ports:
+      - "16379:6379"
+    sysctls:
+      net.core.somaxconn: 65535
+    restart: always
+    networks:
+      app_net:
+        ipv4_address: 192.168.10.0
+networks: #网络配置
+  app_net: #网络名称
+    driver: bridge
+    ipam: #网络配置
+      config:
+        - subnet: 192.168.0.0/24
+
