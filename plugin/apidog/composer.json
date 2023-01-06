@@ -1,0 +1,20 @@
+{
+    "name": "yj-hyperf-admin-pligin/apidog",
+    "autoload": {
+        "psr-4": {
+            "YjHyperfAdminPligin\\Apidog\\": "src/"
+        }
+    },
+    "extra": {
+        "hyperf": {
+            "config": "YjHyperfAdminPligin\\Apidog\\ConfigProvider"
+        }
+    },
+    "authors": [
+        {
+            "name": "zhouwenchang",
+            "email": "1324028467@qq.com"
+        }
+    ],
+    "require": {}
+}

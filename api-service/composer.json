@@ -31,6 +31,7 @@
         "hyperf/memory": "~3.0.0",
         "hyperf/process": "~3.0.0",
         "hyperf/redis": "~3.0.0",
+        "yj-hyperf-admin-pligin/apidog": "dev-main",
         "yj-hyperf-admin-pligin/email": "dev-main"
     },
     "require-dev": {
@@ -39,7 +40,8 @@
         "hyperf/testing": "~3.0.0",
         "mockery/mockery": "^1.0",
         "phpstan/phpstan": "^1.0",
-        "swoole/ide-helper": "^5.0"
+        "swoole/ide-helper": "^5.0",
+        "symfony/var-dumper": "^6.2"
     },
     "suggest": {
         "ext-openssl": "Required to use HTTPS.",

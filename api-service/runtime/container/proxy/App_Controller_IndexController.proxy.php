@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare (strict_types=1);
 /**
  * This file is part of Hyperf.
  *
@@ -15,18 +15,23 @@ use Hyperf\HttpServer\Annotation\AutoController;
 use Hyperf\HttpServer\Annotation\Controller;
 use YjHyperfAdminPligin\Apidog\Annotation\Api;
 use YjHyperfAdminPligin\Apidog\Annotation\ApiPost;
-
 #[Api(prefix: 'index')]
 class IndexController extends AbstractController
 {
+    use \Hyperf\Di\Aop\ProxyTrait;
+    use \Hyperf\Di\Aop\PropertyHandlerTrait;
+    function __construct()
+    {
+        if (method_exists(parent::class, '__construct')) {
+            parent::__construct(...func_get_args());
+        }
+        $this->__handlePropertyHandler(__CLASS__);
+    }
     #[ApiPost(path: 'index')]
     public function index()
     {
         $user = $this->request->input('user', 'Hyperf');
         $method = $this->request->getMethod();
-        return [
-            'method' => $method,
-            'message' => "Hello {$user}.",
-        ];
+        return ['method' => $method, 'message' => "Hello {$user}."];
     }
 }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ea235dc8c0d14a82fe9dbbc7f6be0be5",
+    "content-hash": "687d515446f937124f20ce08f8a461d0",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -4381,12 +4381,41 @@
             "time": "2022-10-16T01:01:54+00:00"
         },
         {
+            "name": "yj-hyperf-admin-pligin/apidog",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "../plugin/apidog",
+                "reference": "8d0cc66360339357b74f54df7bc1f934a087c89e"
+            },
+            "type": "library",
+            "extra": {
+                "hyperf": {
+                    "config": "YjHyperfAdminPligin\\Apidog\\ConfigProvider"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "YjHyperfAdminPligin\\Apidog\\": "src/"
+                }
+            },
+            "authors": [
+                {
+                    "name": "zhouwenchang",
+                    "email": "1324028467@qq.com"
+                }
+            ],
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
             "name": "yj-hyperf-admin-pligin/email",
             "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "../plugin/email",
-                "reference": "cebc90de330708533cdc52e27210e0f3e3f8dd69"
+                "reference": "5b305ba76afc8816fb65b0f36dfa03ceecd0f414"
             },
             "require": {
                 "phpmailer/phpmailer": "6.*"
@@ -7342,6 +7371,94 @@
             "time": "2022-09-28T16:00:52+00:00"
         },
         {
+            "name": "symfony/var-dumper",
+            "version": "v6.2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/var-dumper.git",
+                "reference": "fdbadd4803bc3c96ef89238c9c9e2ebe424ec2e0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/fdbadd4803bc3c96ef89238c9c9e2ebe424ec2e0",
+                "reference": "fdbadd4803bc3c96ef89238c9c9e2ebe424ec2e0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1",
+                "symfony/polyfill-mbstring": "~1.0"
+            },
+            "conflict": {
+                "phpunit/phpunit": "<5.4.3",
+                "symfony/console": "<5.4"
+            },
+            "require-dev": {
+                "ext-iconv": "*",
+                "symfony/console": "^5.4|^6.0",
+                "symfony/process": "^5.4|^6.0",
+                "symfony/uid": "^5.4|^6.0",
+                "twig/twig": "^2.13|^3.0.4"
+            },
+            "suggest": {
+                "ext-iconv": "To convert non-UTF-8 strings to UTF-8 (or symfony/polyfill-iconv in case ext-iconv cannot be used).",
+                "ext-intl": "To show region name in time zone dump",
+                "symfony/console": "To use the ServerDumpCommand and/or the bin/var-dump-server script"
+            },
+            "bin": [
+                "Resources/bin/var-dump-server"
+            ],
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "Resources/functions/dump.php"
+                ],
+                "psr-4": {
+                    "Symfony\\Component\\VarDumper\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Provides mechanisms for walking through any arbitrary PHP variable",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "debug",
+                "dump"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/var-dumper/tree/v6.2.3"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2022-12-22T17:55:15+00:00"
+        },
+        {
             "name": "theseer/tokenizer",
             "version": "1.2.1",
             "source": {
@@ -7395,6 +7512,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "yj-hyperf-admin-pligin/apidog": 20,
         "yj-hyperf-admin-pligin/email": 20
     },
     "prefer-stable": true,
