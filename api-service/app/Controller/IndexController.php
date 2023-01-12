@@ -11,6 +11,9 @@ declare(strict_types=1);
  */
 namespace App\Controller;
 
+use App\Modules\User\Logic\Login\ScanQrcodeLogic;
+use App\Modules\User\Logic\User\UserCreateLogic;
+use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Annotation\AutoController;
 use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\View\RenderInterface;
@@ -23,6 +26,7 @@ use function Hyperf\ViewEngine\view;
 #[Api(prefix: '')]
 class IndexController extends AbstractController
 {
+
     #[ApiGet(path: '/')]
     public function index(RenderInterface $render)
     {

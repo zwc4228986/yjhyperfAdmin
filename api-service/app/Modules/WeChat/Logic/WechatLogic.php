@@ -15,6 +15,10 @@ class WechatLogic
     use ApplicationTrait;
 
     #[Inject]
+    protected ScanQrcodeLoginHandler $scanQrcodeLoginHandler;
+
+
+    #[Inject]
     protected ClientFactory $clientFactory;
 
     private $url = '/cgi-bin/qrcode/create';
@@ -42,13 +46,13 @@ class WechatLogic
         return $this->getApp()->getClient()->get('/cgi-bin/user/info',[
             'openid' => $openid,
             'lang'=>'zh_CN',
-        ]);
+        ])->toArray();
     }
 
     public function service()
     {
         $server = $this->getApp()->setRequest(make(RequestInterface::class))->getServer();
-        $server->with(ScanQrcodeLoginHandler::class);
+        $server->with($this->scanQrcodeLoginHandler);
 //        $server->with(function($message, \Closure $next) {
 //            dump($message);
 //            // 你的自定义逻辑

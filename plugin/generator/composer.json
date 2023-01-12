@@ -2,7 +2,12 @@
     "name": "yj-hyperf-admin-pligin/generator",
     "autoload": {
         "psr-4": {
-            "yjHyperfAdminPligin\\Generator\\": "src/"
+            "YjHyperfAdminPligin\\Generator\\": "src/"
+        }
+    },
+    "extra": {
+        "hyperf": {
+            "config": "YjHyperfAdminPligin\\Generator\\ConfigProvider"
         }
     },
     "authors": [

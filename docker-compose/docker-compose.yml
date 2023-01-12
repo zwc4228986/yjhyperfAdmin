@@ -1,4 +1,5 @@
-version: '3.4'
+version: '3.9'
+name: yjHyperfAdmin
 services:
   hyperf:
     build:
@@ -26,9 +27,6 @@ services:
     depends_on:
       - mysql
       - redis
-    networks:
-      app_net:
-        ipv4_address: 192.168.10.2
   mysql:
     container_name: hyperf-mysql
 #    image: "mysql:5.7.39"
@@ -39,24 +37,13 @@ services:
       MYSQL_ROOT_PASSWORD: "root"
     volumes:
       - "./mysql/data:/var/lab/mysql"
-    networks:
-      app_net:
-        ipv4_address: 192.168.10.1
   redis:
     container_name: hyperf-redis
     image: redis:4-alpine
     ports:
-      - "16379:6379"
+      - "38379:6379"
     sysctls:
       net.core.somaxconn: 65535
     restart: always
-    networks:
-      app_net:
-        ipv4_address: 192.168.10.0
-networks: #网络配置
-  app_net: #网络名称
-    driver: bridge
-    ipam: #网络配置
-      config:
-        - subnet: 192.168.0.0/24
+
 

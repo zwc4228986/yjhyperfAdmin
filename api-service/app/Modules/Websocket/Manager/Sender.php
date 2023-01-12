@@ -11,7 +11,14 @@ class Sender
         $this->container = $container;
     }
 
-    public function send(int $fd,string $event,array $data){
+
+
+    public function send(int $fd,string $event,array $data, $serverId = null){
+        if(!is_null($serverId)){
+            if($serverId != SERVER_RUN_ID){
+                return false;
+            }
+        }
         return $this->getSender()->push($fd,json_encode(compact('event', 'data')));
     }
 
