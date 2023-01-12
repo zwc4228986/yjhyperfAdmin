@@ -1,0 +1,14 @@
+{
+    "name": "yj-hyperf-admin-pligin/generator",
+    "autoload": {
+        "psr-4": {
+            "yjHyperfAdminPligin\\Generator\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "zhouwenchang",
+            "email": "1324028467@qq.com"
+        }
+    ]
+}

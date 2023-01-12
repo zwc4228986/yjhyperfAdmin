@@ -16,6 +16,7 @@ error_reporting(E_ALL);
 
 ! defined('BASE_PATH') && define('BASE_PATH', dirname(__DIR__, 1));
 ! defined('SWOOLE_HOOK_FLAGS') && define('SWOOLE_HOOK_FLAGS', SWOOLE_HOOK_ALL);
+! defined('SERVER_RUN_ID') && define('SERVER_RUN_ID', uniqid());
 
 require BASE_PATH . '/vendor/autoload.php';
 

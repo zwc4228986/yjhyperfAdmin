@@ -11,6 +11,9 @@ declare(strict_types=1);
  */
 return [
     'scan' => [
+        'collectors' => [
+            \YjHyperfAdminPligin\Apidog\AnnotationCollector::class,
+        ],
         'paths' => [
             BASE_PATH . '/app',
         ],

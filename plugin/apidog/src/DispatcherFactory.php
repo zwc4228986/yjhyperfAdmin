@@ -8,12 +8,10 @@ use Hyperf\HttpServer\Annotation\Mapping;
 use Hyperf\HttpServer\Router\DispatcherFactory as HyperfDispatcherFactory;
 use Hyperf\HttpServer\Router\RouteCollector;
 use Hyperf\HttpServer\Router\Router;
-use YjHyperfAdminPligin\Apidog\Annotation\Api;
-
+use YjHyperfAdminPligin\Apidog\Annotations\Api;
 
 class DispatcherFactory extends HyperfDispatcherFactory
 {
-
     protected function handleController(string $className, Controller $annotation, array $methodMetadata, array $middlewares = []): void
     {
         if (!$methodMetadata) {

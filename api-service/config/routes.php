@@ -15,3 +15,8 @@ use Hyperf\HttpServer\Router\Router;
 Router::get('/favicon.ico', function () {
     return '';
 });
+
+Router::addServer('ws', function () {
+    Router::get('/login', \App\Modules\Websocket\Controller\LoginController::class);
+});
+

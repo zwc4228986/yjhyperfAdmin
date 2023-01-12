@@ -13,20 +13,19 @@ namespace App\Controller;
 
 use Hyperf\HttpServer\Annotation\AutoController;
 use Hyperf\HttpServer\Annotation\Controller;
-use YjHyperfAdminPligin\Apidog\Annotation\Api;
-use YjHyperfAdminPligin\Apidog\Annotation\ApiPost;
+use Hyperf\View\RenderInterface;
+use YjHyperfAdminPligin\Apidog\Annotations\Api;
+use YjHyperfAdminPligin\Apidog\Annotations\ApiGet;
+use YjHyperfAdminPligin\Apidog\Annotations\ApiParam;
+use YjHyperfAdminPligin\Apidog\Annotations\ApiPost;
+use function Hyperf\ViewEngine\view;
 
-#[Api(prefix: 'index')]
+#[Api(prefix: '')]
 class IndexController extends AbstractController
 {
-    #[ApiPost(path: 'index')]
-    public function index()
+    #[ApiGet(path: '/')]
+    public function index(RenderInterface $render)
     {
-        $user = $this->request->input('user', 'Hyperf');
-        $method = $this->request->getMethod();
-        return [
-            'method' => $method,
-            'message' => "Hello {$user}.",
-        ];
+        return  $render->render('index');
     }
 }
