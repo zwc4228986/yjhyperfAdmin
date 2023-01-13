@@ -33,6 +33,7 @@
         "hyperf/memory": "~3.0.0",
         "hyperf/process": "~3.0.0",
         "hyperf/redis": "~3.0.0",
+        "hyperf/session": "^3.0",
         "hyperf/snowflake": "^3.0",
         "hyperf/task": "^3.0",
         "hyperf/validation": "^3.0",
@@ -65,7 +66,8 @@
             "App\\": "app/"
         },
         "files": [
-            "app/Function/Common.php"
+            "app/Function/Common.php",
+            "app/Modules/Web/Helper/Common.php"
         ]
     },
     "autoload-dev": {

@@ -58,7 +58,7 @@ class ScanQrcodeLogic
 
             $token = CreateTokenLogic::init($userId)->create();
 
-            $this->sender->send($fd, 'login', ['token' => $token], $serviceId);
+            $this->sender->send($fd, 'login_success', ['token' => $token], $serviceId);
             Db::commit();
         }catch (\Exception $e) {
             Db::rollBack();

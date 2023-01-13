@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components;
+namespace App\Modules\Web\Components;
 
 use Hyperf\ViewEngine\Component\Component;
 use function Hyperf\ViewEngine\view;

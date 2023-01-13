@@ -27,9 +27,7 @@ class CreateTokenLogic
 
     public function create(){
         $this->createToken();
-
         $this->cacheToken();
-
         return $this->getToken();
     }
 
