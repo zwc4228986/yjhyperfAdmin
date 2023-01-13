@@ -9,18 +9,18 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
-use Hyperf\View\Engine\NoneEngine;
+
 use Hyperf\View\Mode;
 
 return [
     'engine' =>  Hyperf\ViewEngine\HyperfViewEngine::class,
-    'mode' => Mode::TASK,
+    'mode' => Mode::SYNC,
     'config' => [
-        'view_path' => BASE_PATH . '/storage/view/',
+        'view_path' => BASE_PATH . '/app/Modules/Web/View',
         'cache_path' => BASE_PATH . '/runtime/view/',
     ],
     'components' => [
-        'footer' => \App\View\Components\Footer::class,
-        'header' => \App\View\Components\Header::class,
+        'footer' => \App\Modules\Web\Components\Footer::class,
+        'header' => \App\Modules\Web\Components\Header::class,
     ],
 ];
