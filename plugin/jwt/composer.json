@@ -1,0 +1,19 @@
+{
+    "name": "yj-hyperf-admin-pligin/jwt",
+    "autoload": {
+        "psr-4": {
+            "YjHyperfAdminPligin\\Jwt\\": "src/"
+        }
+    },
+    "extra": {
+        "hyperf": {
+            "config": "YjHyperfAdminPligin\\Jwt\\ConfigProvider"
+        }
+    },
+    "authors": [
+        {
+            "name": "zhouwenchang",
+            "email": "1324028467@qq.com"
+        }
+    ]
+}
