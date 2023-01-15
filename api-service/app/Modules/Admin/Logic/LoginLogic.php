@@ -6,8 +6,9 @@
 
 namespace App\Modules\Admin\Logic;
 
-use App\Library\Login\LoginCode;
-use App\Library\Login\LoginLibrary;
+
+use App\Modules\Admin\Library\Login\LoginCode;
+use App\Modules\Admin\Library\LoginLibrary;
 
 class LoginLogic
 {
@@ -15,7 +16,7 @@ class LoginLogic
         $loginLibrary = LoginLibrary::init($username,$password,$type);
         $loginLibrary =  $loginLibrary->check();
         if($loginLibrary->code!==LoginCode::SUCCESS){
-            _Error((LoginCode::getMessage($loginLibrary->code)));
+            Error($loginLibrary->code);
         }
         return $loginLibrary->loginSuccess();
     }
