@@ -8,6 +8,7 @@ use App\Dao\System\SystemAdminDao;
 use App\Library\Token\SystemAdminCreateTokenLibrary;
 use App\Modules\Admin\Library\Login\CheckPassword;
 use App\Modules\Admin\Library\Login\CheckUsername;
+use App\Modules\User\Logic\User\CreateTokenLogic;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\Utils\Pipeline;
 
@@ -48,7 +49,7 @@ class LoginLibrary
 
     public function check(){
         $code = App(Pipeline::class)->send($this)->through($this->pipes)->then(function($data){
-            $this->token = SystemAdminCreateTokenLibrary::init($data->getAdminInfo()->id)->create();
+            $this->token = CreateTokenLogic::init($data->getAdminInfo()->id)->create();
             $this->code = 0;
         });
         is_null($this->code) && $this->code = $code;
