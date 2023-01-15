@@ -343,7 +343,7 @@ const login = async () => {
 		return false;
 	}
 	//获取token
-	var user = await request().params(FormParams).post('/admin/login/login')
+	var user = await request().params(FormParams).post('/admin/login')
 		.then(loginSuccess)
 		.finally(() => {
 			islogin.value = false;

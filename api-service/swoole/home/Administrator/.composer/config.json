@@ -1,9 +1,10 @@
 {
-    "config": {},
+    "config": {
+        "secure-http": false},
     "repositories": {
         "packagist": {
             "type": "composer",
-            "url": "https://repo.packagist.org/"
+            "url": "https://mirrors.cloud.tencent.com/composer/"
         }
     }
 }
