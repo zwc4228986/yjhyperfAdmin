@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Modules\Admin\Library;
+namespace App\Library\Login;
 
 
 
 use App\Dao\System\SystemAdminDao;
 use App\Library\Token\SystemAdminCreateTokenLibrary;
-use App\Modules\Admin\Library\Login\CheckPassword;
-use App\Modules\Admin\Library\Login\CheckUsername;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\Utils\Pipeline;
 
@@ -43,7 +41,7 @@ class LoginLibrary
     }
 
     public static function init($username,$password,$type){
-        return  new static($username,$password,$type);
+       return  new static($username,$password,$type);
     }
 
     public function check(){

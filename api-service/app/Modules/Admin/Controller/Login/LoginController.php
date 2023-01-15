@@ -26,6 +26,6 @@ class LoginController
     public function index(){
         $params = getParams();
         $data = $this->loginLogic->login($params->get('username'),$params->get('password'));
-        SUCCESS($data);
+        Success($data);
     }
 }
