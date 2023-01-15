@@ -42,7 +42,7 @@ class Validation
         if ($validator->fails()){
             // Handle exception
             $errorMessage = $validator->errors()->first();
-            dd($errorMessage);
+            ERROR($errorMessage);
         }
 
         Context::set('validator.data',$validator->validated() );
