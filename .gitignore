@@ -2,3 +2,4 @@
 vue/node_modules
 /api-service/vendor
 /api-service/runtime
+api-service/swoole/.DS_Store
