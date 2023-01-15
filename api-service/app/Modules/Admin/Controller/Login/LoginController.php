@@ -26,6 +26,10 @@ class LoginController
     public function index(){
         $params = getParams();
         $data = $this->loginLogic->login($params->get('username'),$params->get('password'));
+<<<<<<< HEAD
         Success($data);
+=======
+        SUCCESS($data);
+>>>>>>> 1ff3589 (我我)
     }
 }

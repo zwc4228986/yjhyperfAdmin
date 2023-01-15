@@ -6999,7 +6999,7 @@
             "dist": {
                 "type": "path",
                 "url": "../plugin/apidog",
-                "reference": "8d0cc66360339357b74f54df7bc1f934a087c89e"
+                "reference": "895533258a58e7d79274420c419f328bcdefaafb"
             },
             "type": "library",
             "extra": {
@@ -7028,7 +7028,7 @@
             "dist": {
                 "type": "path",
                 "url": "../plugin/email",
-                "reference": "5b305ba76afc8816fb65b0f36dfa03ceecd0f414"
+                "reference": "0b78611251091794903a49c99779b1d39057e61c"
             },
             "require": {
                 "phpmailer/phpmailer": "6.*"
@@ -7055,7 +7055,7 @@
             "dist": {
                 "type": "path",
                 "url": "../plugin/generator",
-                "reference": "a7c5cb8080bbcf9e37292201ccc5b867c7f53971"
+                "reference": "69776568f9d6dfc6960a5c3b65bb8eb340743f30"
             },
             "type": "library",
             "extra": {
