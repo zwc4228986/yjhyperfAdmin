@@ -44,7 +44,8 @@
         "w7corp/easywechat": "^6.10",
         "yj-hyperf-admin-pligin/apidog": "dev-main",
         "yj-hyperf-admin-pligin/email": "dev-main",
-        "yj-hyperf-admin-pligin/generator": "dev-main"
+        "yj-hyperf-admin-pligin/generator": "dev-main",
+        "yj-hyperf-admin-pligin/jwt": "dev-main"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.0",

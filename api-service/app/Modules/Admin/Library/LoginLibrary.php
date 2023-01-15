@@ -51,7 +51,7 @@ class LoginLibrary
 
     public function check(){
         $code = App(Pipeline::class)->send($this)->through($this->pipes)->then(function($data){
-            $this->token = SystemAdminCreateTokenLibrary::init($data->getAdminInfo()->id)->create();
+            $this->token = CreateTokenLogic::init($data->getAdminInfo()->id)->create();
             $this->code = 0;
         });
         is_null($this->code) && $this->code = $code;
