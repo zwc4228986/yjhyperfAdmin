@@ -45,7 +45,8 @@
         "yj-hyperf-admin-pligin/apidog": "dev-main",
         "yj-hyperf-admin-pligin/email": "dev-main",
         "yj-hyperf-admin-pligin/generator": "dev-main",
-        "yj-hyperf-admin-pligin/jwt": "dev-main"
+        "yj-hyperf-admin-pligin/jwt": "dev-main",
+        "yj-hyperf-admin-pligin/framework": "dev-main"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.0",

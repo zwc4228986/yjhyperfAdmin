@@ -59,7 +59,7 @@ class DbQueryExecutedListener implements ListenerInterface
                 }
             }
 
-            $this->logger->info(sprintf('[%s] %s', $event->time, $sql));
+            dump(sprintf('[%s] %s', $event->time, $sql));
         }
     }
 }

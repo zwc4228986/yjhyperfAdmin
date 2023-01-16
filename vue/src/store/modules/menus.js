@@ -14,7 +14,7 @@ export default {
 	actions: {
 		async getMenus({ commit, state }) {
 			if(state.list == null){
-				await http().post("/admin/menu/admin").then((data) => {
+				await http().post("/admin/menu/auth").then((data) => {
 					commit("SET_MENU_LIST", data);
 				});
 			}
@@ -22,7 +22,7 @@ export default {
 			return state.list;
 		},
 		async resetMenus({ commit, state }) {
-			await http().post("/admin/menu/admin").then((data) => {
+			await http().post("/admin/menu/auth").then((data) => {
 					commit("SET_MENU_LIST", data);
 			});
 			return state.list;

@@ -351,6 +351,7 @@ const login = async () => {
 };
 
 const loginSuccess = async (data) => {
+	console.log(data);
 	proxy.$TOOL.data.set("TOKEN", data.token);
 	await Store.dispatch("resetMenus");
 	await Store.dispatch("updateUserDetail");

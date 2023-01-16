@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dcb6f985d083b69c4aee684597e0ae77",
+    "content-hash": "8e99c3fcd02abc76b0b4758a7a52818e",
     "packages": [
         {
             "name": "doctrine/deprecations",
@@ -907,11 +907,16 @@
         },
         {
             "name": "hyperf/coordinator",
-            "version": "v3.0.0",
+            "version": "v3.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hyperf/coordinator.git",
+                "reference": "df75218d463af1acd98cae9e8f15675b1b64dfee"
+            },
             "dist": {
                 "type": "zip",
-                "url": "https://mirrors.cloud.tencent.com/repository/composer/hyperf/coordinator/v3.0.0/hyperf-coordinator-v3.0.0.zip",
-                "reference": "5759dd9153ea3789f0d8de0baf53d732016266cd",
+                "url": "https://api.github.com/repos/hyperf/coordinator/zipball/df75218d463af1acd98cae9e8f15675b1b64dfee",
+                "reference": "df75218d463af1acd98cae9e8f15675b1b64dfee",
                 "shasum": ""
             },
             "require": {
@@ -940,15 +945,26 @@
                 "php",
                 "swoole"
             ],
-            "time": "2022-11-01T02:50:54+00:00"
+            "support": {
+                "docs": "https://hyperf.wiki",
+                "issues": "https://github.com/hyperf/hyperf/issues",
+                "pull-request": "https://github.com/hyperf/hyperf/pulls",
+                "source": "https://github.com/hyperf/hyperf"
+            },
+            "time": "2023-01-11T04:01:35+00:00"
         },
         {
             "name": "hyperf/database",
-            "version": "v3.0.2",
+            "version": "v3.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hyperf/database.git",
+                "reference": "8b5ef59cfa6b3aec62356e60246dc77630f5a30a"
+            },
             "dist": {
                 "type": "zip",
-                "url": "https://mirrors.cloud.tencent.com/repository/composer/hyperf/database/v3.0.2/hyperf-database-v3.0.2.zip",
-                "reference": "bf78e28913cb05b4d4e6ce2dc29c4a4b7d806a56",
+                "url": "https://api.github.com/repos/hyperf/database/zipball/8b5ef59cfa6b3aec62356e60246dc77630f5a30a",
+                "reference": "8b5ef59cfa6b3aec62356e60246dc77630f5a30a",
                 "shasum": ""
             },
             "require": {
@@ -985,15 +1001,26 @@
                 "hyperf",
                 "php"
             ],
-            "time": "2023-01-09T08:28:48+00:00"
+            "support": {
+                "docs": "https://hyperf.wiki",
+                "issues": "https://github.com/hyperf/hyperf/issues",
+                "pull-request": "https://github.com/hyperf/hyperf/pulls",
+                "source": "https://github.com/hyperf/hyperf"
+            },
+            "time": "2023-01-12T10:04:57+00:00"
         },
         {
             "name": "hyperf/db-connection",
-            "version": "v3.0.2",
+            "version": "v3.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hyperf/db-connection.git",
+                "reference": "88aa0a30700ad9541f946bf933105900ac813215"
+            },
             "dist": {
                 "type": "zip",
-                "url": "https://mirrors.cloud.tencent.com/repository/composer/hyperf/db-connection/v3.0.2/hyperf-db-connection-v3.0.2.zip",
-                "reference": "d74360fc38d8f2abf0303faf32a2b1b3bc6003e5",
+                "url": "https://api.github.com/repos/hyperf/db-connection/zipball/88aa0a30700ad9541f946bf933105900ac813215",
+                "reference": "88aa0a30700ad9541f946bf933105900ac813215",
                 "shasum": ""
             },
             "require": {
@@ -1031,7 +1058,13 @@
                 "hyperf",
                 "php"
             ],
-            "time": "2023-01-09T08:49:03+00:00"
+            "support": {
+                "docs": "https://hyperf.wiki",
+                "issues": "https://github.com/hyperf/hyperf/issues",
+                "pull-request": "https://github.com/hyperf/hyperf/pulls",
+                "source": "https://github.com/hyperf/hyperf"
+            },
+            "time": "2023-01-11T10:01:35+00:00"
         },
         {
             "name": "hyperf/di",
@@ -5404,6 +5437,30 @@
             }
         },
         {
+            "name": "yj-hyperf-admin-pligin/framework",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "../plugin/framework",
+                "reference": "cdbbedff0fde15981b99ffc1d4dbbbc124a7b660"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "YjHyperfAdminPligin\\Framework\\": "src/"
+                }
+            },
+            "authors": [
+                {
+                    "name": "zhouwenchang",
+                    "email": "1324028467@qq.com"
+                }
+            ],
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
             "name": "yj-hyperf-admin-pligin/generator",
             "version": "dev-main",
             "dist": {
@@ -5438,7 +5495,7 @@
             "dist": {
                 "type": "path",
                 "url": "../plugin/jwt",
-                "reference": "66960b8370d79951c8e51572ff0cb676cc492c1c"
+                "reference": "1add48dd1965a8b616d5cd7e66d8973bb1892f90"
             },
             "type": "library",
             "extra": {
@@ -7533,7 +7590,8 @@
         "yj-hyperf-admin-pligin/apidog": 20,
         "yj-hyperf-admin-pligin/email": 20,
         "yj-hyperf-admin-pligin/generator": 20,
-        "yj-hyperf-admin-pligin/jwt": 20
+        "yj-hyperf-admin-pligin/jwt": 20,
+        "yj-hyperf-admin-pligin/framework": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

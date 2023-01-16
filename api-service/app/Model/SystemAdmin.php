@@ -12,10 +12,10 @@ namespace App\Model;
  * @property string $roles 
  * @property string $last_login_ip 
  * @property int $last_login_time 
- * @property int $create_time 
+ * @property \Carbon\Carbon $create_time 
  * @property int $login_count 
  * @property int $status 
- * @property int $update_time 
+ * @property \Carbon\Carbon $update_time 
  * @property int $delete_time 
  */
 class SystemAdmin extends Model
@@ -33,5 +33,5 @@ class SystemAdmin extends Model
     /**
      * The attributes that should be cast to native types.
      */
-    protected array $casts = ['id' => 'integer', 'last_login_time' => 'integer', 'create_time' => 'integer', 'login_count' => 'integer', 'status' => 'integer', 'update_time' => 'integer', 'delete_time' => 'integer'];
+    protected array $casts = ['id' => 'integer', 'last_login_time' => 'integer', 'create_time' => 'datetime', 'login_count' => 'integer', 'status' => 'integer', 'update_time' => 'datetime', 'delete_time' => 'integer'];
 }

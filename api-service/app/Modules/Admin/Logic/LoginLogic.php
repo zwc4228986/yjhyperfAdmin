@@ -12,6 +12,7 @@ use App\Modules\Admin\Library\LoginLibrary;
 
 class LoginLogic
 {
+
     public function login($username,$password,$type='password'){
         $loginLibrary = LoginLibrary::init($username,$password,$type);
         $loginLibrary =  $loginLibrary->check();
