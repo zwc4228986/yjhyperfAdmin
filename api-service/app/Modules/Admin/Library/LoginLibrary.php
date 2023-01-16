@@ -4,13 +4,9 @@ namespace App\Modules\Admin\Library;
 
 
 
-use App\Dao\System\SystemAdminDao;
-use App\Library\Token\SystemAdminCreateTokenLibrary;
-<<<<<<< HEAD
+use App\Modules\Admin\Dao\SystemAdminDao;
 use App\Modules\Admin\Library\Login\CheckPassword;
 use App\Modules\Admin\Library\Login\CheckUsername;
-=======
->>>>>>> 1ff3589 (我我)
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\Utils\Pipeline;
 use YjHyperfAdminPligin\Jwt\Jwt;

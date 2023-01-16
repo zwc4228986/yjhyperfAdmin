@@ -16,6 +16,7 @@ class Jwt
 
     public function guard(string $guard){
         $config = $this->config->get('jwt.guard')[$guard];
+        dump($config);
         $manager = new Manager($config['provider'], $config['driver']);
         return $manager;
     }

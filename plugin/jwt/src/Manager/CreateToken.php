@@ -18,7 +18,7 @@ class CreateToken
     }
 
     public function get(){
-        $token = $this->manager->getToken();
+        $token = $this->manager->createToken();
         $this->manager->getDriver()->set($this->manager->getProvider().$token,$this->manager->getId());
         return $token;
     }

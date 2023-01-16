@@ -10,12 +10,19 @@ trait TokenTrait
 {
     protected string $token;
 
+
     /**
      * @return string
      */
+    public function createToken(): string
+    {
+
+        return time() . rand(10000, 9999999);
+    }
+
     public function getToken(): string
     {
-        return time() . rand(10000, 9999999);
+        return $this->token;
     }
 
     /**
