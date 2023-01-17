@@ -16,4 +16,9 @@ class SystemAdminDao extends SystemAdmin
         'login_count',
         'status',
     ];
+
+    public function read(int $adminId)
+    {
+        return $this->where('id', $adminId)->first();
+    }
 }

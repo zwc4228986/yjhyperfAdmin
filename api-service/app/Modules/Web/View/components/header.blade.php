@@ -1,93 +1,85 @@
-
 <body>
 <main>
     <header class="shadow fixed-top" style="background: #fff;">
 
-    <nav class="navbar navbar-expand-lg  " aria-label="Fourth navbar example">
-        <div class="container">
-            <div class="dropdown navbar-brand">
-                <div class="nav-link dropdown-toggle" href="#" id="dropdown04" data-bs-toggle="dropdown"
-                     aria-expanded="false">DOUZIYUAN
+        <nav class="navbar navbar-expand-lg  " aria-label="Fourth navbar example">
+            <div class="container">
+                <div class="dropdown navbar-brand">
+                    <div class="nav-link dropdown-toggle" href="#" id="dropdown04" data-bs-toggle="dropdown"
+                         aria-expanded="false">抖资源
+                    </div>
+                    <ul class="dropdown-menu" aria-labelledby="dropdown04">
+                        @foreach ($nav as $item)
+                            <li><a class="dropdown-item" href="#">{{$item['name']}}</a></li>
+                        @endforeach
+                    </ul>
                 </div>
-                <ul class="dropdown-menu" aria-labelledby="dropdown04">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-            </div>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample04"
-                    aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarsExample04"
+                        aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-            <div class="collapse navbar-collapse" id="navbarsExample04">
-                <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="/">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Earn Gold Coins</a>
-                    </li>
-                </ul>
-                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-                    <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
-                </form>
-
-                <ul class="navbar-nav mb-2 mb-md-0">
-                    @if(!$isLogin)
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModel">
-                            Login
-                        </button>
-                    @else
-                        <li class="nav-item   dropdown">
-                            <a href="#" class="d-block  link-dark text-decoration-none dropdown-toggle"
-                               id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32"
-                                     class="rounded-circle">
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown04">
-                                <li><a class="dropdown-item" href="#">New project...</a></li>
-                                <li><a class="dropdown-item" href="#">Settings</a></li>
-                                <li><a class="dropdown-item" href="#">Profile</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="#">Sign out</a></li>
-                            </ul>
+                <div class="collapse navbar-collapse" id="navbarsExample04">
+                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="/">首页</a>
                         </li>
-                    @endif
-                </ul>
-            </div>
-        </div>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">赚金币</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">论坛</a>
+                        </li>
+                    </ul>
+                    <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+                        <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+                    </form>
 
-    </nav>
+                    <ul class="navbar-nav mb-2 mb-md-0">
+                        @if(!$isLogin)
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#loginModel">
+                                Login
+                            </button>
+                        @else
+                            <li class="nav-item   dropdown">
+                                <a href="#" class="d-block  link-dark text-decoration-none dropdown-toggle"
+                                   id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32"
+                                         class="rounded-circle">
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown04">
+                                    <li><a class="dropdown-item" href="#">New project...</a></li>
+                                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="#">Sign out</a></li>
+                                </ul>
+                            </li>
+                        @endif
+                    </ul>
+                </div>
+            </div>
+
+        </nav>
         <ul class="nav justify-content-center">
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">PPT</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">image</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
+            @foreach ($nav as $item)
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">{{$item['name']}}</a>
+                </li>
+            @endforeach
         </ul>
     </header>
-
-
 
 
 </main>
 
 
-
-<div class="modal fade" id="loginModel" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="loginModel" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog  modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -96,7 +88,8 @@
             </div>
             <div class="modal-body">
                 <div class="text-center">
-                    <img src="" style="width: 50px;height: 50px;" class="rounded img-thumbnail wechat_qrcodes" alt="...">
+                    <img src="" style="width: 50px;height: 50px;" class="rounded img-thumbnail wechat_qrcodes"
+                         alt="...">
                 </div>
             </div>
             <div class="modal-footer">

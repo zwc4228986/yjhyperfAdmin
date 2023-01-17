@@ -10,11 +10,20 @@ class MenuLogic
     #[Inject]
     protected SystemMenuDao $systemMenuDao;
 
-    public function lists(array $params = []){
+    public function lists(array $params = [])
+    {
 
     }
 
-    public function getListsByAdminId(int $adminId){
-        return $this->systemMenuDao->setAdminId($adminId)->get();
+    public function getListsByAdminId(int $adminId)
+    {
+        $data = $this->systemMenuDao->setAdminId($adminId)->orderBy('sort')->get();
+        $except = ['active', 'icon', 'params', 'type', 'title', 'hidden', 'position'];
+        $data->transform(function ($item) use ($except) {
+            $item = collect($item);
+            $item->offsetSet('meta', $item->only($except));
+            return $item;
+        });
+        return $data;
     }
 }
