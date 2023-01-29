@@ -5,7 +5,7 @@ import request from "@/utils/request";
 //上传配置
 
 export default {
-	apiObj: request().url('util/file/upload'), //上传请求API对象
+	apiObj: request().url('api/utils/file/upload'), //上传请求API对象
 	successCode: 200, //请求完成代码
 	maxSize: 200, //最大文件大小 默认10MB
 

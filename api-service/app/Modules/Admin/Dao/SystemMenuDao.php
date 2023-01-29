@@ -10,6 +10,22 @@ class SystemMenuDao extends SystemMenu
 {
     use AddWhereQueryTrait;
 
+    protected array  $fillable = [
+        'id',
+        'path',
+        'name',
+        'sort',
+        'pid',
+        'icon',
+        'color',
+        'title',
+        'hidden',
+        'active',
+        'position',
+        'type',
+        'component',
+    ];
+
     public function setAdminId(int $adminId):self
     {
         if($adminId != 1){
@@ -24,5 +40,16 @@ class SystemMenuDao extends SystemMenu
         $menu_ids =  App(SystemRolesMenuDao::class)->where('roles_id',$rolesId)
             ->pluck('menu_id')->toArray();
         return $menu_ids;
+    }
+
+    public function check($id, \Hyperf\Utils\Collection $params)
+    {
+        if ($path = $params->get('path')) {
+            if ($this->where('id', '<>', $id)
+                ->where('path', $path)
+                ->exists()) {
+                Error('path is exists');
+            }
+        }
     }
 }

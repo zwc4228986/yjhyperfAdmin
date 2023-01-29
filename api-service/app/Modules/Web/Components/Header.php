@@ -3,6 +3,7 @@
 namespace App\Modules\Web\Components;
 
 use App\Modules\Web\Logic\NavLogic;
+use App\Modules\Web\Logic\Product\ProductCategoryLogic;
 use Hyperf\Context\Context;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\ViewEngine\Component\Component;
@@ -15,11 +16,11 @@ class Header extends Component
 {
 
     #[Inject]
-    protected NavLogic $navLogic;
+    protected ProductCategoryLogic $productCategoryLogic;
 
     public function render(): mixed
     {
-        $nav = $this->navLogic->lists();
+        $nav = $this->productCategoryLogic->lists();
 
         $isLogin = isLogin();
         dump(Context::get('user_id'));

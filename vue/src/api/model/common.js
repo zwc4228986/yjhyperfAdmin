@@ -3,7 +3,7 @@ import http from "@/utils/request";
 
 export default {
 	upload: {
-		url: `${config.API_URL}/util/file/upload`,
+		url: `${config.API_URL}/api/utils/file/upload`,
 		name: "文件上传",
 		post: async function (data, config = {}) {
 			return await http.post(this.url, data);

@@ -12,6 +12,10 @@ declare(strict_types=1);
 return [
     'default' => 'local',
     'storage' => [
+        'public' => [
+            'driver' => \Hyperf\Filesystem\Adapter\LocalAdapterFactory::class,
+            'root' => BASE_PATH.'/public',
+        ],
         'local' => [
             'driver' => \Hyperf\Filesystem\Adapter\LocalAdapterFactory::class,
             'root' => __DIR__ . '/../../runtime',

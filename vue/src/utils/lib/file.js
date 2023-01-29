@@ -4,5 +4,5 @@ export default async function getFilePath(id){
 		if(!id){
 			return '';
 		}
-		return await http().params({id}).post('util/file/get_path');
+		return await http().params({id}).post('api/utils/file/get-path');
 }

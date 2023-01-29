@@ -1013,7 +1013,7 @@ $form-floating-label-transform: scale(0.85) translateY(-0.5rem) translateX(0.15r
 $form-floating-transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out !default;
 // scss-docs-end form-floating-variables
 
-// Form validation
+// form validation
 
 // scss-docs-start form-feedback-variables
 $form-feedback-margin-top: $form-text-margin-top !default;
@@ -1314,7 +1314,7 @@ $tooltip-arrow-color: null !default; // Deprecated in Bootstrap 5.2.0 for CSS va
 // fusv-enable
 // scss-docs-end tooltip-variables
 
-// Form tooltips must come after regular tooltips
+// form tooltips must come after regular tooltips
 // scss-docs-start tooltip-feedback-variables
 $form-feedback-tooltip-padding-y: $tooltip-padding-y !default;
 $form-feedback-tooltip-padding-x: $tooltip-padding-x !default;

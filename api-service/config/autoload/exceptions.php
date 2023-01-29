@@ -13,7 +13,7 @@ return [
     'handler' => [
         'http' => [
             App\Exception\Handler\YjExceptionHandler::class,
-            Hyperf\HttpServer\Exception\Handler\HttpExceptionHandler::class,
+            \App\Exception\Handler\HttpExceptionHandler::class,
             App\Exception\Handler\AppExceptionHandler::class,
         ],
     ],

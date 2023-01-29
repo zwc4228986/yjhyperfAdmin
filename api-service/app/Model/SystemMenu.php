@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Model;
 
-use Hyperf\DbConnection\Model\Model;
-
 /**
  * @property int $id 
  * @property string $component 
@@ -21,9 +19,9 @@ use Hyperf\DbConnection\Model\Model;
  * @property string $type 
  * @property string $params 
  * @property string $active 
- * @property int $update_time 
+ * @property \Carbon\Carbon $update_time 
  * @property int $delete_time 
- * @property int $create_time 
+ * @property \Carbon\Carbon $create_time 
  * @property string $position 
  */
 class SystemMenu extends Model
@@ -41,5 +39,5 @@ class SystemMenu extends Model
     /**
      * The attributes that should be cast to native types.
      */
-    protected array $casts = ['id' => 'integer', 'menu_id' => 'integer', 'status' => 'integer', 'hidden' => 'integer', 'sort' => 'integer', 'pid' => 'integer', 'update_time' => 'integer', 'delete_time' => 'integer', 'create_time' => 'integer'];
+    protected array $casts = ['id' => 'integer', 'menu_id' => 'integer', 'status' => 'integer', 'hidden' => 'integer', 'sort' => 'integer', 'pid' => 'integer', 'update_time' => 'datetime', 'delete_time' => 'integer', 'create_time' => 'datetime'];
 }

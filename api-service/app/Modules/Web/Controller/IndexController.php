@@ -17,7 +17,6 @@ class IndexController extends AbstractController
     #[ApiGet(path: '/')]
     public function index(RenderInterface $render)
     {
-
         return  $render->render('index');
     }
 }

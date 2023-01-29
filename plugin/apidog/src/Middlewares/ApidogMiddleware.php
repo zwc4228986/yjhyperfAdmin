@@ -40,6 +40,7 @@ class ApidogMiddleware implements MiddlewareInterface
     {
         // TODO: Implement process() method.
         $dispatched = $request->getAttribute(Dispatched::class);
+
         if ($dispatched->status !== Dispatcher::FOUND) {
             return $handler->handle($request);
         }

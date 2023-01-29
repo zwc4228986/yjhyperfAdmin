@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Model;
 
-use Hyperf\DbConnection\Model\Model;
+
 
 /**
  * @property int $id 
@@ -17,7 +17,7 @@ use Hyperf\DbConnection\Model\Model;
  * @property int $delete_time 
  * @property int $create_time 
  */
-class SystemFile extends Model
+class SystemFile extends \App\Model\Trait\SystemFile
 {
     /**
      * The table associated with the model.
@@ -33,4 +33,5 @@ class SystemFile extends Model
      * The attributes that should be cast to native types.
      */
     protected array $casts = ['id' => 'integer', 'tags_id' => 'integer', 'update_time' => 'integer', 'delete_time' => 'integer', 'create_time' => 'integer'];
+
 }

@@ -2,7 +2,7 @@
 namespace  YjHyperfAdminPligin\Framework\Dao;
 
 
-use Hyperf\Database\Query\Builder;
+use Hyperf\Database\Model\Builder;
 
 trait AddWhereQueryTrait
 {
@@ -16,9 +16,9 @@ trait AddWhereQueryTrait
     public function addWhere(\Hyperf\Database\Model\Builder $query):self
     {
         if($this->daoquery == null){
-            return $this->newSelf()->setDaoquery($this->newQuery()->getQuery())->addWhere($query);
+            return $this->newSelf()->setDaoquery($this->newQuery())->addWhere($query);
         }
-        $this->getDaoquery()->addNestedWhereQuery($query->getQuery());
+        $this->getDaoquery()->getQuery()->addNestedWhereQuery($query->getQuery());
         return $this;
     }
 
@@ -35,7 +35,7 @@ trait AddWhereQueryTrait
     public function getDaoquery():Builder
     {
         if($this->daoquery == null){
-            return $this->newQuery()->getQuery();
+            return $this->newQuery();
         }
         return $this->daoquery;
     }

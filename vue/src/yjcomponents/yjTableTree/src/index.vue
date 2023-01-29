@@ -165,6 +165,7 @@ import config from "@/config/table";
 import columnSetting from "./columnSetting";
 import { extend } from "@/utils/common";
 import YjSwitch from "./components/YjSwitch";
+import YjImage from "./components/YjImage";
 import YjText from "./components/YjText";
 import collect from "collect.js";
 export default {
@@ -172,6 +173,7 @@ export default {
   components: {
     columnSetting,
     YjSwitch,
+    YjImage,
     YjText,
   },
   props: {

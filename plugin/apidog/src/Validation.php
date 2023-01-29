@@ -36,7 +36,7 @@ class Validation
             'in'      => 'The :attribute must be one of the following types: :values',
         ];
 
-        $validator = $this->validationFactory->make($this->getInputData($request),$FormDataRules->toArray(),$messages);
+        $validator = $this->validationFactory->make($this->getValidationData($request),$FormDataRules->toArray(),$messages);
 
 
         if ($validator->fails()){
@@ -50,8 +50,14 @@ class Validation
         return true;
     }
 
+    protected function getValidationData($request):array
+    {
+         return array_merge_recursive($this->getInputData($request), $request->getUploadedFiles());
+    }
+
     protected function getInputData($request): array
     {
+
         return $this->storeParsedData(function ()use ($request) {
             if (is_array($request->getParsedBody())) {
                 $data = $request->getParsedBody();
