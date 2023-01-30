@@ -29,13 +29,11 @@ class WebMiddleware implements MiddlewareInterface
     #[Inject]
     protected $response;
 
-
     /**
      * @var Validation
      */
     #[Inject]
     protected $validater;
-
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {

@@ -86,6 +86,7 @@ export default {
 		},
 		defaultFileList: {
 			handler(val){
+				console.log(val);
 				this.$emit('update:modelValue', this.toStr(val))
 				this.value = this.toStr(val)
 			},
@@ -123,7 +124,7 @@ export default {
 		},
 		//数组转换为原始值
 		toStr(arr){
-			return arr.map(v => v.url).join(",")
+			return arr.map(v => v.id).join(",")
 		},
 		//拖拽
 		rowDrop(){
@@ -177,7 +178,7 @@ export default {
 		},
 		handleRemove(file){
 			this.$refs.uploader.handleRemove(file)
-			//this.defaultFileList.splice(this.defaultFileList.findIndex(item => item.uid===file.uid), 1)
+			this.defaultFileList.splice(this.defaultFileList.findIndex(item => item.ic===file.id), 1)
 		},
 		handleExceed(){
 			this.$message.warning(`当前设置最多上传 ${this.limit} 个文件，请移除后上传!`)
@@ -202,9 +203,13 @@ export default {
 					param.onProgress({percent: complete})
 				}
 			}).post().then(res => {
+				
 				// var response = config.parseData(res);
 				// if(response.code == config.successCode){
 				param.onSuccess(res)
+				console.log(res)
+				this.defaultFileList.push(res)
+
 				// }else{
 				// 	param.onError(response.msg || "未知错误")
 				// }

@@ -11,8 +11,8 @@ namespace App\Model;
  * @property string $image 
  * @property string $recommend_image 
  * @property string $slider_image 
- * @property string $store_name 
- * @property string $store_info 
+ * @property string $name 
+ * @property string $info 
  * @property string $keyword 
  * @property string $bar_code 
  * @property string $cate_id 
@@ -65,9 +65,13 @@ namespace App\Model;
  * @property \Carbon\Carbon $update_time 
  * @property int $delete_time 
  * @property \Carbon\Carbon $create_time 
+ * @property int $status 
+ * @property string $image_ids 
+ * @property int $image_id 
  */
-class Product extends Model
+class Product extends \App\Model\Trait\Product
 {
+
     /**
      * The table associated with the model.
      */
@@ -81,5 +85,5 @@ class Product extends Model
     /**
      * The attributes that should be cast to native types.
      */
-    protected array $casts = ['id' => 'integer', 'mer_id' => 'integer', 'sort' => 'integer', 'sales' => 'integer', 'stock' => 'integer', 'is_show' => 'integer', 'is_hot' => 'integer', 'is_benefit' => 'integer', 'is_best' => 'integer', 'is_new' => 'integer', 'is_virtual' => 'integer', 'virtual_type' => 'integer', 'add_time' => 'integer', 'is_postage' => 'integer', 'is_del' => 'integer', 'mer_use' => 'integer', 'is_seckill' => 'integer', 'is_bargain' => 'integer', 'is_good' => 'integer', 'is_sub' => 'integer', 'is_vip' => 'integer', 'ficti' => 'integer', 'browse' => 'integer', 'temp_id' => 'integer', 'spec_type' => 'integer', 'vip_product' => 'integer', 'presale' => 'integer', 'presale_start_time' => 'integer', 'presale_end_time' => 'integer', 'presale_day' => 'integer', 'freight' => 'integer', 'update_time' => 'datetime', 'delete_time' => 'integer', 'create_time' => 'datetime'];
+    protected array $casts = ['id' => 'integer', 'mer_id' => 'integer', 'sort' => 'integer', 'sales' => 'integer', 'stock' => 'integer', 'is_show' => 'integer', 'is_hot' => 'integer', 'is_benefit' => 'integer', 'is_best' => 'integer', 'is_new' => 'integer', 'is_virtual' => 'integer', 'virtual_type' => 'integer', 'add_time' => 'integer', 'is_postage' => 'integer', 'is_del' => 'integer', 'mer_use' => 'integer', 'is_seckill' => 'integer', 'is_bargain' => 'integer', 'is_good' => 'integer', 'is_sub' => 'integer', 'is_vip' => 'integer', 'ficti' => 'integer', 'browse' => 'integer', 'temp_id' => 'integer', 'spec_type' => 'integer', 'vip_product' => 'integer', 'presale' => 'integer', 'presale_start_time' => 'integer', 'presale_end_time' => 'integer', 'presale_day' => 'integer', 'freight' => 'integer', 'update_time' => 'datetime', 'delete_time' => 'integer', 'create_time' => 'datetime', 'status' => 'integer', 'image_id' => 'integer'];
 }

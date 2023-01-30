@@ -5,11 +5,11 @@
     <el-header class="header-tabs">
       <el-tabs type="card" v-model="currentTab" @on-click="onhangeTab">
         <el-tab-pane label="基本信息" name="0"></el-tab-pane>
-        <el-tab-pane label="规格库存" name="1"></el-tab-pane>
+        <!-- <el-tab-pane label="规格库存" name="1"></el-tab-pane> -->
         <el-tab-pane label="商品详情" name="2"></el-tab-pane>
-        <el-tab-pane label="物流设置" name="3"></el-tab-pane>
-        <el-tab-pane label="营销设置" name="4"></el-tab-pane>
-        <el-tab-pane label="其他设置" name="5"></el-tab-pane>
+        <!-- <el-tab-pane label="物流设置" name="3"></el-tab-pane> -->
+        <!-- <el-tab-pane label="营销设置" name="4"></el-tab-pane> -->
+        <!-- <el-tab-pane label="其他设置" name="5"></el-tab-pane> -->
       </el-tabs>
     </el-header>
     <!--		<el-alert title="注意: 因为keep-alive只接受组件name,导致多路由共用组件时,关闭或刷新一个标签导致其他同一组件的页面缓存失效,后续还在寻找完美的解决方案.建议在列表页使用dialog或者drawer形式" type="error" style="margin-bottom: 15px;"></el-alert>-->
@@ -41,7 +41,7 @@
           </el-form-item>
           <el-form-item label="商品分类">
             <el-tree-select
-              v-model="formValidate.cate_id"
+              v-model="formValidate.product_category_id"
               multiple
               :data="productCategoryTree"
             >
@@ -49,33 +49,39 @@
           </el-form-item>
           <el-form-item label="商品名称">
             <el-input
-              v-model="formValidate.store_name"
+              v-model="formValidate.name"
               placeholder="请输入商品名称"
             ></el-input>
           </el-form-item>
-          <el-form-item label="单位">
+          <!-- <el-form-item label="单位">
             <el-input
               v-model="formValidate.unit_name"
               placeholder="请输入单位"
             ></el-input>
-          </el-form-item>
+          </el-form-item> -->
           <el-form-item label="商品轮播图">
             <yjUploadMultiple
               :limit="3"
               draggable
-              v-model="formValidate.slider_image"
+              v-model="formValidate.image_ids"
               tip="最多上传3个文件,单个文件不要超过10M,请上传图像格式文件"
             >
             </yjUploadMultiple>
           </el-form-item>
+          <el-form-item label="售价">
+              <el-input-number
+                v-model="formValidate.price"
+                placeholder="售价"
+              ></el-input-number>
+            </el-form-item>
           <el-form-item label="商品状态">
-            <el-radio-group v-model="formValidate.is_show" class="ml-4">
+            <el-radio-group v-model="formValidate.status" class="ml-4">
               <el-radio :label="1" size="large">上架</el-radio>
               <el-radio :label="0" size="large">下架</el-radio>
             </el-radio-group>
           </el-form-item>
         </div>
-        <div v-show="currentTab === '1'">
+        <!-- <div v-show="currentTab === '1'">
           <el-form-item label="商品规格">
             <el-radio-group v-model="formValidate.spec_type" class="ml-4">
               <el-radio :label="0" size="large">单规格</el-radio>
@@ -239,12 +245,12 @@
                 placeholder="库存"
               ></el-input-number>
             </el-form-item>
-          </div>
-        </div>
+           </div> 
+        </div> -->
         <div v-show="currentTab === '2'">
           <scEditor v-model="formValidate.description"> </scEditor>
         </div>
-        <div v-show="currentTab === '3'">
+        <!-- <div v-show="currentTab === '3'">
           <el-form-item label="运费设置">
             <el-radio-group v-model="formValidate.freight" class="ml-4">
               <el-radio :label="2" size="large">固定邮费</el-radio>
@@ -270,7 +276,7 @@
               </el-option>
             </el-select>
           </el-form-item>
-        </div>
+        </div> -->
         <el-button type="primary" @click="onSubmit">保存</el-button>
       </el-form>
     </el-card>
@@ -293,17 +299,14 @@ export default {
       currentTab: "0",
       productCategoryTree: [],
       formValidate: {
-        temp_id: "",
-        store_name: "",
-        types: 0,
-        postage: 0,
-        freight: 2,
+        name: "",
+        types: 3,
+        info: "",
         description: "",
         is_show: 1,
-        is_virtual: 0,
-        cate_id: "",
-        slider_image: "",
-        spec_type: 1,
+        price: 1,
+        product_category_id: [],
+        image_ids: "",
       },
       oneFormValidate: [
         {
@@ -391,7 +394,7 @@ export default {
   created() {},
   async mounted() {
     await this.getProductCategory();
-    await this.getShippingTemplateLists();
+    // await this.getShippingTemplateLists();
     if (this.id) {
       this.getProductDetail();
     }
@@ -479,28 +482,28 @@ export default {
       this.attrs.splice(index, 1);
     },
     onSubmit() {
-      if (this.formValidate.spec_type == 0) {
-        this.formValidate.attrData = this.oneFormValidate;
-      } else {
-        this.formValidate.attrData = JSON.stringify(this.attrData);
-        this.formValidate.attrs = JSON.stringify(this.attrs);
-      }
+      // if (this.formValidate.spec_type == 0) {
+      //   this.formValidate.attrData = this.oneFormValidate;
+      // } else {
+      //   this.formValidate.attrData = JSON.stringify(this.attrData);
+      //   this.formValidate.attrs = JSON.stringify(this.attrs);
+      // }
       if (this.id) {
         this.formValidate.id = this.id;
         this.$HTTP()
           .params(this.formValidate)
-          .post("/admin/product/product/edit")
+          .post("/admin/product/edit")
           .then((res) => {
             this.$message.success("编辑成功");
           });
       } else {
         this.$HTTP()
           .params(this.formValidate)
-          .post("/admin/product/product/add")
+          .post("/admin/product/add")
           .then((res) => {
             this.$message.success("添加成功");
             setTimeout(() => {
-              this.$router.push("/admin/product/lists");
+              this.$router.push("/product/lists");
             }, 2000);
           });
       }

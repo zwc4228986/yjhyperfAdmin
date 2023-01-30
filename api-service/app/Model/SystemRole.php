@@ -11,8 +11,8 @@ namespace App\Model;
  * @property string $name 
  * @property int $status 
  * @property int $delete_time 
- * @property int $update_time 
- * @property int $create_time 
+ * @property \Carbon\Carbon $update_time 
+ * @property \Carbon\Carbon $create_time 
  */
 class SystemRole extends Model
 {
@@ -29,5 +29,5 @@ class SystemRole extends Model
     /**
      * The attributes that should be cast to native types.
      */
-    protected array $casts = ['id' => 'integer', 'status' => 'integer', 'delete_time' => 'integer', 'update_time' => 'integer', 'create_time' => 'integer'];
+    protected array $casts = ['id' => 'integer', 'status' => 'integer', 'delete_time' => 'integer', 'update_time' => 'datetime', 'create_time' => 'datetime'];
 }

@@ -13,9 +13,9 @@ namespace App\Model;
  * @property string $suffix 
  * @property int $tags_id 
  * @property string $size 
- * @property int $update_time 
+ * @property \Carbon\Carbon $update_time 
  * @property int $delete_time 
- * @property int $create_time 
+ * @property \Carbon\Carbon $create_time 
  */
 class SystemFile extends \App\Model\Trait\SystemFile
 {
@@ -32,6 +32,6 @@ class SystemFile extends \App\Model\Trait\SystemFile
     /**
      * The attributes that should be cast to native types.
      */
-    protected array $casts = ['id' => 'integer', 'tags_id' => 'integer', 'update_time' => 'integer', 'delete_time' => 'integer', 'create_time' => 'integer'];
+    protected array $casts = ['id' => 'integer', 'tags_id' => 'integer', 'update_time' => 'datetime', 'delete_time' => 'integer', 'create_time' => 'datetime'];
 
 }

@@ -6,20 +6,19 @@ namespace App\Model;
 
 
 /**
- * @property int $id 
  * @property int $product_id 
- * @property int $product_category_id 
+ * @property string $description 
+ * @property int $type 
  * @property \Carbon\Carbon $create_time 
- * @property int $product_category_pid 
  * @property int $delete_time 
  * @property \Carbon\Carbon $update_time 
  */
-class ProductCategoryRel extends Model
+class ProductDescription extends Model
 {
     /**
      * The table associated with the model.
      */
-    protected ?string $table = 'product_category_rel';
+    protected ?string $table = 'product_description';
 
     /**
      * The attributes that are mass assignable.
@@ -29,5 +28,5 @@ class ProductCategoryRel extends Model
     /**
      * The attributes that should be cast to native types.
      */
-    protected array $casts = ['id' => 'integer', 'product_id' => 'integer', 'product_category_id' => 'integer', 'create_time' => 'datetime', 'product_category_pid' => 'integer', 'delete_time' => 'integer', 'update_time' => 'datetime'];
+    protected array $casts = ['product_id' => 'integer', 'type' => 'integer', 'create_time' => 'datetime', 'delete_time' => 'integer', 'update_time' => 'datetime'];
 }

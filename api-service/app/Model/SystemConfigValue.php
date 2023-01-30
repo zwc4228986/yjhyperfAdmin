@@ -12,8 +12,8 @@ namespace App\Model;
  * @property string $value 
  * @property int $mer_id 
  * @property int $delete_time 
- * @property int $create_time 
- * @property int $update_time 
+ * @property \Carbon\Carbon $create_time 
+ * @property \Carbon\Carbon $update_time 
  */
 class SystemConfigValue extends Model
 {
@@ -30,5 +30,5 @@ class SystemConfigValue extends Model
     /**
      * The attributes that should be cast to native types.
      */
-    protected array $casts = ['config_value_id' => 'integer', 'mer_id' => 'integer', 'delete_time' => 'integer', 'create_time' => 'integer', 'update_time' => 'integer'];
+    protected array $casts = ['config_value_id' => 'integer', 'mer_id' => 'integer', 'delete_time' => 'integer', 'create_time' => 'datetime', 'update_time' => 'datetime'];
 }

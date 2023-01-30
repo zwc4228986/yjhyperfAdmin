@@ -13,6 +13,7 @@ namespace App\Model;
 
 use App\Constants\ErrorCode;
 use Hyperf\Context\Context;
+use Hyperf\Contract\LengthAwarePaginatorInterface;
 use Hyperf\Database\Model\Builder;
 use Hyperf\Database\Model\SoftDeletes;
 use Hyperf\DbConnection\Db;
@@ -24,7 +25,7 @@ use Hyperf\Utils\Collection;
  * @mixin Builder
  * @property int getList
  * @property int firstOrError
- * @method static BaseModel | Collection getList($columns = [], $pageName = 'page', $page = null)
+ * @method static BaseModel | Collection | LengthAwarePaginatorInterface getList($columns = [], $pageName = 'page', $page = null)
  * @method static BaseModel firstOrError()
  */
 abstract class Model extends BaseModel

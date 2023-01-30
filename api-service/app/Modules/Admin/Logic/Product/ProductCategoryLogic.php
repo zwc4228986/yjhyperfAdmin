@@ -12,7 +12,7 @@ class ProductCategoryLogic
 
     public function getTreeFormat()
     {
-        $data = $this->productCategoryDao->select('cate_name as label', 'pid', 'id as value')
+        $data = $this->productCategoryDao->select('name as label', 'pid', 'id as value')
             ->where('is_show', 1)->get()->each(function ($item) {
                 $item->value = $item->value;
             })->toArray();

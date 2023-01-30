@@ -10,7 +10,7 @@
                     </div>
                     <ul class="dropdown-menu" aria-labelledby="dropdown04">
                         @foreach ($nav as $item)
-                            <li><a class="dropdown-item" href="#">{{$item['name']}}</a></li>
+                            <li><a class="dropdown-item" href="/?product_category_id={{$item['id']}}">{{$item['name']}}</a></li>
                         @endforeach
                     </ul>
                 </div>
@@ -74,7 +74,9 @@
         </ul>
     </header>
 
+    <div style="width: 100%;height: 100px;">
 
+    </div>
 </main>
 
 
