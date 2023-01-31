@@ -18,7 +18,9 @@ trait AddWhereQueryTrait
         if($this->daoquery == null){
             return $this->newSelf()->setDaoquery($this->newQuery())->addWhere($query);
         }
+
         $this->getDaoquery()->getQuery()->addNestedWhereQuery($query->getQuery());
+//        dd($this->getDaoquery()->getQuery()->wheres);
         return $this;
     }
 

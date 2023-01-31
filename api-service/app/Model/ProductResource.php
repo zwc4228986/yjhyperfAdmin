@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Model;
 
-class ProductResource extends Model
+class ProductResource extends \App\Model\Trait\ProductResource
 {
     /**
      * The table associated with the model.

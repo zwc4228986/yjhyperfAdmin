@@ -7,7 +7,7 @@
             <div class="col">
                 <div id="primary" class="content-area">
                     <main id="main" class="site-main" role="main">
-                        <h1 class="d-none d-lg-block mb-3 pt-lg-3">Shopper – Multipurpose E-Commerce Template</h1>
+                        <h1 class="d-none d-lg-block mb-3 pt-lg-3">{{$detail->name}}</h1>
                         <div class="row">
                             <div class="col-lg-8 mb-md-0 mb-3">
                                 <img class="rounded" src="{{$detail->Image->path_format}}">
@@ -15,15 +15,14 @@
                                 {!! $detail->Description->description !!}
                             </div>
                             <div class="col-lg-4  d-lg-block pl-xs-0 pl-lg-5">
-
                                 <div class="price-block p-3">
                                     所需积分：
-                                    <strong class="h2">20积分</strong>
+                                    <strong class="h2">{{$detail->price}}积分</strong>
                                 </div>
                                 <div class="btn-block">
                                     <div class="container text-center">
                                         <div class="d-grid gap-2">
-                                            <button class="btn btn-primary" type="button">下载</button>
+                                            <button class="btn btn-primary downloader"  data-id="{{$detail->id}}" type="button">下载</button>
                                             <button class="btn btn-outline-primary" type="button">收藏</button>
                                         </div>
                                     </div>
@@ -154,10 +153,18 @@
 
         </div>
     </div>
+    <style>
+        img{
+            width:100%;
+        }
+    </style>
+
+    <script>
+
+        $('.downloader').click(function(){
+            let product_id = $(this).data('id');
+            window.location.href = "/web/api/download/"+product_id
+        });
+    </script>
 @endsection
 
-<style>
-    img{
-        width:100%;
-    }
-</style>

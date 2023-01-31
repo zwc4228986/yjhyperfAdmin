@@ -23,11 +23,12 @@ class IndexController extends AbstractController
 
     #[ApiGet(path: '/')]
     #[ApiParam('product_category_id', 'nullable')]
+    #[ApiParam('product_category_pid', 'nullable')]
     public function index(RenderInterface $render)
     {
         $params = getParams();
-        $product = $this->productLogic->lists();
-
+        $product = $this->productLogic->lists($params);
+        dump(url('test',['id' => 111]));
         return  $render->render('index',compact('product'));
     }
 }

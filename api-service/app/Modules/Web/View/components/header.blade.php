@@ -63,12 +63,11 @@
                     </ul>
                 </div>
             </div>
-
         </nav>
         <ul class="nav justify-content-center">
             @foreach ($nav as $item)
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">{{$item['name']}}</a>
+                    <a class="nav-link active" aria-current="page" href="{{url('/?product_category_pid='.$item['id'])}}">{{$item['name']}}</a>
                 </li>
             @endforeach
         </ul>
@@ -105,10 +104,10 @@
 <!-- Start your project here-->
 <!-- End your project here-->
 <!-- MDB -->
-<script src="js/jquery-3.6.3.min.js"></script>
-<script src="ws/socket.js"></script>
+<script src="/js/jquery-3.6.3.min.js"></script>
+<script src="/ws/socket.js"></script>
 {{--<script type="text/javascript" src="js/mdb.min.js"></script>--}}
-<script type="text/javascript" src="js/js.cookie.js"></script>
+<script type="text/javascript" src="/js/js.cookie.js"></script>
 <style>
     .one-nav {
         font-weight: bold;

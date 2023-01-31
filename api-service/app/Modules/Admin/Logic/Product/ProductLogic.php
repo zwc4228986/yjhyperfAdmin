@@ -3,10 +3,12 @@
 namespace App\Modules\Admin\Logic\Product;
 
 use App\Model\ProductCategory;
+use App\Model\ProductResource;
 use App\Modules\Admin\Dao\ProductCategoryDao;
 use App\Modules\Admin\Dao\ProductCategoryRelDao;
 use App\Modules\Admin\Dao\ProductDao;
 use App\Modules\Admin\Dao\ProductDescriptionDao;
+use App\Modules\Admin\Dao\ProductResourceDao;
 use Hyperf\DbConnection\Db;
 use Hyperf\Di\Annotation\Inject;
 
@@ -24,6 +26,8 @@ class ProductLogic
     #[Inject]
     protected ProductCategoryDao $productCategoryDao;
 
+    #[Inject]
+    protected ProductResourceDao $productResourceDao;
 
     public function lists(array $params)
     {
@@ -64,11 +68,17 @@ class ProductLogic
                 'product_category_id' => $product_category_id,
                 'product_id' => $product_id
             ]);
+
         }
     }
 
-    private function updateProductResource(mixed $id, int $resource_id, int $type)
+    private function updateProductResource(int $product_id, int $resource_id, int $type)
     {
-
+        $this->productResourceDao->updateOrCreate([
+            'product_id'=>$product_id,
+            'type'=>$type,
+        ],[
+            'file_id'=>$resource_id
+        ]);
     }
 }

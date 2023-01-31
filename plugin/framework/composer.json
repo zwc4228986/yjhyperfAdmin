@@ -10,5 +10,10 @@
             "name": "zhouwenchang",
             "email": "1324028467@qq.com"
         }
-    ]
+    ],
+    "extra": {
+        "hyperf": {
+            "config": "YjHyperfAdminPligin\\Framework\\ConfigProvider"
+        }
+    }
 }

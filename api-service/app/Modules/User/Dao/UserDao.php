@@ -8,6 +8,7 @@ class UserDao extends User
 {
     protected array $fillable = [
         'phone',
+        'integral',
         'nickname'
     ];
 
