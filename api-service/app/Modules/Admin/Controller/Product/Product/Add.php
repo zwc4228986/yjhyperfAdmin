@@ -22,7 +22,9 @@ class Add
     #[ApiParam("image_ids")]
     #[ApiParam("status")]
     #[ApiParam("product_category_id")]
-    public function add(){
+    #[ApiParam("resource_id")]
+    public function add()
+    {
         $params = getParams();
         $data = $this->productLogic->add($params);
         Success($data);

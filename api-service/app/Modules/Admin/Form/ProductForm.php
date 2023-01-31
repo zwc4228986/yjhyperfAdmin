@@ -3,10 +3,10 @@
 namespace App\Modules\Admin\Form;
 
 use YjHyperfAdminPligin\Apidog\Annotations\Api;
+use YjHyperfAdminPligin\Apidog\Annotations\ApiGet;
 use YjHyperfAdminPligin\Apidog\Annotations\ApiPost;
 use YjHyperfAdminPligin\Form\BaseForm;
 use YjHyperfAdminPligin\Form\Column\Column;
-use YjHyperfAdminPligin\Form\Form;
 
 #[Api("form/product")]
 class ProductForm extends BaseForm
@@ -32,6 +32,7 @@ class ProductForm extends BaseForm
     }
 
     #[ApiPost("config")]
+    #[ApiGet("config")]
     function Config()
     {
         // TODO: Implement Config() method.

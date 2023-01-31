@@ -35,32 +35,40 @@ class ProductLogic
     {
         Db::beginTransaction();
         try {
-            $params->offsetSet('image_id',(int)$params->get('image_ids'));
+            $params->offsetSet('image_id', (int)$params->get('image_ids'));
             $product = $this->productDao->create($params->toArray());
             $this->productDescriptionDao->updateOrCreate([
                 'product_id' => $product->id,
-            ],$params->only(['description'])->toArray());
+            ], $params->only(['description'])->toArray());
             $product_category_ids = $params->get('product_category_id');
-            $this->updateProductCategoryRel($product->id,$product_category_ids);
+            $resource_id = $params->get('resource_id');
+            $this->updateProductCategoryRel($product->id, $product_category_ids);
+            $this->updateProductResource($product->id, $resource_id, 0);
             Db::commit();
-        }catch (\Exception $exception){
+        } catch (\Exception $exception) {
             Db::rollBack();
             Error($exception->getMessage());
         }
         return $product;
     }
 
-    private function updateProductCategoryRel($product_id,$product_category_ids){
+    private function updateProductCategoryRel($product_id, $product_category_ids)
+    {
         //先删除
-        foreach ($product_category_ids as $product_category_id){
+        foreach ($product_category_ids as $product_category_id) {
             //获取一级导航
-            $product_category_pid = $this->productCategoryDao->where('id',$product_category_id)->value('pid');
+            $product_category_pid = $this->productCategoryDao->where('id', $product_category_id)->value('pid');
 
             $this->productCategoryRelDao->updateOrCreate([
                 'product_category_pid' => $product_category_pid,
                 'product_category_id' => $product_category_id,
-                'product_id'=>$product_id
+                'product_id' => $product_id
             ]);
         }
+    }
+
+    private function updateProductResource(mixed $id, int $resource_id, int $type)
+    {
+
     }
 }
