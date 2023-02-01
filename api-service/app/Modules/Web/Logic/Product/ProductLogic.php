@@ -16,21 +16,26 @@ class ProductLogic
     #[Inject]
     protected UserDao $userDao;
 
-    public function lists(Collection $params){
+
+
+    public function lists(Collection $params)
+    {
         return $this->productDao->params($params)->paginate();
     }
 
     public function detail(int $product_id)
     {
 
-        return $this->productDao->where('id',$product_id)->with(['Image','Description'])->first();
+        return $this->productDao->where('id', $product_id)->with(['Image', 'Description'])->first();
     }
 
-    public function buy(int $userId,int $product_id)
+    public function buy(int $userId, int $product_id)
     {
-        $product = $this->productDao->where('id',$product_id)->first();
+        $product = $this->productDao->where('id', $product_id)->first();
         $product_price = $product->price;
-        
+        //判断是否足够多的币
+        $this->userDao->opAccount($userId, 'buy_product', -$product_price, 'integral');
+
     }
 
 }

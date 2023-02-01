@@ -25,7 +25,8 @@ class Page extends Component
 
     public function render(): mixed
     {
+
         $elements = $this->page->elements();
-        return view('components.bootstrap',['paginator'=>$this->page,'elements'=>$elements]);
+        return view('components.bootstrap', ['paginator' => $this->page, 'elements' => $elements]);
     }
 }

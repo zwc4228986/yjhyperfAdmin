@@ -28,7 +28,7 @@ class IndexController extends AbstractController
     {
         $params = getParams();
         $product = $this->productLogic->lists($params);
-        dump(url('test',['id' => 111]));
-        return  $render->render('index',compact('product'));
+//        dump(url('test',['id' => 111]));
+        return $render->render('index', compact('product'));
     }
 }
