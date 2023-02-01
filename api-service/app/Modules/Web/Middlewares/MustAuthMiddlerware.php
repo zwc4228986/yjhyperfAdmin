@@ -28,13 +28,16 @@ class MustAuthMiddlerware implements MiddlewareInterface
         // TODO: Implement process() method.
 //        dump('========');
 //        dump($this->session->get('token'),'111');
-        $userId = 0;
+        $userId = $request->getQueryParams()['autouid']??0;
+
         if($this->session->has('token')){
             $userId = $this->tokenLogic->getUserId($this->session->get('token'));
         }
+
         if($userId == 0){
             return $this->response->redirect('/');
         }
+
         Context::set('user_id', $userId);
         return $handler->handle($request);
     }

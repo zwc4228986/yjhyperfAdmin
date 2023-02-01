@@ -14,14 +14,12 @@ use function Hyperf\ViewEngine\view;
 
 class Header extends Component
 {
-
     #[Inject]
     protected ProductCategoryLogic $productCategoryLogic;
 
     public function render(): mixed
     {
         $nav = $this->productCategoryLogic->lists();
-
         $isLogin = isLogin();
         dump(Context::get('user_id'));
         $userId = getUserID();

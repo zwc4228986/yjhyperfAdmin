@@ -15,7 +15,7 @@ use Hyperf\DbConnection\Model\Model;
  * @property int $update_time 
  * @property int $delete_time 
  */
-class Order extends Model
+class Order extends \App\Model\Trait\Order
 {
     /**
      * The table associated with the model.

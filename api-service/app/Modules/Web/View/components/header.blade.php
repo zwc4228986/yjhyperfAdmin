@@ -1,7 +1,6 @@
 <body>
 <main>
-    <header class="shadow fixed-top" style="background: #fff;">
-
+    <header class="shadow " style="background: #fff;">
         <nav class="navbar navbar-expand-lg  " aria-label="Fourth navbar example">
             <div class="container">
                 <div class="dropdown navbar-brand">
@@ -64,19 +63,22 @@
                 </div>
             </div>
         </nav>
-        <ul class="nav justify-content-center">
-            @foreach ($nav as $item)
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{url('/?product_category_pid='.$item['id'])}}">{{$item['name']}}</a>
-                </li>
-            @endforeach
-        </ul>
     </header>
+    
+    <nav class="navbar navbar-light bg-light  sticky-top">
+        <div class="container">
+            <ul class="nav justify-content-center">
+                @foreach ($nav as $item)
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{{url('/?product_category_pid='.$item['id'])}}">{{$item['name']}}</a>
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+    </nav>
 
-    <div style="width: 100%;height: 100px;">
-
-    </div>
 </main>
+
 
 
 <div class="modal fade" id="loginModel" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"

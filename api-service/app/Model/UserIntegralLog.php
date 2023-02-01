@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Model;
 
-use Hyperf\DbConnection\Model\Model;
-
 /**
  * @property int $id 
  * @property string $type 
@@ -25,7 +23,11 @@ class UserIntegralLog extends Model
     /**
      * The attributes that are mass assignable.
      */
-    protected array $fillable = [];
+    protected array $fillable = [
+        'type',
+        'number',
+        'user_id',
+    ];
 
     /**
      * The attributes that should be cast to native types.

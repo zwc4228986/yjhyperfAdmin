@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Web\Api\Product;
+namespace App\Modules\Web\Api\Order;
 
 use App\Modules\Order\Logic\OrderLogic;
 use App\Modules\Web\Logic\Product\ProductLogic;
@@ -12,9 +12,9 @@ use YjHyperfAdminPligin\Apidog\Annotations\ApiParam;
 use YjHyperfAdminPligin\Apidog\Annotations\ApiPost;
 use function App\Modules\Web\Helper\getUserID;
 
-#[Api('web/api/product/buy')]
+#[Api('web/api/order/create')]
 #[Middleware(MustAuthMiddlerware::class)]
-class Buy
+class Create
 {
     #[Inject]
     protected ProductLogic $productLogic;
@@ -25,7 +25,7 @@ class Buy
     #[ApiPost]
     #[ApiParam('product_id')]
     public function index(){
-        $userId = 5;
+        $userId = getUserID();
         $params = getParams();
 //        $this->productLogic->buy($userId,$params->get('product_id'));
         $this->orderLogic->buy($userId,$params->get('product_id'));

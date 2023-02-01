@@ -34,8 +34,7 @@ class ProductLogic
         $product = $this->productDao->where('id', $product_id)->first();
         $product_price = $product->price;
         //判断是否足够多的币
-        $this->userDao->opAccount($userId, 'buy_product', -$product_price, 'integral');
-
+        return $this->userDao->opAccount($userId,   'integral',-$product_price,'buy_product');
     }
 
 }

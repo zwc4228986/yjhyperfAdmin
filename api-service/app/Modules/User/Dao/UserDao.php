@@ -23,10 +23,13 @@ class UserDao extends User
     {
         Db::beginTransaction();
         try {
-            $user = $this->where('user_id', $userId)->lock(true)->first();
+            dump($userId);
+            $user = $this->where('id', $userId)->lock(true)->first();
+            dump($user,$accountType);
             $userAccountValue = $user->{$accountType};
+            dump($userAccountValue);
             if ($number < 0) {
-                if (bcadd($userAccountValue, $number, 2) < 0) {
+                if (bcadd((string)$userAccountValue, (string)$number, 2) < 0) {
                     Error('积分不足');
                 }
             }

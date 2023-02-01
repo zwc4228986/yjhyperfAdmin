@@ -15,7 +15,7 @@ use Hyperf\DbConnection\Model\Model;
  * @property int $update_time 
  * @property int $delete_time 
  */
-class OrderProduct extends Model
+class OrderProduct extends \App\Model\Trait\OrderProduct
 {
     /**
      * The table associated with the model.
@@ -25,7 +25,12 @@ class OrderProduct extends Model
     /**
      * The attributes that are mass assignable.
      */
-    protected array $fillable = [];
+    protected array $fillable = [
+        'order_id',
+        'user_id',
+        'product_id',
+        'price',
+    ];
 
     /**
      * The attributes that should be cast to native types.
