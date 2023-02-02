@@ -9,7 +9,8 @@
                     </div>
                     <ul class="dropdown-menu" aria-labelledby="dropdown04">
                         @foreach ($nav as $item)
-                            <li><a class="dropdown-item" href="/?product_category_id={{$item['id']}}">{{$item['name']}}</a></li>
+                            <li><a class="dropdown-item"
+                                   href="/?product_category_id={{$item['id']}}">{{$item['name']}}</a></li>
                         @endforeach
                     </ul>
                 </div>
@@ -49,9 +50,9 @@
                                          class="rounded-circle">
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown04">
-                                    <li><a class="dropdown-item" href="#">New project...</a></li>
-                                    <li><a class="dropdown-item" href="#">Settings</a></li>
-                                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                                    <li><a class="dropdown-item" href="{{url('user/center')}}}">我的信息</a></li>
+                                    <li><a class="dropdown-item" href="#">我的订单</a></li>
+                                    <li><a class="dropdown-item" href="#">设置</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
@@ -64,34 +65,33 @@
             </div>
         </nav>
     </header>
-    
-    <nav class="navbar navbar-light bg-light  sticky-top">
-        <div class="container">
-            <ul class="nav justify-content-center">
-                @foreach ($nav as $item)
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{url('/?product_category_pid='.$item['id'])}}">{{$item['name']}}</a>
-                    </li>
-                @endforeach
-            </ul>
-        </div>
-    </nav>
+
 
 </main>
-
-
+<nav class="navbar navbar-light bg-light  sticky-top">
+    <div class="container">
+        <ul class="nav justify-content-center">
+            @foreach ($nav as $item)
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page"
+                       href="{{url('/?product_category_pid='.$item['id'])}}">{{$item['name']}}</a>
+                </li>
+            @endforeach
+        </ul>
+    </div>
+</nav>
 
 <div class="modal fade" id="loginModel" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
      aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog  modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">Login</h1>
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">公众号扫码登录</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="text-center">
-                    <img src="" style="width: 50px;height: 50px;" class="rounded img-thumbnail wechat_qrcodes"
+                    <img src="" style="width: 200px;height: 200px;" class="rounded img-thumbnail wechat_qrcodes"
                          alt="...">
                 </div>
             </div>

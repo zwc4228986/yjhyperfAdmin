@@ -15,15 +15,15 @@ use YjHyperfAdminPligin\Apidog\Annotations\ApiPost;
 
 #[Api(prefix: 'user/center')]
 #[Middleware(MustAuthMiddlerware::class)]
-
 class CenterController
 {
     #[Inject]
     protected OrderLogic $orderLogic;
 
     #[ApiGet]
-    public function index(RenderInterface $render){
-        $orderData = $this->orderLogic->lists(Collection::make());
-        return $render->render('views/user/center');
+    public function index(RenderInterface $render)
+    {
+        $order = $this->orderLogic->lists(Collection::make());
+        return $render->render('views/user/center', compact('order'));
     }
 }
