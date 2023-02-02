@@ -12,4 +12,8 @@ class OrderProduct extends Model
         'product_id',
         'price',
     ];
+
+    public function Product(){
+        return $this->hasOne(\App\Model\Product::class,'id','product_id')->with('Image');
+    }
 }

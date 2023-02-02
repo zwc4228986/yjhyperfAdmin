@@ -51,12 +51,15 @@ class OrderLogic
             Db::rollBack();
             Error($exception->getMessage());
         }
-        return true;
+        return $order;
     }
 
     public function lists(\Hyperf\Utils\Collection $params)
     {
-        $data = $this->orderDao->params($params)->getList();
+        $data = $this->orderDao->params($params)->with(['OrderProduct'=>function($query){
+            $query->with('Product');
+        }])->getList();
+        dump($data->toArray());
         return $data;
     }
 }

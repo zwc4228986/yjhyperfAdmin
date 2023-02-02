@@ -16,8 +16,6 @@ class ProductLogic
     #[Inject]
     protected UserDao $userDao;
 
-
-
     public function lists(Collection $params)
     {
         return $this->productDao->params($params)->paginate();

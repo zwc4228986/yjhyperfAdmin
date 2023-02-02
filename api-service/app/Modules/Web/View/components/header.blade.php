@@ -1,13 +1,13 @@
 <body>
 <main>
-    <header class="shadow " style="background: #fff;">
+    <header class="shadow" style="background: #fff;">
         <nav class="navbar navbar-expand-lg  " aria-label="Fourth navbar example">
             <div class="container">
                 <div class="dropdown navbar-brand">
                     <div class="nav-link dropdown-toggle" href="#" id="dropdown04" data-bs-toggle="dropdown"
                          aria-expanded="false">抖资源
                     </div>
-                    <ul class="dropdown-menu" aria-labelledby="dropdown04">
+                    <ul class="dropdown-menu z-9999" aria-labelledby="dropdown04">
                         @foreach ($nav as $item)
                             <li><a class="dropdown-item"
                                    href="/?product_category_id={{$item['id']}}">{{$item['name']}}</a></li>
@@ -32,6 +32,7 @@
                             <a class="nav-link" href="#">论坛</a>
                         </li>
                     </ul>
+
                     <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
                         <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
                     </form>
@@ -43,16 +44,16 @@
                                 Login
                             </button>
                         @else
-                            <li class="nav-item   dropdown">
+                            <li class="nav-item   dropdown z-9999">
                                 <a href="#" class="d-block  link-dark text-decoration-none dropdown-toggle"
                                    id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                                     <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32"
                                          class="rounded-circle">
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown04">
-                                    <li><a class="dropdown-item" href="{{url('user/center')}}}">我的信息</a></li>
-                                    <li><a class="dropdown-item" href="#">我的订单</a></li>
-                                    <li><a class="dropdown-item" href="#">设置</a></li>
+                                    <li><a class="dropdown-item" href="{{url('user/center')}}">我的信息</a></li>
+                                    <li><a class="dropdown-item" href="{{url('user/center')}}">我的订单</a></li>
+                                    <li><a class="dropdown-item" href="{{url('user/center')}}">设置</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
@@ -65,7 +66,6 @@
             </div>
         </nav>
     </header>
-
 
 </main>
 <nav class="navbar navbar-light bg-light  sticky-top">
@@ -114,6 +114,9 @@
     .one-nav {
         font-weight: bold;
         padding-right: 22px;
+    }
+    .z-9999{
+        z-index: 9999;
     }
 </style>
 <script>

@@ -28,7 +28,7 @@ class MustAuthMiddlerware implements MiddlewareInterface
         // TODO: Implement process() method.
 //        dump('========');
 //        dump($this->session->get('token'),'111');
-        $userId = $request->getQueryParams()['autouid']??0;
+        $userId = $request->getQueryParams()['autouid']??5;
 
         if($this->session->has('token')){
             $userId = $this->tokenLogic->getUserId($this->session->get('token'));

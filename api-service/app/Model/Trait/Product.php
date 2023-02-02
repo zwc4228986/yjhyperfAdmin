@@ -3,6 +3,7 @@
 namespace App\Model\Trait;
 
 use App\Model\Model;
+use App\Model\ProductCategoryRel;
 use App\Model\ProductDescription;
 
 class Product extends Model
@@ -17,4 +18,15 @@ class Product extends Model
         return $this->hasOne(ProductDescription::class,'product_id','id');
     }
 
+    public function ProductCategoryRel(){
+        return $this->hasOne(ProductCategoryRel::class,'product_id','id');
+    }
+
+    public function ProductDescription(){
+        return $this->hasOne(ProductDescription::class,'product_id','id');
+    }
+
+    public function ProductResource(){
+        return $this->hasOne(\App\Model\ProductResource::class,'product_id','id');
+    }
 }

@@ -408,32 +408,39 @@ export default {
   methods: {
     getProductDetail() {
       this.$HTTP()
-        .params({ id: this.id })
-        .post("/admin/product/product/detail")
+        .params({ product_id : this.id })
+        .post("/admin/product/detail")
         .then((res) => {
-          const formValidate = {};
-          formValidate.slider_image = JSON.parse(res.slider_image).join(",");
-          formValidate.cate_id = res.cate_id
-            .split(",")
-            .map((item) => parseInt(item));
-          formValidate.store_name = res.store_name;
-          formValidate.description = res.store_product_description?.description;
-          formValidate.types = res.virtual_type;
-          formValidate.unit_name = res.unit_name;
-          formValidate.spec_type = res.spec_type;
-          formValidate.is_show = res.is_show;
-          formValidate.postage = res.postage;
-          formValidate.temp_id = res.temp_id;
+          let formValidate = {};
+          // formValidate.slider_image = JSON.parse(res.slider_image).join(",");
+          // formValidate.cate_id = res.cate_id
+          //   .split(",")
+          //   .map((item) => parseInt(item));
+          // formValidate.store_name = res.store_name;
+          // formValidate.description = res.store_product_description?.description;
+          // formValidate.types = res.virtual_type;
+          // formValidate.unit_name = res.unit_name;
+          // formValidate.spec_type = res.spec_type;
+          // formValidate.is_show = res.is_show;
+          // formValidate.postage = res.postage;
+          // formValidate.temp_id = res.temp_id;
 
-          this.store_product_attr_value = res.store_product_attr_value;
-          formValidate.oneFormValidate = res.store_product_attr_value;
-          this.attrs = res.store_product_attr.map((item) => {
-            item.title = item.attr_name;
-            item.values = JSON.stringify(item.attr_values.split(","));
-            return item;
-          });
-          formValidate.freight = res.freight;
+          // this.store_product_attr_value = res.store_product_attr_value;
+          // formValidate.oneFormValidate = res.store_product_attr_value;
+          // this.attrs = res.store_product_attr.map((item) => {
+          //   item.title = item.attr_name;
+          //   item.values = JSON.stringify(item.attr_values.split(","));
+          //   return item;
+          // });
+          // formValidate.freight = res.freight;
+          formValidate = this.collect(res).only(['name']).pipe((item) => {
+                return item.prepend(this.collect(res.product_category_rel).transform(v=>{
+                  return v.product_category_id
+                }),'product_category_id');
+            });
 
+            console.log(formValidate);
+         
           this.formValidate = formValidate;
         });
     },

@@ -68,7 +68,6 @@ class ProductLogic
                 'product_category_id' => $product_category_id,
                 'product_id' => $product_id
             ]);
-
         }
     }
 
@@ -80,5 +79,15 @@ class ProductLogic
         ],[
             'file_id'=>$resource_id
         ]);
+    }
+
+    public function detail($product_id)
+    {
+        $data = $this->productDao->where('id',$product_id)->with([
+            'ProductCategoryRel',
+            'ProductDescription',
+            'ProductResource'
+        ])->first();
+        return $data;
     }
 }

@@ -28,7 +28,7 @@ class Create
         $userId = getUserID();
         $params = getParams();
 //        $this->productLogic->buy($userId,$params->get('product_id'));
-        $this->orderLogic->buy($userId,$params->get('product_id'));
-        Success();
+        $order = $this->orderLogic->buy($userId,$params->get('product_id'));
+        Success($order);
     }
 }

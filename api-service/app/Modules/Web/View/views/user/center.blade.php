@@ -429,23 +429,44 @@
                         <!-- Card header START -->
                         <!-- Card body START -->
                         <div class="card-body">
-                            <!-- Privacy START -->
-                            <ul class="list-group">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">产品信息</th>
+                                    <th scope="col">下载次数</th>
+                                    <th scope="col">操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
                                 @foreach ($order as $item)
-                                    <!-- Privacy item -->
-                                    <li class="list-group-item d-md-flex justify-content-between align-items-start">
-                                        <div class="me-md-3">
-                                            <h6 class="mb-0"> Use two-factor authentication</h6>
-                                            <p class="small mb-0">Unaffected occasional thoroughly. Adieus it no wonders
-                                                spirit houses. </p>
-                                        </div>
-                                        <button class="btn btn-primary-soft btn-sm mt-1 mt-md-0"><i
-                                                    class="bi bi-pencil-square"></i> Change
-                                        </button>
-                                    </li>
+                                <tr>
+                                    <th scope="row">
+                                        <a href="#">
+                                            <div class="card mb-3">
+                                                <div class="row g-0">
+                                                    <div class="col-md-4">
+                                                        <img src="{{$item->OrderProduct->Product->Image->path_format}}" class="img-fluid rounded-start" alt="...">
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">{{$item->OrderProduct->Product->name}}</h5>
+                                                            <p class="card-text"><small class="text-muted">ID: {{$item->OrderProduct->Product->id}}</small></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </th>
+                                    <td style="width: 100px;">
+                                        {{$item->OrderProduct->download}}
+                                    </td>
+                                    <td style="width: 100px;"><a href="{{url('web/api/download/'.$item->OrderProduct->id)}}" class="btn btn-primary "
+                                           tabindex="-1"
+                                           role="button" >下载</a></td>
+                                </tr>
                                 @endforeach
-                            </ul>
-                            <!-- Privacy END -->
+                                </tbody>
+                            </table>
                         </div>
                         <!-- Card body END -->
                         <!-- Button save -->

@@ -35,7 +35,7 @@ class UrlGenerator
     {
         $path = '/'.trim($path, '/');
 
-        return trim($root.$path, '/');
+        return rtrim($root.$path, '/');
     }
 
     protected function extractQueryString($path)
