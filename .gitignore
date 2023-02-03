@@ -7,4 +7,4 @@ api-service/swoole/bin/swoole-cli.exe
 api-service/swoole/tmp
 api-service/swoole/home/Administrator/.composer/cache
 /api-service/runtime
-
+uniapp/unpackage

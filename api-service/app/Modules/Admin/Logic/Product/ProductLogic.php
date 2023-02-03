@@ -31,7 +31,7 @@ class ProductLogic
 
     public function lists(array $params)
     {
-        $data = $this->productDao->orderByDesc("id")->getList();
+        $data = $this->productDao->orderByDesc("id")->with('Image')->getList();
         return $data;
     }
 
@@ -74,16 +74,16 @@ class ProductLogic
     private function updateProductResource(int $product_id, int $resource_id, int $type)
     {
         $this->productResourceDao->updateOrCreate([
-            'product_id'=>$product_id,
-            'type'=>$type,
-        ],[
-            'file_id'=>$resource_id
+            'product_id' => $product_id,
+            'type' => $type,
+        ], [
+            'file_id' => $resource_id
         ]);
     }
 
     public function detail($product_id)
     {
-        $data = $this->productDao->where('id',$product_id)->with([
+        $data = $this->productDao->where('id', $product_id)->with([
             'ProductCategoryRel',
             'ProductDescription',
             'ProductResource'
