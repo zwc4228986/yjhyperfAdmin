@@ -1,0 +1,16 @@
+.DS_Store
+node_modules/
+/unpackage/dedug/*
+/unpackage/dist/*
+/unpackage/resources/*
+/unpackage/debug/*
+dist/
+*.zip
+.hbuilderx
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+unpackage
+hybrid
