@@ -7,6 +7,7 @@ use YjHyperfAdminPligin\Framework\Dao\AddWhereQueryTrait;
 
 class OrderDao extends Order
 {
+
     use AddWhereQueryTrait;
 
     protected array $fillable = [

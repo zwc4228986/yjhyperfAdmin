@@ -21,4 +21,5 @@ class GetPath
         $path = $this->systemFileDao->getFullPath($id);
         Success($path);
     }
+
 }

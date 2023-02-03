@@ -19,7 +19,7 @@ class Product extends Model
     }
 
     public function ProductCategoryRel(){
-        return $this->hasOne(ProductCategoryRel::class,'product_id','id');
+        return $this->hasMany(ProductCategoryRel::class,'product_id','id');
     }
 
     public function ProductDescription(){

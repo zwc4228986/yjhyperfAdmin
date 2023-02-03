@@ -1,17 +1,18 @@
 <template>
   <div class="sc-upload-multiple">
+     
     <el-upload
       ref="uploader"
       list-type="picture-card"
       :auto-upload="autoUpload"
       :disabled="disabled"
-      :action="newAction"
       :name="name"
       :data="data"
       :http-request="request"
-      :file-list="defaultFileList"
-      :show-file-list="showFileList"
+       v-model:file-list="fileList"
+      :show-file-list="true"
       :accept="accept"
+      :on-progress="onProgress"
       :multiple="multiple"
       :limit="limit"
       :before-upload="before"
@@ -26,9 +27,13 @@
       <template #tip>
         <div v-if="tip" class="el-upload__tip">{{ tip }}</div>
       </template>
+      <yj-image :modelValue="file_id"></yj-image>
       <template #file="{ file }">
-        <div class="sc-upload-list-item">
-          <el-image
+        <div class="sc-upload-list-item" >
+          {{ file.url }}
+          <yj-image :modelValue="file.url"></yj-image>
+          <!-- <yj-image v-if=""></yj-image> -->
+          <!-- <el-image
             class="el-upload-list__item-thumbnail"
             :src="file.url"
             fit="cover"
@@ -41,7 +46,7 @@
             <template #placeholder>
               <div class="sc-upload-multiple-image-slot">Loading...</div>
             </template>
-          </el-image>
+          </el-image> -->
           <div
             v-if="!disabled && file.status == 'success'"
             class="sc-upload__item-actions"
@@ -68,8 +73,60 @@
     ></span>
   </div>
 </template>
+<script setup>
+import config from "@/config/upload";
 
-<script>
+const emit = defineEmits(['update:file-list']);
+
+const props = defineProps({ modelValue: String})
+const fileList = [ {
+    id:1,
+    name: 'food.jpeg',
+    url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
+  }]
+
+const request = async (param)=>{
+  // console.log(param);
+  // var apiObj = config.apiObj;
+  //     const data = new FormData();
+  //     data.append(param.filename, param.file);
+  //     for (const key in param.data) {
+  //       data.append(key, param.data[key]);
+  //     }
+  //     const fileInfo = await apiObj
+  //       .params(data)
+  //       .post();
+
+  //     fileList.push( {
+  //   id:2,
+  //   name: 'food.jpeg',
+  //   url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
+  // })
+
+  //     emit('update:file-list',fileList);
+      console.log(fileList);
+      // param.onSuccess(res);
+        // .then((res) => {
+        //   // var response = config.parseData(res);
+        //   // if(response.code == config.successCode){
+        //   param.onSuccess(res);
+        //   console.log(res);
+        //   // this.defaultFileList.push(res);
+        //   // }else{
+        //   // 	param.onError(response.msg || "未知错误")
+        //   // }
+        //   // console.log(res,param);
+        // })
+        // .catch((err) => {
+        //   console.log(err);
+        //   param.onError(err);
+        // });
+}
+const onProgress = (res)=>{
+  console.log(res);
+}
+</script>
+<!-- <script>
 import config from "@/config/upload";
 import Sortable from "sortablejs";
 import sysConfig from "@/config";
@@ -257,7 +314,7 @@ export default {
     },
   },
 };
-</script>
+</script> -->
 
 <style scoped>
 .el-form-item.is-error .sc-upload-multiple:deep(.el-upload--picture-card) {

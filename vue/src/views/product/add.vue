@@ -400,7 +400,7 @@ export default {
     await this.getProductCategory();
     // await this.getShippingTemplateLists();
     if (this.id) {
-      this.getProductDetail();
+      await this.getProductDetail();
     }
     //修改tab名称
     // this.$store.commit("updateViewTagsTitle", this.id?`CURD编辑ID:${this.id}`:"CURD新增")
@@ -433,16 +433,19 @@ export default {
           //   return item;
           // });
           // formValidate.freight = res.freight;
-          formValidate = this.collect(res).only(['name']).pipe((item) => {
-                return item.prepend(this.collect(res.product_category_rel).transform(v=>{
-                  return v.product_category_id
-                }),'product_category_id');
-            });
-
-            console.log(formValidate);
-         
-          this.formValidate = formValidate;
+          formValidate = this.collect(res).only(['name','image_ids','price','status']);
+          formValidate.prepend(res.product_description.description,'description')
+          formValidate.prepend(res.product_description.description,'description')
+          formValidate.prepend(3,'types')
+          formValidate.prepend(res.product_resource?.file_id,'resource_id')
+          formValidate.prepend(this.collect(res.product_category_rel).transform((res)=>{
+            return parseInt(res.product_category_id)
+          }).all(),'product_category_id');
+          console.log(formValidate);
+          
+          this.formValidate = formValidate.all();
         });
+
     },
     async getShippingTemplateLists() {
       this.shippingTemplateLists = await this.$HTTP()

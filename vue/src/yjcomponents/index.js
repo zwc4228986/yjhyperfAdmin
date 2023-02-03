@@ -6,6 +6,7 @@ import YjStatistic from "./yjStatistic";
 import yjUploadMultiple from "./yjUploadMultiple";
 import yjFormCreate from "./yjFormCreate";
 import yjSearch from "./yjSearch";
+import yjImage from "./yjImage";
 
 const components = [
 	YjTable2,
@@ -14,7 +15,8 @@ const components = [
 	yjUploadMultiple,
 	YjTableTree,
 	yjSearch,
-	yjFormCreate
+	yjFormCreate,
+	yjImage
 ];
 
 export default {
