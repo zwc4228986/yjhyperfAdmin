@@ -11,8 +11,8 @@ use Hyperf\DbConnection\Model\Model;
  * @property string $order_sn 
  * @property int $user_id 
  * @property string $price 
- * @property int $create_time 
- * @property int $update_time 
+ * @property \Carbon\Carbon $create_time 
+ * @property \Carbon\Carbon $update_time 
  * @property int $delete_time 
  */
 class Order extends \App\Model\Trait\Order
@@ -30,5 +30,5 @@ class Order extends \App\Model\Trait\Order
     /**
      * The attributes that should be cast to native types.
      */
-    protected array $casts = ['id' => 'integer', 'user_id' => 'integer', 'create_time' => 'integer', 'update_time' => 'integer', 'delete_time' => 'integer'];
+    protected array $casts = ['id' => 'integer', 'user_id' => 'integer', 'create_time' => 'datetime', 'update_time' => 'datetime', 'delete_time' => 'integer'];
 }

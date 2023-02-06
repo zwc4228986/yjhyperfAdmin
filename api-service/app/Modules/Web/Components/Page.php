@@ -5,6 +5,7 @@ namespace App\Modules\Web\Components;
 use App\Modules\Web\Logic\NavLogic;
 use App\Modules\Web\Logic\Product\ProductCategoryLogic;
 use Hyperf\Context\Context;
+use Hyperf\Contract\LengthAwarePaginatorInterface;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\Paginator\LengthAwarePaginator;
 use Hyperf\ViewEngine\Component\Component;
@@ -16,7 +17,7 @@ use function Hyperf\ViewEngine\view;
 class Page extends Component
 {
 
-    private LengthAwarePaginator $page;
+    private LengthAwarePaginatorInterface $page;
 
     public function __construct($page)
     {
@@ -26,7 +27,7 @@ class Page extends Component
     public function render(): mixed
     {
 
-        $elements = $this->page->elements();
+        $elements = $this->page->getElements();
         return view('components.bootstrap', ['paginator' => $this->page, 'elements' => $elements]);
     }
 }

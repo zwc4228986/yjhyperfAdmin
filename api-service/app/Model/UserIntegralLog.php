@@ -8,8 +8,8 @@ namespace App\Model;
  * @property int $id 
  * @property string $type 
  * @property int $number 
- * @property int $create_time 
- * @property int $update_time 
+ * @property \Carbon\Carbon $create_time 
+ * @property \Carbon\Carbon $update_time 
  * @property int $delete_time 
  * @property int $user_id 
  */
@@ -32,5 +32,5 @@ class UserIntegralLog extends Model
     /**
      * The attributes that should be cast to native types.
      */
-    protected array $casts = ['id' => 'integer', 'number' => 'integer', 'create_time' => 'integer', 'update_time' => 'integer', 'delete_time' => 'integer', 'user_id' => 'integer'];
+    protected array $casts = ['id' => 'integer', 'number' => 'integer', 'create_time' => 'datetime', 'update_time' => 'datetime', 'delete_time' => 'integer', 'user_id' => 'integer'];
 }

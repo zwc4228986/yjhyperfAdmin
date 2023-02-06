@@ -1,7 +1,7 @@
 <body>
 <main>
-    <header class="shadow" style="background: #fff;">
-        <nav class="navbar navbar-expand-lg  " aria-label="Fourth navbar example">
+    <header class="shadow">
+        <nav class="navbar navbar-expand-lg navbar-dark" aria-label="Fourth navbar example">
             <div class="container">
                 <div class="dropdown navbar-brand">
                     <div class="nav-link dropdown-toggle" href="#" id="dropdown04" data-bs-toggle="dropdown"
@@ -14,7 +14,8 @@
                         @endforeach
                     </ul>
                 </div>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+
+                <button class="navbar-toggler " type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarsExample04"
                         aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -23,7 +24,7 @@
                 <div class="collapse navbar-collapse" id="navbarsExample04">
                     <ul class="navbar-nav me-auto mb-2 mb-md-0">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/">首页</a>
+                            <a class="nav-link active"  href="/">首页</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">赚金币</a>
@@ -45,7 +46,7 @@
                             </button>
                         @else
                             <li class="nav-item   dropdown z-9999">
-                                <a href="#" class="d-block  link-dark text-decoration-none dropdown-toggle"
+                                <a href="#" class="d-block  link-light text-decoration-none dropdown-toggle"
                                    id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                                     <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32"
                                          class="rounded-circle">
@@ -68,12 +69,12 @@
     </header>
 
 </main>
-<nav class="navbar navbar-light bg-light  sticky-top">
+<nav class="navbar navbar-light bg-white  sticky-top shadow-sm">
     <div class="container">
-        <ul class="nav justify-content-center">
+        <ul class="nav  justify-content-center">
             @foreach ($nav as $item)
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page"
+                    <a class="nav-link nav-custom-link active" aria-current="page"
                        href="{{url('/?product_category_pid='.$item['id'])}}">{{$item['name']}}</a>
                 </li>
             @endforeach
