@@ -10,7 +10,7 @@
                     <ul class="dropdown-menu z-9999" aria-labelledby="dropdown04">
                         @foreach ($nav as $item)
                             <li><a class="dropdown-item"
-                                   href="/?product_category_id={{$item['id']}}">{{$item['name']}}</a></li>
+                                   href="{{url('/?product_category_pid='.$item['id'])}}">{{$item['name']}}</a></li>
                         @endforeach
                     </ul>
                 </div>

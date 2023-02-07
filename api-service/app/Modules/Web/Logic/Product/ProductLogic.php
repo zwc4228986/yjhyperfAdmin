@@ -23,7 +23,6 @@ class ProductLogic
 
     public function detail(int $product_id)
     {
-
         return $this->productDao->where('id', $product_id)->with(['Image', 'Description'])->first();
     }
 
