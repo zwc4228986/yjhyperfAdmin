@@ -356,3 +356,9 @@ export function refundOrderDetail(uni) {
 export function cancelRefundOrder(uni) {
 	return request.post('order/refund/cancel/' + uni);
 }
+
+export function createOrder(data) {
+	return request.post('/api/order/create',data,{
+		URL:3
+	});
+}

@@ -59,10 +59,7 @@
             "
           >
             <template #default="scope">
-              <el-avatar
-                :src="deepGet(scope.row, item.prop)"
-                :size="30"
-              ></el-avatar>
+              <yj-image :modelValue="scope.row[item.prop]"></yj-image>
             </template>
           </el-table-column>
 
@@ -165,7 +162,7 @@ import config from "@/config/table";
 import columnSetting from "./columnSetting";
 import { extend } from "@/utils/common";
 import YjSwitch from "./components/YjSwitch";
-import YjImage from "./components/YjImage";
+import YjImage from "@/yjcomponents/yjImage/src/index";
 import YjText from "./components/YjText";
 import collect from "collect.js";
 export default {
@@ -285,9 +282,15 @@ export default {
         [config.request.order]: this.order,
       };
       extend(reqData, this.tableParams);
-      var res = await this.apiObj.params(collect(reqData).filter((item)=>{
-          return item!='all'
-      }).all()).post();
+      var res = await this.apiObj
+        .params(
+          collect(reqData)
+            .filter((item) => {
+              return item != "all";
+            })
+            .all()
+        )
+        .post();
       try {
         var response = config.parseData(res);
       } catch (error) {

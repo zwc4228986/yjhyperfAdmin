@@ -7,8 +7,8 @@ import config from "@/config/upload";
 
 import { defineComponent, defineProps, defineEmits } from "vue";
 
-   const props = defineProps({modelValue: String})
-   const emit = defineEmits(['update:modelValue'])
+const props = defineProps({ modelValue: String });
+const emit = defineEmits(["update:modelValue"]);
 //    emit('update:modelValue', false)
 
 //    const state = {
@@ -19,6 +19,8 @@ const src =
   typeof props.modelValue === "number"
     ? config.getImagePath(props.modelValue)
     : props.modelValue;
+
+console.log(props);
 </script>
 
 <style scoped>

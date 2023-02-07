@@ -212,12 +212,12 @@
 				let that = this;
 				getCategoryList().then(res => {
 					let data = res;
-					data.forEach(item => {
-						item.children.unshift({
-							'id': 0,
-							'cate_name': '全部'
-						})
-					})
+					// data.forEach(item => {
+					// 	item.children.unshift({
+					// 		'id': 0,
+					// 		'cate_name': '全部'
+					// 	})
+					// })
 					that.categoryTitle = data[0].cate_name;
 					that.where.cid = data[0].id;
 					that.sid = 0;

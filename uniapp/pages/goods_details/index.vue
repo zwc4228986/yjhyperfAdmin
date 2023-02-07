@@ -299,11 +299,11 @@
 							</form>
 						</view>
 						<view class="bnt acea-row skeleton-rect" v-else>
-							<form v-if="storeInfo.cart_button" @submit="joinCart" class="joinCart bnts">
+							<!-- <form v-if="storeInfo.cart_button" @submit="joinCart" class="joinCart bnts">
 								<button class="joinCart bnts" form-type="submit">
 									加入目标
 								</button>
-							</form>
+							</form> -->
 							<form @submit="goBuy" class="buy bnts" :class="!storeInfo.cart_button ? 'virbnt' : ''">
 								<button class="buy bnts" :class="!storeInfo.cart_button ? 'virbnt' : ''"
 									form-type="submit">
@@ -428,6 +428,9 @@
 	import {
 		getCustomer
 	} from '@/utils/index.js'
+	import {
+		createOrder
+	} from '@/api/order.js'
 	import {
 		getProductDetail,
 		getProductCode,
@@ -1507,7 +1510,10 @@
 				if (this.isLogin === false) {
 					toLogin();
 				} else {
-					this.goCat(true);
+					createOrder({product_id: this.id}).then(res=>{
+						
+					});
+					// this.goCat(true);
 				}
 			},
 			open(data) {
