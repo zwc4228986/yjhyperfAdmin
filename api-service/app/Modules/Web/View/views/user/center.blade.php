@@ -34,15 +34,13 @@
                                 <!-- Side Nav START -->
                                 <ul class="nav nav-tabs nav-pills nav-pills-soft flex-column fw-bold gap-2 border-0">
                                     <li class="nav-item" data-bs-dismiss="offcanvas">
-                                        <a class="nav-link d-flex mb-0 active" href="#nav-setting-tab-1"
+                                        <a class="nav-link d-flex mb-0 {{$type=='info'?'active':''}}" href="{{url('/user/center/info')}}"
                                            data-bs-toggle="tab"> <img class="me-2 h-20px fa-fw"
-                                                                      src="assets/images/icon/person-outline-filled.svg"
                                                                       alt=""><span>我的信息 </span></a>
                                     </li>
                                     <li class="nav-item" data-bs-dismiss="offcanvas">
-                                        <a class="nav-link d-flex mb-0" href="#nav-setting-tab-3" data-bs-toggle="tab">
+                                        <a class="nav-link d-flex mb-0 {{$type=='download'?'active':''}}" href="{{url('/user/center/download')}}" data-bs-toggle="tab">
                                             <img class="me-2 h-20px fa-fw"
-                                                 src="assets/images/icon/shield-outline-filled.svg"
                                                  alt=""><span>我的下载</span></a>
                                     </li>
                                 </ul>
@@ -94,6 +92,7 @@
         <div class="col-lg-6 vstack gap-4">
             <!-- Setting Tab content START -->
             <div class="tab-content py-0 mb-0">
+
 
                 <!-- Account setting tab START -->
                 <div class="tab-pane fade active show" id="nav-setting-tab-1">
