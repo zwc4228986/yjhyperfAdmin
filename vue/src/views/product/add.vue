@@ -408,7 +408,7 @@ export default {
   methods: {
     getProductDetail() {
       this.$HTTP()
-        .params({ product_id : this.id })
+        .params({ product_id: this.id })
         .post("/admin/product/detail")
         .then((res) => {
           let formValidate = {};
@@ -433,19 +433,34 @@ export default {
           //   return item;
           // });
           // formValidate.freight = res.freight;
-          formValidate = this.collect(res).only(['name','image_ids','price','status']);
-          formValidate.prepend(res.product_description.description,'description')
-          formValidate.prepend(res.product_description.description,'description')
-          formValidate.prepend(3,'types')
-          formValidate.prepend(res.product_resource?.file_id,'resource_id')
-          formValidate.prepend(this.collect(res.product_category_rel).transform((res)=>{
-            return parseInt(res.product_category_id)
-          }).all(),'product_category_id');
+          formValidate = this.collect(res).only([
+            "name",
+            "image_ids",
+            "price",
+            "status",
+          ]);
+          formValidate.prepend(
+            res.product_description.description,
+            "description"
+          );
+          formValidate.prepend(
+            res.product_description.description,
+            "description"
+          );
+          formValidate.prepend(3, "types");
+          formValidate.prepend(res.product_resource?.file_id, "resource_id");
+          formValidate.prepend(
+            this.collect(res.product_category_rel)
+              .transform((res) => {
+                return parseInt(res.product_category_id);
+              })
+              .all(),
+            "product_category_id"
+          );
           console.log(formValidate);
-          
+
           this.formValidate = formValidate.all();
         });
-
     },
     async getShippingTemplateLists() {
       this.shippingTemplateLists = await this.$HTTP()

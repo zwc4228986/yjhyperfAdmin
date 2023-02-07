@@ -15,8 +15,8 @@ import request from "@/utils/request.js";
  * @param int id
  * 
  */
-export function getProductDetail(id) {
-	return request.post('api/product/detail' , {id}, {
+export function getProductDetail(product_id) {
+	return request.post('/api/product/detail' , {product_id}, {
 		noAuth: true,
 		URL:3
 	});

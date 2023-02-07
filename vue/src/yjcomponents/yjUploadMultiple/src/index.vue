@@ -1,6 +1,5 @@
 <template>
   <div class="sc-upload-multiple">
-     
     <el-upload
       ref="uploader"
       list-type="picture-card"
@@ -9,7 +8,7 @@
       :name="name"
       :data="data"
       :http-request="request"
-       v-model:file-list="fileList"
+      :file-list="fileList"
       :show-file-list="true"
       :accept="accept"
       :on-progress="onProgress"
@@ -27,11 +26,29 @@
       <template #tip>
         <div v-if="tip" class="el-upload__tip">{{ tip }}</div>
       </template>
-      <yj-image :modelValue="file_id"></yj-image>
       <template #file="{ file }">
-        <div class="sc-upload-list-item" >
-          {{ file.url }}
+        <div class="sc-upload-list-item">
           <yj-image :modelValue="file.url"></yj-image>
+          <span class="el-upload-list__item-actions">
+            <span
+              class="el-upload-list__item-preview"
+              @click="handlePictureCardPreview(file)"
+            >
+              <el-icon><zoom-in /></el-icon>
+            </span>
+            <span
+              class="el-upload-list__item-delete"
+              @click="handleDownload(file)"
+            >
+              <el-icon><Download /></el-icon>
+            </span>
+            <span
+              class="el-upload-list__item-delete"
+              @click="handleRemove(file)"
+            >
+              <el-icon><Delete /></el-icon>
+            </span>
+          </span>
           <!-- <yj-image v-if=""></yj-image> -->
           <!-- <el-image
             class="el-upload-list__item-thumbnail"
@@ -47,10 +64,7 @@
               <div class="sc-upload-multiple-image-slot">Loading...</div>
             </template>
           </el-image> -->
-          <div
-            v-if="!disabled && file.status == 'success'"
-            class="sc-upload__item-actions"
-          >
+          <div v-if="file.status == 'success'" class="sc-upload__item-actions">
             <span class="del" @click="handleRemove(file)"
               ><el-icon><el-icon-delete /></el-icon
             ></span>
@@ -72,59 +86,106 @@
       ><el-input v-model="value"></el-input
     ></span>
   </div>
+  <el-dialog v-model="dialogVisible">
+    <img w-full :src="dialogImageUrl" alt="Preview Image" />
+  </el-dialog>
 </template>
 <script setup>
 import config from "@/config/upload";
+import { collect } from "collect.js";
+import { Delete, Download, Plus, ZoomIn } from "@element-plus/icons-vue";
+import { watch, ref } from "Vue";
 
-const emit = defineEmits(['update:file-list']);
+const emit = defineEmits(["update:modelValue"]);
 
-const props = defineProps({ modelValue: String})
-const fileList = [ {
-    id:1,
-    name: 'food.jpeg',
-    url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
-  }]
+const props = defineProps({ modelValue: String });
+console.log(props);
+let fileList = [];
 
-const request = async (param)=>{
-  // console.log(param);
-  // var apiObj = config.apiObj;
-  //     const data = new FormData();
-  //     data.append(param.filename, param.file);
-  //     for (const key in param.data) {
-  //       data.append(key, param.data[key]);
-  //     }
-  //     const fileInfo = await apiObj
-  //       .params(data)
-  //       .post();
+watch(
+  () => props.modelValue,
+  (value) => {
+    if (value) {
+      fileList = collect(props.modelValue.split(","))
+        .transform((res) => {
+          return {
+            id: res,
+            url: config.getImagePath(res),
+          };
+        })
+        .all();
+    }
+  }
+);
 
-  //     fileList.push( {
-  //   id:2,
-  //   name: 'food.jpeg',
-  //   url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
+// console.log(fileList);
+console.log(props);
+const updateModelValue = () => {
+  emit(
+    "update:modelValue",
+    fileList
+      .map((res) => {
+        return res.id;
+      })
+      .join(",")
+  );
+};
+
+const request = async (param) => {
+  console.log(param);
+  var apiObj = config.apiObj;
+  const data = new FormData();
+  data.append(param.filename, param.file);
+  for (const key in param.data) {
+    data.append(key, param.data[key]);
+  }
+  const fileInfo = await apiObj.params(data).post();
+  fileList.push({
+    id: fileInfo.id,
+    url: fileInfo.src,
+  });
+
+  // fileList.push({
+  //   id: 2,
+  //   name: "food.jpeg",
+  //   url: "https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100",
+  // });
+
+  updateModelValue();
+  // console.log(fileList);
+  // param.onSuccess(res);
+  // .then((res) => {
+  //   // var response = config.parseData(res);
+  //   // if(response.code == config.successCode){
+  //   param.onSuccess(res);
+  //   console.log(res);
+  //   // this.defaultFileList.push(res);
+  //   // }else{
+  //   // 	param.onError(response.msg || "未知错误")
+  //   // }
+  //   // console.log(res,param);
   // })
-
-  //     emit('update:file-list',fileList);
-      console.log(fileList);
-      // param.onSuccess(res);
-        // .then((res) => {
-        //   // var response = config.parseData(res);
-        //   // if(response.code == config.successCode){
-        //   param.onSuccess(res);
-        //   console.log(res);
-        //   // this.defaultFileList.push(res);
-        //   // }else{
-        //   // 	param.onError(response.msg || "未知错误")
-        //   // }
-        //   // console.log(res,param);
-        // })
-        // .catch((err) => {
-        //   console.log(err);
-        //   param.onError(err);
-        // });
-}
-const onProgress = (res)=>{
+  // .catch((err) => {
+  //   console.log(err);
+  //   param.onError(err);
+  // });
+};
+const dialogImageUrl = ref("");
+const dialogVisible = ref(false);
+const handlePictureCardPreview = (uploadFile) => {
+  dialogImageUrl.value = uploadFile.url;
+  dialogVisible.value = true;
+};
+const onProgress = (res) => {
   console.log(res);
-}
+};
+const handleRemove = (file) => {
+  fileList.splice(
+    fileList.findIndex((item) => item.id === file.id),
+    1
+  );
+  updateModelValue();
+};
 </script>
 <!-- <script>
 import config from "@/config/upload";
@@ -337,6 +398,8 @@ export default {
 }
 .sc-upload-multiple .el-image {
   display: block;
+  width: 100%;
+  height: 100%;
 }
 .sc-upload-multiple .el-image:deep(img) {
   -webkit-user-drag: none;
@@ -380,5 +443,9 @@ export default {
   top: 0;
   left: 0;
   background-color: var(--el-overlay-color-lighter);
+}
+.el-dialog img {
+  width: 100%;
+  height: 100%;
 }
 </style>

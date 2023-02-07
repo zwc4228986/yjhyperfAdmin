@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Admin\Controller\Product\Product;
+namespace App\Modules\Product\Controller\Product;
 
 use App\Modules\Admin\Logic\Product\ProductLogic;
 use Hyperf\Di\Annotation\Inject;

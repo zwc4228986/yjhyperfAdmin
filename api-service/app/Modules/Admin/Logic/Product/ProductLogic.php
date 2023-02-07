@@ -88,6 +88,34 @@ class ProductLogic
             'ProductDescription',
             'ProductResource'
         ])->first();
+
+        $imags_ids = $data->image_ids;
+        $images = getFileFullPath(explode(',', $imags_ids));
+        dump($images);
+        $data->setAttribute('images', $images);
+
         return $data;
+    }
+
+    public function edit(int $product_id, \Hyperf\Utils\Collection $params)
+    {
+        Db::beginTransaction();
+        try {
+            $params->offsetSet('image_id', (int)$params->get('image_ids'));
+
+            $this->productDao->edit($product_id, $params);
+            $this->productDescriptionDao->updateOrCreate([
+                'product_id' => $product_id,
+            ], $params->only(['description'])->toArray());
+            $product_category_ids = $params->get('product_category_id');
+            $resource_id = $params->get('resource_id');
+            $this->updateProductCategoryRel($product_id, $product_category_ids);
+            $this->updateProductResource($product_id, $resource_id, 0);
+            Db::commit();
+        } catch (\Exception $exception) {
+            Db::rollBack();
+            Error($exception->getMessage());
+        }
+        return $product_id;
     }
 }

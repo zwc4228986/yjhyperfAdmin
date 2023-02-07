@@ -21,9 +21,10 @@ class Index
     protected FilesystemFactory $filesystemFactory;
 
     #[ApiGet]
-    public function index(RequestInterface $request,ResponseInterface $response){
+    public function index(RequestInterface $request, ResponseInterface $response)
+    {
         $id = $request->route('id');
-        $file = $this->systemFileDao->where('id', $id)->insert();
+        $file = $this->systemFileDao->where('id', $id)->first();
         $path = $this->filesystemFactory->get('public')->read($file->path);
 
         return $response

@@ -47,7 +47,7 @@
 						<!-- #ifdef APP-PLUS || MP -->
 						<view class="" :style="'width:100%;' + 'height:'+sysHeight"></view>
 						<!-- #endif -->
-						<productConSwiper class="skeleton-rect" :imgUrls="storeInfo.slider_image"
+						<productConSwiper class="skeleton-rect" :imgUrls="storeInfo.images"
 							:videoline="storeInfo.video_link" @videoPause="videoPause"></productConSwiper>
 						<view class="wrapper">
 							<view class="share acea-row row-between row-bottom">
@@ -68,24 +68,21 @@
 								</view>
 								<view class="iconfont icon-fenxiang skeleton-rect" @click="listenerActionSheet"></view>
 							</view>
-							<view class="introduce skeleton-rect" v-text="storeInfo.store_name"></view>
+							<view class="introduce skeleton-rect" v-text="storeInfo.name"></view>
 							<view class="label acea-row row-between-wrapper" style="padding-bottom: 20rpx">
-								<view class="skeleton-rect" v-text="'原价:' + (storeInfo.ot_price || 0) + '小豆'">
+								<view class="skeleton-rect" v-text="'原价:' + (storeInfo.ot_price || 0) + '抖币'">
 								</view>
-								<view class="skeleton-rect" v-text="
+				<!-- 				<view class="skeleton-rect" v-text="
                     '库存:' +
                     (storeInfo.stock || 0) +
                     (storeInfo.unit_name || '')
-                  "></view>
+                  "></view> -->
 								<view class="skeleton-rect" v-text="
                     '销量:' +
-                    (storeInfo.fsales || 0) +
-                    (storeInfo.unit_name || '')
+                    (storeInfo.fsales || 0)
                   "></view>
 							</view>
-							<view v-if="
-                  !is_money_level && storeInfo.vip_price && storeInfo.is_vip
-                " class="svip acea-row row-between-wrapper">
+							<view class="svip acea-row row-between-wrapper">
 								<view class="">开通“超级会员”立省{{ diff }}元</view>
 								<navigator url="/pages/annex/vip_paid/index">
 									立即开通
@@ -231,7 +228,7 @@
 												<span class="pictrue_log pictrue_log_class"
 													v-if="val.activity && val.activity.type === '3'">拼团</span>
 											</view>
-											<view class="name line1">{{ val.store_name }}</view>
+											<view class="name line1">{{ val.name }}</view>
 											<view class="money font-color">¥{{ val.price }}</view>
 										</view>
 									</view>
@@ -712,7 +709,7 @@
 			that.$set(that, "actionSheetHidden", !that.actionSheetHidden);
 			userShare();
 			return {
-				title: that.storeInfo.store_name || "",
+				title: that.storeInfo.name || "",
 				imageUrl: that.storeInfo.image || "",
 				path: "/pages/goods_details/index?id=" + that.id + "&spid=" + that.uid,
 			};
@@ -762,7 +759,7 @@
 					scene: scene,
 					type: 0,
 					href: `${HTTP_REQUEST_URL}${curRoute}&spread=${that.uid}`,
-					title: that.storeInfo.store_name,
+					title: that.storeInfo.name,
 					summary: that.storeInfo.store_info,
 					imageUrl: that.storeInfo.small_image,
 					success: function(res) {
@@ -1032,125 +1029,116 @@
 				let that = this;
 				getProductDetail(that.id)
 					.then((res) => {
-						let storeInfo = res.data.storeInfo;
-						let good_list = res.data.good_list || [];
-						let count = Math.ceil(good_list.length / 6);
-						let goodArray = new Array();
-						for (let i = 0; i < count; i++) {
-							let list = good_list.slice(i * 6, i * 6 + 6);
-							if (list.length)
-								goodArray.push({
-									list: list,
-								});
-						}
+						let storeInfo = res;
+						console.log(storeInfo);
 						that.$set(that, "storeInfo", storeInfo);
-						that.$set(that, "description", storeInfo.description);
-						if (this.description) {
-							this.description = this.description.replace(
-								/<img/gi,
-								'<img style="max-width:100%;height:auto;float:left;display:block" '
-							);
-							this.description = this.description.replace(
-								/<video/gi,
-								'<video style="width:100%;height:300px;display:block" '
-							);
+						that.$set(that, "description", storeInfo.product_description.description);
+					// 	if (this.description) {
+					// 		this.description = this.description.replace(
+					// 			/<img/gi,
+					// 			'<img style="max-width:100%;height:auto;float:left;display:block" '
+					// 		);
+					// 		this.description = this.description.replace(
+					// 			/<video/gi,
+					// 			'<video style="width:100%;height:300px;display:block" '
+					// 		);
 
-						}
-						that.$set(that, 'presale_pay_status', res.data.storeInfo
-							.presale_pay_status); // 1未开始; 2进行中; 3已结束
-						that.$set(that, "reply", res.data.reply ? [res.data.reply] : []);
-						that.$set(that, "replyCount", res.data.replyCount);
-						that.$set(that, "replyChance", res.data.replyChance);
-						that.$set(that.attr, "productAttr", res.data.productAttr);
-						that.$set(that, "productValue", res.data.productValue);
-						that.$set(that, "is_vip", res.data.storeInfo.is_vip);
-						that.$set(that.sharePacket, "priceName", res.data.priceName);
-						that.$set(
-							that.sharePacket,
-							"isState",
-							res.data.priceName != 0 ? true : false
-						);
-						that.$set(that, "systemStore", res.data.system_store);
-						that.$set(that, "storeSelfMention", res.data.store_self_mention);
-						that.$set(that, "good_list", goodArray);
-						// that.$set(that, "PromotionCode", storeInfo.code_base);
-						that.$set(
-							that,
-							"activity",
-							res.data.activity ? res.data.activity : []
-						);
-						that.$set(that, "couponList", res.data.coupons);
-						that.$set(
-							that,
-							"routineContact",
-							Number(res.data.routine_contact_type)
-						);
-						uni.setNavigationBarTitle({
-							title: storeInfo.store_name.substring(0, 7) + "...",
-						});
-						for (let key in res.data.productValue) {
-							let obj = res.data.productValue[key];
-							that.skuArr.push(obj);
-						}
-						this.$set(this, "selectSku", that.skuArr[0]);
-						that.$set(
-							that,
-							"diff",
-							that.$util.$h.Sub(storeInfo.price, storeInfo.vip_price)
-						);
-						var navList = ["商品", "详情"];
-						if (res.data.replyCount) {
-							navList.splice(1, 0, "评价");
-						}
-						// if (goodArray.length) {
-						// 	navList.splice(-1, 0, '推荐');
-						// }
-						that.$set(that, "navList", navList);
-						that.$set(that, "storeImage", that.storeInfo.image);
-						// #ifdef H5
-						if (that.isLogin) {
-							that.ShareInfo();
-						}
-						// #endif
-						if (that.isLogin) {
-							that.getUserInfo();
-						}
-						// #ifdef H5 || APP-PLUS
-						this.getImageBase64();
-						// #endif
-						this.$nextTick(() => {
-							if (good_list.length) {
-								// #ifndef APP-PLUS
-								that.setClientHeight();
-								// #endif
-								// #ifdef APP-PLUS
+					// 	}
+					// 	that.$set(that, 'presale_pay_status', res.data.storeInfo
+					// 		.presale_pay_status); // 1未开始; 2进行中; 3已结束
+					// 	that.$set(that, "reply", res.data.reply ? [res.data.reply] : []);
+					// 	that.$set(that, "replyCount", res.data.replyCount);
+					// 	that.$set(that, "replyChance", res.data.replyChance);
+					// 	that.$set(that.attr, "productAttr", res.data.productAttr);
+					// 	that.$set(that, "productValue", res.data.productValue);
+					// 	that.$set(that, "is_vip", res.data.storeInfo.is_vip);
+					// 	that.$set(that.sharePacket, "priceName", res.data.priceName);
+					// 	that.$set(
+					// 		that.sharePacket,
+					// 		"isState",
+					// 		res.data.priceName != 0 ? true : false
+					// 	);
+					// 	that.$set(that, "systemStore", res.data.system_store);
+					// 	that.$set(that, "storeSelfMention", res.data.store_self_mention);
+					// 	that.$set(that, "good_list", goodArray);
+					// 	// that.$set(that, "PromotionCode", storeInfo.code_base);
+					// 	that.$set(
+					// 		that,
+					// 		"activity",
+					// 		res.data.activity ? res.data.activity : []
+					// 	);
+					// 	that.$set(that, "couponList", res.data.coupons);
+					// 	that.$set(
+					// 		that,
+					// 		"routineContact",
+					// 		Number(res.data.routine_contact_type)
+					// 	);
+					// 	uni.setNavigationBarTitle({
+					// 		title: storeInfo.name.substring(0, 7) + "...",
+					// 	});
+					// 	for (let key in res.data.productValue) {
+					// 		let obj = res.data.productValue[key];
+					// 		that.skuArr.push(obj);
+					// 	}
+					// 	this.$set(this, "selectSku", that.skuArr[0]);
+					// 	that.$set(
+					// 		that,
+					// 		"diff",
+					// 		that.$util.$h.Sub(storeInfo.price, storeInfo.vip_price)
+					// 	);
+					// 	var navList = ["商品", "详情"];
+					// 	if (res.data.replyCount) {
+					// 		navList.splice(1, 0, "评价");
+					// 	}
+					// 	// if (goodArray.length) {
+					// 	// 	navList.splice(-1, 0, '推荐');
+					// 	// }
+					// 	that.$set(that, "navList", navList);
+					// 	that.$set(that, "storeImage", that.storeInfo.image);
+					// 	// #ifdef H5
+					// 	if (that.isLogin) {
+					// 		that.ShareInfo();
+					// 	}
+					// 	// #endif
+					// 	if (that.isLogin) {
+					// 		that.getUserInfo();
+					// 	}
+					// 	// #ifdef H5 || APP-PLUS
+					// 	this.getImageBase64();
+					// 	// #endif
+					// 	this.$nextTick(() => {
+					// 		if (good_list.length) {
+					// 			// #ifndef APP-PLUS
+					// 			that.setClientHeight();
+					// 			// #endif
+					// 			// #ifdef APP-PLUS
 
-								setTimeout(() => {
-									that.setClientHeight();
-								}, 1000);
-								// #endif
-							}
-						});
-						setTimeout(function() {
-							that.infoScroll();
-						}, 500);
-						// #ifndef H5
-						that.downloadFilestoreImage();
-						// #endif
-						that.DefaultSelect();
-						that.getCartCount();
+					// 			setTimeout(() => {
+					// 				that.setClientHeight();
+					// 			}, 1000);
+					// 			// #endif
+					// 		}
+					// 	});
+					// 	setTimeout(function() {
+					// 		that.infoScroll();
+					// 	}, 500);
+					// 	// #ifndef H5
+					// 	that.downloadFilestoreImage();
+					// 	// #endif
+					// 	that.DefaultSelect();
+					// 	that.getCartCount();
 						setTimeout(() => {
 							this.showSkeleton = false;
 						}, 1000);
-					})
-					.catch((err) => {
-						//状态异常返回上级页面
-						return that.$util.Tips({
-							title: err.toString(),
-						}, {
-							tab: 3,
-							url: 1,
-						});
+					// })
+					// .catch((err) => {
+					// 	//状态异常返回上级页面
+					// 	return that.$util.Tips({
+					// 		title: err.toString(),
+					// 	}, {
+					// 		tab: 3,
+					// 		url: 1,
+					// 	});
 					});
 			},
 			infoScroll: function() {
@@ -1230,8 +1218,8 @@
 				if (productSelect && productAttr.length) {
 					this.$set(
 						this.attr.productSelect,
-						"store_name",
-						this.storeInfo.store_name
+						"name",
+						this.storeInfo.name
 					);
 					this.$set(this.attr.productSelect, "image", productSelect.image);
 					this.$set(this.attr.productSelect, "price", productSelect.price);
@@ -1248,8 +1236,8 @@
 				} else if (!productSelect && productAttr.length) {
 					this.$set(
 						this.attr.productSelect,
-						"store_name",
-						this.storeInfo.store_name
+						"name",
+						this.storeInfo.name
 					);
 					this.$set(this.attr.productSelect, "image", this.storeInfo.image);
 					this.$set(this.attr.productSelect, "price", this.storeInfo.price);
@@ -1266,8 +1254,8 @@
 				} else if (!productSelect && !productAttr.length) {
 					this.$set(
 						this.attr.productSelect,
-						"store_name",
-						this.storeInfo.store_name
+						"name",
+						this.storeInfo.name
 					);
 					this.$set(this.attr.productSelect, "image", this.storeInfo.image);
 					this.$set(this.attr.productSelect, "price", this.storeInfo.price);
@@ -1657,7 +1645,7 @@
 							updateURLParameter(href, 'spread', res.data.uid);
 						let configAppMessage = {
 							desc: data.store_info,
-							title: data.store_name,
+							title: data.name,
 							link: href,
 							imgUrl: data.image,
 						};

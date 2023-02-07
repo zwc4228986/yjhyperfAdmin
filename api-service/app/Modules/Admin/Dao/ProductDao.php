@@ -13,4 +13,12 @@ class ProductDao extends Product
         'image_id',
         'image_ids',
     ];
+
+    public function edit(int $product_id, \Hyperf\Utils\Collection $params)
+    {
+        $product = $this->where('id', $product_id)->first();
+        $product->fill($params->toArray());
+        return $product->save();
+
+    }
 }
