@@ -7,11 +7,8 @@ import config from "@/config/upload";
 
 import { defineComponent, defineProps, defineEmits } from "vue";
 
-const props = defineProps({
-  modelValue: Number,
-});
-
-const emit = defineEmits(["update:modelValue"]);
+   const props = defineProps({modelValue: String})
+   const emit = defineEmits(['update:modelValue'])
 //    emit('update:modelValue', false)
 
 //    const state = {

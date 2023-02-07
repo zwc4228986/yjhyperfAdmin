@@ -25,4 +25,5 @@ class ViewController  extends AbstractController
         $detail = $this->productLogic->detail($product_id);
         return  $render->render('views/product/view',compact('detail'));
     }
+
 }

@@ -12,6 +12,7 @@ declare(strict_types=1);
 return [
     'http' => [
         \App\Middlewares\CorsMiddleware::class,
+        \App\Middlewares\RouterMiddleware::class,
         \Hyperf\Session\Middleware\SessionMiddleware::class,
         \YjHyperfAdminPligin\Apidog\Middlewares\ApidogMiddleware::class
     ],

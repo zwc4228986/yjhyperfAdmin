@@ -11,9 +11,11 @@ use Hyperf\DbConnection\Model\Model;
  * @property string $order_id 
  * @property int $product_id 
  * @property string $price 
- * @property int $create_time 
- * @property int $update_time 
+ * @property \Carbon\Carbon $create_time 
+ * @property \Carbon\Carbon $update_time 
  * @property int $delete_time 
+ * @property int $user_id 
+ * @property int $download 
  */
 class OrderProduct extends \App\Model\Trait\OrderProduct
 {
@@ -35,5 +37,5 @@ class OrderProduct extends \App\Model\Trait\OrderProduct
     /**
      * The attributes that should be cast to native types.
      */
-    protected array $casts = ['id' => 'integer', 'product_id' => 'integer', 'create_time' => 'integer', 'update_time' => 'integer', 'delete_time' => 'integer'];
+    protected array $casts = ['id' => 'integer', 'product_id' => 'integer', 'create_time' => 'datetime', 'update_time' => 'datetime', 'delete_time' => 'integer', 'user_id' => 'integer', 'download' => 'integer'];
 }

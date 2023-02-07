@@ -12,12 +12,12 @@ declare(strict_types=1);
 use Hyperf\HttpServer\Router\Router;
 
 
+
 Router::get('/favicon.ico', function () {
     return '';
 });
 
-
-
+app(App\Routers\NavRouter::class)->run();
 
 Router::addServer('ws', function () {
     Router::get('/login', \App\Modules\Websocket\Controller\LoginController::class);

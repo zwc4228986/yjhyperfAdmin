@@ -3,19 +3,17 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>@yield('title','抖资源')</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link href="/bootstrap/css/bootstrap.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
             crossorigin="anonymous"></script>
-
-    {{--    <link rel="stylesheet" href="/css/navbar-top-fixed.css"/>--}}
+        <link rel="stylesheet" href="/css/app.css"/>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
-<body>
+<body class="bg-light">
 <x-header/>
 @section('sidebar')
 @show
-<div class="container py-lg-5">
+<div class="container py-lg-4 py-sm-4">
     @yield('content')
 </div>
 <x-footer/>

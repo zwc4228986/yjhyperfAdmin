@@ -71,7 +71,6 @@ class DispatcherFactory extends HyperfDispatcherFactory
         foreach ($collector as $className => $metadata) {
             if (isset($metadata['_c'][Api::class])) {
                 $middlewares = $this->handleMiddleware($metadata['_c']);
-                dump($className, $metadata['_c'][Api::class], $metadata['_m'] ?? [], $middlewares);
                 $this->handleController($className, $metadata['_c'][Api::class], $metadata['_m'] ?? [], $middlewares);
             }
         }

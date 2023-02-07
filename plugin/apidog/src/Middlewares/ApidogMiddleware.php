@@ -44,13 +44,13 @@ class ApidogMiddleware implements MiddlewareInterface
         if ($dispatched->status !== Dispatcher::FOUND) {
             return $handler->handle($request);
         }
+
         // do not check Closure
         if ($dispatched->handler->callback instanceof \Closure) {
             return $handler->handle($request);
         }
         [$controller, $action] = $this->prepareHandler($dispatched->handler->callback);
-
-        $this->validater->Validated($request,$controller, $action);
+        $this->validater->Validated($request,$controller, $action,$dispatched->handler->options['params']??[]);
 
         return $handler->handle($request);
     }
