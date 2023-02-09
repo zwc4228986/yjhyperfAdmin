@@ -11,6 +11,7 @@ class SystemFileDao extends SystemFile
         'path',
         'suffix',
         'tags_id',
+        'storage',
         'size',
     ];
 
@@ -19,4 +20,5 @@ class SystemFileDao extends SystemFile
         $path = $this->where('id', $id)->value('path');
         return env('WEBSITE_FILE_URL') . $path;
     }
+
 }

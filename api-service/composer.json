@@ -42,6 +42,7 @@
         "hyperf/view": "^3.0",
         "hyperf/view-engine": "^3.0",
         "hyperf/websocket-server": "^3.0",
+        "overtrue/flysystem-qiniu": "^3.0",
         "w7corp/easywechat": "^6.10",
         "yj-hyperf-admin-pligin/apidog": "dev-main",
         "yj-hyperf-admin-pligin/email": "dev-main",

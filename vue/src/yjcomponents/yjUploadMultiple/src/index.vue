@@ -8,7 +8,7 @@
       :name="name"
       :data="data"
       :http-request="request"
-      :file-list="fileList"
+      :file-list=" state.fileList"
       :show-file-list="true"
       :accept="accept"
       :on-progress="onProgress"
@@ -94,19 +94,24 @@
 import config from "@/config/upload";
 import { collect } from "collect.js";
 import { Delete, Download, Plus, ZoomIn } from "@element-plus/icons-vue";
-import { watch, ref } from "Vue";
+
+import { watch, ref,computed,reactive } from "vue";
 
 const emit = defineEmits(["update:modelValue"]);
 
 const props = defineProps({ modelValue: String });
 console.log(props);
-let fileList = [];
+const state = reactive({
+  fileList:[]
+});
+
 
 watch(
   () => props.modelValue,
   (value) => {
     if (value) {
-      fileList = collect(props.modelValue.split(","))
+      
+      state.fileList = collect(value.split(","))
         .transform((res) => {
           return {
             id: res,
@@ -118,12 +123,14 @@ watch(
   }
 );
 
+
+
 // console.log(fileList);
 console.log(props);
 const updateModelValue = () => {
   emit(
     "update:modelValue",
-    fileList
+    state.fileList
       .map((res) => {
         return res.id;
       })
@@ -140,16 +147,13 @@ const request = async (param) => {
     data.append(key, param.data[key]);
   }
   const fileInfo = await apiObj.params(data).post();
-  fileList.push({
+
+  state.fileList.push({
     id: fileInfo.id,
     url: fileInfo.src,
   });
 
-  // fileList.push({
-  //   id: 2,
-  //   name: "food.jpeg",
-  //   url: "https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100",
-  // });
+ 
 
   updateModelValue();
   // console.log(fileList);
@@ -180,12 +184,13 @@ const onProgress = (res) => {
   console.log(res);
 };
 const handleRemove = (file) => {
-  fileList.splice(
-    fileList.findIndex((item) => item.id === file.id),
+  state.fileList.splice(
+    state.fileList.findIndex((item) => item.id === file.id),
     1
   );
   updateModelValue();
 };
+
 </script>
 <!-- <script>
 import config from "@/config/upload";

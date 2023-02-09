@@ -430,14 +430,19 @@
 </template>
 <script>
 	let sysHeight = uni.getSystemInfoSync().statusBarHeight + 'px';
-	import {
-		getMenuList,
-		getUserInfo,
-		getUser,
-		getStatistics,
-		setVisit,
-		updateUserInfo
+	// import {
+	// 	getMenuList,
+	// 	getUserInfo,
+	// 	getUser,
+	// 	getStatistics,
+	// 	setVisit,
+	// 	updateUserInfo
+	// } from '@/api/user.js';
+
+    import {
+		userInfo
 	} from '@/api/user.js';
+
 	import {
 		wechatAuthV2,
 		getNavigation,
@@ -644,6 +649,7 @@
 					this.getUserInfo();
 				}).catch(err => {})
 			}
+			
 			// #endif
 			// #ifdef APP-PLUS
 			that.$set(that, 'pageHeight', app.globalData.windowHeight);
@@ -674,10 +680,10 @@
 			// #endif
 			if (that.isLogin) {
 				this.getUserInfo();
-				this.getUser();
-				this.getMyMenus();
-				this.setVisit();
-				this.getStatistics();
+				// this.getUser();
+				// this.getMyMenus();
+				// this.setVisit();
+				// this.getStatistics();
 			};
 		},
 		onPullDownRefresh() {
@@ -753,25 +759,25 @@
 				getUserInfo().then(res => {
 					that.userInfo = res.data
 					that.$store.commit("SETUID", res.data.uid);
-					that.orderMenu.forEach((item, index) => {
-						switch (item.title) {
-							case '待付款':
-								item.num = res.data.orderStatusNum.unpaid_count
-								break
-							case '待发货':
-								item.num = res.data.orderStatusNum.unshipped_count
-								break
-							case '待收货':
-								item.num = res.data.orderStatusNum.received_count
-								break
-							case '待评价':
-								item.num = res.data.orderStatusNum.evaluated_count
-								break
-							case '售后/退款':
-								item.num = res.data.orderStatusNum.refunding_count
-								break
-						}
-					})
+					// that.orderMenu.forEach((item, index) => {
+					// 	switch (item.title) {
+					// 		case '待付款':
+					// 			item.num = res.data.orderStatusNum.unpaid_count
+					// 			break
+					// 		case '待发货':
+					// 			item.num = res.data.orderStatusNum.unshipped_count
+					// 			break
+					// 		case '待收货':
+					// 			item.num = res.data.orderStatusNum.received_count
+					// 			break
+					// 		case '待评价':
+					// 			item.num = res.data.orderStatusNum.evaluated_count
+					// 			break
+					// 		case '售后/退款':
+					// 			item.num = res.data.orderStatusNum.refunding_count
+					// 			break
+					// 	}
+					// })
 					uni.stopPullDownRefresh();
 				});
 			},

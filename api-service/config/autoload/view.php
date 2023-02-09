@@ -23,5 +23,7 @@ return [
         'footer' => \App\Modules\Web\Components\Footer::class,
         'header' => \App\Modules\Web\Components\Header::class,
         'page' => \App\Modules\Web\Components\Page::class,
+        'user-order' => \App\Modules\Web\Components\User\Order::class,
+        'user-info' => \App\Modules\Web\Components\User\Info::class,
     ],
 ];

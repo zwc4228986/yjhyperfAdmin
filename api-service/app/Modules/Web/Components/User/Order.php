@@ -2,22 +2,23 @@
 
 namespace App\Modules\Web\Components\User;
 
-use App\Modules\User\Logic\User\UserLogic;
+use App\Modules\Order\Logic\OrderLogic;
 use Hyperf\Di\Annotation\Inject;
+use Hyperf\Utils\Collection;
 use Hyperf\ViewEngine\Component\Component;
 use function App\Modules\Web\Helper\getUserID;
 use function Hyperf\ViewEngine\view;
 
-class Info extends Component
+class Order extends Component
 {
     #[Inject]
-    protected UserLogic $userLogic;
+    protected OrderLogic $orderLogic;
 
     public function render(): mixed
     {
         $userId = getUserID();
-        $userDetail = $this->userLogic->detail($userId);
-
-        return view('components.user.info',compact('userDetail'));
+        $order = $this->orderLogic->lists(collect(['user_id' => $userId]));
+        dump($order);
+        return view('components.user.order',compact('order'));
     }
 }

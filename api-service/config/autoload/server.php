@@ -59,7 +59,6 @@ return [
         Constant::OPTION_PACKAGE_MAX_LENGTH => 20 * 1024 * 1024,
         Constant::OPTION_DOCUMENT_ROOT => BASE_PATH . '/public',
         Constant::OPTION_ENABLE_STATIC_HANDLER => true,
-
     ],
     'callbacks' => [
         Event::ON_MESSAGE => [Hyperf\WebSocketServer\Server::class, 'onMessage'],

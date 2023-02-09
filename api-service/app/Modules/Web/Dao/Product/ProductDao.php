@@ -12,8 +12,6 @@ class ProductDao extends Product
 {
     use AddWhereQueryTrait;
 
-
-
     public function params(Collection $params)
     {
         $_this = $this;

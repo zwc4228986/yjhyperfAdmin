@@ -23,7 +23,8 @@ class ViewController  extends AbstractController
     public function index(RenderInterface $render){
         $product_id = $this->request->route('product_id');
         $detail = $this->productLogic->detail($product_id);
-        return  $render->render('views/product/view',compact('detail'));
+        $product = $this->productLogic->recommand($product_id);
+        return  $render->render('views/product/view',compact('detail','product'));
     }
 
 }

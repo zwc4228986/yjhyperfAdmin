@@ -58,7 +58,7 @@ class OrderLogic
     {
         $data = $this->orderDao->params($params)->with(['OrderProduct'=>function($query){
             $query->with('Product');
-        }])->getList();
+        }])->orderByDesc('id')->getList();
         dump($data->toArray());
         return $data;
     }

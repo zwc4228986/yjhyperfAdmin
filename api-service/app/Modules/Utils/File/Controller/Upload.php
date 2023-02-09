@@ -27,6 +27,32 @@ class Upload
     #[ApiPost]
     #[ApiParam('file','file')]
     #[ApiParam('type','nullable')]
+    public function upload(){
+        $params = getParams();
+
+        /** @var UploadedFile $file */
+        $file = $params->get('file');
+        $stream = fopen($file->getRealPath(), 'r+');
+
+        $filePath = $this->getFilePath('img', $file->getExtension());
+
+        $this->filesystem->get('qiniu')->writeStream($filePath, $stream);
+
+        $file = $this->systemFileDao->create(['storage'=>'qiniu','name' => $file->getClientFilename(),'type'=>'', 'path' => $filePath, 'size' => $file->getSize(),'suffix'=>$file->getExtension()]);
+
+        fclose($stream);
+
+        if ($params->get('type','default') == 'tinymce') {
+            return $this->response->json(['location' => env('WEBSITE_FILE_URL') . $filePath]);
+        } else {
+            Success(['id' => $file->id, 'path' => $filePath, 'src' =>  env('WEBSITE_FILE_URL').$filePath]);
+
+        }
+    }
+
+//    #[ApiPost]
+//    #[ApiParam('file','file')]
+//    #[ApiParam('type','nullable')]
     public function index(){
         $params = getParams();
 

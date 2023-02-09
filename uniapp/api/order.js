@@ -362,3 +362,9 @@ export function createOrder(data) {
 		URL:3
 	});
 }
+
+export function orderLists(data) {
+	return request.post('/api/order/lists',data,{
+		URL:3
+	});
+}

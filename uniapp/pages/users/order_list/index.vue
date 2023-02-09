@@ -13,25 +13,25 @@
 					</view>
 				</view>
 			</view> -->
-      <u-sticky offset-top="0" bgColor="transparent">
-        <view class="nav acea-row row-around bg-color">
-          <view class="item" :class="orderStatus == 0 ? 'on' : ''" @click="statusClick(0)">
-            <view>待付款</view>
-          </view>
-          <view class="item" :class="orderStatus == 1 ? 'on' : ''" @click="statusClick(1)">
-            <view>待发货</view>
-          </view>
-          <view class="item" :class="orderStatus == 2 ? 'on' : ''" @click="statusClick(2)">
-            <view>待收货</view>
-          </view>
-          <view class="item" :class="orderStatus == 3 ? 'on' : ''" @click="statusClick(3)">
-            <view>待评价</view>
-          </view>
-          <view class="item" :class="orderStatus == 4 ? 'on' : ''" @click="statusClick(4)">
-            <view>已完成</view>
-          </view>
-        </view>
-      </u-sticky>
+<!--      <u-sticky offset-top="0" bgColor="transparent">-->
+<!--        <view class="nav acea-row row-around bg-color">-->
+<!--          <view class="item" :class="orderStatus == 0 ? 'on' : ''" @click="statusClick(0)">-->
+<!--            <view>待付款</view>-->
+<!--          </view>-->
+<!--          <view class="item" :class="orderStatus == 1 ? 'on' : ''" @click="statusClick(1)">-->
+<!--            <view>待发货</view>-->
+<!--          </view>-->
+<!--          <view class="item" :class="orderStatus == 2 ? 'on' : ''" @click="statusClick(2)">-->
+<!--            <view>待收货</view>-->
+<!--          </view>-->
+<!--          <view class="item" :class="orderStatus == 3 ? 'on' : ''" @click="statusClick(3)">-->
+<!--            <view>待评价</view>-->
+<!--          </view>-->
+<!--          <view class="item" :class="orderStatus == 4 ? 'on' : ''" @click="statusClick(4)">-->
+<!--            <view>已完成</view>-->
+<!--          </view>-->
+<!--        </view>-->
+<!--      </u-sticky>-->
 			<view class="list">
 				<view class="item" v-for="(item, index) in orderList" :key="index">
 					<view @click="goOrderDetails(item.order_id)">
@@ -142,6 +142,7 @@
 		getOrderList,
 		orderData,
 		orderCancel,
+    orderLists,
 		orderDel,
 		orderPay
 	} from '@/api/order.js';
@@ -412,7 +413,7 @@
 				if (that.loading) return;
 				that.loading = true;
 				that.loadTitle = '加载更多';
-				getOrderList({
+        orderLists({
 						type: that.orderStatus,
 						page: that.page,
 						limit: that.limit

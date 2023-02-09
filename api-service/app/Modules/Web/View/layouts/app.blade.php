@@ -8,6 +8,7 @@
             crossorigin="anonymous"></script>
         <link rel="stylesheet" href="/css/app.css"/>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body class="bg-light">
 <x-header/>
