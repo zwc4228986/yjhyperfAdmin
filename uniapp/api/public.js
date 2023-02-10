@@ -67,8 +67,9 @@ export function login(data) {
  */
 export function silenceAuth(data) {
 	//#ifdef MP
-	return request.get("v2/wechat/silence_auth", data, {
-		noAuth: true
+	return request.post("/api/wechat/miniapp/code2session", data, {
+		noAuth: true,
+		URL:3,
 	});
 	//#endif
 	//#ifdef H5

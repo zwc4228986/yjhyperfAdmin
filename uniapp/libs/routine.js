@@ -52,15 +52,16 @@ class Routine {
 					spread_code: app.globalData.code
 				})
 				.then(res => {
-					if (res.data && res.data.token !== undefined) {
+					console.log(res);
+					if (res && res.token !== undefined) {
 						uni.hideLoading();
-						let time = res.data.expires_time - Math.round(new Date() / 1000);
+						// let time = res.data.expires_time - Math.round(new Date() / 1000);
 						store.commit('LOGIN', {
-							token: res.data.token,
-							time: time
+							token: res.token,
+							time: 1000000
 						});
-						store.commit('SETUID', res.data.userInfo.uid);
-						store.commit('UPDATE_USERINFO', res.data.userInfo);
+						store.commit('SETUID', res.user_id);
+						store.commit('UPDATE_USERINFO', res.userData);
 						resolve(res)
 					} else {
 						reject()

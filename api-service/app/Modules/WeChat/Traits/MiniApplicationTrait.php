@@ -2,10 +2,10 @@
 
 namespace App\Modules\WeChat\Traits;
 
-use EasyWeChat\OfficialAccount\Application;
 
+use EasyWeChat\MiniApp\Application;
 
-trait ApplicationTrait
+trait MiniApplicationTrait
 {
     private $app = null;
     //wx6f9f720b88e739b4
@@ -14,8 +14,8 @@ trait ApplicationTrait
     {
         if (is_null($this->app)) {
             $config = [
-                'app_id' => 'wx6f9f720b88e739b4',
-                'secret' => 'ae2f8a7085877d33be07b06c07435cc3',
+                'app_id' => 'wx96ed9d6460eb122f',
+                'secret' => '8b767d96590c353f57863d093022fd4a',
                 'token' => 'youjin',
                 'aes_key' => '', // 明文模式请勿填写 EncodingAESKey
 

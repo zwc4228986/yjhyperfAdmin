@@ -1,20 +1,19 @@
 <?php
+/**
+ * @Notes:【】
+ * @Date: 2023-02-09 23:41
+ */
 
 namespace App\Modules\User\Logic\Login;
-
 
 use App\Modules\User\Dao\UserDao;
 use App\Modules\User\Dao\UserOpenidDao;
 use App\Modules\User\Logic\User\CreateTokenLogic;
-use App\Modules\Websocket\Manager\Sender;
-use App\Modules\WeChat\Logic\WechatLogic;
 use Hyperf\DbConnection\Db;
 use Hyperf\Di\Annotation\Inject;
 
-class ScanQrcodeLogic
+class MiniappLogic
 {
-    #[Inject]
-    public Sender $sender;
 
     #[Inject]
     public UserDao $userDao;
@@ -22,22 +21,13 @@ class ScanQrcodeLogic
     #[Inject]
     public UserOpenidDao $userOpenidDao;
 
-
-    public function wechat($openid, $serviceId, $fd)
+    public function miniapp($openid, $unionid)
     {
-
-        $type = 'wechat';
-        //判断是否是当前服务器
-        //获取uuid
-        $wechatUserInfo = app(WechatLogic::class)->getUserInfo($openid);
-
-        $unionid = $wechatUserInfo['unionid'];
-        $subscribe_scene = $wechatUserInfo['subscribe_scene'];
+        $type = 'miniapp';
         Db::beginTransaction();
         try {
             //是否已经注册
             $userOpenidData = $this->userOpenidDao->getDataByOpenid($type, $openid);
-
             if (is_null($userOpenidData)) {
                 $wechatUserInfo = $this->userOpenidDao->getDataByUnionId($unionid);
                 if (is_null($wechatUserInfo)) {
@@ -49,24 +39,18 @@ class ScanQrcodeLogic
                     'user_id' => $user->id,
                     'unionid' => $unionid,
                     'openid' => $openid,
-                    'subscribe_scene' => $subscribe_scene,
                     'type' => $type,
                 ]);
-                $userId = $user->id;
+                $user_id = $user->id;
             } else {
-                $userId = $userOpenidData->user_id;
+                $user_id = $userOpenidData->user_id;
             }
-
-            $token = CreateTokenLogic::init($userId)->create();
-
-            $this->sender->send($fd, 'login_success', ['token' => $token], $serviceId);
+            $token = CreateTokenLogic::init($user_id)->create();
             Db::commit();
         } catch (\Exception $e) {
             Db::rollBack();
             dd($e->getMessage());
         }
-        return $token;
+        return compact('token', 'user_id');
     }
-
-
 }
