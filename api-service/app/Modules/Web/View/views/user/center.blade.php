@@ -46,46 +46,24 @@
                                             <img class="me-2 h-20px fa-fw"
                                                  alt=""><span>我的下载</span></a>
                                     </li>
+                                    <li class="nav-item" data-bs-dismiss="offcanvas">
+                                        <a class="nav-link d-flex mb-0">
+                                            <img class="me-2 h-20px fa-fw"
+                                                 alt=""><span>退出登录</span></a>
+                                    </li>
                                 </ul>
                                 <!-- Side Nav END -->
 
                             </div>
                             <!-- Card body END -->
                             <!-- Card footer -->
-                            <div class="card-footer text-center py-2">
-                                <a class="btn btn-link text-secondary btn-sm" href="#!">View Profile </a>
-                            </div>
+{{--                            <div class="card-footer text-center py-2">--}}
+{{--                                <a class="btn btn-link text-secondary btn-sm" href="#!">View Profile </a>--}}
+{{--                            </div>--}}
                         </div>
                         <!-- Card END -->
                     </div>
                     <!-- Offcanvas body -->
-
-                    <!-- Helper link START -->
-                    <ul class="nav small mt-4 justify-content-center lh-1">
-                        <li class="nav-item">
-                            <a class="nav-link" href="my-profile-about.html">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="settings.html">Settings</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" target="_blank" href="https://support.webestica.com/login">Support </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" target="_blank" href="docs/index.html">Docs </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="help.html">Help</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="privacy-and-terms.html">Privacy &amp; terms</a>
-                        </li>
-                    </ul>
-                    <!-- Helper link END -->
-                    <!-- Copyright -->
-                    <p class="small text-center mt-1">©2022 <a class="text-body" target="_blank"
-                                                               href="https://www.webestica.com/"> Webestica </a></p>
-
                 </div>
             </nav>
         </div>

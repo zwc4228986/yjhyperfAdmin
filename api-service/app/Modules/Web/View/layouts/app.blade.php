@@ -11,7 +11,7 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body class="bg-light">
-<x-header/>
+<x-header :productCategoryPid="$product_category_pid"/>
 @section('sidebar')
 @show
 <div class="container py-lg-4 py-sm-4">

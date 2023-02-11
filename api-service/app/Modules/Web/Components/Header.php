@@ -17,6 +17,13 @@ class Header extends Component
     #[Inject]
     protected ProductCategoryLogic $productCategoryLogic;
 
+    public int $product_category_pid;
+
+    public function __construct(int $productCategoryPid)
+    {
+        $this->product_category_pid = $productCategoryPid;
+    }
+
     public function render(): mixed
     {
         $nav = $this->productCategoryLogic->lists();
@@ -24,6 +31,8 @@ class Header extends Component
         dump(Context::get('user_id'));
         $userId = getUserID();
         dump($isLogin, $userId);
-        return view('components.header', compact('nav', 'isLogin'));
+        $product_category_pid = $this->product_category_pid;
+
+        return view('components.header', compact('nav', 'isLogin','product_category_pid'));
     }
 }
