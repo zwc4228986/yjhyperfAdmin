@@ -24,7 +24,7 @@
                 <div class="collapse navbar-collapse" id="navbarsExample04">
                     <ul class="navbar-nav me-auto mb-2 mb-md-0">
                         <li class="nav-item">
-                            <a class="nav-link active"  href="{{url("/")}}">首页</a>
+                            <a class="nav-link active" href="{{url("/")}}">首页</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">赚金币</a>
@@ -46,13 +46,14 @@
                             <li class="nav-item   dropdown z-9999">
                                 <a href="#" class="d-block  link-light text-decoration-none dropdown-toggle"
                                    id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                                    <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32"
+                                         class="rounded-circle">
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown04">
                                     <li><a class="dropdown-item" href="{{url('/user/center/info')}}">我的信息</a></li>
                                     <li><a class="dropdown-item" href="{{url('/user/center/order')}}">我的订单</a></li>
-{{--                                    <li><a class="dropdown-item" href="{{url('/user/center/')}}">抖币记录</a></li>--}}
-{{--                                    <li><a class="dropdown-item" href="{{url('user/center')}}">设置</a></li>--}}
+                                    {{--                                    <li><a class="dropdown-item" href="{{url('/user/center/')}}">抖币记录</a></li>--}}
+                                    {{--                                    <li><a class="dropdown-item" href="{{url('user/center')}}">设置</a></li>--}}
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
@@ -67,9 +68,10 @@
     </header>
 
 </main>
+
 <nav class="navbar navbar-light bg-white  sticky-top shadow-sm" id="second_nav">
-    <div class="container" >
-        <ul class="nav  justify-content-center" >
+    <div class="container">
+        <ul class="nav  justify-content-center">
 
             <li class="nav-item {{$product_category_pid==0?"active":""}}">
                 <a class="nav-link nav-custom-link " aria-current="page"
@@ -120,7 +122,8 @@
         font-weight: bold;
         padding-right: 22px;
     }
-    .z-9999{
+
+    .z-9999 {
         z-index: 9999;
     }
 </style>

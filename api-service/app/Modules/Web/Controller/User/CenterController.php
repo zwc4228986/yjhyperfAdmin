@@ -32,6 +32,6 @@ class CenterController extends AbstractController
         $type = $this->request->route('type');
         $userId = getUserID();
         $userDetail = $this->userLogic->detail($userId);
-        return $render->render('views/user/center', compact('type','userDetail'));
+        return $render->render('views/user/center', compact('type', 'userDetail'));
     }
 }

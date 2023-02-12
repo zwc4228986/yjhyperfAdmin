@@ -11,6 +11,7 @@ use App\Modules\Admin\Dao\ProductDescriptionDao;
 use App\Modules\Admin\Dao\ProductResourceDao;
 use Hyperf\DbConnection\Db;
 use Hyperf\Di\Annotation\Inject;
+use Hyperf\Utils\Collection;
 
 class ProductLogic
 {
@@ -29,10 +30,9 @@ class ProductLogic
     #[Inject]
     protected ProductResourceDao $productResourceDao;
 
-    public function lists(array $params)
+    public function lists(Collection $params)
     {
-        $data = $this->productDao->orderByDesc("id")->with('Image')->getList();
-        return $data;
+        return $this->productDao->params($params)->orderByDesc("id")->with('Image')->getList();
     }
 
     public function add(\Hyperf\Utils\Collection $params)

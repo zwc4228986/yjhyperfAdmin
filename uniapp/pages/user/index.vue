@@ -65,7 +65,7 @@
 								<view class="info">
 
 									<!-- #ifdef MP -->
-									<view class="name" v-if="!userInfo.uid" @click="openAuto"
+									<view class="name" v-if="!userInfo.id" @click="openAuto"
 										style="height: 100%; display: flex; align-items: center;">
 										请点击授权
 									</view>
@@ -114,27 +114,27 @@
 								<view class="num-item" 
 									@click="goMenuPage('/pages/users/user_integral/index')">
 									<text class="num">{{(userInfo.integral/10).toFixed(2)}}</text>
-									<view class="txt">余额</view>
+									<view class="txt">抖币</view>
 								</view>
 								<view class="num-item" 
 									@click="goMenuPage('/pages/users/user_goods_collection/index')">
 									<text class="num">{{userInfo.collectCount || 0}}</text>
 									<view class="txt">收藏</view>
 								</view>
-								<view class="num-item" @click="goMenuPage('/pages/users/user_integral/index')">
+								<!-- <view class="num-item" @click="goMenuPage('/pages/users/user_integral/index')">
 									<text class="num">{{userInfo.integral || 0}}</text>
 									<view class="txt">小豆</view>
 								</view>
 								<view class="num-item" @click="goMenuPage('/pages/users/user_coupon/index')">
 									<text class="num">{{userInfo.couponCount || 0}}</text>
 									<view class="txt">优惠券</view>
-								</view>
+								</view> -->
 							</view>
 							<!-- <view class="sign" @click="goSignIn">签到</view> -->
 						
 						</view>
 					</view>
-					<view class="cardVipA-box">
+				<!-- 	<view class="cardVipA-box">
 						<view class="cardVipA acea-row row-between-wrapper"
 							v-if="userInfo.svip_open && member_style==1">
 							<view class="acea-row row-middle">
@@ -195,13 +195,13 @@
 								{{ userInfo.overdue_time ? '立即续费' : '立即激活' }}
 							</navigator>
 						</view>
-					</view>
+					</view> -->
 					<view class="order-wrapper" :class="userInfo.svip_open?'':'height'">
 						<view class="order-hd flex">
-							<view class="left">订单中心</view>
+							<view class="left">我的下载</view>
 							<navigator class="right flex" hover-class="none" url="/pages/users/order_list/index"
 								open-type="navigate">
-								更多订单
+								更多下载
 								<text class="iconfont icon-xiangyou"></text>
 							</navigator>
 						</view>
@@ -210,7 +210,6 @@
 							<block v-for="(item,index) in orderMenu" :key="index">
 								<navigator class="order-item" hover-class="none" :url="item.url">
 									<view class="pic">
-										<!-- <image :src="item.img" mode=""></image> -->
 										<text class="iconfont" :class="item.img"></text>
 										<text class="order-status-num" v-if="item.num > 0">{{ item.num }}</text>
 									</view>
@@ -219,7 +218,7 @@
 							</block>
 						</view>
 					</view>
-					<view class="task-wrapper" v-if="!task_hide" :class="userInfo.svip_open?'':'height'">
+				<!-- 	<view class="task-wrapper" v-if="!task_hide" :class="userInfo.svip_open?'':'height'">
 						
 						<view class="task-wrapper-title">我的任务</view>
 						
@@ -306,7 +305,7 @@
 							</view>
 						</view>
 						
-					</view>
+					</view> -->
 				</view>
 				<!-- 轮播 -->
 				<view class="slider-wrapper" v-if="imgUrls.length>0 && my_banner_status">
@@ -346,7 +345,7 @@
 							</view>
 						</block>
 
-						<button class="item" open-type='contact' v-if="routineContact == 1">
+						<button class="item" open-type='contact' >
 							<image src="/static/images/contact.png"></image>
 							<text>联系客服</text>
 						</button>
@@ -440,7 +439,7 @@
 	// } from '@/api/user.js';
 
     import {
-		userInfo
+		getUserInfo
 	} from '@/api/user.js';
 
 	import {
@@ -473,9 +472,16 @@
 		// computed: mapGetters(['isLogin','cartNum']),
 		computed: {
 			...mapGetters({
-				cartNum: 'cartNum',
 				isLogin: 'isLogin'
 			})
+		},
+		watch: {
+			isLogin(newValue, oldValue) {
+				console.log(newValue);
+				if(newValue){
+					this.onLoadFun()
+				}
+			}
 		},
 		filters: {
 			coundTime(val) {
@@ -723,8 +729,6 @@
 			// 授权回调
 			onLoadFun() {
 				this.getUserInfo();
-				this.getMyMenus();
-				this.setVisit();
 			},
 			Setting: function() {
 				uni.openSetting({
@@ -757,8 +761,8 @@
 			getUserInfo: function() {
 				let that = this;
 				getUserInfo().then(res => {
-					that.userInfo = res.data
-					that.$store.commit("SETUID", res.data.uid);
+					that.userInfo = res
+					that.$store.commit("SETUID", res.id);
 					// that.orderMenu.forEach((item, index) => {
 					// 	switch (item.title) {
 					// 		case '待付款':
@@ -1333,7 +1337,7 @@
 					// padding: 0 47rpx;
 
 					.num-item {
-						width: 33.33%;
+						width: 50%;
 						text-align: center;
 
 						&~.num-item {

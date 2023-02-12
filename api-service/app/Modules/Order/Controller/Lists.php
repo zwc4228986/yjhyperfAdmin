@@ -23,6 +23,10 @@ class Lists
     {
         $userId = getUserID();
         $data = $this->orderLogic->lists(Collection::make(['user_id' => $userId]));
+        $data->transform(function ($item) {
+            $item['download_url'] = getDownloadPath($item->OrderProduct->id);
+            return $item;
+        });
         Success($data);
     }
 }

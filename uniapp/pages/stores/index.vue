@@ -141,7 +141,8 @@
 					news: 0,
 					page: 1,
 					limit: 20,
-					cid: 0,
+					product_category_pid: 0,
+					product_category_id: 0,
 				},
 				price: 0,
 				stock: 0,
@@ -170,7 +171,7 @@
 					that.isWidth = e.windowWidth / 5
 				}
 			});
-			this.where.cid = options.cid || 0;
+			this.where.product_category_pid = options.cid || 0;
 			this.$set(this.where, 'sid', options.sid || 0);
 			this.title = options.title || '';
 			this.$set(this.where, 'keyword', options.searchValue || '');
@@ -219,7 +220,7 @@
 					// 	})
 					// })
 					that.categoryTitle = data[0].cate_name;
-					that.where.cid = data[0].id;
+					that.where.product_category_pid = data[0].id;
 					that.sid = 0;
 					that.navActive = 0;
 					that.tabClick = 0;
@@ -273,7 +274,7 @@
 				this.categoryErList = item.children ? item.children : [];
 				this.tabClick = 0;
 				this.tabLeft = 0;
-				this.where.cid = list.id;
+				this.where.product_category_pid = list.id;
 				this.sid = 0;
 			    this.$set(this.where, 'page', 1);
 				this.loadend = false;

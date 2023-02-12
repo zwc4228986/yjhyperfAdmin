@@ -15,8 +15,11 @@ import request from "@/utils/request.js";
  * 
  */
 export function getUserInfo() {
-	return request.get('user');
+	return request.post('/api/user/detail',{},{
+		URL:3
+	});
 }
+
 
 
 

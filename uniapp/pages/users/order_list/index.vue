@@ -68,38 +68,25 @@
 							</view>
 
 						</view>
-						<view class="item-info acea-row row-between row-top" v-for="(items, index) in item.cartInfo"
-							:key="index">
+						<view class="item-info acea-row row-between row-top">
 							<view class="pictrue">
-								<image :src="items.productInfo.image"></image>
+								<image :src="item.order_product.product.image.path_format"></image>
 							</view>
 							<view class="text">
                 <view class="text-info row-between">
-                  <text class="name line2">{{ items.productInfo.store_name }}</text>
+                  <text class="name line2">{{ item.order_product.product.name }}</text>
                   <view class="money">
                     <!-- <view v-if="items.productInfo.attrInfo">￥{{ items.productInfo.attrInfo.price }}
                     </view>
                     <view v-else>￥{{ items.productInfo.price }}</view> -->
-                    <view>x{{ items.cart_num }}</view>
-                    <view v-if="items.refund_num && item._status._type != -2" class="return">
-                      {{ items.refund_num }}件退款中
-                    </view>
                   </view>
                 </view>
                 <view class="text-price row-start">
-                  <view class="zhu" v-if="items.productInfo.attrInfo">{{ items.productInfo.attrInfo.price }}小豆
-                  </view>
-                  <view class="zhu" v-else>{{ items.productInfo.price }}小豆</view>
-                  <view class="huaxian" v-if="items.productInfo.attrInfo">{{ items.productInfo.attrInfo.price }}小豆/套
-                  </view>
-                  <view class="huaxian" v-else>{{ items.productInfo.price }}小豆/套</view>
+                  <view class="huaxian">{{ item.price }}抖币</view>
                 </view>
 							</view>
 						</view>
 					</view>
-          <view class="totalPrice">
-            合计：<text class="money">{{ item.pay_price }}</text>小豆
-          </view>
 					<view class="bottom acea-row row-right row-middle">
 						<view class="bnt cancelBnt" v-if="item._status._type == 0 || item._status._type == 9"
 							@click="cancelOrder(index, item.order_id)">取消</view>
@@ -114,7 +101,7 @@
 						</view> -->
 						<view class="bnt cancelBnt" v-if="item._status._type == 4"
 							@click="delOrder(item.order_id, index)">删除订单</view>
-						<view class="bnt bg-color" @click="goOrderDetails(item.order_id)">查看详情</view>
+						<view class="bnt bg-color" @click="copy(item.download_url)">复制下载链接</view>
 					</view>
 				</view>
 			</view>
@@ -241,6 +228,15 @@
 			// 授权关闭
 			authColse: function(e) {
 				this.isShowAuth = e;
+			},
+			copy(value){
+				uni.setClipboardData({
+				  data: value,
+				  success: () =>
+				    uni.showToast({
+				      title: '复制成功'
+				    })
+				})
 			},
 			/**
 			 * 事件回调
@@ -541,7 +537,7 @@
 
 	.my-order .list {
 		width: 100vw;
-		margin: 74rpx auto 0 auto;
+		margin: 0 auto 0 auto;
     border-radius: 20rpx 20rpx 0px 0px;
 	}
 

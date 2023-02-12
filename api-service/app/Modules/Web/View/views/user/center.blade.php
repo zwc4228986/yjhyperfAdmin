@@ -29,7 +29,8 @@
                             <div class="card-body">
                                 <div class="d-none d-lg-block text-center mb-5">
                                     <div class="avatar avatar-xxl avatar-circle mb-3">
-                                        <img src="https://github.com/mdo.png" alt="mdo" width="100" height="100" class="rounded-circle">
+                                        <img src="https://github.com/mdo.png" alt="mdo" width="100" height="100"
+                                             class="rounded-circle">
                                     </div>
                                     <h4 class="card-title mb-0">{{$userDetail['nickname']}}</h4>
                                     <p class="card-text small">ID：{{$userDetail['id']}}</p>
@@ -38,11 +39,13 @@
                                 <!-- Side Nav START -->
                                 <ul class="nav nav-tabs nav-pills nav-pills-soft flex-column fw-bold gap-2 border-0">
                                     <li class="nav-item" data-bs-dismiss="offcanvas">
-                                        <a class="nav-link d-flex mb-0 {{$type=='info'?'active':''}}" href="{{url('/user/center/info')}}">
+                                        <a class="nav-link d-flex mb-0 {{$type=='info'?'active':''}}"
+                                           href="{{url('/user/center/info')}}">
                                             <img class="me-2 h-20px fa-fw" alt=""><span>我的信息 </span></a>
                                     </li>
                                     <li class="nav-item" data-bs-dismiss="offcanvas">
-                                        <a class="nav-link d-flex mb-0 {{$type=='order'?'active':''}}" href="{{url('/user/center/order')}}">
+                                        <a class="nav-link d-flex mb-0 {{$type=='order'?'active':''}}"
+                                           href="{{url('/user/center/order')}}">
                                             <img class="me-2 h-20px fa-fw"
                                                  alt=""><span>我的下载</span></a>
                                     </li>
@@ -57,9 +60,9 @@
                             </div>
                             <!-- Card body END -->
                             <!-- Card footer -->
-{{--                            <div class="card-footer text-center py-2">--}}
-{{--                                <a class="btn btn-link text-secondary btn-sm" href="#!">View Profile </a>--}}
-{{--                            </div>--}}
+                            {{--                            <div class="card-footer text-center py-2">--}}
+                            {{--                                <a class="btn btn-link text-secondary btn-sm" href="#!">View Profile </a>--}}
+                            {{--                            </div>--}}
                         </div>
                         <!-- Card END -->
                     </div>
@@ -76,16 +79,16 @@
 
                 @switch($type)
                     @case('info')
-                        <x-user-info />
-                        @break
+                        <x-user-info/>
+                        @break('test')
                     @case('order')
-                        <x-user-order />
-                        @break
+                        <x-user-order/>
+                        @break('2222')
                     @default
                         Default case...
                 @endswitch
 
-{{--                <x-dynamic-component component="x-user-info" class="mt-4" />--}}
+                {{--                <x-dynamic-component component="x-user-info" class="mt-4" />--}}
             </div>
             <!-- Setting Tab content END -->
         </div>

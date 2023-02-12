@@ -14,8 +14,9 @@ class Lists
     protected ProductLogic $productLogic;
 
     #[ApiPost]
-    public function index(){
-        $data = $this->productLogic->lists([]);
+    public function index()
+    {
+        $data = $this->productLogic->lists(collect([]));
         Success($data);
     }
 }

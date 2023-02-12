@@ -60,6 +60,7 @@ class OrderLogic
             $query->with('Product');
         }])->orderByDesc('id')->getList();
         dump($data->toArray());
+
         return $data;
     }
 }

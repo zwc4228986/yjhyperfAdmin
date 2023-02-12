@@ -4,14 +4,6 @@
 	},
 	"pages": [ //pages数组中第一项表示应用启动页
 		{
-			"path": "pages/guide/index",
-			"style": {
-				"app-plus": {
-					"titleNView": false //禁用原生导航栏
-				}
-			}
-		},
-		{
 			"path": "pages/stores/index",
 			"style": {
 				"navigationBarTitleText": "商城",
@@ -19,6 +11,15 @@
 				"navigationStyle": "custom"
 			}
 		},
+		{
+			"path": "pages/guide/index",
+			"style": {
+				"app-plus": {
+					"titleNView": false //禁用原生导航栏
+				}
+			}
+		},
+		
 		{
 			"path": "pages/task_index/index",
 			"style": {
@@ -1204,7 +1205,7 @@
 				{
 					"path": "order_list/index",
 					"style": {
-						"navigationBarTitleText": "我的订单",
+						"navigationBarTitleText": "我的下载",
             "navigationBarTextStyle": "white",
             "navigationBarBackgroundColor": "#F58325",
 						"app-plus": {
@@ -1952,24 +1953,24 @@
 		"borderStyle": "white",
 		"backgroundColor": "#ffffff",
 		"list": [
-			{
-				"pagePath": "pages/index/index",
-				"iconPath": "static/images/icon/0-0.png",
-				"selectedIconPath": "static/images/icon/0-1.png",
-				"text": "首页"
-			},
+			// {
+			// 	"pagePath": "pages/index/index",
+			// 	"iconPath": "static/images/icon/0-0.png",
+			// 	"selectedIconPath": "static/images/icon/0-1.png",
+			// 	"text": "首页"
+			// },
 			{
 				"pagePath": "pages/stores/index",
-				"iconPath": "static/images/icon/1-0.png",
-				"selectedIconPath": "static/images/icon/1-1.png",
-				"text": "商城"
+				"iconPath": "static/images/icon/5-1.png",
+				"selectedIconPath": "static/images/icon/5-0.png",
+				"text": "资源"
 			},
-			{
-				"pagePath": "pages/task_index/index",
-				"iconPath": "static/images/icon/2-0.png",
-				"selectedIconPath": "static/images/icon/2-1.png",
-				"text": "福利"
-			},
+			// {
+			// 	"pagePath": "pages/task_index/index",
+			// 	"iconPath": "static/images/icon/2-0.png",
+			// 	"selectedIconPath": "static/images/icon/2-1.png",
+			// 	"text": "福利"
+			// },
 			{
 				"pagePath": "pages/user/index",
 				"iconPath": "static/images/icon/4-0.png",

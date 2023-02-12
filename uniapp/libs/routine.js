@@ -61,7 +61,7 @@ class Routine {
 							time: 1000000
 						});
 						store.commit('SETUID', res.user_id);
-						store.commit('UPDATE_USERINFO', res.userData);
+						// store.commit('UPDATE_USERINFO', res.userData);
 						resolve(res)
 					} else {
 						reject()
