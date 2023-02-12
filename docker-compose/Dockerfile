@@ -6,10 +6,11 @@ ARG timezone
 ENV TIMEZONE=${timezone:-"Asia/Shanghai"} \
     APP_ENV=prod \
     SCAN_CACHEABLE=(true)
+
+
+COPY ./api-service /opt/www
+
 WORKDIR /opt/www
-
-COPY api-service /opt/www
-
 RUN composer install --no-dev -o && php bin/hyperf.php
 
 EXPOSE 9501
