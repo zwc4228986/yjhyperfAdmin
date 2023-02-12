@@ -5,6 +5,7 @@ vue/node_modules
 /api-service/runtime
 api-service/swoole/bin/swoole-cli.exe
 api-service/swoole/tmp
+api-service/swoole/swoole-cli.exe.stackdump
 api-service/swoole/home/Administrator/.composer/cache
 /api-service/runtime
 uniapp/unpackage
