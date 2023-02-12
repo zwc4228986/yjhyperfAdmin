@@ -8,9 +8,10 @@ ENV TIMEZONE=${timezone:-"Asia/Shanghai"} \
     SCAN_CACHEABLE=(true)
 
 
-COPY ./api-service /opt/www
+COPY ./api-service /opt/www/api-service
+COPY ./plugin /opt/www/plugin
 
-WORKDIR /opt/www
+WORKDIR /opt/www/api-service
 RUN composer install --no-dev -o && php bin/hyperf.php
 
 EXPOSE 9501
