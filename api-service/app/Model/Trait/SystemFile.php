@@ -10,9 +10,13 @@ class SystemFile extends Model
         'path_format'
     ];
 
-    public function getPathFormatAttribute(){
-        return $this->checkAttributes('path',function($path){
-           return env('WEBSITE_FILE_URL').$path;
+    public function getPathFormatAttribute()
+    {
+        return $this->checkAttributes(['path', 'storage'], function ($path, $storage) {
+            if ($storage == 'qiniu') {
+                return env('QINIU_DOMAIN') . $path;
+            }
+            return env('WEBSITE_FILE_URL') . $path;
         });
     }
 }

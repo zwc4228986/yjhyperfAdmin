@@ -90,7 +90,7 @@
 										<image src="/static/images/edit.png" mode=""></image>
 									</view> -->
 									</view>
-									<view class="phone" v-if="!userInfo.phone && isLogin" @tap="bindPhone">绑定手机号</view>
+									<!-- <view class="phone" v-if="!userInfo.phone && isLogin" @tap="bindPhone">绑定手机号</view> -->
 								</view>
 								<view class="message">
 									<navigator url="/pages/users/user_info/index" hover-class="none">
@@ -113,7 +113,7 @@
 							<view class="num-wrapper">
 								<view class="num-item" 
 									@click="goMenuPage('/pages/users/user_integral/index')">
-									<text class="num">{{(userInfo.integral/10).toFixed(2)}}</text>
+									<text class="num">{{userInfo.integral  || 0}}</text>
 									<view class="txt">抖币</view>
 								</view>
 								<view class="num-item" 
@@ -762,7 +762,7 @@
 				let that = this;
 				getUserInfo().then(res => {
 					that.userInfo = res
-					that.$store.commit("SETUID", res.id);
+					that.$store.commit("SETUID", res.user_id);
 					// that.orderMenu.forEach((item, index) => {
 					// 	switch (item.title) {
 					// 		case '待付款':
@@ -951,6 +951,7 @@
 			},
 			// goMenuPage
 			goMenuPage(url, name) {
+				return false;
 				if (this.isLogin) {
 					if (url.indexOf('http') === -1) {
 						// #ifdef H5 || APP-PLUS

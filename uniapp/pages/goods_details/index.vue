@@ -70,8 +70,8 @@
 							</view>
 							<view class="introduce skeleton-rect" v-text="storeInfo.name"></view>
 							<view class="label acea-row row-between-wrapper" style="padding-bottom: 20rpx">
-								<view class="skeleton-rect" v-text="'原价:' + (storeInfo.ot_price || 0) + '抖币'">
-								</view>
+								<!-- <view class="skeleton-rect" v-text="'原价:' + (storeInfo.ot_price || 0) + '抖币'">
+								</view> -->
 				<!-- 				<view class="skeleton-rect" v-text="
                     '库存:' +
                     (storeInfo.stock || 0) +
@@ -82,13 +82,13 @@
                     (storeInfo.fsales || 0)
                   "></view>
 							</view>
-							<view class="svip acea-row row-between-wrapper">
+						<!-- 	<view class="svip acea-row row-between-wrapper">
 								<view class="">开通“超级会员”立省{{ diff }}元</view>
 								<navigator url="/pages/annex/vip_paid/index">
 									立即开通
 									<text class="iconfont icon-jiantou"></text>
 								</navigator>
-							</view>
+							</view> -->
 							<view class="presell_count" v-if="storeInfo.presale">
 								<view>
 									<view>预售活动时间：</view>
@@ -341,9 +341,9 @@
 						</view>
 					</view> -->
 			</view>
-			<shareRedPackets :sharePacket="sharePacket" @listenerActionSheet="listenerActionSheet"
+			<!-- <shareRedPackets :sharePacket="sharePacket" @listenerActionSheet="listenerActionSheet"
 				@closeChange="closeChange" :showAnimate="showAnimate" @boxStatus="boxStatus">
-			</shareRedPackets>
+			</shareRedPackets> -->
 			<!-- 组件 -->
 			<productWindow :attr="attr" :isShow="1" :iSplus="1" @myevent="onMyEvent" @ChangeAttr="ChangeAttr"
 				@ChangeCartNum="ChangeCartNum" @attrVal="attrVal" @iptCartNum="iptCartNum" id="product-window"
@@ -460,7 +460,7 @@
 	import couponListWindow from "@/components/couponListWindow";
 	import productWindow from "@/components/productWindow";
 	import userEvaluation from "@/components/userEvaluation";
-	import shareRedPackets from "@/components/shareRedPackets";
+	// import shareRedPackets from "@/components/shareRedPackets";
 	import kefuIcon from "@/components/kefuIcon";
 	import menuIcon from "@/components/menuIcon.vue";
 	import {
@@ -491,7 +491,7 @@
 			couponListWindow,
 			productWindow,
 			userEvaluation,
-			shareRedPackets,
+			// shareRedPackets,
 			kefuIcon,
 			mpHtml,
 			menuIcon,

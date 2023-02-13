@@ -9,4 +9,5 @@ require_once 'FormToData.php';
 require_once 'Url.php';
 require_once 'getFileFullPath.php';
 require_once 'getDownloadPath.php';
+require_once 'getFileDomain.php';
 

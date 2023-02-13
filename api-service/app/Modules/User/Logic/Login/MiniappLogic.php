@@ -31,7 +31,7 @@ class MiniappLogic
             if (is_null($userOpenidData)) {
                 $wechatUserInfo = $this->userOpenidDao->getDataByUnionId($unionid);
                 if (is_null($wechatUserInfo)) {
-                    $user = $this->userDao->create();
+                    $user = $this->userDao->add();
                 } else {
                     $user = $this->userDao->read($wechatUserInfo->user_id);
                 }

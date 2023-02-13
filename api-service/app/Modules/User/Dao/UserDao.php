@@ -25,7 +25,7 @@ class UserDao extends User
         try {
             dump($userId);
             $user = $this->where('id', $userId)->lock(true)->first();
-            dump($user,$accountType);
+            dump($user, $accountType);
             $userAccountValue = $user->{$accountType};
             dump($userAccountValue);
             if ($number < 0) {
@@ -52,4 +52,15 @@ class UserDao extends User
         ]);
     }
 
+    public function createNickname()
+    {
+        return '豆资源' . ($this->count() + 1);
+    }
+
+    public function add()
+    {
+        return $this->create([
+            'nickname' => $this->createNickname()
+        ]);
+    }
 }

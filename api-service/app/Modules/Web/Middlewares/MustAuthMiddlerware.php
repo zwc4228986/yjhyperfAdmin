@@ -2,7 +2,9 @@
 
 namespace App\Modules\Web\Middlewares;
 
+use App\Constants\ErrorCode;
 use App\Modules\User\Logic\User\TokenLogic;
+use Firebase\JWT\JWT;
 use Hyperf\Context\Context;
 use Hyperf\Contract\SessionInterface;
 use Hyperf\Di\Annotation\Inject;
@@ -28,13 +30,27 @@ class MustAuthMiddlerware implements MiddlewareInterface
         // TODO: Implement process() method.
 //        dump('========');
 //        dump($this->session->get('token'),'111');
-        $userId = $request->getQueryParams()['autouid']??5;
 
-        if($this->session->has('token')){
+        $form_type = $request->getHeaderLine('Form-type');
+        if ($form_type == 'routine') {
+            $token = trim(ltrim($request->getHeaderLine('Authori-zation'), 'Bearer'));
+            if ($token) {
+                $userId = $this->tokenLogic->getUserId($token);
+                Context::set('user_id', $userId);
+                return $handler->handle($request);
+            } else {
+                Error(ErrorCode::CODE_ERR_AUTH);
+            }
+        }
+
+
+        $userId = $request->getQueryParams()['autouid'] ?? 5;
+
+        if ($this->session->has('token')) {
             $userId = $this->tokenLogic->getUserId($this->session->get('token'));
         }
 
-        if($userId == 0){
+        if ($userId == 0) {
             return $this->response->redirect('/');
         }
 

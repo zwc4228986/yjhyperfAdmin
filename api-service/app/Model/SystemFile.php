@@ -5,17 +5,16 @@ declare(strict_types=1);
 namespace App\Model;
 
 
-
 /**
- * @property int $id 
- * @property string $name 
- * @property string $path 
- * @property string $suffix 
- * @property int $tags_id 
- * @property string $size 
- * @property \Carbon\Carbon $update_time 
- * @property int $delete_time 
- * @property \Carbon\Carbon $create_time 
+ * @property int $id
+ * @property string $name
+ * @property string $path
+ * @property string $suffix
+ * @property int $tags_id
+ * @property string $size
+ * @property \Carbon\Carbon $update_time
+ * @property int $delete_time
+ * @property \Carbon\Carbon $create_time
  */
 class SystemFile extends \App\Model\Trait\SystemFile
 {
@@ -27,7 +26,8 @@ class SystemFile extends \App\Model\Trait\SystemFile
     /**
      * The attributes that are mass assignable.
      */
-    protected array $fillable = [];
+    protected array $fillable = [
+    ];
 
     /**
      * The attributes that should be cast to native types.

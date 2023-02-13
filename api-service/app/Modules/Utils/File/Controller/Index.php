@@ -25,7 +25,7 @@ class Index
     {
         $id = $request->route('id');
         $file = $this->systemFileDao->where('id', $id)->first();
-        $path = $this->filesystemFactory->get('public')->read($file->path);
+        $path = $this->filesystemFactory->get('qiniu')->read($file->path);
 
         return $response
             ->withAddedHeader('content-type', 'image/png')
