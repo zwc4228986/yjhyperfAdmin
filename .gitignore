@@ -9,3 +9,4 @@ api-service/swoole/swoole-cli.exe.stackdump
 api-service/swoole/home/Administrator/.composer/cache
 /api-service/runtime
 uniapp/unpackage
+.DS_Store
