@@ -15,5 +15,6 @@ WORKDIR /opt/www/api-service
 RUN composer install --no-dev -o && php bin/hyperf.php
 
 EXPOSE 9501
+EXPOSE 9502
 
-ENTRYPOINT ["php", "/opt/www/bin/hyperf.php", "start"]
+ENTRYPOINT ["php", "/opt/www/api-service/bin/hyperf.php", "start"]
