@@ -44,7 +44,7 @@ class MustAuthMiddlerware implements MiddlewareInterface
         }
 
 
-        $userId = $request->getQueryParams()['autouid'] ?? 5;
+        $userId = $request->getQueryParams()['autouid'] ?? 7;
 
         if ($this->session->has('token')) {
             $userId = $this->tokenLogic->getUserId($this->session->get('token'));

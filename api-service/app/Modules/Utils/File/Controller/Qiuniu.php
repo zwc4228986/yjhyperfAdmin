@@ -12,8 +12,8 @@ use YjHyperfAdminPligin\Apidog\Annotations\ApiParam;
 use YjHyperfAdminPligin\Apidog\Annotations\ApiPost;
 use Hyperf\HttpServer\Contract\ResponseInterface;
 
-#[Api('api/utils/file/upload')]
-class Upload
+#[Api('api/utils/file/update')]
+class Qiuniu
 {
     #[Inject]
     protected FilesystemFactory $filesystem;
@@ -27,27 +27,26 @@ class Upload
     #[ApiPost]
     #[ApiParam('file','file')]
     #[ApiParam('type','nullable')]
-    #[ApiParam('storage','nullable')]
     public function upload(){
         $params = getParams();
 
         /** @var UploadedFile $file */
         $file = $params->get('file');
-        $stroage = $params->get('storage','qiniu');
+
         $stream = fopen($file->getRealPath(), 'r+');
 
         $filePath = $this->getFilePath('img', $file->getExtension());
 
-        $this->filesystem->get($stroage)->writeStream($filePath, $stream);
+        $this->filesystem->get('qiniu')->writeStream($filePath, $stream);
 
-        $file = $this->systemFileDao->create(['storage'=>$stroage,'name' => $file->getClientFilename(),'type'=>'', 'path' => $filePath, 'size' => $file->getSize(),'suffix'=>$file->getExtension()]);
+        $file = $this->systemFileDao->create(['storage'=>'qiniu','name' => $file->getClientFilename(),'type'=>'', 'path' => $filePath, 'size' => $file->getSize(),'suffix'=>$file->getExtension()]);
 
         fclose($stream);
 
         if ($params->get('type','default') == 'tinymce') {
             return $this->response->json(['location' => env('WEBSITE_FILE_URL') . $filePath]);
         } else {
-            Success(['id' => $file->id, 'path' => $filePath, 'src' => getFileFullPath($file->id)]);
+            Success(['id' => $file->id, 'path' => $filePath, 'src' =>  env('WEBSITE_FILE_URL').$filePath]);
 
         }
     }

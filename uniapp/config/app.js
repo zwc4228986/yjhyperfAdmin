@@ -14,7 +14,7 @@ module.exports = {
 	HTTP_REQUEST_URL:`https://www.xiaomubiao.shopping`,
 	// #endif
 	HTTP_REQUEST_URL2:`https://api.xiaomubiao.shopping`,
-	HTTP_REQUEST_URL3:`http://127.0.0.1:9501`,
+	HTTP_REQUEST_URL3:`https://xmbshop.haishuju.vip`,
 	// HTTP_REQUEST_URL2:`http://150.158.155.57:9701`,
     IMAGE_URL:'https://www.xiaomubiao.shopping',
 	// 以下配置在不做二开的前提下,不需要做任何的修改

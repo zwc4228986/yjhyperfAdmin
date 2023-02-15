@@ -212,6 +212,7 @@ export default {
 			const data = new FormData();
 			var file = this.cropper ? this.cropperUploadFile : param.file;
 			data.append("file", file);
+			data.append("storage", 'qiniu_file');
 			console.log(data);
 			apiObj.params(data).post()
 				.then((res) => {

@@ -63,7 +63,6 @@
 									<!-- #endif -->
 								</view>
 								<view class="info">
-
 									<!-- #ifdef MP -->
 									<view class="name" v-if="!userInfo.id" @click="openAuto"
 										style="height: 100%; display: flex; align-items: center;">
@@ -77,12 +76,12 @@
 										请点击授权
 									</view>
 									<!-- #endif -->
-									<view class="name" v-if="userInfo.uid">
+									<view class="name" v-if="userInfo.id">
 										{{userInfo.nickname}}
-										<image class="live" :src="userInfo.vip_icon" v-if="userInfo.vip_icon"></image>
+									<!-- 	<image class="live" :src="userInfo.vip_icon" v-if="userInfo.vip_icon"></image>
 										<view class="vip" v-if="userInfo.is_money_level> 0 && userInfo.svip_open">
 											<image src="/static/images/svip.png"></image>
-										</view>
+										</view> -->
 									</view>
 									<view class="num" v-if="userInfo.phone" @click="goEdit()">
 										<view class="num-txt">{{userInfo.phone}}</view>

@@ -14,7 +14,7 @@
 <x-header :productCategoryPid="$product_category_pid??0"/>
 @section('sidebar')
 @show
-<div class="container py-lg-4 py-sm-4">
+<div class="container py-4 ">
     @yield('content')
 </div>
 <x-footer/>

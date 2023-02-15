@@ -168,7 +168,7 @@
             "urlCheck" : false,
             "minified" : true,
             "postcss" : true,
-            "es6" : true
+            "es6" : false
         },
         "permission" : {
             "scope.userLocation" : {

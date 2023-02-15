@@ -22,7 +22,7 @@
                                     <div class="container text-center">
                                         <div class="d-grid gap-2">
                                             <button class="btn p-3 bg-purple-400 hover:bg-purple-500  text-white  border-purple-400 downloader" data-id="{{$detail->id}}"
-                                                    type="button">下载
+                                                    type="button">立即兑换
                                             </button>
                                             <button class="btn btn-outline-primary" type="button">收藏</button>
                                         </div>

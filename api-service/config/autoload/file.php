@@ -85,6 +85,13 @@ return [
             'bucket' => env('QINIU_BUCKET'),
             'domain' => env('QINIU_DOMAIN'),
         ],
+        'qiniu_file' => [
+            'driver' => \Hyperf\Filesystem\Adapter\QiniuAdapterFactory::class,
+            'accessKey' => env('QINIU_ACCESS_KEY'),
+            'secretKey' => env('QINIU_SECRET_KEY'),
+            'bucket' =>env('QINIU_FILE_BUCKET'),
+            'domain' => env('QINIU_FILE_DOMAIN'),
+        ],
         'cos' => [
             'driver' => \Hyperf\Filesystem\Adapter\CosAdapterFactory::class,
             'region' => env('COS_REGION'),
