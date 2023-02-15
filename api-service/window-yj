@@ -1,3 +1,3 @@
 ./swoole-cli -d swoole.use_shortname=Off  bin/hyperf.php start
 
-cv
+.\swoole\bin\swoole-cli.exe  -d swoole.use_shortname=Off  bin/hyperf.php start

@@ -31,10 +31,11 @@ class OrderProductController
     protected FilesystemFactory $filesystemFactory;
 
     #[ApiGet]
-    public function index(){
+    public function index()
+    {
         $order_product_id = $this->request->route('order_product_id');
         //查询商品
-        $orderProduct =  $this->orderProduct->where('id',$order_product_id)->with(['Product'=>function($query){
+        $orderProduct = $this->orderProduct->where('id', $order_product_id)->with(['Product' => function ($query) {
             $query->with(['ProductResource']);
         }])->first();
         dump($orderProduct);
@@ -47,9 +48,9 @@ class OrderProductController
         dump(getFilePath($file_id));
 
 //       dump(config('file.storage.public.root').($product->File->path));
-        dump($this->filesystemFactory->get('qiniu')->getAdapter()->privateDownloadUrl(getFilePath($file_id)->first()));
+        $url = $this->filesystemFactory->get('qiniu_file')->getAdapter()->privateDownloadUrl(getFilePath($file_id)->first());
 
-
-//       return $this->response->download(getFileFullPath($file_id)->first());
+        dump($url);
+        return $this->response->redirect($url);
     }
 }

@@ -27,17 +27,18 @@ class IndexController
     protected OrderProduct $orderProduct;
 
     #[ApiGet]
-    public function index(RenderInterface $render){
+    public function index(RenderInterface $render)
+    {
         $order_product_id = $this->request->route('order_product_id');
         //查询商品
-        $orderProduct =  $this->orderProduct->where('id',$order_product_id)->first();
+        $orderProduct = $this->orderProduct->where('id', $order_product_id)->first();
         $product_id = $orderProduct->product_id;
-        $productResource =  $this->productResourceDao->where('product_id', $product_id)
-            ->where('type',0)
-            ->with(['File','Product'=>function($query){
+        $productResource = $this->productResourceDao->where('product_id', $product_id)
+            ->where('type', 0)
+            ->with(['File', 'Product' => function ($query) {
                 $query->with('Image');
             }])
             ->first();
-        return  $render->render('views/download/index',compact('productResource'));
+        return $render->render('views/download/index', compact('productResource', 'order_product_id'));
     }
 }

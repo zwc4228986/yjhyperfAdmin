@@ -15,7 +15,8 @@
                                 <div class="btn-block">
                                     <div class="container text-center">
                                         <div class="d-grid gap-2">
-                                            <button class="btn p-3 bg-purple-400 hover:bg-purple-500  text-white  border-purple-400 downloader" data-id="{{$productResource->id}}"
+                                            <button class="btn p-3 bg-purple-400 hover:bg-purple-500  text-white  border-purple-400 downloader"
+                                                    data-id="{{$order_product_id}}"
                                                     type="button">立即下载
                                             </button>
                                         </div>
@@ -71,13 +72,13 @@
             var myToastEl = document.getElementById('productToastEl')
             // var myToast = new bootstrap.Toast(myToastEl)
             //
-            const myToast =new bootstrap.Toast(myToastEl)
+            const myToast = new bootstrap.Toast(myToastEl)
             // console.log(myToast)
             // myToast.show();
-            console.log(myToastEl,myToast)
+            console.log(myToastEl, myToast)
             $('.downloader').click(function () {
                 let order_product_id = $(this).data('id');
-                window.location.href= "{{url('/download/order_product')}}"+'/'+order_product_id
+                window.location.href = "{{url('/download/order_product')}}" + '/' + order_product_id
             });
         });
     </script>

@@ -1,4 +1,3 @@
-
 <!-- Privacy and safety tab START -->
 <div class="tab-pane active show" id="nav-setting-tab-3">
     <!-- Privacy and safety START -->
@@ -26,12 +25,15 @@
                                 <div class="card mb-3">
                                     <div class="row g-0">
                                         <div class="col-md-4">
-                                            <img src="{{$item->OrderProduct->Product?->Image?->path_format}}" class="img-fluid rounded-start" alt="...">
+                                            <img src="{{$item->OrderProduct->Product?->Image?->path_format}}"
+                                                 class="img-fluid rounded-start" alt="...">
                                         </div>
                                         <div class="col-md-8">
                                             <div class="card-body">
                                                 <h5 class="card-title">{{$item->OrderProduct?->Product?->name}}</h5>
-                                                <p class="card-text"><small class="text-muted">ID: {{$item->OrderProduct?->Product?->id}}</small></p>
+                                                <p class="card-text"><small
+                                                            class="text-muted">ID: {{$item->OrderProduct?->Product?->id}}</small>
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
@@ -41,7 +43,8 @@
                         <td style="width: 100px;">
                             {{$item->OrderProduct?->download}}
                         </td>
-                        <td style="width: 100px;"><a href="{{url('/web/api/download/'.$item->OrderProduct?->id)}}" class="btn btn-primary "
+                        <td style="width: 100px;"><a href="{{url('/download/'.$item->OrderProduct?->id)}}"
+                                                     class="btn bg-purple-400 hover:bg-purple-500  text-white  border-purple-400"
                                                      tabindex="-1" role="button">下载</a></td>
                     </tr>
                 @endforeach
