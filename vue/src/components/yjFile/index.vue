@@ -23,6 +23,7 @@
         ref="upload"
         class="uploader"
         :disabled="fileSelect"
+        :data="uploadParams"
         :auto-upload="!cropper"
         :on-change="change"
         :accept="accept"
@@ -110,6 +111,9 @@ export default {
   },
   data() {
     return {
+      uploadParams:{
+        'storage':'qiniu_file'
+      },
       percentage: 0,
       loading: false,
       fileIsImg: true,
@@ -188,6 +192,7 @@ export default {
       this.loading = true;
     },
     uploadProgress(res, file) {
+      console.log(file)
       this.percentage = file.percentage.toFixed(1);
     },
     success(res) {
@@ -230,6 +235,8 @@ export default {
       const data = new FormData();
       var file = this.cropper ? this.cropperUploadFile : param.file;
       data.append("file", file);
+      data.append("storage", 'qiniu_file');
+
       console.log(data);
       apiObj
         .params(data)
