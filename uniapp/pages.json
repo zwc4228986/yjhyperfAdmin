@@ -1953,12 +1953,12 @@
 		"borderStyle": "white",
 		"backgroundColor": "#ffffff",
 		"list": [
-			// {
-			// 	"pagePath": "pages/index/index",
-			// 	"iconPath": "static/images/icon/0-0.png",
-			// 	"selectedIconPath": "static/images/icon/0-1.png",
-			// 	"text": "首页"
-			// },
+			{
+				"pagePath": "pages/index/index",
+				"iconPath": "static/images/icon/0-0.png",
+				"selectedIconPath": "static/images/icon/0-1.png",
+				"text": "首页"
+			},
 			{
 				"pagePath": "pages/stores/index",
 				"iconPath": "static/images/icon/5-1.png",

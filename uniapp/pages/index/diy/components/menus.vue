@@ -1,16 +1,16 @@
 <template>
-	<view v-show="!isSortType && menus.length" class="menus-box" :class="bgStyle?'borderRadius15':''" :style="{background:bgColor,margin:'0 '+prConfig*2+'rpx',marginTop:mbConfig*2+'rpx'}">
+	<view  class="menus-box borderRadius15">
 		<view v-if="isMany">
 			<view class="swiper">
 				<swiper :interval="interval" :duration="duration" :style="'height:'+(navHigh*2+30)+'rpx;'" @change='bannerfun'>
 					<block>
 						<swiper-item v-for="(item,indexw) in menuList" :key="indexw">
 							<view class="nav acea-row" :id="'nav' + indexw">
-								<view :style="'color:' + titleColor" class="item" :class="number===1?'four':number===2?'five':''" v-for="(itemn,indexn) in item.list" :key="indexn" @click="menusTap(itemn.info[1].value)">
+								<view  class="item four"  v-for="(itemn,indexn) in item.list" :key="indexn" @click="menusTap()">
 									<view class="pictrue skeleton-radius" :class="menuStyle?'':'on'">
 										<image :src="itemn.img" mode="aspectFill"></image>
 									</view>
-									<view class="menu-txt">{{ itemn.info[0].value }}</view>
+									<view class="menu-txt">{{ itemn.name }}</view>
 								</view>
 							</view>
 						</swiper-item>
@@ -24,11 +24,11 @@
 		<view class="nav oneNav" v-else>
 			<scroll-view scroll-x="true" style="white-space: nowrap; display: flex" show-scrollbar="false">
 				<block v-for="(item, index) in menus" :key="index">
-					<view class="item" :style="'color:' + titleColor" @click="menusTap(item.info[1].value)">
-						<view class="pictrue skeleton-radius" :class="menuStyle?'':'on'">
+					<view class="item"  @click="menusTap(item.url_config)">
+						<view class="pictrue skeleton-radius on" >
 							<image :src="item.img" mode="aspectFill"></image>
 						</view>
-						<view class="menu-txt">{{ item.info[0].value }}</view>
+						<view class="menu-txt">{{ item.name }}</view>
 					</view>
 				</block>
 			</scroll-view>
@@ -53,63 +53,61 @@
 			return {
 				interval: 3000,
 				duration: 500,
-				menus: this.dataConfig.menuConfig.list || [],
-				titleColor: this.dataConfig.titleColor.color[0].item,
-				mbConfig: this.dataConfig.mbConfig.val,
-				rowsNum: this.dataConfig.rowsNum.type,
-				number: this.dataConfig.number.type,
-				isMany: this.dataConfig.tabConfig.tabVal,
-				menuStyle: this.dataConfig.menuStyle.type,
-				docConfig: this.dataConfig.pointerStyle.type,
-				dotColor: this.dataConfig.pointerColor.color[0].item,
-				bgColor: this.dataConfig.bgColor.color[0].item,
-				bgStyle: this.dataConfig.bgStyle.type,
-				prConfig: this.dataConfig.prConfig.val,
+				isMany:false,
+				menus:  [
+					{
+						img:'http://150.158.155.57:9704/uploads/attach/2022/08/20220820/b76c1e866cf200c87dc42dc310977873.png',
+						name:'签到',
+						url_config:{
+							type:'navigateTo',
+							url:'/pages/users/user_sgin/index',
+						}
+					}
+				],
 				navHigh: 0,
-				menuList: [],
 				active: 0
 			};
 		},
 		created() {},
 		mounted() {
-			if (this.rowsNum === 0) {
-				if (this.number === 0) {
-					this.pageNum(6)
-				} else if (this.number === 1) {
-					this.pageNum(8)
-				} else {
-					this.pageNum(10)
-				}
-			} else if (this.rowsNum === 1) {
-				if (this.number === 0) {
-					this.pageNum(9)
-				} else if (this.number === 1) {
-					this.pageNum(12)
-				} else {
-					this.pageNum(15)
-				}
-			} else {
-				if (this.number === 0) {
-					this.pageNum(12)
-				} else if (this.number === 1) {
-					this.pageNum(16)
-				} else {
-					this.pageNum(20)
-				}
-			}
-			this.$nextTick(() => {
-				if (this.menuList.length&&this.isMany) {
-					let that = this
-					// #ifdef H5
-					that.menuHeight()
-					// #endif
-					// #ifndef H5
-					setTimeout(() => {
-						that.menuHeight()
-					},100)
-					// #endif
-				}
-			})
+			// if (this.rowsNum === 0) {
+			// 	if (this.number === 0) {
+			// 		this.pageNum(6)
+			// 	} else if (this.number === 1) {
+			// 		this.pageNum(8)
+			// 	} else {
+			// 		this.pageNum(10)
+			// 	}
+			// } else if (this.rowsNum === 1) {
+			// 	if (this.number === 0) {
+			// 		this.pageNum(9)
+			// 	} else if (this.number === 1) {
+			// 		this.pageNum(12)
+			// 	} else {
+			// 		this.pageNum(15)
+			// 	}
+			// } else {
+			// 	if (this.number === 0) {
+			// 		this.pageNum(12)
+			// 	} else if (this.number === 1) {
+			// 		this.pageNum(16)
+			// 	} else {
+			// 		this.pageNum(20)
+			// 	}
+			// }
+			// this.$nextTick(() => {
+			// 	if (this.menuList.length&&this.isMany) {
+			// 		let that = this
+			// 		// #ifdef H5
+			// 		that.menuHeight()
+			// 		// #endif
+			// 		// #ifndef H5
+			// 		setTimeout(() => {
+			// 			that.menuHeight()
+			// 		},100)
+			// 		// #endif
+			// 	}
+			// })
 		},
 		methods: {
 			bannerfun(e) {
@@ -134,31 +132,35 @@
 				}
 				this.$set(this, 'menuList', goodArray);
 			},
-			menusTap(url) {
-				console.log(url);
-				
-				if (url.indexOf("http") != -1) {
-					// #ifdef H5
-					location.href = url
-					// #endif
-					// #ifdef MP || APP-PLUS
+			menusTap(urlConfig) {
+				console.log(urlConfig);
+				if(urlConfig.type == 'navigateTo'){
 					uni.navigateTo({
-						url: `/pages/annex/web_view/index?url=${url}`
-					});
-					// #endif
-				} else {
-					console.log(['/pages/stores/index'].indexOf(url));
-					if (['/pages/goods_cate/goods_cate','/pages/stores/index', '/pages/order_addcart/order_addcart', '/pages/user/index']
-						.indexOf(url) == -1) {
-						uni.navigateTo({
-							url: url
-						})
-					} else {
-						uni.reLaunch({
-							url: url
-						})
-					}
+						url: urlConfig.url
+					})
 				}
+				// if (url.indexOf("http") != -1) {
+				// 	// #ifdef H5
+				// 	location.href = url
+				// 	// #endif
+				// 	// #ifdef MP || APP-PLUS
+				// 	uni.navigateTo({
+				// 		url: `/pages/annex/web_view/index?url=${url}`
+				// 	});
+				// 	// #endif
+				// } else {
+				// 	console.log(['/pages/stores/index'].indexOf(url));
+				// 	if (['/pages/goods_cate/goods_cate','/pages/stores/index', '/pages/order_addcart/order_addcart', '/pages/user/index']
+				// 		.indexOf(url) == -1) {
+				// 		uni.navigateTo({
+				// 			url: url
+				// 		})
+				// 	} else {
+				// 		uni.reLaunch({
+				// 			url: url
+				// 		})
+				// 	}
+				// }
 			}
 		}
 	};

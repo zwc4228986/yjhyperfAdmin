@@ -14,7 +14,7 @@
 			<view class='nav acea-row row-middle'>
 				<view class='item' :class='nows ? "font-color":""' @click='set_where(4)'>新品</view>
 				<view class='item' @click='set_where(2)'>
-					小豆排序
+					抖币排序
 					<image v-if="price==1" src='../../static/images/up.png'></image>
 					<image v-else-if="price==2" src='../../static/images/down.png'></image>
 					<image v-else src='../../static/images/horn.png'></image>

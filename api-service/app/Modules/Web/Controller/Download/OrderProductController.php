@@ -49,7 +49,7 @@ class OrderProductController
 
 //       dump(config('file.storage.public.root').($product->File->path));
         $url = $this->filesystemFactory->get('qiniu_file')->getAdapter()->privateDownloadUrl(getFilePath($file_id)->first());
-
+        
         dump($url);
         return $this->response->redirect($url);
     }

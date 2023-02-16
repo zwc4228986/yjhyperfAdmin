@@ -1,7 +1,8 @@
 <template>
-	<view v-if="pageShow" class="page"
-		:class="bgTabVal==2?'fullsize noRepeat':bgTabVal==1?'repeat ysize':'noRepeat ysize'"
-		:style="'background-color:'+bgColor+';background-image: url('+bgPic+');min-height:'+windowHeight+'px;'">
+	
+	<view v-if="pageShow"
+		class="page fullsize noRepeat repeat ysize "
+		:style="'background-color:white;min-height:'+windowHeight+'px;'">
 		
 		<view v-if="!errorNetwork" :style="colorStyle">
 			<skeleton :show="showSkeleton" :isNodes="isNodes" ref="skeleton" loading="chiaroscuro" selector="skeleton"
@@ -15,8 +16,10 @@
 					</component>
 				</view>
 				<!-- #endif -->
+				<headerSerch></headerSerch>
+				<menus></menus>
 				<!-- #ifdef MP || APP-PLUS -->
-				<block v-for="(item, index) in styleConfig" :key="index">
+				<block v-for="(item, index) in []" :key="index">
 					<activeParty v-if="item.name == 'activeParty'" :dataConfig="item" :isSortType="isSortType">
 					</activeParty>
 					<activePartyPlus v-if="item.name == 'activePartyPlus'" :dataConfig="item" :isSortType="isSortType">

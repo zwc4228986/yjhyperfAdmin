@@ -4,8 +4,8 @@
 			<view class='header bgcolor'>
 				<view class='headerCon acea-row row-between-wrapper'>
 					<view class='left'>
-						<text class="bean-title">当前小豆</text>
-						<view class='bean-count-item'><text>{{userInfo.integral}}</text></view>
+						<text class="bean-title">当前抖币</text>
+						<view class='bean-count-item'><text>{{integral}}</text></view>
 					</view>
 					<view class='middle acea-row row-between-wrapper'>
 						<view class='pictrue'>
@@ -15,13 +15,13 @@
 					<navigator class='right acea-row row-middle' hover-class='none'
 						url='/pages/users/user_integral/index'>
 						<!-- <view class='iconfont icon-caidan'></view> -->
-						<view style="color: white;">小豆明细</view>
+						<view style="color: white;">抖币明细</view>
 					</navigator>
 				</view>
 			</view>
 			
 			<view class="wrap">
-				<view class="vip-card-wrap">
+				<!-- <view class="vip-card-wrap">
 					<view class="left">
 						<view class="pictrue">
 							<image src="/static/images/users/user_sgin/vip.png" />
@@ -34,13 +34,13 @@
 					<view class="right" @click="goMember">
 						<image src="/static/images/users/user_sgin/open-vip.png" />
 					</view>
-				</view>
+				</view> -->
 			
 				<view class="wrap-item">
-					<view class="title">连续签到 奖励送不停</view>
+					<view class="title">签到 奖励送不停</view>
 					
 					<view class="sign-in-box">
-						<view class="content">
+					<!-- 	<view class="content">
 							<view class="sign-in-item "  :class="sign_index >= index + 1 ? 'is-select' : ''" v-for="(item,index) in signSystemList" :key="index" >
 								<view class="day">{{item.day}}</view>
 								<view class="reward">
@@ -58,7 +58,7 @@
 									
 								</view>
 							</view>
-						</view>
+						</view> -->
 						<view class="bottom-btn" v-if="userInfo.is_day_sgin">
 							<view class="btn"></view>
 						</view>
@@ -84,7 +84,7 @@
 					友情提示：明天你将获得{{tomorrow}}个小豆
 				</view>
 				
-				<view class="wrap-item daily-task">
+				<!-- <view class="wrap-item daily-task">
 					<view class="title">每日任务</view>
 					
 					<view class="task-box">
@@ -123,10 +123,12 @@
 						
 					</view>
 				</view>
-				
+				 -->
 			</view>
 		</view>
 		<popup ref="popup"></popup>
+		
+		<!-- <ad adpid="1058113774"></ad> -->
 	</view>
 <!-- 			<view class='wrapper'>
 				<view class='list acea-row row-between-wrapper'>
@@ -200,6 +202,7 @@
 	} from "vuex";
 	import {
 		postSignUser,
+		getUserInfo,
 		getSignConfig,
 		getSignList,
 		setSignIntegral
@@ -276,14 +279,15 @@ import { sign } from 'crypto';
 			}
 		},
 		onLoad() {
-			if (this.isLogin) {
+			// if (this.isLogin) {
 				this.getUserInfo();
-				this.getSignSysteam();
-				this.getSignList();
-			} else {
-				toLogin();
-			}
-			this.getSignTaskList();
+			// }
+			// 	this.getSignSysteam();
+			// 	this.getSignList();
+			// } else {
+			// 	toLogin();
+			// }
+			// this.getSignTaskList();
 		},
 		methods: {
 			goReceive(item){
@@ -357,15 +361,19 @@ import { sign } from 'crypto';
 			 */
 			getUserInfo: function() {
 				let that = this;
-				postSignUser({
-					sign: 1
-				}).then(res => {
-					res.data.integral = parseInt(res.data.integral);
-					let sum_sgin_day = res.data.sum_sgin_day;
-					that.$set(that, 'userInfo', res.data);
-					that.signCount = that.PrefixInteger(sum_sgin_day, 4);
-					that.sign_index = res.data.sign_num;
-				});
+				getUserInfo().then(res=>{
+					that.integral = res.integral
+					that.userInfo = res;
+				})
+				// postSignUser({
+				// 	sign: 1
+				// }).then(res => {
+				// 	res.data.integral = parseInt(res.data.integral);
+				// 	let sum_sgin_day = res.data.sum_sgin_day;
+				// 	that.$set(that, 'userInfo', res.data);
+				// 	that.signCount = that.PrefixInteger(sum_sgin_day, 4);
+				// 	that.sign_index = res.data.sign_num;
+				// });
 			},
 
 			/**
