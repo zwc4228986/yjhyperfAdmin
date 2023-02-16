@@ -37,16 +37,23 @@ class MenuLogic
 
     public function edit($id, Collection $params)
     {
+
         $this->systemMenuDao->check($id,$params);
 
         $systemMenuData = $this->systemMenuDao->where('id',$id)->first();
-        dump($systemMenuData);
+
         $params->except('name');
         if($path = $params->get('path')){
             $params->offsetSet('name',implode(array_map('ucwords',explode('/',$path))));
         }
-
+        
         $systemMenuData->fill($params->toArray());
         return $systemMenuData->save();
+    }
+
+    public function add(Collection $params)
+    {
+        $this->systemMenuDao->check(0,$params);
+        return $this->systemMenuDao->create($params->toArray());
     }
 }

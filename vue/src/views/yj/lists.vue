@@ -3,7 +3,6 @@
     <el-header class="header-tabs" v-if="formConfig.tabs">
       <el-tabs type="card" v-model="formParams[formConfig.tabs.prop]">
         <el-tab-pane label="全部" name="all"> </el-tab-pane>
-
         <el-tab-pane
           :label="item.label"
           :name="item.value"
