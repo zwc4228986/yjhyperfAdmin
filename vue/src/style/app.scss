@@ -37,7 +37,9 @@ textarea {
 	box-sizing: border-box;
 	outline: none;
 }
-
+.el-button {
+    background-color: var(--el-button-bg-color, var(--el-color-white));
+}
 /* 全局滚动条样式 */
 .scrollable {
 	-webkit-overflow-scrolling: touch;
