@@ -8,9 +8,22 @@ import request from "@/utils/request.js";
  */
 export function getSignTaskLists(data) {
 	return request.post('/api/sign/task/lists',data,{
-		URL:2
+		URL:3
 	});
 }
+
+export function getSignList(data) {
+	return request.post('/api/sign/lists',data,{
+		URL:3
+	});
+}
+
+export function toSign(data) {
+	return request.post('/api/sign',data,{
+		URL:3
+	});
+}
+
 
 /**
  * 添加任务

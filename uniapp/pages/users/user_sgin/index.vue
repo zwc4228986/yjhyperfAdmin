@@ -3,16 +3,16 @@
 		<view class='sign' :style="colorStyle">
 			<view class='header bgcolor'>
 				<view class='headerCon acea-row row-between-wrapper'>
-					<view class='left'>
+					<view class='left' >
 						<text class="bean-title">当前抖币</text>
 						<view class='bean-count-item'><text>{{integral}}</text></view>
 					</view>
-					<view class='middle acea-row row-between-wrapper'>
+					<view class='middle acea-row row-between-wrapper'  >
 						<view class='pictrue'>
 							<image :src='userInfo.avatar'></image>
 						</view>
 					</view>
-					<navigator class='right acea-row row-middle' hover-class='none'
+					<navigator class='right acea-row row-middle'   hover-class='none'
 						url='/pages/users/user_integral/index'>
 						<!-- <view class='iconfont icon-caidan'></view> -->
 						<view style="color: white;">抖币明细</view>
@@ -40,25 +40,25 @@
 					<view class="title">签到 奖励送不停</view>
 					
 					<view class="sign-in-box">
-					<!-- 	<view class="content">
+					 	<view class="content">
 							<view class="sign-in-item "  :class="sign_index >= index + 1 ? 'is-select' : ''" v-for="(item,index) in signSystemList" :key="index" >
-								<view class="day">{{item.day}}</view>
+								<view class="day">签到{{item.times}}次</view>
 								<view class="reward">
 									<view class="reward-box">
-									<view style="margin-right: 10rpx;">
-									{{item.sign_num}}
+									<view  class="reward-box-point">
+									{{item.point}}
 									</view>
 									<view class="bean-icon">
 										<image src="/static/images/users/user_sgin/bean.png" />
 									</view>
 									</view>
 									<view>
-										小豆奖励
+										抖币奖励
 									</view>
 									
 								</view>
 							</view>
-						</view> -->
+						</view> 
 						<view class="bottom-btn" v-if="userInfo.is_day_sgin">
 							<view class="btn"></view>
 						</view>
@@ -69,7 +69,7 @@
 							  :customStyle="{ width: '60%' }"
 							  shape="circle"
 							  text="立即签到"
-							  @click="goSign"
+							  @click="sign"
 							></yj-button>
 						</div>
 						
@@ -81,10 +81,10 @@
 					<view class="pictrue">
 						<image src="/static/images/users/user_sgin/tips.png" />
 					</view>
-					友情提示：明天你将获得{{tomorrow}}个小豆
+					友情提示：每天可以签到5次!!
 				</view>
 				
-				<!-- <view class="wrap-item daily-task">
+			<!-- 	<view class="wrap-item daily-task">
 					<view class="title">每日任务</view>
 					
 					<view class="task-box">
@@ -122,13 +122,18 @@
 						
 						
 					</view>
-				</view>
-				 -->
+				</view> -->
+				
 			</view>
 		</view>
 		<popup ref="popup"></popup>
-		
-		<!-- <ad adpid="1058113774"></ad> -->
+		<view style="position: fixed;bottom: 0;width: 100%;">
+			<ad adpid="1058113774"></ad>
+		</view>
+		<ad-rewarded-video ref="adRewardedVideo" adpid="1705716440" :preload="false" :loadnext="false" :disabled="true"
+		      v-slot:default="{loading, error}" @load="onadload" @close="onadclose" @error="onaderror">
+		      <view class="ad-error" v-if="error">{{error}}</view>
+		</ad-rewarded-video>
 	</view>
 <!-- 			<view class='wrapper'>
 				<view class='list acea-row row-between-wrapper'>
@@ -204,10 +209,11 @@
 		postSignUser,
 		getUserInfo,
 		getSignConfig,
-		getSignList,
 		setSignIntegral
 	} from '@/api/user.js';
 	import {
+			getSignList,
+			toSign,
 		signTaskReceive,
 		getSignTaskLists
 	} from '@/api/sign.js';
@@ -231,7 +237,7 @@ import { sign } from 'crypto';
 		mixins: [colors],
 		data() {
 			return {
-		
+				isLoading:false,
 				task_lists:[],
 				active: false,
 				userInfo: {},
@@ -247,8 +253,8 @@ import { sign } from 'crypto';
 		},
 		computed: {
 				tomorrow:function(){
-					if(this.signSystemList.length>0){
-						return this.signSystemList[this.sign_index].sign_num;
+					if(this.signList.length>0){
+						return this.signList[this.sign_index].point;
 					}else{
 						return 0;
 					}
@@ -283,13 +289,33 @@ import { sign } from 'crypto';
 				this.getUserInfo();
 			// }
 			// 	this.getSignSysteam();
-			// 	this.getSignList();
+				// 
 			// } else {
 			// 	toLogin();
 			// }
-			// this.getSignTaskList();
+			this.getSignTaskList();
+			this.getSignList();
 		},
 		methods: {
+			sign(){
+				toSign().then(()=>{
+						this.sign_index = (that.sign_index + 1)
+						this.$refs.popup.show(10,20);
+				})
+			},
+			onadclose(e) {
+			        const detail = e.detail
+			        // 用户点击了【关闭广告】按钮
+			        if (detail && detail.isEnded) {
+			          // 正常播放结束
+			          console.log("onClose " + detail.isEnded);
+			        } else {
+			          // 播放中途退出
+			          console.log("onClose " + detail.isEnded);
+			        }
+			        //this.isLoading = true;
+			        //this.$refs.adRewardedVideo.load();
+			},
 			goReceive(item){
 				signTaskReceive(item.code).then(res=>{
 					this.getUserInfo();
@@ -386,7 +412,8 @@ import { sign } from 'crypto';
 					page: 1,
 					limit: 3
 				}).then(res => {
-					that.$set(that, 'signList', res.data);
+					that.$set(that, 'signSystemList', res.data);
+					that.$set(that, 'sign_index', res.number);
 				})
 			},
 			/**
@@ -415,27 +442,31 @@ import { sign } from 'crypto';
 			 * 用户签到
 			 */
 			goSign: function(e) {
-				let that = this,
-					sum_sgin_day = that.userInfo.sum_sgin_day;
-				if (that.userInfo.is_day_sgin) return this.$util.Tips({
-					title: '您今日已签到!'
-				});
-				setSignIntegral().then(res => {
-					that.active = true;
-					that.integral = res.data.integral;
-					that.sign_index = (that.sign_index + 1) > that.signSystemList.length ? 1 : that
-						.sign_index + 1;
-					that.$refs.popup.show(that.signSystemList[that.sign_index-1].sign_num,that.signSystemList[that.sign_index].sign_num);
-					that.signCount = that.PrefixInteger(sum_sgin_day + 1, 4);
-					that.$set(that.userInfo, 'is_day_sgin', true);
-					that.$set(that.userInfo, 'integral', that.$util.$h.Add(that.userInfo.integral, res.data
-						.integral));
-					that.getSignList();
-				}).catch(err => {
-					return this.$util.Tips({
-						title: err
-					})
-				});
+				 if (this.isLoading) {
+				          return
+				        }
+				        this.$refs.adRewardedVideo.show();
+				// let that = this,
+				// 	sum_sgin_day = that.userInfo.sum_sgin_day;
+				// if (that.userInfo.is_day_sgin) return this.$util.Tips({
+				// 	title: '您今日已签到!'
+				// });
+				// setSignIntegral().then(res => {
+				// 	that.active = true;
+				// 	that.integral = res.data.integral;
+				// 	that.sign_index = (that.sign_index + 1) > that.signSystemList.length ? 1 : that
+				// 		.sign_index + 1;
+				// 	that.$refs.popup.show(that.signSystemList[that.sign_index-1].sign_num,that.signSystemList[that.sign_index].sign_num);
+				// 	that.signCount = that.PrefixInteger(sum_sgin_day + 1, 4);
+				// 	that.$set(that.userInfo, 'is_day_sgin', true);
+				// 	that.$set(that.userInfo, 'integral', that.$util.$h.Add(that.userInfo.integral, res.data
+				// 		.integral));
+				// 	that.getSignList();
+				// }).catch(err => {
+				// 	return this.$util.Tips({
+				// 		title: err
+				// 	})
+				// });
 			},
 			/**
 			 * 关闭签到提示
@@ -467,8 +498,8 @@ import { sign } from 'crypto';
 				display: flex;
 				flex-direction: column;
 				justify-content: center;
-				align-items: center;
-				
+				flex-basis: 100px;
+			
 				.bean-title {
 					font-size: 24rpx;
 					font-family: PingFang SC;
@@ -602,14 +633,14 @@ import { sign } from 'crypto';
 					grid-row-gap: 22rpx;
 					grid-column-gap: 30rpx;
 					.sign-in-item {
-						background-image: url('#{$app-url}/static/images/sign-bg-1.png');
+						background-color: #FBF2E5;
 						background-size: 100% 100%;
 						background-repeat: no-repeat;
 						display: flex;
 						flex-direction: column;
 						align-items: center;
-						padding: 25rpx;
-						
+						justify-content: center;
+						border-radius: 10rpx;
 						.day {
 							font-size: 24rpx;
 							font-family: PingFang SC;
@@ -627,12 +658,16 @@ import { sign } from 'crypto';
 							color: #999999;
 							.reward-box{
 								display: flex;
+								justify-content: center;
+								.reward-box-point{
+									font-weight: bold;
+									margin-right: 10rpx;
+								}
 							}
 							.bean-icon {
 								display: inline;
 								width: 18rpx;
 								height: 18rpx;
-								
 								image {
 									width: inherit;
 									height: inherit;

@@ -12,6 +12,7 @@ namespace App\Model;
  * @property \Carbon\Carbon $create_time 
  * @property int $delete_time 
  * @property \Carbon\Carbon $update_time 
+ * @property int $id 
  */
 class ProductDescription extends Model
 {
@@ -28,5 +29,5 @@ class ProductDescription extends Model
     /**
      * The attributes that should be cast to native types.
      */
-    protected array $casts = ['product_id' => 'integer', 'type' => 'integer', 'create_time' => 'datetime', 'delete_time' => 'integer', 'update_time' => 'datetime'];
+    protected array $casts = ['product_id' => 'integer', 'type' => 'integer', 'create_time' => 'datetime', 'delete_time' => 'integer', 'update_time' => 'datetime', 'id' => 'integer'];
 }
