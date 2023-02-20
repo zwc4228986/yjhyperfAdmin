@@ -8,6 +8,7 @@ use Hyperf\Di\Annotation\Inject;
 use Hyperf\Guzzle\ClientFactory;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\Snowflake\IdGeneratorInterface;
+use Hyperf\Utils\Collection;
 use function Swoole\Coroutine\Http\request;
 
 class WechatLogic
@@ -60,6 +61,17 @@ class WechatLogic
 //        });
 
         return $server->serve();
+    }
+
+    public function menuCreate($data)
+    {
+        dump($data);
+        return $this->getApp()->getClient()->postJson('cgi-bin/menu/create',['button'=>$data])->getContent();
+    }
+
+    public function menuGet()
+    {
+        return $this->getApp()->getClient()->get('cgi-bin/get_current_selfmenu_info')->getContent();
     }
 
 

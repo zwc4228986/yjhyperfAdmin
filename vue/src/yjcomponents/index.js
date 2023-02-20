@@ -6,6 +6,7 @@ import YjStatistic from "./yjStatistic";
 import yjUploadMultiple from "./yjUploadMultiple";
 import yjFormCreate from "./yjFormCreate";
 import yjSearch from "./yjSearch";
+import yjCloseWrap from "./yjCloseWrap";
 
 
 const components = [
@@ -16,6 +17,7 @@ const components = [
 	yjUploadMultiple,
 	YjTableTree,
 	yjSearch,
+	yjCloseWrap,
 	yjFormCreate
 ];
 

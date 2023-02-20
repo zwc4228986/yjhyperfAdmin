@@ -1,12 +1,17 @@
 // @import 'tailwind.css';
-@import "app.scss";
+
+
 @import "fix.scss";
 @import "pages.scss";
 @import "ui.scss";
 @import "media.scss";
-
-@import "~@/assets/font/scicon/iconfont.css";
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "element-plus/dist/index.css";
+@import "element-plus/theme-chalk/display.css";
+@import '@icon-park/vue-next/styles/index.css';
+@import "app.scss";
+@import "~@/assets/font/scicon/iconfont.css";
+
+

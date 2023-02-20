@@ -1,7 +1,5 @@
 import ElementPlus from "element-plus";
-import "element-plus/dist/index.css";
-import "element-plus/theme-chalk/display.css";
-import '@icon-park/vue-next/styles/index.css';
+
 
 import scui from "./scui";
 import i18n from "./locales";
