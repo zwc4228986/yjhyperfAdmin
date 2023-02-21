@@ -18,6 +18,7 @@
 				<!-- #endif -->
 				<headerSerch></headerSerch>
 				<menus></menus>
+				<circle></circle>
 				<!-- #ifdef MP || APP-PLUS -->
 				<block v-for="(item, index) in []" :key="index">
 					<activeParty v-if="item.name == 'activeParty'" :dataConfig="item" :isSortType="isSortType">
@@ -232,6 +233,7 @@
 	// #endif
 	// #ifdef MP || APP-PLUS
 	import authorize from '@/components/Authorize';
+	import circle from './components/circle';
 	import activeParty from './components/activeParty';
 	import activePartyPlus from './components/activePartyPlus';
 	import headerSerch from './components/headerSerch';
@@ -300,6 +302,7 @@
 			recommend,
 			Loading,
 			pageFooter,
+			circle,
 			couponWindow,
 			// #ifdef H5
 			...mConfig,

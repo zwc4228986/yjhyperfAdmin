@@ -4,7 +4,7 @@
 		<view class="serch-wrapper row-middle">
 			<view class="logo">
 				<image class="skeleton-rect" :src="logoConfig" mode="heightFix"></image>
-				<view class="swiger">{{titleInfo.length ? titleInfo[0].val : ''}}</view>
+				<view class="swiger">抖资源</view>
 			</view>
 			<view class="input acea-row row-middle fillet skeleton-rect" hover-class="none" @click="goPage"><text
 					class="iconfont icon-sousuo"></text>
@@ -30,8 +30,9 @@
 			<view class="serch-box" style="height: 48px;">
 				<view class="serch-wrapper row-middle">
 					<view class="logo">
-						<image class="skeleton-rect" :src="logoConfig" mode="heightFix"></image>
-						<view class="swiger">{{titleInfo.length ? titleInfo[0].val : ''}}</view>
+						抖资源
+						<!-- <image class="skeleton-rect" :src="logoConfig" mode="heightFix"></image>
+						<view class="swiger">抖资源</view> -->
 					</view>
 					<navigator url="/pages/goods_search/index" class="input acea-row row-middle fillet"
 						hover-class="none"><text class="iconfont icon-sousuo"></text>
@@ -143,10 +144,11 @@
 			padding: 20rpx 30rpx 0 30rpx;
 
 			.logo {
-				margin-right: 30rpx;
 				display: flex;
 				align-items: flex-end;
-
+				justify-content: center;
+				font-weight: bold;
+				color: white;
 				image {
 					width: 144rpx;
 					height: 50rpx;
@@ -211,9 +213,11 @@
 			padding: 15rpx 30rpx 20rpx 30rpx;
 
 			.logo {
-				margin-right: 30rpx;
 				display: flex;
 				align-items: flex-end;
+				justify-content: center;
+				font-weight: bold;
+				color: white;
 					
 				image {
 					width: 144rpx;

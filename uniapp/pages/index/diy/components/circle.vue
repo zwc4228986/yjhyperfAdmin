@@ -1,37 +1,20 @@
 <template>
-	<view  class="menus-box ">
-		<view v-if="isMany">
-			<view class="swiper">
-				<swiper :interval="interval" :duration="duration" :style="'height:'+(navHigh*2+30)+'rpx;'" @change='bannerfun'>
-					<block>
-						<swiper-item v-for="(item,indexw) in menuList" :key="indexw">
-							<view class="nav acea-row" :id="'nav' + indexw">
-								<view  class="item four"  v-for="(itemn,indexn) in item.list" :key="indexn" @click="menusTap()">
-									<view class="pictrue skeleton-radius" :class="menuStyle?'':'on'">
-										<image :src="itemn.img" mode="aspectFill"></image>
-									</view>
-									<view class="menu-txt">{{ itemn.name }}</view>
-								</view>
-							</view>
-						</swiper-item>
-					</block>
-				</swiper>
-			</view>
-			<view class="dot acea-row row-center-wrapper" v-if="docConfig<2">
-				<view class="dot-item" :class="{ 'line_dot-item': docConfig === 0,'': docConfig === 1}" :style="active==index?'background:'+ dotColor:''" v-for="(item,index) in menuList"></view>
-			</view>
+	<view  class="circle menus-box borderRadius15">
+		<view class="circle-header">
+			<view>推荐资源分类</view>
 		</view>
-		<view class="nav oneNav" v-else>
-			<scroll-view scroll-x="true" style="white-space: nowrap; display: flex" show-scrollbar="false">
-				<block v-for="(item, index) in menus" :key="index">
-					<view class="item"  @click="menusTap(item.url_config)">
-						<view class="pictrue skeleton-radius on" >
-							<image :src="item.img" mode="aspectFill"></image>
+		
+		<view class="circle-content" >
+			<block v-for="(item, index) in menus" :key="index">
+					<view class="item">
+						<u-image radius="10" width="100px" height="80px"></u-image>
+						<view class="right">
+							<view class="circle-content-title">抖资源</view>
+							<view class="circle-content-info">w1w1</view>
+							<view class="circle-content-bottom">w1w1</view>
 						</view>
-						<view class="menu-txt">{{ item.name }}</view>
 					</view>
-				</block>
-			</scroll-view>
+			</block>
 		</view>
 	</view>
 </template>
@@ -167,8 +150,29 @@
 </script>
 
 <style lang="scss">
-	.menus-box{
-		background: #f5f5f5;
+	.circle{
+		padding: 20rpx;
+		.circle-header{
+			padding-bottom: 20rpx;
+		}
+		.circle-content .item{
+			display: flex;
+			.right{
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				margin-left: 20rpx;
+				.circle-content-title{
+					font-size: 28rpx;
+					font-weight: bold;
+				}
+				.circle-content-info{
+					font-size: 24rpx;
+					height: 2em;
+					color: #666;
+				}
+			}
+		}
 	}
 	.dot {
 		width: 100%;
