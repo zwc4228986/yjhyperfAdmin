@@ -4,21 +4,20 @@ declare(strict_types=1);
 
 namespace App\Model;
 
-
 /**
  * @property int $id 
  * @property string $name 
  * @property \Carbon\Carbon $create_time 
  * @property \Carbon\Carbon $update_time 
  * @property int $delete_time 
- * @property int $circle_id 
+ * @property int $icon_id 
  */
-class Nav extends Model
+class Circle extends Model
 {
     /**
      * The table associated with the model.
      */
-    protected ?string $table = 'nav';
+    protected ?string $table = 'circle';
 
     /**
      * The attributes that are mass assignable.
@@ -28,5 +27,5 @@ class Nav extends Model
     /**
      * The attributes that should be cast to native types.
      */
-    protected array $casts = ['id' => 'integer', 'create_time' => 'datetime', 'update_time' => 'datetime', 'delete_time' => 'integer', 'circle_id' => 'integer'];
+    protected array $casts = ['id' => 'integer', 'create_time' => 'datetime', 'update_time' => 'datetime', 'delete_time' => 'integer', 'icon_id' => 'integer'];
 }

@@ -8,20 +8,17 @@ use Hyperf\DbConnection\Model\Model;
 
 /**
  * @property int $id 
- * @property string $name 
- * @property int $times 
- * @property int $status 
- * @property int $point 
  * @property int $create_time 
  * @property int $update_time 
  * @property int $delete_time 
+ * @property int $user_id 
  */
-class Sign extends Model
+class SignLog extends Model
 {
     /**
      * The table associated with the model.
      */
-    protected ?string $table = 'sign';
+    protected ?string $table = 'sign_log';
 
     /**
      * The attributes that are mass assignable.
@@ -31,5 +28,5 @@ class Sign extends Model
     /**
      * The attributes that should be cast to native types.
      */
-    protected array $casts = ['id' => 'integer', 'times' => 'integer', 'status' => 'integer', 'point' => 'integer', 'create_time' => 'integer', 'update_time' => 'integer', 'delete_time' => 'integer'];
+    protected array $casts = ['id' => 'integer', 'create_time' => 'integer', 'update_time' => 'integer', 'delete_time' => 'integer', 'user_id' => 'integer'];
 }

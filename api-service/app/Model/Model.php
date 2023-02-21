@@ -40,6 +40,7 @@ abstract class Model extends BaseModel
 
     public function scopeGetList(Builder $query, $columns = ['*'], $pageName = 'page', $page = null)
     {
+
         if (Context::get('is_page', true)) {
             $limit = make(RequestInterface::class)->input('limit', 15);
             return $query->paginate($limit, $columns, $pageName, $page);

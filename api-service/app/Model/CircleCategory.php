@@ -8,17 +8,18 @@ namespace App\Model;
 /**
  * @property int $id 
  * @property string $name 
- * @property \Carbon\Carbon $create_time 
- * @property \Carbon\Carbon $update_time 
+ * @property int $sort 
+ * @property int $is_show 
  * @property int $delete_time 
- * @property int $circle_id 
+ * @property int $update_time 
+ * @property int $create_time 
  */
-class Nav extends Model
+class CircleCategory extends Model
 {
     /**
      * The table associated with the model.
      */
-    protected ?string $table = 'nav';
+    protected ?string $table = 'circle_category';
 
     /**
      * The attributes that are mass assignable.
@@ -28,5 +29,5 @@ class Nav extends Model
     /**
      * The attributes that should be cast to native types.
      */
-    protected array $casts = ['id' => 'integer', 'create_time' => 'datetime', 'update_time' => 'datetime', 'delete_time' => 'integer', 'circle_id' => 'integer'];
+    protected array $casts = ['id' => 'integer', 'sort' => 'integer', 'is_show' => 'integer', 'delete_time' => 'integer', 'update_time' => 'integer', 'create_time' => 'integer'];
 }

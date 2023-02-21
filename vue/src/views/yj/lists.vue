@@ -113,10 +113,11 @@ export default {
     immediate: true,
   },
   async created() {
-    this.yjCode = this.$route.path.slice(1);
-
+    this.yjCode = this.$route.path.slice(1).split('/')[0];
+    console.log(this.yjCode);
     this.formConfig = await this.$HTTP().post(`/form/${this.yjCode}/config`);
     this._init();
+
   },
   methods: {
     _init() {

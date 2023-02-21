@@ -18,7 +18,7 @@ class GetPath
     #[ApiParam("id")]
     public function index(){
         $id = getParams()->get('id');
-        $path = $this->systemFileDao->getFullPath($id);
+        $path = getFileFullPath($id)->first();
         Success($path);
     }
 
