@@ -344,6 +344,15 @@
 							</view>
 						</block>
 
+
+						<view class="item"
+							@click="goMenuPage('/pages/users/user_sgin/index', '每日签到')">
+							<image src="/static/images/b76c1e866cf200c87dc42dc310977873.png"></image>
+							<text>每日签到</text>
+						</view>
+						
+					
+						
 						<button class="item" open-type='contact' >
 							<image src="/static/images/contact.png"></image>
 							<text>联系客服</text>
@@ -950,7 +959,7 @@
 			},
 			// goMenuPage
 			goMenuPage(url, name) {
-				return false;
+				
 				if (this.isLogin) {
 					if (url.indexOf('http') === -1) {
 						// #ifdef H5 || APP-PLUS

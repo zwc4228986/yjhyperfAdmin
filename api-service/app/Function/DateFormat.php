@@ -1,6 +1,7 @@
 <?php
 if (!function_exists('dateFormat')) {
-    function dateFormat($timestamp) {
+    function dateFormat($timestamp): string
+    {
         $seconds = time() - $timestamp;
         if($seconds > 31536000) {
             return date('Y-n-j',$timestamp);

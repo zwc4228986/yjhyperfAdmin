@@ -20,15 +20,7 @@
 			}
 		},
 		
-		{
-			"path": "pages/task_index/index",
-			"style": {
-				"navigationBarTitleText": "福利中心",
-				"enablePullDownRefresh": false,
-				"navigationBarTextStyle": "white",
-				"navigationBarBackgroundColor": "#FF9742"
-			}
-		},
+	
 		{
 			"path": "pages/index/index",
 			"style": {
@@ -113,278 +105,6 @@
 					"enablePullDownRefresh": false
 				}
 			}]
-		},
-		{
-			"root": "pages/task",
-			"name": "task",
-			"pages": [{
-					"path": "user/detail",
-					"style": {
-						"navigationBarTitleText": "任务详情页",
-						"enablePullDownRefresh": false,
-						"navigationBarTextStyle": "white",
-						"navigationBarBackgroundColor": "#F58325",
-						"app-plus": {
-							// #ifdef APP-PLUS
-							"titleNView": {
-								"type": "default"
-							}
-							// #endif
-						}
-					}
-
-				},
-				{
-					"path": "changePrice",
-					"style": {
-						"navigationBarTitleText": "修改任务价格",
-						"enablePullDownRefresh": false
-					}
-
-				},
-				{
-					"path": "changeNumber",
-					"style": {
-						"navigationBarTitleText": "修改任务数量",
-						"enablePullDownRefresh": false
-					}
-
-				},
-				{
-					"path": "help/help",
-					"style": {
-						"navigationBarTitleText": "帮助中心",
-						"enablePullDownRefresh": false,
-						"navigationBarTextStyle": "white",
-						"navigationBarBackgroundColor": "#F58325"
-					}
-				},
-				{
-					"path": "help/detail",
-					"style": {
-						"navigationBarTitleText": "帮助中心",
-						"enablePullDownRefresh": false,
-						"navigationBarTextStyle": "white",
-						"navigationBarBackgroundColor": "#F58325",
-						"app-plus": {
-							// #ifdef APP-PLUS
-							"titleNView": {
-								"type": "default"
-							}
-							// #endif
-						}
-					}
-				
-				},
-				{
-					"path": "RefreshProp/RefreshProp",
-					"style": {
-						"navigationBarTitleText": "刷新道具购买",
-						"enablePullDownRefresh": false,
-						"navigationBarTextStyle": "white",
-						"navigationBarBackgroundColor": "#F58325",
-						"app-plus": {
-							// #ifdef APP-PLUS
-							"titleNView": {
-								"type": "default"
-							}
-							// #endif
-						}
-					}
-
-				}, {
-					"path": "RefreshProp/top",
-					"style": {
-						"navigationBarTitleText": "置顶道具购买",
-						"enablePullDownRefresh": false,
-						"navigationBarTextStyle": "white",
-						"navigationBarBackgroundColor": "#F58325",
-						"app-plus": {
-							// #ifdef APP-PLUS
-							"titleNView": {
-								"type": "default"
-							}
-							// #endif
-						}
-					}
-
-				}, {
-					"path": "report/report",
-					"style": {
-						"navigationBarTitleText": "投诉",
-						"enablePullDownRefresh": false,
-						"navigationBarTextStyle": "white",
-						"navigationBarBackgroundColor": "#F58325",
-						"app-plus": {
-							// #ifdef APP-PLUS
-							"titleNView": {
-								"type": "default"
-							}
-							// #endif
-						}
-					}
-
-				}, {
-					"path": "receive/lists/lists",
-					"style": {
-						"navigationBarTitleText": "提交记录",
-						"enablePullDownRefresh": false,
-						"navigationBarTextStyle": "white",
-						"navigationBarBackgroundColor": "#F58325",
-						"app-plus": {
-							// #ifdef APP-PLUS
-							"titleNView": {
-								"type": "default"
-							}
-							// #endif
-						}
-					}
-
-				}, {
-					"path": "receive/detail/detail",
-					"style": {
-						"navigationBarTitleText": "",
-						"enablePullDownRefresh": false,
-						"app-plus": {
-							// #ifdef APP-PLUS
-							"titleNView": {
-								"type": "default"
-							}
-							// #endif
-						}
-					}
-
-				},
-				{
-					"path": "detail",
-					"style": {
-						"navigationBarTitleText": "任务详情",
-						"enablePullDownRefresh": false,
-						"navigationBarTextStyle": "white",
-						"navigationBarBackgroundColor": "#F58325",
-						"app-plus": {
-							// #ifdef APP-PLUS
-							"titleNView": {
-								"type": "default"
-							}
-							// #endif
-						}
-					}
-				},
-				{
-					"path": "order_confirm/index",
-					"style": {
-						"navigationBarTitleText": "提交订单",
-						"app-plus": {
-							// #ifdef APP-PLUS
-							"titleNView": {
-								"type": "default"
-							}
-							// #endif
-						}
-					}
-				},
-				{
-					"path": "user/tasks",
-					"style": {
-						"navigationBarTitleText": "主页",
-						"navigationBarTextStyle": "white",
-						"navigationBarBackgroundColor": "#F58325",
-						"app-plus": {
-							// #ifdef APP-PLUS
-							"titleNView": {
-								"type": "default"
-							}
-							// #endif
-						}
-					}
-				},
-				{
-					"path": "add_types",
-					"style": {
-						"navigationBarTitleText": "选择发布类型",
-						"navigationBarTextStyle": "white",
-						"navigationBarBackgroundColor": "#F58325",
-						"app-plus": {
-							// #ifdef APP-PLUS
-							"titleNView": {
-								"type": "default"
-							}
-							// #endif
-						}
-					}
-				},
-				{
-					"path": "add",
-					"style": {
-						"navigationBarTitleText": "选择发布类型",
-						"navigationBarTextStyle": "white",
-						"navigationBarBackgroundColor": "#F58325",
-						"app-plus": {
-							// #ifdef APP-PLUS
-							"titleNView": {
-								"type": "default"
-							}
-							// #endif
-						}
-					}
-				},
-				{
-					"path": "add_step2",
-					"style": {
-						"navigationBarTitleText": "选择发布类型",
-						"navigationBarTextStyle": "white",
-						"navigationBarBackgroundColor": "#F58325",
-						"app-plus": {
-							// #ifdef APP-PLUS
-							"titleNView": {
-								"type": "default"
-							}
-							// #endif
-						}
-					}
-				},
-				{
-					"path": "user/center",
-					"style": {
-						"navigationBarTitleText": "商家任务中心",
-						"navigationBarTextStyle": "white",
-						"navigationBarBackgroundColor": "#F58325",
-						"app-plus": {
-							// #ifdef APP-PLUS
-							"titleNView": {
-								"type": "default"
-							}
-							// #endif
-						}
-					}
-				},
-				{
-					"path": "info",
-					"style": {
-						"navigationBarTitleText": "试客小站",
-						"navigationBarTextStyle": "white",
-						"navigationBarBackgroundColor": "#F58325"
-					}
-				}
-			    ,{
-                    "path" : "log/log",
-                    "style" :                                                                                    
-                {
-					  "navigationBarTitleText": "置顶/刷新记录",
-					  "navigationBarTextStyle": "white",
-					  "navigationBarBackgroundColor": "#F58325",
-					  "app-plus": {
-					  	// #ifdef APP-PLUS
-					  	"titleNView": {
-					  		"type": "default"
-					  	}
-					  	// #endif
-					  }
-                }
-                
-                }
-            ]
 		},
 		{
 			"root": "pages/chat",
@@ -857,7 +577,7 @@
 				{
 					"path": "user_integral/index",
 					"style": {
-						"navigationBarTitleText": "我的小豆",
+						"navigationBarTitleText": "我的抖币",
 						"navigationBarTextStyle": "white",
 						"navigationBarBackgroundColor": "#F58325",
 						"app-plus": {
@@ -1953,12 +1673,12 @@
 		"borderStyle": "white",
 		"backgroundColor": "#ffffff",
 		"list": [
-			{
-				"pagePath": "pages/index/index",
-				"iconPath": "static/images/icon/0-0.png",
-				"selectedIconPath": "static/images/icon/0-1.png",
-				"text": "首页"
-			},
+			// {
+			// 	"pagePath": "pages/index/index",
+			// 	"iconPath": "static/images/icon/0-0.png",
+			// 	"selectedIconPath": "static/images/icon/0-1.png",
+			// 	"text": "首页"
+			// },
 			{
 				"pagePath": "pages/stores/index",
 				"iconPath": "static/images/icon/5-1.png",

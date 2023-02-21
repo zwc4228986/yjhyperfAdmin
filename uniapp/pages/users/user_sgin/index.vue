@@ -69,7 +69,7 @@
 							  :customStyle="{ width: '60%' }"
 							  shape="circle"
 							  text="立即签到"
-							  @click="sign"
+							  @click="goSign"
 							></yj-button>
 						</div>
 						
@@ -126,7 +126,7 @@
 				
 			</view>
 		</view>
-		<popup ref="popup"></popup>
+		<popup ref="popup" @signAgain="goSign"></popup>
 		<view style="position: fixed;bottom: 0;width: 100%;">
 			<ad adpid="1058113774"></ad>
 		</view>
@@ -243,7 +243,6 @@ import { sign } from 'crypto';
 				userInfo: {},
 				signCount: [],
 				signSystemList: [],
-				signList: [],
 				integral: 0,
 				isAuto: false, //没有授权的不会自动授权
 				isShowAuth: false, //是否隐藏授权
@@ -253,8 +252,9 @@ import { sign } from 'crypto';
 		},
 		computed: {
 				tomorrow:function(){
-					if(this.signList.length>0){
-						return this.signList[this.sign_index].point;
+					if(this.signSystemList.length>0){
+						console.log(this.sign_index,this.signSystemList)
+						return this.signSystemList[this.sign_index]?.point;
 					}else{
 						return 0;
 					}
@@ -273,6 +273,11 @@ import { sign } from 'crypto';
 				...mapGetters(['isLogin'])
 		},
 		watch: {
+			sign_index:{
+					handler: function(newV, oldV) {
+						this.getUserInfo();
+					}
+			},
 			isLogin: {
 				handler: function(newV, oldV) {
 					if (newV) {
@@ -298,9 +303,10 @@ import { sign } from 'crypto';
 		},
 		methods: {
 			sign(){
+				this.$refs.popup.handleClose();
 				toSign().then(()=>{
-						this.sign_index = (that.sign_index + 1)
-						this.$refs.popup.show(10,20);
+						this.sign_index = (this.sign_index + 1)
+						this.$refs.popup.show(this.signSystemList[this.sign_index-1].point,this.tomorrow);
 				})
 			},
 			onadclose(e) {
@@ -309,6 +315,7 @@ import { sign } from 'crypto';
 			        if (detail && detail.isEnded) {
 			          // 正常播放结束
 			          console.log("onClose " + detail.isEnded);
+					  this.sign();
 			        } else {
 			          // 播放中途退出
 			          console.log("onClose " + detail.isEnded);
@@ -442,7 +449,13 @@ import { sign } from 'crypto';
 			 * 用户签到
 			 */
 			goSign: function(e) {
-				 if (this.isLoading) {
+						if(this.sign_index>=this.signSystemList.length){
+							return this.$util.Tips({
+								title: '每日最多签到'+(this.signSystemList.length)+'次!'
+							});
+						}
+						
+						if (this.isLoading) {
 				          return
 				        }
 				        this.$refs.adRewardedVideo.show();

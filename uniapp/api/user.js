@@ -180,8 +180,10 @@ export function getCommissionInfo(q, types) {
 /*
  * 积分记录
  * */
-export function getIntegralList(q) {
-	return request.get("integral/list", q);
+export function getIntegralList(data) {
+	return request.post('/api/user/user_integral_log/lists',data,{
+		URL:3
+	});
 }
 
 /**

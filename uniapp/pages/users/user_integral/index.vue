@@ -2,7 +2,7 @@
 	<view>
 		<view class='integral-details' :style="colorStyle">
 			<view class='header'>
-				<view class='currentScore'>当前小豆</view>
+				<view class='currentScore'>当前抖币</view>
 				<view class="scoreNum">{{userInfo.integral}}</view>
 				<view class='line'></view>
 				<!-- <view class='nav acea-row'>
@@ -33,17 +33,17 @@
 							class='iconfont icon-shuoming'></text>提示：你有{{userInfo.clear_integral}}积分在{{ userInfo.clear_time | dateFormat }}过期，请尽快使用</view> -->
 					<view class='item acea-row row-between-wrapper' v-for="(item,index) in integralList" :key="index">
 						<view>
-							<view class='state'>{{item.mark}}</view>
-							<view>{{item.add_time}}</view>
+							<view class='state'>{{item.type_format}}</view>
+							<view>{{item.create_time_format}}</view>
 						</view>
-						<view class='num font-color' v-if="item.pm">+{{item.number}}</view>
-						<view class='num' v-else>-{{item.number}}</view>
+						<view class='num font-color' v-if="item.number>0">+{{item.number}}</view>
+						<view class='num' v-else>{{item.number}}</view>
 					</view>
 					<view class='loadingicon acea-row row-center-wrapper' v-if="integralList.length>0">
 						<text class='loading iconfont icon-jiazai' :hidden='loading==false'></text>{{loadTitle}}
 					</view>
 					<view v-if="integralList.length == 0">
-						<emptyPage title="暂无小豆记录哦～"></emptyPage>
+						<emptyPage title="暂无抖币记录哦～"></emptyPage>
 					</view>
 				</view>
 				<view class='list2' :hidden='current!=1'>
@@ -52,7 +52,7 @@
 						<view class='pictrue'>
 							<image src='./../static/score.png'></image>
 						</view>
-						<view class='name'>购买商品可获得积分奖励</view>
+						<view class='name'>邀请好友可获得积分奖励</view>
 						<view class='earn'>赚积分</view>
 					</navigator>
 					<navigator class='item acea-row row-between-wrapper' hover-class='none'
@@ -74,7 +74,7 @@
 
 <script>
 	import {
-		postSignUser,
+		getUserInfo,
 		getIntegralList
 	} from '@/api/user.js';
 	import dayjs from '@/plugin/dayjs/dayjs.min.js';
@@ -115,7 +115,7 @@
 				],
 				current: 0,
 				page: 1,
-				limit: 10,
+				limit: 15,
 				integralList: [],
 				userInfo: {},
 				loadend: false,
@@ -166,20 +166,8 @@
 			},
 			getUserInfo: function() {
 				let that = this;
-				postSignUser({
-					sign: 1,
-					integral: 1,
-					all: 1
-				}).then(function(res) {
-					that.$set(that, 'userInfo', res.data);
-					let clearTime = res.data.clear_time;
-					let showTime = clearTime-(86400*14);
-					let timestamp = Date.parse(new Date())/1000;
-					if(showTime < timestamp){
-						that.isTime = 1
-					}else{
-						that.isTime = 0
-					}
+				getUserInfo().then(function(res) {
+					that.$set(that, 'userInfo', res);
 				});
 			},
 
@@ -191,11 +179,13 @@
 				if (that.loading) return;
 				if (that.loadend) return;
 				that.loading = true;
+				
 				that.loadTitle = '';
 				getIntegralList({
 					page: that.page,
 					limit: that.limit
 				}).then(function(res) {
+					console.log(res)
 					let list = res.data,
 						loadend = list.length < that.limit;
 					that.integralList = that.$util.SplitArray(list, that.integralList);
@@ -204,9 +194,6 @@
 					that.loading = false;
 					that.loadend = loadend;
 					that.loadTitle = loadend ? '哼~😕我也是有底线的~' : "加载更多";
-				}, function(res) {
-					this.loading = false;
-					that.loadTitle = '加载更多';
 				});
 			},
 			nav: function(current) {

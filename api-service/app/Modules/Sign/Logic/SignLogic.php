@@ -39,7 +39,7 @@ class SignLogic
         if ($count >= 5) {
             Error('每日最多签到5次');
         }
-        $point = $this->signDao->where('times', $count)->value('point');
+        $point = $this->signDao->where('times', $count + 1)->value('point');
         if ($point) {
             $this->userDao->opAccount($userId, 'integral', $point, 'sign');
         } else {

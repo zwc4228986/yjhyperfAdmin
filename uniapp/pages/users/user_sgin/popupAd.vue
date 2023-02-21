@@ -5,11 +5,11 @@
 				<image  :src="`${IMAGE_URL}/static/images/sign_success.png`"></image>
 			</view>
 			<view class="container-text">
-				<view class="today_beans">获得<text>{{today}}</text>小豆</view>
+				<view class="today_beans">获得<text>{{today}}</text>抖币</view>
 				<view  class="container-text-top">
-					明天签到可得<text>{{tomorrow}}</text>小豆
+					再签一次可得<text>{{tomorrow}}</text>抖币
 				</view>
-				<view @click="handleClose" class="container-text-btn">知道了</view>
+				<view @click="signAgain" class="container-text-btn">再签到一次</view>
 			</view>
 			
 			<view class="container-btn" @click="handleClose">
@@ -54,6 +54,9 @@
 			},
 			changeShow(){
 				this.is_show = this.is_show?false:true;
+			},
+			signAgain(){
+				this.$emit('signAgain')
 			},
 			handleClose() {
 				if(this.is_show){
