@@ -20,6 +20,7 @@
 						<view class="bg">
 							<view class="user-info">
 								<view>
+
 									<!-- 注释这个是加的bnt -->
 									<!-- #ifdef H5 -->
 									<button class="bntImg" v-if="userInfo.is_complete == 0 && isWeixin"

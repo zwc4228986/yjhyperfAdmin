@@ -72,6 +72,7 @@ export function silenceAuth(data) {
 		URL:3,
 	});
 	//#endif
+
 	//#ifdef H5
 	return request.get("v2/wechat/wx_silence_auth", data, {
 		noAuth: true

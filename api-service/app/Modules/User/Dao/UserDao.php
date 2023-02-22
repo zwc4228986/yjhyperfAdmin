@@ -54,12 +54,12 @@ class UserDao extends User
 
     public function createNickname()
     {
-        return '豆资源' . ($this->count() + 1);
+        return '抖资源' . ($this->count() + 1);
     }
 
-    public function add()
+    public function add($params=[])
     {
-        return $this->create([
+        return $this->create($params+[
             'nickname' => $this->createNickname()
         ]);
     }

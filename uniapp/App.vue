@@ -76,6 +76,44 @@
 				}
 			}
 		},
+    onShow(){
+      const queryData = uni.getEnterOptionsSync() // uni-app版本 3.5.1+ 支持
+      if (queryData.query.spread) {
+        this.$Cache.set('spread', queryData.query.spread);
+        this.globalData.spid = queryData.query.spread;
+        this.globalData.pid = queryData.query.spread;
+        silenceBindingSpread(this.globalData)
+      }
+      if (queryData.query.spid) {
+        this.$Cache.set('spread', queryData.query.spid);
+        this.globalData.spid = queryData.query.spid;
+        this.globalData.pid = queryData.query.spid;
+        silenceBindingSpread(this.globalData)
+      }
+      // #ifdef MP
+      if (queryData.query.scene) {
+        switch (queryData.scene) {
+            //扫描小程序码
+          case 1047:
+            this.globalData.code = queryData.query.scene;
+            break;
+            //长按图片识别小程序码
+          case 1048:
+            this.globalData.code = queryData.query.scene;
+            break;
+            //手机相册选取小程序
+          case 1049:
+            this.globalData.code = queryData.query.scene;
+            break;
+            //直接进入小程序
+          case 1001:
+            this.globalData.spid = queryData.query.scene;
+            break;
+        }
+        silenceBindingSpread(this.globalData)
+      }
+      // #endif
+    },
 		async onLaunch(option) {
 			let that = this;
 			colorChange('color_change').then(res => {
@@ -114,6 +152,7 @@
 				that.globalData.pid = option.query.spread;
 				silenceBindingSpread()
 			}
+
 			if (option.query.spid) {
 				that.$Cache.set('spread', option.query.spid);
 				that.globalData.spid = option.query.spid;
@@ -213,6 +252,7 @@
 					}
 				}
 			});
+
 			if (option.query.hasOwnProperty('type') && option.query.type == "iframeWindow") {
 				this.globalData.isIframe = true;
 			} else {

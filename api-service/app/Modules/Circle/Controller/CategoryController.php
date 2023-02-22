@@ -1,22 +1,23 @@
 <?php
 
-namespace App\Modules\Admin\Controller\Circle\Category;
+namespace App\Modules\Circle\Controller;
 
-use App\Modules\Admin\Logic\Circle\CircleCategoryLogic;
+use App\Modules\Circle\Logic\CircleCategoryLogic;
 use Hyperf\Di\Annotation\Inject;
 use YjHyperfAdminPligin\Apidog\Annotations\Api;
 use YjHyperfAdminPligin\Apidog\Annotations\ApiPost;
 
-#[Api("admin/circle_category/lists")]
-class Lists
+#[Api('api/circle_category/lists')]
+class CategoryController
 {
+
     #[Inject]
-    protected CircleCategoryLogic $circleCategoryLogic;
+    protected CircleCategoryLogic  $circleCategoryLogic;
 
     #[ApiPost]
-    public function index(){
+    public function lists(){
         $data = $this->circleCategoryLogic->lists();
         Success($data);
     }
-
+    
 }

@@ -21,7 +21,7 @@ class MiniappLogic
     #[Inject]
     public UserOpenidDao $userOpenidDao;
 
-    public function miniapp($openid, $unionid)
+    public function miniapp($openid, $unionid, $spread_spid)
     {
         $type = 'miniapp';
         Db::beginTransaction();
@@ -31,7 +31,9 @@ class MiniappLogic
             if (is_null($userOpenidData)) {
                 $wechatUserInfo = $this->userOpenidDao->getDataByUnionId($unionid);
                 if (is_null($wechatUserInfo)) {
-                    $user = $this->userDao->add();
+                    $user = $this->userDao->add([
+                        'spid'=>$spread_spid
+                    ]);
                 } else {
                     $user = $this->userDao->read($wechatUserInfo->user_id);
                 }

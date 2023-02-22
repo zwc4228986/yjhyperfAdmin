@@ -22,6 +22,7 @@ class CircleForm extends BaseForm
 {
     public const DELETE = true;
     public const ADD =  true;
+    public const EDIT =  true;
 
     protected $yjCode = 'circle';
 
@@ -83,7 +84,7 @@ class CircleForm extends BaseForm
         $lists = $form->setTitle($id ? '编辑' : '添加' . '商品分类')->formData(function () use ($id) {
             $formData = [];
             if ($id) {
-                $formData = app(ProductCategoryDao::class)->where('id', $id)->first();
+                $formData = app(CircleDao::class)->where('id', $id)->first();
             }
             return $formData;
         });

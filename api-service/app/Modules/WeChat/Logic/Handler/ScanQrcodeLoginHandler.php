@@ -17,7 +17,7 @@ class ScanQrcodeLoginHandler
 
                 $openid = $message->FromUserName;
                 dump($openid);
-                 $this->scanQrcodeLogic->wechat($openid,$serviceId, $fd);
+                $this->scanQrcodeLogic->wechat($openid,$serviceId, $fd);
         }
         return $next($message);
     }

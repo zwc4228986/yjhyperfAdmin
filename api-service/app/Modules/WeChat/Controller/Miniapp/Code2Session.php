@@ -28,15 +28,15 @@ class Code2Session
 
     #[ApiPost]
     #[ApiParam("code")]
+    #[ApiParam("spread_spid",'nullable')]
+//    #[ApiParam("spread_code")]
     public function index()
     {
         $params = getParams();
-
         $data = $this->miniAppLogic->code2Session($params->get('code'));
 
-        $data = $this->miniappLogicLogic->miniapp($data['openid'], $data['unionid']);
+        $data = $this->miniappLogicLogic->miniapp($data['openid'], $data['unionid'],$params->get('spread_spid'));
         $data['userData'] = $this->userLogic->detail($data['user_id']);
-
 
         Success($data);
     }

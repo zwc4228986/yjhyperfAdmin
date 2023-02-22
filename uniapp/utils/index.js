@@ -18,12 +18,12 @@ import {
 import {
 	getWorkermanUrl
 } from '@/api/kefu.js'
+import store from '@/store';
 /**
  * 绑定用户授权
  * @param {Object} puid
  */
 export function silenceBindingSpread() {
-
 
 	//#ifdef H5
 	let puid = Cache.get('spread'),
@@ -39,7 +39,8 @@ export function silenceBindingSpread() {
 	if (Number.isNaN(puid)) {
 		puid = 0;
 	}
-	if (puid) {
+
+	if ((code || puid) && store.state.app.token) {
 		spread({
 			puid,
 			code
@@ -47,14 +48,13 @@ export function silenceBindingSpread() {
 			//#ifdef H5
 			Cache.clear('spread');
 			//#endif
-
 			//#ifdef MP || APP-PLUS
 			getApp().globalData.spid = 0;
 			getApp().globalData.code = 0;
 			//#endif
-
 		}).catch(res => {});
 	}
+
 }
 
 export function isWeixin() {

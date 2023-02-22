@@ -45,6 +45,7 @@ class ScanQrcodeLogic
                 } else {
                     $user = $this->userDao->read($wechatUserInfo->user_id);
                 }
+
                 $this->userOpenidDao->create([
                     'user_id' => $user->id,
                     'unionid' => $unionid,

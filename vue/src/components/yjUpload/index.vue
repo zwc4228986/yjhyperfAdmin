@@ -105,7 +105,6 @@ export default {
 			fileSelectDialogVisible: false,
 		};
 	},
-
 	watch: {
 		async modelValue(value) {
 			this.img = await getFilePath(value);
