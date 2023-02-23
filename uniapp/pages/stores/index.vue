@@ -1,7 +1,33 @@
 <template>
 	<view :style="colorStyle">
+		<view class="sys-head" :style="{height:sysHeight}"></view> 
+		<view style="height:48px;position: relative;">
+			<view id="home" class="home acea-row row-center-wrapper">
+				<view class="iconfont icon-fanhui2" @tap="returns"></view>
+				<!-- #ifdef MP -->
+				<view class="line"></view>
+				<view class="iconfont icon-gengduo5" @click="moreNav"></view>
+				<!-- #endif -->
+			</view>
+		</view>
+	
+		<!-- <homeList :navH="navH" :returnShow="true" :currentPage="false" :sysHeight="sysHeight" >
+		</homeList> -->
+		<view class="circle-header">
+			<u-image radius="10" width="100px" height="80px"></u-image>
+			<view class="right">
+				<view class="circle-header-title">C4D</view>
+				<view class="circle-header-info">{{item.info}}</view>
+				<view class="circle-header-bottom">200个资源</view>
+			</view>
+		</view>
+		
 		<view class='productList'>
-			<headerSearch></headerSearch>
+			<!-- -->
+			
+			<view class="circle">
+				
+			</view>
 			<view class="longTab acea-row row-middle">
 				<scroll-view scroll-x="true" style="white-space: nowrap; display: flex;height:44rpx;"
 					scroll-with-animation :scroll-left="tabLeft" show-scrollbar="true">
@@ -88,7 +114,10 @@
 </template>
 
 <script>
-
+	let app = getApp();
+		let sysHeight = uni.getSystemInfoSync().statusBarHeight + 'px';
+	let statusBarHeight = uni.getSystemInfoSync().statusBarHeight * 2 + 'rpx';
+	import homeList from '@/components/homeList'
 	import { IMAGE_URL } from "@/config/app.js";
 	console.log(IMAGE_URL,'IMAGE_URL');
 	import headerSearch from '@/pages/index/diy/components/headerSerch.vue'
@@ -114,12 +143,14 @@
 		components: {
 			recommend,
 			home,
-			headerSearch
+			headerSearch,
+			homeList,
 		},
 		mixins:[colors],
 		data() {
 			return {
-				
+				sysHeight: sysHeight,
+				navH:app.globalData.navHeight,
 				is_diy: uni.getStorageSync('is_diy'),
 				image_url:IMAGE_URL,
 				categoryList: [],
@@ -361,8 +392,53 @@
 		}
 	}
 </script>
-
+<style>
+	page{
+		background-image: linear-gradient( 80deg, #597D95 10%, #92837E 100%);
+	}
+</style>
 <style scoped lang="scss">
+		.productList{
+			background-color: white;
+			border-radius:20rpx;
+			overflow: hidden;
+			height: calc(100vh - 50px);
+		}
+		.home{
+			position: absolute;
+			left: 10px;
+			top: 0px;
+			    color: #333;
+			    width: 126rpx;
+			    left: 15rpx;
+			    height: 56rpx;
+			    z-index: 99;
+			    background: rgba(255, 255, 255, 0.3);
+			    border: 1px solid rgba(0, 0, 0, 0.1);
+			    border-radius: 40rpx;
+			    font-size: 33rpx;
+		}
+		
+		.circle-header{
+			padding:0rpx 20rpx 20rpx 20rpx;
+			display: flex;
+			.right{
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				margin-left: 20rpx;
+				color: white;
+				.circle-header-title{
+					font-size: 28rpx;
+					font-weight: bold;
+					
+				}
+				.circle-header-info{
+					font-size: 24rpx;
+					height: 2em;
+				}
+			}
+		}
 	.page-footer {
 		position: fixed;
 		bottom: 0;

@@ -18,7 +18,7 @@
 				<!-- #endif -->
 				<headerSerch></headerSerch>
 				<menus></menus>
-				<circle></circle>
+				<circle :data="user_circle_lists"></circle>
 				<!-- #ifdef MP || APP-PLUS -->
 				<block v-for="(item, index) in []" :key="index">
 					<activeParty v-if="item.name == 'activeParty'" :dataConfig="item" :isSortType="isSortType">
@@ -222,6 +222,9 @@
 		getCouponNewUser,
 		siteConfig
 	} from '@/api/api.js';
+	import {user_circle} from '@/api/circle.js';
+	
+	
 	import {
 		getNavigation
 	} from '@/api/public.js';
@@ -378,7 +381,7 @@
 				// #ifdef APP-PLUS || MP
 				isFixed: true,
 				// #endif
-
+				user_circle_lists:[],
 				// #ifdef H5
 				isFixed: false,
 				// #endif
@@ -471,12 +474,17 @@
 			}).catch(err => {
 				console.error(err.msg);
 			});
+			
 			// #endif
-
+			user_circle({limit:-1}).then(res=>{
+				
+				this.user_circle_lists = res
+			})
+			
 			// 优惠券弹窗
 			// var newDates = new Date().toLocaleDateString();
 			if (this.isLogin) {
-				this.getCoupon();
+				// this.getCoupon();
 				// getCartCounts().then(res => {
 				// 	this.countNum = res.data.count
 				// 	this.$store.commit('indexData/setCartNum', res.data.count > 99 ? '..' : res.data.count +

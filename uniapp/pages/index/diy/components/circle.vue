@@ -9,9 +9,9 @@
 					<view class="item">
 						<u-image radius="10" width="100px" height="80px"></u-image>
 						<view class="right">
-							<view class="circle-content-title">抖资源</view>
-							<view class="circle-content-info">w1w1</view>
-							<view class="circle-content-bottom">w1w1</view>
+							<view class="circle-content-title">{{item.name}}</view>
+							<view class="circle-content-info">{{item.info}}</view>
+							<view class="circle-content-bottom">200个资源</view>
 						</view>
 					</view>
 			</block>
@@ -23,9 +23,9 @@
 	export default {
 		name: 'menus',
 		props: {
-			dataConfig: {
-				type: Object,
-				default: () => {}
+			data: {
+				type: Array,
+				default: [],
 			},
 			isSortType: {
 				type: String | Number,
@@ -38,18 +38,15 @@
 				duration: 500,
 				isMany:false,
 				menus:  [
-					{
-						img:'http://150.158.155.57:9704/uploads/attach/2022/08/20220820/b76c1e866cf200c87dc42dc310977873.png',
-						name:'签到',
-						url_config:{
-							type:'navigateTo',
-							url:'/pages/users/user_sgin/index',
-						}
-					}
 				],
 				navHigh: 0,
 				active: 0
 			};
+		},
+		watch:{
+			data(val){
+				this.menus = val;
+			}
 		},
 		created() {},
 		mounted() {
@@ -150,12 +147,14 @@
 </script>
 
 <style lang="scss">
+	
 	.circle{
 		padding: 20rpx;
 		.circle-header{
 			padding-bottom: 20rpx;
 		}
 		.circle-content .item{
+			margin-bottom: 20rpx;
 			display: flex;
 			.right{
 				display: flex;

@@ -1,6 +1,5 @@
 <template>
 		<diy></diy>
-		
 </template>
 
 <script>
