@@ -24,10 +24,11 @@ class ProductCategoryLogic
         
     }
 
-    public function getTreelists()
+    public function getTreelists($params)
     {
-        $data = $this->productCategoryDao->with('File')->get()->toArray();
-        return Tree($data, 0, 'id', 'pid');
+        $data = $this->productCategoryDao->newSelf()->params($params)->with('File')->get();
+
+        return Tree($data->toArray(), 0, 'id', 'pid');
     }
 
     public function delete(int $id)

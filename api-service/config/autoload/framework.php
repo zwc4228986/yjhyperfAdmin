@@ -12,6 +12,7 @@ declare(strict_types=1);
 return [
     'providers' => [
         \App\Providers\RouterProvider::class,
-        \YjHyperfAdminPligin\Framework\Builder\BuilderProvider::class
+        \YjHyperfAdminPligin\Framework\Builder\BuilderProvider::class,
+        \YjHyperfAdminPligin\Framework\Providers\CollectProvider::class
     ]
 ];
