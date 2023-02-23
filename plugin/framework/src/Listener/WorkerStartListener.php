@@ -58,6 +58,7 @@ class WorkerStartListener implements ListenerInterface
     private function registerProviders()
     {
         $providers = config('framework.providers');
+
         return new RewindableGenerator(function () use ($providers) {
             foreach ($providers as $abstract) {
                 yield make($abstract);

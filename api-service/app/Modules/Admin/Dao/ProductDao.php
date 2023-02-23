@@ -36,6 +36,14 @@ class ProductDao extends Product
             );
         }
 
+        if ($params->offsetExists('circle_id')) {
+            $_this = $this->addWhere(
+                $this::query()->whereIn('id', app(Circel::class)
+                    ->where('circle_id', $params->get('product_category_id'))->pluck('product_id')->toArray())
+            );
+        }
+
+
         return $_this;
     }
 
@@ -44,6 +52,6 @@ class ProductDao extends Product
         $product = $this->where('id', $product_id)->first();
         $product->fill($params->toArray());
         return $product->save();
-
     }
+
 }

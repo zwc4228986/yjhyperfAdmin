@@ -16,10 +16,10 @@ class Lists
 
     #[ApiPost]
     #[ApiParam('product_category_pid', 'nullable')]
+    #[ApiParam('circle_id', 'nullable')]
     public function index()
     {
         $params = getParams();
-        $product_category_pid = $params->get('product_category_pid', 0);
         $data = $this->productLogic->lists($params);
         Success($data);
     }

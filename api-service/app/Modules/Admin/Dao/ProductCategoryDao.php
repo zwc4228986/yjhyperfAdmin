@@ -2,27 +2,24 @@
 
 namespace App\Modules\Admin\Dao;
 
-use App\Model\ProductCategory;
-use App\Model\SystemFile;
+use App\Modules\Admin\Model\ProductCategoryModel;
+use YjHyperfAdminPligin\Framework\Dao\DaoTrait;
 
-class ProductCategoryDao extends ProductCategory
+class ProductCategoryDao extends ProductCategoryModel
 {
-    
-    protected array $fillable = [
-        'pid',
-        'name',
-        'sort',
-        'file_id',
-        'is_show',
-    ];
+    use DaoTrait;
 
     public function hasChild(int $id):bool
     {
         return $this->where('pid', $id)->exists();
     }
 
-    public function File(){
-        return $this->hasOne(SystemFile::class,'id','file_id');
+    public function params($params)
+    {
+        $params->check('circle_id',function ($circle_id){
+            $this->addWhere('circle_id',$circle_id);
+        });
+        return $this;
     }
 
 }
