@@ -22,7 +22,6 @@
 			this.setOpenShare();
 			console.log('refreshGoodsLists');
 			uni.$emit('refreshGoodsLists')
-			
 		},
 		onHide() {
 			// this.isDiy = -1
