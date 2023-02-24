@@ -3,10 +3,10 @@
 		<view class="sys-head" :style="{height:sysHeight}"></view> 
 		<view style="height:48px;position: relative;">
 			<view id="home" class="home acea-row row-center-wrapper">
-				<view class="iconfont icon-fanhui2" @tap="returns"></view>
+				<view class="iconfont icon-fanhui2" @tap="returns()"></view>
 				<!-- #ifdef MP -->
 				<view class="line"></view>
-				<view class="iconfont icon-gengduo5" @click="moreNav"></view>
+				<view class="iconfont icon-shouye8" @click="goHome()"></view>
 				<!-- #endif -->
 			</view>
 		</view>
@@ -176,6 +176,7 @@
 					product_category_id: 0,
 				},
 				price: 0,
+				circle_id: 0,
 				stock: 0,
 				nows: false,
 				loadend: false,
@@ -202,6 +203,7 @@
 					that.isWidth = e.windowWidth / 5
 				}
 			});
+			this.circle_id = options.id
 			this.where.product_category_pid = options.cid || 0;
 			this.$set(this.where, 'sid', options.sid || 0);
 			this.title = options.title || '';
@@ -240,9 +242,26 @@
 					}
 				})
 			},
+			goHome(){
+				uni.switchTab({
+					url:'/pages/index/index'
+				})
+			},
+			// 后退
+			returns() {
+				// #ifdef H5
+				return history.back();
+				// #endif
+				// #ifndef H5
+				return uni.navigateBack({
+					delta: 1,
+				})
+				// #endif
+			},
 			getAllCategory: function() {
+				
 				let that = this;
-				getCategoryList().then(res => {
+				getCategoryList({circle_id:this.circle_id}).then(res => {
 					let data = res;
 					// data.forEach(item => {
 					// 	item.children.unshift({
@@ -398,6 +417,7 @@
 	}
 </style>
 <style scoped lang="scss">
+	
 		.productList{
 			background-color: white;
 			border-radius:20rpx;
@@ -405,6 +425,15 @@
 			height: calc(100vh - 50px);
 		}
 		.home{
+			.line{
+				width: 1rpx;
+				height: 34rpx;
+				background: #B3B3B3;
+			}
+			.iconfont{
+				    width: 58rpx;
+				    text-align: center;
+			}
 			position: absolute;
 			left: 10px;
 			top: 0px;

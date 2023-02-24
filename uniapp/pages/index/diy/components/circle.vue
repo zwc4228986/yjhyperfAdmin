@@ -6,7 +6,7 @@
 		
 		<view class="circle-content" >
 			<block v-for="(item, index) in menus" :key="index">
-					<view class="item">
+					<view class="item" @click="goCircle(item)">
 						<u-image radius="10" width="100px" height="80px"></u-image>
 						<view class="right">
 							<view class="circle-content-title">{{item.name}}</view>
@@ -112,6 +112,12 @@
 				}
 				this.$set(this, 'menuList', goodArray);
 			},
+			goCircle(item){
+				uni.navigateTo({
+					url:"/pages/stores/index?circle_id="+item.id
+				})
+			},
+			
 			menusTap(urlConfig) {
 				console.log(urlConfig);
 				if(urlConfig.type == 'navigateTo'){
