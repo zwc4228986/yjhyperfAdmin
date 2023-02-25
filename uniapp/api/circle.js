@@ -10,4 +10,18 @@ export function user_circle(data) {
 }
 
 
+export function getCircleDetail(data) {
+	return request.post('/api/circle/detail',data,{
+		URL:3
+	});
+}
+
+
+export function setCollect(data) {
+	return request.post('/api/circle/collect',data,{
+		URL:3
+	});
+}
+
+
 

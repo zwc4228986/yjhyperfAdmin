@@ -13,6 +13,7 @@ namespace App\Model;
  * @property \Carbon\Carbon $create_time 
  * @property int $delete_time 
  * @property int $integral 
+ * @property int $spid 
  */
 class User extends Model
 {
@@ -29,5 +30,5 @@ class User extends Model
     /**
      * The attributes that should be cast to native types.
      */
-    protected array $casts = ['id' => 'integer', 'update_time' => 'datetime', 'create_time' => 'datetime', 'delete_time' => 'integer', 'integral' => 'integer'];
+    protected array $casts = ['id' => 'integer', 'update_time' => 'datetime', 'create_time' => 'datetime', 'delete_time' => 'integer', 'integral' => 'integer', 'spid' => 'integer'];
 }

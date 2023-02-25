@@ -168,7 +168,6 @@
 
 <style lang="scss">
 	.menus-box{
-		background: #f5f5f5;
 	}
 	.dot {
 		width: 100%;

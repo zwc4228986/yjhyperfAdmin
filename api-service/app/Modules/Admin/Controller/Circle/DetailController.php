@@ -9,17 +9,13 @@ use YjHyperfAdminPligin\Apidog\Annotations\Api;
 use YjHyperfAdminPligin\Apidog\Annotations\ApiParam;
 use YjHyperfAdminPligin\Apidog\Annotations\ApiPost;
 
-#[Api("admin/circle/add")]
-class AddController
+#[Api("admin/circle/detail")]
+class DetailController
 {
     #[Inject]
     protected CircleLogic $circleLogic;
 
     #[ApiPost]
-    #[ApiParam("name")]
-    #[ApiParam("icon_id")]
-    #[ApiParam("sort")]
-    #[ApiParam("is_show")]
     public function index()
     {
         $params = getParams();

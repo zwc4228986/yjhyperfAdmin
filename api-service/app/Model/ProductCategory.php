@@ -15,6 +15,7 @@ namespace App\Model;
  * @property int $delete_time 
  * @property \Carbon\Carbon $update_time 
  * @property \Carbon\Carbon $create_time 
+ * @property int $circle_id 
  */
 class ProductCategory extends Model
 {
@@ -31,7 +32,7 @@ class ProductCategory extends Model
     /**
      * The attributes that should be cast to native types.
      */
-    protected array $casts = ['id' => 'integer', 'pid' => 'integer', 'sort' => 'integer', 'is_show' => 'integer', 'delete_time' => 'integer', 'update_time' => 'datetime', 'create_time' => 'datetime'];
+    protected array $casts = ['id' => 'integer', 'pid' => 'integer', 'sort' => 'integer', 'is_show' => 'integer', 'delete_time' => 'integer', 'update_time' => 'datetime', 'create_time' => 'datetime', 'circle_id' => 'integer'];
 
 
 }

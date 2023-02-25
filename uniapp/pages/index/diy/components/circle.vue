@@ -158,6 +158,8 @@
 		padding: 20rpx;
 		.circle-header{
 			padding-bottom: 20rpx;
+			font-weight: bold;
+			font-size: 32rpx;
 		}
 		.circle-content .item{
 			margin-bottom: 20rpx;

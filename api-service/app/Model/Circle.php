@@ -10,6 +10,8 @@ namespace App\Model;
  * @property \Carbon\Carbon $create_time 
  * @property \Carbon\Carbon $update_time 
  * @property int $delete_time 
+ * @property int $collect_num 
+ * @property string $info 
  * @property int $icon_id 
  */
 class Circle extends Model
@@ -27,5 +29,5 @@ class Circle extends Model
     /**
      * The attributes that should be cast to native types.
      */
-    protected array $casts = ['id' => 'integer', 'create_time' => 'datetime', 'update_time' => 'datetime', 'delete_time' => 'integer', 'icon_id' => 'integer'];
+    protected array $casts = ['id' => 'integer', 'create_time' => 'datetime', 'update_time' => 'datetime', 'delete_time' => 'integer', 'collect_num' => 'integer', 'icon_id' => 'integer'];
 }

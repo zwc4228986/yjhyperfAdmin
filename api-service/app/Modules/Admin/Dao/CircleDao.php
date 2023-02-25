@@ -19,8 +19,15 @@ class CircleDao extends CircleModel
         return $dao->save();
     }
 
-    public function del(int $id){
+    public function del(int $id)
+    {
         $dao = $this->where('id', $id)->first();
         return $dao->delete();
+    }
+
+    public function detail(int $id)
+    {
+        $dao = $this->where('id', $id)->first();
+        return $dao;
     }
 }

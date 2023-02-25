@@ -16,9 +16,15 @@
 		<view class="circle-header">
 			<u-image radius="10" width="100px" height="80px"></u-image>
 			<view class="right">
-				<view class="circle-header-title">C4D</view>
-				<view class="circle-header-info">{{item.info}}</view>
-				<view class="circle-header-bottom">200个资源</view>
+				<view class="circle-header-title">{{circle_detail.name}}</view>
+				<view class="circle-header-info">{{circle_detail.info}}</view>
+				<view class="circle-header-bottom">
+					<view @click="setCollect" class="item skeleton-rect">
+						<view class="iconfont icon-shoucang1" style="color: red;"  v-if="circle_detail.is_collect"></view>
+						<view class="iconfont icon-shoucang" v-else></view>
+						<!-- <view class="p_center">收藏</view> -->
+					</view>
+				</view>
 			</view>
 		</view>
 		
@@ -130,6 +136,11 @@
 		getProductslist,
 		getProductHot
 	} from '@/api/store.js';
+	
+	import {
+		getCircleDetail,
+		setCollect
+	} from '@/api/circle.js'
 	import recommend from '@/components/recommend';
 	import {
 		mapGetters
@@ -178,6 +189,7 @@
 				price: 0,
 				circle_id: 0,
 				stock: 0,
+				circle_detail:{},
 				nows: false,
 				loadend: false,
 				loading: false,
@@ -197,13 +209,15 @@
 		},
 		onLoad: function(options) {
 			this.getAllCategory();
+			
 			var that = this;
 			uni.getSystemInfo({
 				success(e) {
 					that.isWidth = e.windowWidth / 5
 				}
 			});
-			this.circle_id = options.id
+			this.circle_id = options.circle_id
+			this.getCircleDetail();
 			this.where.product_category_pid = options.cid || 0;
 			this.$set(this.where, 'sid', options.sid || 0);
 			this.title = options.title || '';
@@ -229,6 +243,16 @@
 			}
 		},
 		methods: {
+			setCollect(){
+				setCollect({circle_id:this.circle_id}).then(res=>{
+					this.circle_detail.is_collect = !this.circle_detail.is_collect
+				})
+			},
+			getCircleDetail(){
+				getCircleDetail({id:this.circle_id}).then(res=>{
+					this.circle_detail = res;
+				})
+			},
 			goRouter(item) {
 				var pages = getCurrentPages();
 				var page = (pages[pages.length - 1]).$page.fullPath;
@@ -457,6 +481,7 @@
 				justify-content: space-between;
 				margin-left: 20rpx;
 				color: white;
+				flex:1;
 				.circle-header-title{
 					font-size: 28rpx;
 					font-weight: bold;
@@ -465,6 +490,10 @@
 				.circle-header-info{
 					font-size: 24rpx;
 					height: 2em;
+				}
+				.circle-header-bottom{
+					display: flex;
+					justify-content: flex-end;
 				}
 			}
 		}
