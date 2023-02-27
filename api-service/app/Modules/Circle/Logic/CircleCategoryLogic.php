@@ -2,7 +2,7 @@
 
 namespace App\Modules\Circle\Logic;
 
-use App\Modules\Admin\Dao\CircleCategoryDao;
+use App\Modules\Circle\Dao\CircleCategoryDao;
 use Hyperf\Di\Annotation\Inject;
 
 class CircleCategoryLogic
@@ -12,6 +12,11 @@ class CircleCategoryLogic
 
     public function lists(){
         return $this->circleCategoryDao->lists();
+    }
+
+    public function tree()
+    {
+        return $this->circleCategoryDao->with('Circle')->get();
     }
 
 }

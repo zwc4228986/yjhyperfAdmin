@@ -67,6 +67,20 @@
 			"style": {
 				"navigationBarTitleText": "找回密码"
 			}
+		},
+		{
+			"path": "pages/goods_cate/goods_cate",
+			"style": {
+				"navigationBarTitleText": "资源分类",
+				"app-plus": {
+					// #ifdef APP-PLUS
+					"titleNView": {
+						"type": "default"
+					}
+					// #endif
+				}
+
+			}
 		}
     ],
 	"subPackages": [

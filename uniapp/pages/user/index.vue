@@ -198,24 +198,16 @@
 					</view> -->
 					<view class="order-wrapper" :class="userInfo.svip_open?'':'height'">
 						<view class="order-hd flex">
-							<view class="left">我的关注资源</view>
-							<navigator class="right flex" hover-class="none" url="/pages/users/order_list/index"
-								open-type="navigate">
-								更多下载
-								<text class="iconfont icon-xiangyou"></text>
-							</navigator>
+							<view class="left">我的关注资源分类</view>
 						</view>
 					
 						<view class="order-bd">
-							<block v-for="(item,index) in orderMenu" :key="index">
-								<navigator class="order-item" hover-class="none" :url="item.url">
+							<view v-for="(item,index) in userCircle" :key="index">
 									<view class="pic">
-										<text class="iconfont" :class="item.img"></text>
-										<text class="order-status-num" v-if="item.num > 0">{{ item.num }}</text>
+										<u-image></u-image>
 									</view>
 									<view class="txt">{{item.title}}</view>
-								</navigator>
-							</block>
+							</view>
 						</view>
 					</view>
 					<view class="order-wrapper" :class="userInfo.svip_open?'':'height'">
@@ -461,6 +453,7 @@
 		getUserCircle
 	} from '@/api/user.js';
 
+
 	import {
 		wechatAuthV2,
 		getNavigation,
@@ -484,6 +477,7 @@
 	import {
 		getCustomer
 	} from '@/utils/index.js'
+
 	export default {
 		components: {
 			tabBar,
@@ -684,7 +678,7 @@
 			let routes = getCurrentPages(); // 获取当前打开过的页面路由数组
 			let curRoute = routes[routes.length - 1].route //获取当前页面路由
 			this.activeRouter = '/' + curRoute
-			this.getUserCircle();
+			
 			
 		},
 		onReady() {
@@ -719,7 +713,7 @@
 		methods: {
 			getUserCircle(){
 				getUserCircle().then(res=>{
-					this.userCircle();
+					this.userCircle = res;
 				})
 			},
 			go(url){
