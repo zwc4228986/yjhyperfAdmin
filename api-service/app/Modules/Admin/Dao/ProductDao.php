@@ -54,4 +54,8 @@ class ProductDao extends Product
         return $product->save();
     }
 
+    public function isBuy(int $product_id, int $userId)
+    {
+
+    }
 }

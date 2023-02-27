@@ -15,9 +15,9 @@ import Cache from "@/utils/cache";
 import {
 	getCustomerType
 } from '@/api/api.js'
-import {
-	getWorkermanUrl
-} from '@/api/kefu.js'
+// import {
+// 	getWorkermanUrl
+// } from '@/api/kefu.js'
 import store from '@/store';
 /**
  * 绑定用户授权
@@ -155,14 +155,14 @@ export function updateURLParameter(url, param, paramVal) {
 	return baseURL + "?" + newAdditionalURL + rows_txt;
 }
 
-let VUE_APP_WS_URL = Cache.get('WORKERMAN_URL') || ''
-getWorkermanUrl().then(res => {
-	Cache.set('WORKERMAN_URL', res.data.chat)
-	VUE_APP_WS_URL = res.data.chat;
-})
+// let VUE_APP_WS_URL = Cache.get('WORKERMAN_URL') || ''
+// getWorkermanUrl().then(res => {
+// 	Cache.set('WORKERMAN_URL', res.data.chat)
+// 	VUE_APP_WS_URL = res.data.chat;
+// })
 
-export {
-	VUE_APP_WS_URL
-}
+// export {
+// 	VUE_APP_WS_URL
+// }
 
 export default parseQuery;

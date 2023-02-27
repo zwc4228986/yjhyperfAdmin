@@ -21,6 +21,7 @@ import {
 } from '../../config/cache';
 
 const state = {
+	logining:false,
 	token: Cache.get(LOGIN_STATUS) || false,
 	backgroundColor: "#fff",
 	userInfo: {},
@@ -31,6 +32,9 @@ const state = {
 };
 
 const mutations = {
+	SET_LOGINING(state,val){
+		state.logining = val
+	},
 	SETPHONESTATUS(state,val){
 		state.phoneStatus = val;
 	},

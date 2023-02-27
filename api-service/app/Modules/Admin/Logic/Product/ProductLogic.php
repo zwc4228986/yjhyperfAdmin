@@ -81,14 +81,13 @@ class ProductLogic
         ]);
     }
 
-    public function detail($product_id)
+    public function detail(int $product_id, int $userId = 0)
     {
         $data = $this->productDao->where('id', $product_id)->with([
             'ProductCategoryRel',
             'ProductDescription',
             'ProductResource'
         ])->first();
-
         $imags_ids = $data->image_ids;
         $images = getFileFullPath(explode(',', $imags_ids));
         dump($images);

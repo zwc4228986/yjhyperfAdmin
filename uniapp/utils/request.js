@@ -38,15 +38,22 @@ function baseRequest(url, method, data, {
 	}	
 	console.log(Url + url);
 	
-	if (!noAuth) {
-		//登录过期自动登录
+	if(url !== '/api/wechat/miniapp/code2session'){
 		if (!store.state.app.token && !checkLogin()) {
 			toLogin();
-			return Promise.reject({
-				msg: '未登录'
-			});
+			// setTimeout(()=>{
+			// 	 return  baseRequest(url,method,data,{noAuth,noVerify,URL})
+			// },500)
+			
+			// return Promise.reject({
+			// 	msg: '未登录'
+			// });
 		}
 	}
+	// if (!noAuth) {
+	// 	//登录过期自动登录
+		
+	// }
 	if (store.state.app.token) header[TOKENNAME] = 'Bearer ' + store.state.app.token;
 	
 	return new Promise((reslove, reject) => {

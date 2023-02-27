@@ -139,12 +139,12 @@
 					</view>
 				</view>
 				<!-- #endif -->
-				<!-- 	<view class="loadingicon acea-row row-center-wrapper" v-if="tempArr.length && styleConfig[styleConfig.length - 1].name == 'promotionList'">
+				<view class="loadingicon acea-row row-center-wrapper" v-if="tempArr.length && styleConfig[styleConfig.length - 1].name == 'promotionList'">
 					<text class="loading iconfont icon-jiazai" :hidden="loading == false"></text>
 					{{ loadTitle }}
-				</view> -->
+				</view> 
 				<!-- #ifdef MP -->
-				<!-- <authorize @onLoadFun="onLoadFun" :isAuto="isAuto" :isShowAuth="isShowAuth" @authColse="authColse" :isGoIndex="false"></authorize> -->
+				<authorize @onLoadFun="onLoadFun" :isAuto="true" :isShowAuth="true" @authColse="authColse" :isGoIndex="false"></authorize>
 				<!-- #endif -->
 				<couponWindow :window="isCouponShow" @onColse="couponClose" :couponImage="couponObj.image"
 					:couponList="couponObj.list"></couponWindow>
@@ -341,6 +341,7 @@
 		computed: mapGetters(['isLogin', 'cartNum']),
 		data() {
 			return {
+				isShowAuth:true,
 				showPopup: true,
 				showSkeleton: true, //骨架屏显示隐藏
 				isNodes: 0, //控制什么时候开始抓取元素节点,只要数值改变就重新抓取
@@ -519,15 +520,15 @@
 				deep: true, //深度监听设置为 true
 				handler: function(newV, oldV) {
 					// 优惠券弹窗
-					var newDates = new Date().toLocaleDateString();
-					if (newV) {
-						try {
-							var oldDate = uni.getStorageSync('oldDate') || '';
-						} catch {}
-						if (oldDate != newDates) {
-							this.getCoupon();
-						}
-					}
+					// var newDates = new Date().toLocaleDateString();
+					// if (newV) {
+					// 	try {
+					// 		var oldDate = uni.getStorageSync('oldDate') || '';
+					// 	} catch {}
+					// 	if (oldDate != newDates) {
+					// 		this.getCoupon();
+					// 	}
+					// }
 				}
 			}
 		},

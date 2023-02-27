@@ -50,11 +50,14 @@
 						<productConSwiper class="skeleton-rect" :imgUrls="storeInfo.images"
 							:videoline="storeInfo.video_link" @videoPause="videoPause"></productConSwiper>
 						<view class="wrapper">
+							
 							<view class="share acea-row row-between row-bottom">
-								<view class="money font-color skeleton-rect">
+								
+								<view class="money font-color skeleton-rect flexs" style= "align-items: center;">
+									<u-tag v-if="storeInfo.is_buy" text="已兑换"  size="mini" type="warning"></u-tag>
 									<text class="num" v-text="storeInfo.price || 0"></text>
-									小豆
-									<text v-if="storeInfo.spec_type">起</text>
+									抖币
+								<!-- 	<text v-if="storeInfo.spec_type">起</text>
 									<text class="vip-money" v-if="
                       storeInfo.vip_price &&
                       storeInfo.vip_price > 0 &&
@@ -64,11 +67,14 @@
                       storeInfo.vip_price &&
                       storeInfo.vip_price > 0 &&
                       storeInfo.is_vip == 1
-                    " src="../../static/images/svip.gif"></image>
+                    " src="../../static/images/svip.gif"></image> -->
 								</view>
 								<view class="iconfont icon-fenxiang skeleton-rect" @click="listenerActionSheet"></view>
 							</view>
-							<view class="introduce skeleton-rect" v-text="storeInfo.name"></view>
+							<view class="flexs" style="align-items: center;">
+								
+								<view class="introduce skeleton-rect" v-text="storeInfo.name"></view>
+							</view>
 							<view class="label acea-row row-between-wrapper" style="padding-bottom: 20rpx">
 								<!-- <view class="skeleton-rect" v-text="'原价:' + (storeInfo.ot_price || 0) + '抖币'">
 								</view> -->
@@ -291,6 +297,7 @@
 									加入目标
 								</button>
 							</form>
+							
 							<form class="buy bnts bg-color-hui">
 								<button class="buy bnts bg-color-hui" form-type="submit"
 									:class="!storeInfo.cart_button ? 'virbnt' : ''">
@@ -299,17 +306,29 @@
 							</form>
 						</view>
 						<view class="bnt acea-row skeleton-rect" v-else>
-							<!-- <form v-if="storeInfo.cart_button" @submit="joinCart" class="joinCart bnts">
+							 <form v-if="storeInfo.is_buy" @submit="goBuy" class="buy bnts virbnt">
+							 	<button class="buy bnts virbnt"
+							 		form-type="submit">
+							 		下载
+							 	</button>
+							 </form> 
+							 
+							
+							 <form v-if="!storeInfo.is_buy" @submit="joinCart" class="joinCart bnts">
 								<button class="joinCart bnts" form-type="submit">
-									加入目标
+									视频兑换
 								</button>
-							</form> -->
-							<form @submit="goBuy" class="buy bnts" :class="!storeInfo.cart_button ? 'virbnt' : ''">
-								<button class="buy bnts" :class="!storeInfo.cart_button ? 'virbnt' : ''"
+							</form> 
+							
+							
+							<form v-if="!storeInfo.is_buy"   @submit="goBuy" class="buy bnts">
+								<button class="buy bnts"
 									form-type="submit">
-									立即兑换
+									抖币兑换
 								</button>
 							</form>
+							
+							
 						</view>
 					</view>
 					<view class="presale" v-else>
@@ -387,7 +406,7 @@
 				<!-- #endif -->
 				<button class="item" hover-class="none" @click="goPoster">
 					<view class="iconfont icon-haibao"></view>
-					<view class="">生成海报1</view>
+					<view class="">生成海报</view>
 				</button>
 			</view>
 			<view class="mask" v-if="posters" @click="listenerActionClose"></view>
@@ -419,11 +438,15 @@
 				:background="background" :foreground="foreground" :pdground="pdground" :icon="codeIcon"
 				:iconSize="iconsize" :onval="onval" :loadMake="loadMake" @result="qrR" />
 			<!-- #endif -->
+			
+			
+			<dAlert ></dAlert>
 		</view>
 	</view>
 </template>
 
 <script>
+	 import dAlert from '@/uni_modules/d-alert/components/d-alert/d-alert.vue'
 	let sysHeight = uni.getSystemInfoSync().statusBarHeight + 'px';
 	import {
 		getCustomer
@@ -496,6 +519,7 @@
 			mpHtml,
 			menuIcon,
 			cusPreviewImg,
+			dAlert,
 			// #ifdef MP
 			authorize,
 			// #endif
@@ -673,6 +697,7 @@
 			//#endif
 		},
 		onReady: function() {
+			 this._open_tan()
 			this.isNodes++;
 			// #ifdef H5
 			this.codeVal = window.location.origin + '/pages/goods_details/index?id=' + this.id +
@@ -723,6 +748,24 @@
 			this.currentPage = !this.currentPage
 		},
 		methods: {
+			  _open_tan() {
+			                console.log('____open___')
+							return false;
+							this.$showModal({
+			                  content: '这是一个自定义弹框',
+			                  showCancel:false,
+			                  price:199,
+			                  msg:'限时活动',
+			                  time:'限时时间：2022.06.11——2022.10.01',
+			                  success(res) {
+			                    if (res.confirm) {
+			                      console.log('用户点击确定-领取成功')
+			                    } else if (res.cancel) {
+			                      console.log('用户点击取消')
+			                    }
+			                  }
+			                })
+			            },
 			goCustomer() {
 				getCustomer(`/pages/customer_list/chat?productId=${this.id}`)
 			},
@@ -1511,7 +1554,12 @@
 					toLogin();
 				} else {
 					createOrder({product_id: this.id}).then(res=>{
-						
+						this.$util.Tips({
+							title: "兑换成功",
+							success: () => {
+								// that.getCartCount(true);
+							},
+						});
 					});
 					// this.goCat(true);
 				}

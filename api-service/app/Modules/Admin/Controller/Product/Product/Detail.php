@@ -13,10 +13,11 @@ class Detail
 {
     #[Inject]
     protected ProductLogic $productLogic;
-    
+
     #[ApiPost]
     #[ApiParam("product_id")]
-    public function index(){
+    public function index()
+    {
         $params = getParams();
         $data = $this->productLogic->detail($params->get('product_id'));
         Success($data);

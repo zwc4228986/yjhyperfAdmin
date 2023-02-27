@@ -18,6 +18,10 @@ import socket from './libs/new_chat.js'
 import yjSocket from './libs/chat2.js'
 import yjui from '@/yjui/lib'
 
+import initModal from "@/store/myAlert.js";
+console.log('initModel',initModal)
+initModal(Vue)
+
 Vue.prototype.$util = util;
 Vue.prototype.$config = configs;
 Vue.prototype.$Cache = Cache;
@@ -27,10 +31,13 @@ Vue.prototype.$yjSocket = new yjSocket();
 Vue.config.productionTip = false
 import pageLoading from './components/pageLoading.vue'
 import skeleton from './components/skeleton/index.vue'
+import ourLoading from '@/components/our-loading/our-loading.vue'
 import uView from '@/uni_modules/uview-ui'
 Vue.use(uView)
 Vue.component('skeleton', skeleton)
 Vue.component('pageLoading',pageLoading)
+Vue.component('ourLoading', ourLoading)
+
 // #ifdef H5
 
 import { parseQuery } from "./utils";
@@ -38,6 +45,12 @@ import Auth from './libs/wechat';
 import { SPREAD } from './config/cache';
 Vue.prototype.$wechat = Auth;
 Vue.prototype.$BASE_URL = 'http:4399.com';
+
+Vue.prototype.$store = store
+
+
+
+// initModal(Vue);
 
 
 let cookieName = "VCONSOLE",

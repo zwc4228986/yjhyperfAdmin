@@ -1,5 +1,11 @@
 <template>
-		<diy></diy>
+	<view>
+		<diy v-if="isDiy"></diy>
+		<ourLoading isFullScreen active @loadSuccess="loadSuccess" text="loading..."  />
+		<ad-interstitial ref="ad" adpid="1216003411" :loadnext="true" v-slot:default="{loading, error}" @load="onadload" @close="onadclose" @error="onaderror">
+		   
+		</ad-interstitial>
+	</view>
 </template>
 
 <script>
@@ -8,7 +14,7 @@
 	export default {
 		data() {
 			return {
-				isDiy: uni.getStorageSync('is_diy'),
+				isDiy: false,
 				shareInfo:{}
 			}
 		},
@@ -16,17 +22,25 @@
 			diy
 		},
 		onShow() {
-			uni.$on('is_diy', (data) => {
-				this.isDiy = data
-			})
 			this.setOpenShare();
-			console.log('refreshGoodsLists');
-			uni.$emit('refreshGoodsLists')
 		},
 		onHide() {
 			// this.isDiy = -1
 		},
 		methods: {
+				loadSuccess(){
+					this.isDiy = true;
+				},
+				onadload(e) {
+				  this.$refs.ad.show();
+			    },
+			    onadclose(e) {
+					 console.log("onadclose",e);
+			    },
+			    onaderror(e) {
+			      // 广告加载失败
+			      console.log("onaderror: ", e.detail);
+			    },
 			// 微信分享；
 			setOpenShare: function() {
 				let that = this;

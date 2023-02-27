@@ -36,7 +36,7 @@
 		'--view-theme: rgba(254,92,45,1); --view-theme-16:#FE5C2D;--view-priceColor:#FE5C2D;--view-minorColor:rgba(254, 92, 45, 0.5);--view-minorColorT:rgba(254, 92, 45, 0.1);--view-bntColor:#FDB000;--view-op-ten: rgba(254,92,45, 0.1);--view-main-start:#FF9445; --view-main-over:#FE5C2D;--view-op-point-four: rgba(254,92,45, 0.04);'
 	let red =
 		'--view-theme: rgba(246,131,38,1);--view-theme-16: #F68326;--view-priceColor:#F68326;--view-minorColor:rgba(246, 131, 38, 0.5);--view-minorColorT:rgba(233, 51, 35, 0.1);--view-bntColor:#FE960F;--view-op-ten: rgba(246,131,38, 0.1);--view-main-start:#F68326; --view-main-over:#F68326;--view-op-point-four: rgba(233,51,35, 0.04);'
-	
+
 	export default {
 		globalData: {
 			spid: 0,
@@ -115,6 +115,9 @@
       // #endif
     },
 		async onLaunch(option) {
+			
+		
+			
 			let that = this;
 			colorChange('color_change').then(res => {
 				uni.setStorageSync('is_diy', res.data.is_diy)

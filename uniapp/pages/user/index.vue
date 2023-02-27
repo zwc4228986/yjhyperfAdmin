@@ -198,14 +198,14 @@
 					</view> -->
 					<view class="order-wrapper" :class="userInfo.svip_open?'':'height'">
 						<view class="order-hd flex">
-							<view class="left">我的下载</view>
+							<view class="left">我的关注资源</view>
 							<navigator class="right flex" hover-class="none" url="/pages/users/order_list/index"
 								open-type="navigate">
 								更多下载
 								<text class="iconfont icon-xiangyou"></text>
 							</navigator>
 						</view>
-
+					
 						<view class="order-bd">
 							<block v-for="(item,index) in orderMenu" :key="index">
 								<navigator class="order-item" hover-class="none" :url="item.url">
@@ -216,6 +216,15 @@
 									<view class="txt">{{item.title}}</view>
 								</navigator>
 							</block>
+						</view>
+					</view>
+					<view class="order-wrapper" :class="userInfo.svip_open?'':'height'">
+						<view class="order-hd flex">
+							<view class="left">我的资源</view>
+							<navigator class="right flex" hover-class="none" url="/pages/users/order_list/index"
+								open-type="navigate">
+								<text class="iconfont icon-xiangyou" style="font-weight: bold;"></text>
+							</navigator>
 						</view>
 					</view>
 				<!-- 	<view class="task-wrapper" v-if="!task_hide" :class="userInfo.svip_open?'':'height'">
@@ -448,7 +457,8 @@
 	// } from '@/api/user.js';
 
     import {
-		getUserInfo
+		getUserInfo,
+		getUserCircle
 	} from '@/api/user.js';
 
 	import {
@@ -597,6 +607,7 @@
 				mpHeight: 0,
 				showStatus: 1,
 				newData: {},
+				userCircle:[],
 				activeRouter: '',
 				// #ifdef H5 || MP
 				pageHeight: '100%',
@@ -673,7 +684,8 @@
 			let routes = getCurrentPages(); // 获取当前打开过的页面路由数组
 			let curRoute = routes[routes.length - 1].route //获取当前页面路由
 			this.activeRouter = '/' + curRoute
-
+			this.getUserCircle();
+			
 		},
 		onReady() {
 			let self = this
@@ -705,6 +717,11 @@
 			this.onLoadFun();
 		},
 		methods: {
+			getUserCircle(){
+				getUserCircle().then(res=>{
+					this.userCircle();
+				})
+			},
 			go(url){
 				uni.navigateTo({
 					url:url
@@ -738,6 +755,7 @@
 			// 授权回调
 			onLoadFun() {
 				this.getUserInfo();
+				this.userCircle();
 			},
 			Setting: function() {
 				uni.openSetting({
@@ -1406,9 +1424,8 @@
 				
 				.order-hd {
 					justify-content: space-between;
-					padding: 30rpx 20rpx 10rpx 30rpx;
-					margin-top: 25rpx;
-					font-size: 30rpx;
+					padding: 30rpx 20rpx 30rpx 30rpx;
+					font-size: 35rpx;
 					color: #282828;
 
 					.left {

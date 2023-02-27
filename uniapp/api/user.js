@@ -681,3 +681,9 @@ export function addTaskBlack(data){
   	URL:2
   });
 }
+
+export function getUserCircle(){
+  return request.post('/api/user/collect',{},{
+  	URL:3
+  });
+}

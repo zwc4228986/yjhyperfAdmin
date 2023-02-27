@@ -45,6 +45,7 @@ function prePage() {
 
 export const toLogin = Debounce(_toLogin, 800)
 
+
 function _toLogin(push, pathLogin) {
 	// #ifdef H5
 	if (isWeixin()) {
@@ -95,16 +96,7 @@ function _toLogin(push, pathLogin) {
 	// uni.navigateTo({
 	// 	url: '/pages/users/wechat_login/index'
 	// })
-	Routine.getCode()
-		.then(code => {
-			console.log(code)
-			Routine.silenceAuth(code).then(res => {
-				console.log(res)
-			})
-		})
-		.catch(err => {
-			uni.hideLoading();
-		});
+		miniappLogin()
 	// #endif
 
 	// #ifdef APP-PLUS
@@ -115,6 +107,37 @@ function _toLogin(push, pathLogin) {
 
 }
 
+
+export function miniappLogin(){
+		
+			return new Promise((resolve, reject)=>{
+				if(!isLogin()){
+					Routine.getCode().then(code => {
+							console.log(code)
+							Routine.silenceAuth(code).then(res => {
+								resolve(res)
+							})
+						})
+						.catch(err => {
+							uni.hideLoading();
+						});
+					
+				}else{
+					
+					resolve({})
+				}
+			})
+			
+}
+
+function isLogin(){
+	 let token = Cache.get(LOGIN_STATUS);
+	 if(token){
+		 return true;
+	 }else{
+		 return false;
+	 }
+}
 
 export function checkLogin() {
 	let token = Cache.get(LOGIN_STATUS);
