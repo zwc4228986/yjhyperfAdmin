@@ -78,7 +78,7 @@
 		},
 		async onLaunch(option) {
 			let that = this;
-			colorChange('color_change').then(res => {
+			coloaarChange('color_change').then(res => {
 				uni.setStorageSync('is_diy', res.data.is_diy)
 				uni.$emit('is_diy', res.data.is_diy)
 				switch (0) {
