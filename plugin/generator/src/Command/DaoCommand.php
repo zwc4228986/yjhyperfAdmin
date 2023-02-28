@@ -16,7 +16,6 @@ class DaoCommand extends GeneratorCommand
     public function handle()
     {
         $config = $this->createConfig();
-
     }
 
     public function createConfig()

@@ -18,4 +18,8 @@ class OrderProductDao extends OrderProductModel
         return $this->where('product_id', $productId)->where('user_id', $userId)->exists();
     }
 
+    public function getProductOrderId(int $productId, int $userId = 0):int
+    {
+        return $this->where('product_id', $productId)->where('user_id', $userId)->value('id')??0;
+    }
 }

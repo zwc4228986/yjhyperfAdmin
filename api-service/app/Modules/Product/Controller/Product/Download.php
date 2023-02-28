@@ -12,9 +12,9 @@ use YjHyperfAdminPligin\Apidog\Annotations\ApiParam;
 use YjHyperfAdminPligin\Apidog\Annotations\ApiPost;
 use function App\Modules\Web\Helper\getUserID;
 
-#[Api("api/product/detail")]
+#[Api("api/product/download")]
 #[Middleware(MustAuthMiddlerware::class)]
-class Detail
+class Download
 {
     #[Inject]
     protected ProductLogic $productLogic;
@@ -22,16 +22,14 @@ class Detail
     #[Inject]
     protected OrderProductLogic $orderProductLogic;
 
-    #[ApiPost]
+    #[ApiPost("detail")]
     #[ApiParam("product_id")]
     public function index()
     {
         $params = getParams();
         $userId = getUserID();
         $data = $this->productLogic->detail($params->get('product_id'));
-        $order_product_id =  $this->orderProductLogic->getProductOrderId($params->get('product_id'), $userId);
-        $data->is_buy = (bool)$order_product_id;
-        $data->order_product_id = $order_product_id;
+        $data->is_buy = $this->orderProductLogic->isBuy($params->get('product_id'), $userId);
         Success($data);
     }
 }
