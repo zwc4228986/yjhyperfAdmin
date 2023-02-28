@@ -7,7 +7,7 @@
 		<view class="circle-content" >
 			<block v-for="(item, index) in menus" :key="index">
 					<view class="item" @click="goCircle(item)">
-						<u-image radius="10" width="100px" height="80px"></u-image>
+						<u-image :src="item.icon.path_format" radius="10" width="100px" height="80px"></u-image>
 						<view class="right">
 							<view class="circle-content-title">{{item.name}}</view>
 							<view class="circle-content-info">{{item.info}}</view>

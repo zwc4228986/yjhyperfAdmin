@@ -18,12 +18,13 @@ class EditController
     #[ApiPost]
     #[ApiParam("name")]
     #[ApiParam("id")]
-    #[ApiParam("file_id")]
+    #[ApiParam("icon_id")]
     #[ApiParam("sort")]
     #[ApiParam("is_show")]
-    public function  index(){
+    public function index()
+    {
         $params = getParams();
-        $this->circleLogic->edit($params->get('id'),$params->except('id'));
+        $this->circleLogic->edit($params->get('id'), $params->except('id'));
         Success();
     }
 }

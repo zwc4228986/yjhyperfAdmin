@@ -15,11 +15,12 @@ class UserCircleLogic
     #[Inject]
     protected CircleCollectDao $circleCollectDao;
 
+    #[Inject]
     protected CircleDao $circleDao;
 
     public function lists(int $userId)
     {
-        $circle_ids = $this->circleCollectDao->wher('user_id', $userId)->plick('circle_id');
-        return $this->circleDao->whereIn('id', $circle_ids->toArray())->get();
+        $circle_ids = $this->circleCollectDao->where('user_id', $userId)->pluck('circle_id');
+        return $this->circleDao->whereIn('id', $circle_ids->toArray())->with('Icon')->get();
     }
 }

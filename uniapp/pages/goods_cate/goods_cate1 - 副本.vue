@@ -7,7 +7,7 @@
 		<view class='header acea-row row-center-wrapper'>
 			<view class='acea-row row-between-wrapper input'>
 				<text class='iconfont icon-sousuo'></text>
-				<input type='text' placeholder="搜索名称" @confirm="searchSubmitValue" confirm-type='search'
+				<input type='text' :placeholder="('搜索名称')" @confirm="searchSubmitValue" confirm-type='search'
 					name="search" placeholder-class='placeholder'></input>
 			</view>
 		</view>
@@ -17,7 +17,7 @@
 				<scroll-view scroll-y="true" scroll-with-animation='true' style="height: calc(100% - 100rpx)">
 					<view class='item acea-row row-center-wrapper' :class='index==navActive?"on":""'
 						v-for="(item,index) in productList" :key="index" @click='tap(index,"b"+index)'>
-						<text>{{(item.name)}}</text>
+						<text>{{(item.cate_name)}}</text>
 					</view>
 					<!-- #ifdef APP-PLUS -->
 					<view class="item" v-if="newData.status && newData.status.status"></view>
@@ -31,19 +31,19 @@
 						<view class='listw' :id="'b'+index">
 							<view class='title acea-row row-center-wrapper'>
 								<view class='line'></view>
-								<view class='name'>{{(item.name)}}</view>
+								<view class='name'>{{(item.cate_name)}}</view>
 								<view class='line'></view>
 							</view>
 							<view class='list acea-row'>
-								<block v-for="(itemn,indexn) in item.circle" :key="indexn">
+								<block v-for="(itemn,indexn) in item.children" :key="indexn">
 									<navigator hover-class='none'
 										:url='"/pages/goods/goods_list/index?sid="+itemn.id+"&title="+itemn.cate_name'
 										class='item acea-row row-column row-middle'>
 										<view class='picture'>
-											<image :src='itemn.icon.path_format' v-if="itemn.icon.path_format"></image>
+											<image :src='itemn.pic' v-if="itemn.pic"></image>
 											<image src="/static/images/sort-img.png" v-else></image>
 										</view>
-										<view class='name line1'>{{(itemn.name)}}</view>
+										<view class='name line1'>{{(itemn.cate_name)}}</view>
 									</navigator>
 								</block>
 							</view>
@@ -193,11 +193,10 @@
 			getCircleTree: function() {
 				let that = this;
 				getCircleTree().then(res => {
-					that.productList = res;
+					that.productList = res.data;
 					// that.$nextTick(res => {
 					// 	that.infoScroll();
 					// })
-					
 				})
 			},
 			scroll: function(e) {
@@ -217,7 +216,17 @@
 						this.navActive = scrollArr.length - 1
 					}
 				}
-			}
+			},
+			searchSubmitValue: function(e) {
+				if (this.$util.trim(e.detail.value).length > 0)
+					uni.navigateTo({
+						url: '/pages/goods/goods_list/index?searchValue=' + e.detail.value
+					})
+				else
+					return this.$util.Tips({
+						title: this.(`搜索商品名称`)
+					});
+			},
 		}
 	}
 </script>
@@ -371,13 +380,13 @@
 	.productSort .conter .list .item .picture {
 		width: 120rpx;
 		height: 120rpx;
-		border-radius: 2%;
+		border-radius: 50%;
 	}
 
 	.productSort .conter .list .item .picture image {
 		width: 100%;
 		height: 100%;
-		border-radius: 2%;
+		border-radius: 50%;
 	}
 
 	.productSort .conter .list .item .name {

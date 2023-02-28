@@ -3,8 +3,9 @@
 namespace App\Modules\Admin\Model;
 
 use App\Model\Circle;
+use App\Model\SystemFile;
 
-class CircleModel  extends Circle
+class CircleModel extends Circle
 {
     protected array $fillable = [
         'name',
@@ -13,4 +14,9 @@ class CircleModel  extends Circle
         'is_show',
         'icon_id',
     ];
+
+    public function Icon()
+    {
+        return $this->hasOne(SystemFile::class, 'id', 'icon_id');
+    }
 }

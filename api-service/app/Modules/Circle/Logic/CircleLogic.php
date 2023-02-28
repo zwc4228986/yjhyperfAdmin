@@ -17,7 +17,7 @@ class CircleLogic
 
     public function lists()
     {
-        return $this->circleDao->getList();
+        return $this->circleDao->with("Icon")->getList();
     }
 
     public function detail(int $circleId, int $userId)

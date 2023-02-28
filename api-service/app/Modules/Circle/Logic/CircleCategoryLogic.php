@@ -10,13 +10,16 @@ class CircleCategoryLogic
     #[Inject]
     protected CircleCategoryDao $circleCategoryDao;
 
-    public function lists(){
+    public function lists()
+    {
         return $this->circleCategoryDao->lists();
     }
 
     public function tree()
     {
-        return $this->circleCategoryDao->with('Circle')->get();
+        return $this->circleCategoryDao->with(['Circle' => function ($query) {
+            $query->with('Icon');
+        }])->get();
     }
 
 }

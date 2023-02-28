@@ -1700,12 +1700,12 @@
 			// 	"selectedIconPath": "static/images/icon/5-0.png",
 			// 	"text": "资源"
 			// },
-			// {
-			// 	"pagePath": "pages/task_index/index",
-			// 	"iconPath": "static/images/icon/2-0.png",
-			// 	"selectedIconPath": "static/images/icon/2-1.png",
-			// 	"text": "福利"
-			// },
+			{
+				"pagePath": "pages/goods_cate/goods_cate",
+				"iconPath": "static/images/icon/5-1.png",
+				"selectedIconPath": "static/images/icon/5-0.png",
+				"text": "资源"
+			},
 			{
 				"pagePath": "pages/user/index",
 				"iconPath": "static/images/icon/4-0.png",

@@ -10,8 +10,15 @@ export function user_circle(data) {
 }
 
 
+
 export function getCircleDetail(data) {
 	return request.post('/api/circle/detail',data,{
+		URL:3
+	});
+}
+
+export function getCircleTree(data) {
+	return request.post('/api/circle_category/tree',data,{
 		URL:3
 	});
 }

@@ -10,8 +10,9 @@ class CircleLogic
     #[Inject]
     protected CircleDao $circleDao;
 
-    public function lists(){
-        return $this->circleDao->getList();
+    public function lists()
+    {
+        return $this->circleDao->with('Icon')->getList();
     }
 
     public function add(\Hyperf\Utils\Collection $params)
@@ -19,10 +20,11 @@ class CircleLogic
         return $this->circleDao->add($params);
     }
 
-    public function edit(int $id,\Hyperf\Utils\Collection $params){
-        return $this->circleDao->edit($id,$params);
+    public function edit(int $id, \Hyperf\Utils\Collection $params)
+    {
+        return $this->circleDao->edit($id, $params);
     }
-    
+
     public function del(int $id)
     {
         return $this->circleDao->del($id);

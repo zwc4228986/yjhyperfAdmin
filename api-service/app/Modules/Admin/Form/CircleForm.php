@@ -21,8 +21,8 @@ use YjHyperfAdminPligin\Form\Column\Column;
 class CircleForm extends BaseForm
 {
     public const DELETE = true;
-    public const ADD =  true;
-    public const EDIT =  true;
+    public const ADD = true;
+    public const EDIT = true;
 
     protected $yjCode = 'circle';
 
@@ -46,7 +46,7 @@ class CircleForm extends BaseForm
     }
 
     #[ApiPost("update")]
-    #[ApiParam("id",'nullable')]
+    #[ApiParam("id", 'nullable')]
     public function update()
     {
 

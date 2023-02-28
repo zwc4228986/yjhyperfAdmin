@@ -12,7 +12,7 @@ class Elm extends \YjHyperfAdminPligin\Form\FormBuilder\Factory\Elm
         $type = 'YjUpload';
         $component = new CustomComponent($type);
 ////            $span->action( $this->configValueModel->_get('site_url').'/util/file/upload');
-        $component->props(['action' => env('FIEL_URL').'/util/file/upload', 'name' => '上传图片']);
+        $component->props(['action' => env('FIEL_URL') . '/util/file/upload', 'name' => '上传图片', 'storage' => 'qiniu']);
         return $component;
     }
 
@@ -20,7 +20,7 @@ class Elm extends \YjHyperfAdminPligin\Form\FormBuilder\Factory\Elm
     {
         $type = 'yjFile';
         $component = new CustomComponent($type);
-        $component->props(['action' =>  env('FIEL_URL').'/util/file/upload', 'name' => '上传图片']);
+        $component->props(['action' => env('FIEL_URL') . '/util/file/upload', 'name' => '上传图片']);
         return $component;
     }
 

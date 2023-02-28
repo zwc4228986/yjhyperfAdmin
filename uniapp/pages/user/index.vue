@@ -196,17 +196,18 @@
 							</navigator>
 						</view>
 					</view> -->
-					<view class="order-wrapper" :class="userInfo.svip_open?'':'height'">
-						<view class="order-hd flex">
+					<view class="circle-wrapper" :class="userInfo.svip_open?'':'height'">
+						<view class="circle-hd flex">
 							<view class="left">我的关注资源分类</view>
 						</view>
+				
 					
-						<view class="order-bd">
-							<view v-for="(item,index) in userCircle" :key="index">
+						<view class="circle-bd">
+							<view  class="item" v-for="(item,index) in userCircle" :key="index">
 									<view class="pic">
-										<u-image></u-image>
+										<image style="width: 100%;height: 100%;"  :src="item.icon.path_format"></image>
 									</view>
-									<view class="txt">{{item.title}}</view>
+									<view class="txt">{{item.name}}</view>
 							</view>
 						</view>
 					</view>
@@ -621,25 +622,7 @@
 		},
 		onLoad(option) {
 			// uni.hideTabBar()
-			let that = this;
-			if (this.is_diy) {
-				if (uni.getStorageSync('FOOTER_BAR')) {
-					uni.hideTabBar()
-				}
-				getNavigation().then(res => {
-					this.newData = res.data
-					
-					if (this.newData.status && this.newData.status.status) {
-						this.task_hide = true;
-						uni.hideTabBar()
-					} else {
-							this.task_hide = false;
-						uni.showTabBar()
-					}
-				})
-				
-				
-			}
+		
 
 			// #ifdef MP
 			// 小程序静默授权
@@ -653,6 +636,8 @@
 					.catch(res => {
 						uni.hideLoading();
 					});
+			}else{
+				this.onLoadFun()
 			}
 			// #endif
 
@@ -700,11 +685,12 @@
 			});
 			// #endif
 			if (that.isLogin) {
-				this.getUserInfo();
+				// this.getUserInfo();
 				// this.getUser();
 				// this.getMyMenus();
 				// this.setVisit();
 				// this.getStatistics();
+					this.onLoadFun();
 			};
 		},
 		onPullDownRefresh() {
@@ -749,7 +735,7 @@
 			// 授权回调
 			onLoadFun() {
 				this.getUserInfo();
-				this.userCircle();
+				this.getUserCircle();
 			},
 			Setting: function() {
 				uni.openSetting({
@@ -1039,6 +1025,33 @@
 	body {
 		background-color: white;
 		height: 100%;
+	}
+	.circle-wrapper{
+		background-color: #F68326;
+		padding: 0 30rpx 20rpx 30rpx;
+		.circle-hd{
+			font-size: 28rpx;
+			color: #fff;
+		}
+		.circle-bd{
+			padding: 10rpx 0;
+			display: flex;
+			.pic{
+				height: 100rpx;
+				width: 100%;
+			}
+			.item{
+				margin-right: 2%;
+				flex-basis: 20%;
+				background-color: white;
+				border-radius: 10rpx;
+				.txt{
+					color: #666;
+					font-size: 24rpx;
+					padding: 5rpx;
+				}
+			}
+		}
 	}
 
 	// .height {
@@ -1413,7 +1426,6 @@
 			.order-wrapper {
 				border-radius: 16rpx;
 				position: relative;
-				margin-top: -10rpx;
 				border-bottom: 20rpx solid #F7F7F7;
 				
 				.order-hd {
