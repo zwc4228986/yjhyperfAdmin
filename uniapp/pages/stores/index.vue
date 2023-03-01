@@ -10,7 +10,7 @@
 				<!-- #endif -->
 			</view>
 		</view>
-	
+		
 		<!-- <homeList :navH="navH" :returnShow="true" :currentPage="false" :sysHeight="sysHeight" >
 		</homeList> -->
 		<view class="circle-header">
@@ -30,9 +30,8 @@
 		
 		<view class='productList'>
 			<!-- -->
-			
 			<view class="circle">
-				
+
 			</view>
 			<view class="longTab acea-row row-middle">
 				<scroll-view scroll-x="true" style="white-space: nowrap; display: flex;height:44rpx;"
@@ -97,7 +96,7 @@
 		<!-- #ifndef MP -->
 		<home></home>
 		<!-- #endif -->
-		
+
 		<tabBar v-if="!is_diy" :pagePath="'/pages/user/index'"></tabBar>
 		<view class="foot" v-else-if="is_diy && newData.status && newData.status.status">
 			<view class="page-footer" id="target" :style="{'background-color':newData.bgColor.color[0].item}">
@@ -116,6 +115,7 @@
 				</view>
 			</view>
 		</view>
+
 	</view>
 </template>
 
@@ -132,7 +132,7 @@
 		getNavigation,
 	} from '@/api/public.js'
 	import {
-		getCategoryList,
+		getCircleCategoryList,
 		getProductslist,
 		getProductHot
 	} from '@/api/store.js';
@@ -285,14 +285,14 @@
 			getAllCategory: function() {
 				
 				let that = this;
-				getCategoryList({circle_id:this.circle_id}).then(res => {
+				getCircleCategoryList({circle_id:this.circle_id,limit:-1}).then(res => {
 					let data = res;
-					// data.forEach(item => {
-					// 	item.children.unshift({
-					// 		'id': 0,
-					// 		'cate_name': '全部'
-					// 	})
-					// })
+					data.forEach(item => {
+						item.children.unshift({
+							'id': 0,
+							'name': '全部'
+						})
+					})
 					that.categoryTitle = data[0].cate_name;
 					that.where.product_category_pid = data[0].id;
 					that.sid = 0;
@@ -341,6 +341,7 @@
 					// that.$set(that, 'hostProduct', res.data)
 				});
 			},
+
 			tapNav(index, item) {
 				let list = this.categoryList[index];
 				this.navActive = index;

@@ -252,7 +252,14 @@
           <scEditor v-model="formValidate.description"> </scEditor>
         </div>
         <div v-show="currentTab === '5'">
-          <yj-file v-model="formValidate.resource_id"></yj-file>
+          <el-form ref="form" label-width="100px">
+            <el-form-item label="七牛云" >
+              <yj-file v-model="formValidate.resource_id"></yj-file>
+            </el-form-item>
+            <el-form-item label="百度网盘">
+              <el-input  type="textarea" placeholder="" v-model="formValidate.baidu_resource"> </el-input>
+            </el-form-item>
+          </el-form>
         </div>
         <!-- <div v-show="currentTab === '3'">
           <el-form-item label="运费设置">
@@ -307,6 +314,7 @@ export default {
         types: 3,
         info: "",
         description: "",
+        baidu_resource: "",
         is_show: 1,
         price: 1,
         product_category_id: [],

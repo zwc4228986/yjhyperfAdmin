@@ -4,11 +4,14 @@ namespace App\Modules\Admin\Dao;
 
 use App\Model\Product;
 use App\Model\ProductCategoryRel;
+use App\Modules\Admin\Model\ProductModel;
 use Hyperf\Utils\Collection;
 use YjHyperfAdminPligin\Framework\Dao\AddWhereQueryTrait;
+use YjHyperfAdminPligin\Framework\Dao\DaoTrait;
 
-class ProductDao extends Product
+class ProductDao extends ProductModel
 {
+
     protected array $fillable = [
         'name',
         'price',
@@ -17,7 +20,7 @@ class ProductDao extends Product
         'image_ids',
     ];
 
-    use AddWhereQueryTrait;
+    use DaoTrait;
 
     public function params(Collection $params)
     {

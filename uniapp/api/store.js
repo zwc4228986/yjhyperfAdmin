@@ -83,6 +83,18 @@ export function getCategoryList(data) {
 }
 
 /**
+ * 获取分类列表
+ * 
+ */
+export function getCircleCategoryList(data) {
+	return request.post('/api/circle_category/lists', data, {
+		noAuth: true,
+		URL:3
+	});
+}
+
+
+/**
  * 获取产品列表
  * @param object data
  */

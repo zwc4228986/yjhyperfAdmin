@@ -2,26 +2,56 @@
 
 namespace App\Modules\Admin\Logic\Product;
 
+use App\Modules\Admin\Dao\CircleCategoryDao;
+use App\Modules\Admin\Dao\CircleDao;
 use App\Modules\Admin\Dao\ProductCategoryDao;
 use Hyperf\Di\Annotation\Inject;
+use Hyperf\Utils\Collection;
 
 class ProductCategoryLogic
 {
     #[Inject]
     protected ProductCategoryDao $productCategoryDao;
 
+    #[Inject]
+    protected CircleCategoryDao $circleCategoryDao;
+
     public function getTreeFormat()
     {
-        $data = $this->productCategoryDao->select('name as label', 'pid', 'id as value')
-            ->where('is_show', 1)->get()->each(function ($item) {
-                $item->value = $item->value;
-            })->toArray();
-        return Tree($data, 0, 'value', 'pid', 'children');
+        /** @var Collection $data */
+        $datas = $this->circleCategoryDao->with(['Circle'=>function($query){
+            $query->with(['ProductCategory'=>function($query){
+                 $query->select('name as label','id as value','circle_id');
+            }]);
+        }])->get();
+
+        $datas->transform(function ($data){
+            $data->Circle->transform(function ($item){
+                 return [
+                     'children'=>$item->ProductCategory,
+                     'label'=>$item->name,
+                     'value'=>$item->id,
+                 ];
+            });
+            return [
+                'children'=>$data->Circle,
+                'label'=>$data->name,
+                'value'=>$data->id,
+            ];
+        });
+
+//        return $this->circleDao->select('name as label', 'pid', 'id as value')->get();
+//        $data = $this->productCategoryDao->newSelf()->select('name as label', 'pid', 'id as value')
+//            ->where('is_show', 1)->get()->each(function ($item) {
+//                $item->value = $item->value;
+//            })->toArray();
+//        return Tree($data, 0, 'value', 'pid', 'children');
+        return $datas;
     }
 
     public function lists(array $params=[])
     {
-        
+
     }
 
     public function getTreelists($params)

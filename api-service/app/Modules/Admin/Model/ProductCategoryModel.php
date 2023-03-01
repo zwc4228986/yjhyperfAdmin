@@ -13,6 +13,7 @@ class ProductCategoryModel extends ProductCategory
         'sort',
         'file_id',
         'is_show',
+        'circle_id'
     ];
 
     public function File(){

@@ -19,7 +19,7 @@ class OrderProductLogic
     {
         return $this->orderProductDao->isBuy($productId, $userId);
     }
-    
+
     public function getProductOrderId($productId, $userId)
     {
         return $this->orderProductDao->getProductOrderId($productId, $userId);

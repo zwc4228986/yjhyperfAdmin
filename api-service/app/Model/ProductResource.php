@@ -13,7 +13,7 @@ namespace App\Model;
  * @property int $delete_time 
  * @property int $type 
  */
-class ProductResource extends \App\Model\Trait\ProductResource
+class ProductResource extends Model
 {
     /**
      * The table associated with the model.

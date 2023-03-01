@@ -19,4 +19,8 @@ class CircleModel extends Circle
     {
         return $this->hasOne(SystemFile::class, 'id', 'icon_id');
     }
+
+    public function ProductCategory(){
+        return $this->hasMany(ProductCategoryModel::class,'circle_id','id');
+    }
 }
