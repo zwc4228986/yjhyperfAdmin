@@ -15,7 +15,7 @@ class Lists
 
     #[ApiPost]
     public function index(){
-        $data = $this->productCategoryLogic->getTreelists();
+        $data = $this->productCategoryLogic->getTreelists(collect());
         Success($data);
     }
 }

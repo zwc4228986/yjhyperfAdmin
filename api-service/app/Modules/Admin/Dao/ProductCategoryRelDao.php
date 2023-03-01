@@ -2,13 +2,9 @@
 
 namespace App\Modules\Admin\Dao;
 
-use App\Model\ProductCategoryRel;
+use App\Modules\Admin\Model\ProductCategoryRelModel;
 
-class ProductCategoryRelDao extends ProductCategoryRel
+class ProductCategoryRelDao extends ProductCategoryRelModel
 {
-    protected array $fillable = [
-      'product_id',
-      'product_category_id',
-      'product_category_pid',
-    ];
+
 }

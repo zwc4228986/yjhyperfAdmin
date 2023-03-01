@@ -15,7 +15,9 @@ class TreeController
 
     #[ApiPost]
     public function index(){
+
         $data = $this->productCategoryLogic->getTreeFormat();
         Success($data);
     }
+
 }

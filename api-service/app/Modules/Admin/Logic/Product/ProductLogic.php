@@ -32,7 +32,7 @@ class ProductLogic
 
     public function lists(Collection $params)
     {
-        return $this->productDao->params($params)->orderByDesc("id")->with('Image')->getList();
+        return $this->productDao->newSelf()->params($params)->orderByDesc("id")->with('Image')->getList();
     }
 
     public function add(\Hyperf\Utils\Collection $params)
@@ -45,9 +45,12 @@ class ProductLogic
                 'product_id' => $product->id,
             ], $params->only(['description'])->toArray());
             $product_category_ids = $params->get('product_category_id');
-            $resource_id = $params->get('resource_id');
+
             $this->updateProductCategoryRel($product->id, $product_category_ids);
+            $resource_id = $params->get('resource_id');
+            $baidu_resource = $params->get('baidu_resource');
             $this->updateProductResource($product->id, $resource_id, 0);
+            $this->updateProductResource($product->id, $baidu_resource, 1);
             Db::commit();
         } catch (\Exception $exception) {
             Db::rollBack();
@@ -61,7 +64,7 @@ class ProductLogic
         //先删除
         foreach ($product_category_ids as $product_category_id) {
             //获取一级导航
-            $product_category_pid = $this->productCategoryDao->where('id', $product_category_id)->value('pid');
+            $product_category_pid = $this->productCategoryDao->newSelf()->where('id', $product_category_id)->value('pid');
 
             $this->productCategoryRelDao->updateOrCreate([
                 'product_category_pid' => $product_category_pid,
@@ -71,23 +74,40 @@ class ProductLogic
         }
     }
 
-    private function updateProductResource(int $product_id, int $resource_id, int $type)
+    private function updateProductResource(int $product_id, int|string $resource, int $type)
     {
-        $this->productResourceDao->updateOrCreate([
-            'product_id' => $product_id,
-            'type' => $type,
-        ], [
-            'file_id' => $resource_id
-        ]);
+        if(!$resource){
+            $this->productResourceDao->where('product_id',$product_id)
+                ->where('type',$type)->delete();
+        }
+        if($type == 0){
+            $this->productResourceDao->updateOrCreate([
+                'product_id' => $product_id,
+                'type' => $type,
+            ], [
+                'file_id' => $resource
+            ]);
+        }
+
+        if($type == 1){
+            $this->productResourceDao->updateOrCreate([
+                'product_id' => $product_id,
+                'type' => $type,
+            ], [
+                'url' => $resource
+            ]);
+        }
+
     }
 
     public function detail(int $product_id, int $userId = 0)
     {
-        $data = $this->productDao->where('id', $product_id)->with([
+        $data = $this->productDao->newSelf()->where('id', $product_id)->with([
             'ProductCategoryRel',
             'ProductDescription',
             'ProductResource'
         ])->first();
+
         $imags_ids = $data->image_ids;
         $images = getFileFullPath(explode(',', $imags_ids));
         dump($images);
@@ -108,8 +128,11 @@ class ProductLogic
             ], $params->only(['description'])->toArray());
             $product_category_ids = $params->get('product_category_id');
             $resource_id = $params->get('resource_id');
+
             $this->updateProductCategoryRel($product_id, $product_category_ids);
             $this->updateProductResource($product_id, $resource_id, 0);
+            $baidu_resource = $params->get('baidu_resource');
+            $this->updateProductResource($product_id, $baidu_resource, 1);
             Db::commit();
         } catch (\Exception $exception) {
             Db::rollBack();

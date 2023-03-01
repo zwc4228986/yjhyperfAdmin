@@ -2,13 +2,10 @@
 
 namespace App\Modules\Admin\Dao;
 
-use App\Model\ProductResource;
 
-class ProductResourceDao extends ProductResource
+use App\Modules\Admin\Model\ProductResourceModel;
+
+class ProductResourceDao extends ProductResourceModel
 {
-    protected array $fillable = [
-      'product_id',
-      'file_id',
-      'type',
-    ];
+
 }
