@@ -306,12 +306,12 @@
 							</form>
 						</view>
 						<view class="bnt acea-row skeleton-rect" v-else>
-							 <form v-if="storeInfo.is_buy" @submit="goBuy" class="buy bnts virbnt">
+							 <div v-if="storeInfo.is_buy" @click="goDownload" class="buy bnts virbnt">
 							 	<button class="buy bnts virbnt"
 							 		form-type="submit">
 							 		下载
 							 	</button>
-							 </form> 
+							 </div> 
 							 
 							
 							 <form v-if="!storeInfo.is_buy" @submit="joinCart" class="joinCart bnts">
@@ -831,6 +831,12 @@
 			},
 			boxStatus(data) {
 				this.showAnimate = data;
+			},
+			goDownload(){
+				
+				uni.navigateTo({
+					url: `/pages/product/download?id=${this.storeInfo.order_product_id}`,
+				});
 			},
 			goActivity: function(e) {
 				let item = e;

@@ -19,7 +19,7 @@ class OrderProductLogic
     {
         return $this->orderProductDao->isBuy($productId, $userId);
     }
-    
+
     public function getProductOrderId($productId, $userId)
     {
         return $this->orderProductDao->getProductOrderId($productId, $userId);
@@ -27,7 +27,9 @@ class OrderProductLogic
 
     public function download_detail(int $order_product_id)
     {
-        $data = $this->orderProductDao->with('ProductResource')->where('id', $order_product_id)->first();
+        $data = $this->orderProductDao->with(['ProductResource', 'Product' => function ($query) {
+            $query->with('Image');
+        }])->where('id', $order_product_id)->first();
         return $data;
     }
 

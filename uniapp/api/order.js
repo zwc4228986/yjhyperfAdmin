@@ -368,3 +368,9 @@ export function orderLists(data) {
 		URL:3
 	});
 }
+
+export function orderDownloadDetail(data) {
+	return request.post('/api/order/product/download_detail',data,{
+		URL:3
+	});
+}
