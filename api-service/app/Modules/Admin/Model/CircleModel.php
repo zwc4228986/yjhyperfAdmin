@@ -4,6 +4,7 @@ namespace App\Modules\Admin\Model;
 
 use App\Model\Circle;
 use App\Model\SystemFile;
+use App\Modules\Product\Model\SystemFileModel;
 
 class CircleModel extends Circle
 {
@@ -17,10 +18,11 @@ class CircleModel extends Circle
 
     public function Icon()
     {
-        return $this->hasOne(SystemFile::class, 'id', 'icon_id');
+        return $this->hasOne(SystemFileModel::class, 'id', 'icon_id');
     }
 
-    public function ProductCategory(){
-        return $this->hasMany(ProductCategoryModel::class,'circle_id','id');
+    public function ProductCategory()
+    {
+        return $this->hasMany(ProductCategoryModel::class, 'circle_id', 'id');
     }
 }

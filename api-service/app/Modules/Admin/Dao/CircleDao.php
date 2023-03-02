@@ -27,7 +27,7 @@ class CircleDao extends CircleModel
 
     public function detail(int $id)
     {
-        $dao = $this->where('id', $id)->first();
+        $dao = $this->where('id', $id)->with("Icon")->first();
         return $dao;
     }
 }

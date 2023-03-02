@@ -2,8 +2,9 @@
 
 namespace App\Modules\Product\Controller\Product;
 
-use App\Modules\Admin\Logic\Product\ProductLogic;
+
 use App\Modules\Order\Logic\OrderProductLogic;
+use App\Modules\Product\Logic\ProductLogic;
 use App\Modules\Web\Middlewares\MustAuthMiddlerware;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Annotation\Middleware;
@@ -29,7 +30,7 @@ class Detail
         $params = getParams();
         $userId = getUserID();
         $data = $this->productLogic->detail($params->get('product_id'));
-        $order_product_id =  $this->orderProductLogic->getProductOrderId($params->get('product_id'), $userId);
+        $order_product_id = $this->orderProductLogic->getProductOrderId($params->get('product_id'), $userId);
         $data->is_buy = (bool)$order_product_id;
         $data->order_product_id = $order_product_id;
         Success($data);

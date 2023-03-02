@@ -12,8 +12,8 @@ class ProductModel extends Product
 {
     public function Image()
     {
-        return $this->hasOne(\App\Model\SystemFile::class, 'id', 'image_id')->withDefault(function ($item) {
-            return App(\App\Model\SystemFile::class)->where('suffix', 'png')->first();
+        return $this->hasOne(\App\Modules\Product\Model\SystemFileModel::class, 'id', 'image_id')->withDefault(function ($item) {
+            return App(\App\Modules\Product\Model\SystemFileModel::class)->where('suffix', 'png')->first();
         });
     }
 }

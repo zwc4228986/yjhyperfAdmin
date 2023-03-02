@@ -1,6 +1,10 @@
 <?php
+/**
+ * @Notes:【】
+ * @Date: 2023-03-01 21:11
+ */
 
-namespace App\Modules\Admin\Model;
+namespace App\Modules\Product\Model;
 
 use App\Model\Product;
 use App\Model\ProductCategoryRel;
@@ -10,8 +14,8 @@ class ProductModel extends Product
 {
     public function Image()
     {
-        return $this->hasOne(\App\Model\SystemFile::class, 'id', 'image_id')->withDefault(function ($item) {
-            return App(\App\Model\SystemFile::class)->where('suffix', 'png')->first();
+        return $this->hasOne(SystemFileModel::class, 'id', 'image_id')->withDefault(function ($item) {
+            return App(SystemFileModel::class)->where('suffix', 'png')->first();
         });
     }
 
@@ -34,5 +38,4 @@ class ProductModel extends Product
     {
         return $this->hasOne(\App\Model\ProductResource::class, 'product_id', 'id');
     }
-
 }

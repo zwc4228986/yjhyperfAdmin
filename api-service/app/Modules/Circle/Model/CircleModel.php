@@ -4,6 +4,7 @@ namespace App\Modules\Circle\Model;
 
 use App\Model\Circle;
 use App\Model\SystemFile;
+use App\Modules\User\Model\SystemFileModel;
 
 class CircleModel extends Circle
 {
@@ -17,6 +18,6 @@ class CircleModel extends Circle
 
     public function Icon()
     {
-        return $this->hasOne(SystemFile::class, 'id', 'icon_id');
+        return $this->hasOne(SystemFileModel::class, 'id', 'icon_id');
     }
 }

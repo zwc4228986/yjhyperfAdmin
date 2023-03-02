@@ -1689,6 +1689,12 @@
 			]
 		}
 	],
+	"plugins": {
+	        "netdiskShare": {
+	        "version": "1.2.4",
+	        "provider": "wx8c873f830774d652"
+	        }
+	  },
 	"tabBar": {
 		"color": "#666666",
 		"selectedColor": "#F58325",

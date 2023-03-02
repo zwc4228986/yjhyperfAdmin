@@ -1,25 +1,19 @@
 <?php
+/**
+ * @Notes:【】
+ * @Date: 2023-03-01 21:10
+ */
 
-namespace App\Modules\Admin\Dao;
+namespace App\Modules\Product\Dao;
 
-use App\Model\Product;
+use App\Model\Circle;
 use App\Model\ProductCategoryRel;
-use App\Modules\Admin\Model\ProductModel;
+use App\Modules\Product\Model\ProductModel;
 use Hyperf\Utils\Collection;
-use YjHyperfAdminPligin\Framework\Dao\AddWhereQueryTrait;
 use YjHyperfAdminPligin\Framework\Dao\DaoTrait;
 
 class ProductDao extends ProductModel
 {
-
-    protected array $fillable = [
-        'name',
-        'price',
-        'status',
-        'image_id',
-        'image_ids',
-    ];
-
     use DaoTrait;
 
     public function params(Collection $params)
@@ -41,24 +35,13 @@ class ProductDao extends ProductModel
 
         if ($params->offsetExists('circle_id')) {
             $_this = $this->addWhere(
-                $this::query()->whereIn('id', app(Circel::class)
+                $this::query()->whereIn('id', app(Circle::class)
                     ->where('circle_id', $params->get('product_category_id'))->pluck('product_id')->toArray())
             );
         }
 
-
         return $_this;
     }
 
-    public function edit(int $product_id, \Hyperf\Utils\Collection $params)
-    {
-        $product = $this->newSelf()->where('id', $product_id)->first();
-        $product->fill($params->toArray());
-        return $product->save();
-    }
 
-    public function isBuy(int $product_id, int $userId)
-    {
-
-    }
 }

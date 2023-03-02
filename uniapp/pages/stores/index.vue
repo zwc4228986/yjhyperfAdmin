@@ -14,7 +14,7 @@
 		<!-- <homeList :navH="navH" :returnShow="true" :currentPage="false" :sysHeight="sysHeight" >
 		</homeList> -->
 		<view class="circle-header">
-			<u-image radius="10" width="100px" height="80px"></u-image>
+			<u-image :src="circle_detail.icon.path_format" radius="10" width="100px" height="80px"></u-image>
 			<view class="right">
 				<view class="circle-header-title">{{circle_detail.name}}</view>
 				<view class="circle-header-info">{{circle_detail.info}}</view>
@@ -61,7 +61,7 @@
 				<view class='item' :class='is_switch==true?"":"on"' hover-class='none'
 					v-for="(item,index) in productList" :key="index" @click="godDetail(item)">
 					<view class='pictrue' :class='is_switch==true?"":"on"'>
-						<image :src='item.image.path_format' :class='is_switch==true?"":"on"'></image>
+						<image :src='item.image.path_format' mode="aspectFill" :class='is_switch==true?"":"on"'></image>
 						<span class="pictrue_log_class" :class="is_switch === true ? 'pictrue_log_big' : 'pictrue_log'"
 							v-if="item.activity && item.activity.type === '1'">秒杀</span>
 						<span class="pictrue_log_class" :class="is_switch === true ? 'pictrue_log_big' : 'pictrue_log'"
@@ -132,7 +132,7 @@
 		getNavigation,
 	} from '@/api/public.js'
 	import {
-		getCircleCategoryList,
+		getCategoryList,
 		getProductslist,
 		getProductHot
 	} from '@/api/store.js';
@@ -208,7 +208,7 @@
 		  });
 		},
 		onLoad: function(options) {
-			this.getAllCategory();
+			
 			
 			var that = this;
 			uni.getSystemInfo({
@@ -218,6 +218,7 @@
 			});
 			this.circle_id = options.circle_id
 			this.getCircleDetail();
+			this.getAllCategory();
 			this.where.product_category_pid = options.cid || 0;
 			this.$set(this.where, 'sid', options.sid || 0);
 			this.title = options.title || '';
@@ -283,16 +284,13 @@
 				// #endif
 			},
 			getAllCategory: function() {
-				
 				let that = this;
-				getCircleCategoryList({circle_id:this.circle_id,limit:-1}).then(res => {
+				getCategoryList({circle_id:this.circle_id,limit:-1}).then(res => {
 					let data = res;
-					data.forEach(item => {
-						item.children.unshift({
+						data.unshift({
 							'id': 0,
 							'name': '全部'
 						})
-					})
 					that.categoryTitle = data[0].cate_name;
 					that.where.product_category_pid = data[0].id;
 					that.sid = 0;

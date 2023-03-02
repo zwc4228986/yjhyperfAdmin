@@ -19,24 +19,24 @@ class ProductCategoryLogic
     public function getTreeFormat()
     {
         /** @var Collection $data */
-        $datas = $this->circleCategoryDao->with(['Circle'=>function($query){
-            $query->with(['ProductCategory'=>function($query){
-                 $query->select('name as label','id as value','circle_id');
+        $datas = $this->circleCategoryDao->with(['Circle' => function ($query) {
+            $query->with(['ProductCategory' => function ($query) {
+                $query->select('name as label', 'id as value', 'circle_id');
             }]);
         }])->get();
 
-        $datas->transform(function ($data){
-            $data->Circle->transform(function ($item){
-                 return [
-                     'children'=>$item->ProductCategory,
-                     'label'=>$item->name,
-                     'value'=>$item->id,
-                 ];
+        $datas->transform(function ($data) {
+            $data->Circle->transform(function ($item) {
+                return [
+                    'children' => $item->ProductCategory,
+                    'label' => $item->name,
+                    'value' => $item->id,
+                ];
             });
             return [
-                'children'=>$data->Circle,
-                'label'=>$data->name,
-                'value'=>$data->id,
+                'children' => $data->Circle,
+                'label' => $data->name,
+                'value' => $data->id,
             ];
         });
 
@@ -49,7 +49,7 @@ class ProductCategoryLogic
         return $datas;
     }
 
-    public function lists(array $params=[])
+    public function lists(array $params = [])
     {
 
     }
@@ -63,17 +63,22 @@ class ProductCategoryLogic
 
     public function delete(int $id)
     {
-        if($this->productCategoryDao->hasChild($id)){
+        if ($this->productCategoryDao->hasChild($id)) {
             return Error('Product category has Child');
         }
 
-        return $this->productCategoryDao->where('id',$id)->delete();
+        return $this->productCategoryDao->where('id', $id)->delete();
     }
 
     public function edit($id, \Hyperf\Utils\Collection $params)
     {
-        $productCategory = $this->productCategoryDao->where('id',$id)->firstOrError();
+        $productCategory = $this->productCategoryDao->where('id', $id)->firstOrError();
         $productCategory->fill($params->toArray());
         return $productCategory->save();
+    }
+
+    public function add(Collection $params)
+    {
+        return $this->productCategoryDao->create($params->toArray());
     }
 }

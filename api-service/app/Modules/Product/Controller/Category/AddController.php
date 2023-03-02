@@ -17,12 +17,12 @@ class EditController
     #[ApiPost]
     #[ApiParam("id")]
     #[ApiParam("name")]
+    #[ApiParam("file_id")]
     #[ApiParam("sort")]
     #[ApiParam("is_show")]
-    public function index()
-    {
+    public function  index(){
         $params = getParams();
-        $this->productCategoryLogic->edit($params->get('id'), $params->except('id'));
+        $this->productCategoryLogic->edit($params->get('id'),$params->except('id'));
         Success();
     }
 }

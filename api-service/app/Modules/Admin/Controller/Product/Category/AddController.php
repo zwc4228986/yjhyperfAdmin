@@ -8,21 +8,20 @@ use YjHyperfAdminPligin\Apidog\Annotations\Api;
 use YjHyperfAdminPligin\Apidog\Annotations\ApiParam;
 use YjHyperfAdminPligin\Apidog\Annotations\ApiPost;
 
-#[Api("admin/product/category/edit")]
-class EditController
+#[Api("admin/product/category/add")]
+class AddController
 {
     #[Inject]
     protected ProductCategoryLogic $productCategoryLogic;
 
     #[ApiPost]
-    #[ApiParam("id")]
     #[ApiParam("name")]
     #[ApiParam("sort")]
     #[ApiParam("is_show")]
     public function index()
     {
         $params = getParams();
-        $this->productCategoryLogic->edit($params->get('id'), $params->except('id'));
+        $this->productCategoryLogic->add($params);
         Success();
     }
 }

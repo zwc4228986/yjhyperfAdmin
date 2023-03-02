@@ -1,16 +1,17 @@
 <?php
 
-namespace App\Modules\Admin\Logic\Product;
+namespace App\Modules\Product\Logic;
 
 use App\Model\ProductCategory;
 use App\Model\ProductResource;
 use App\Modules\Admin\Dao\ProductCategoryDao;
 use App\Modules\Admin\Dao\ProductCategoryRelDao;
 
-use App\Modules\Admin\Dao\ProductDao;
+
 use App\Modules\Admin\Dao\ProductDescriptionDao;
 use App\Modules\Admin\Dao\ProductResourceDao;
 
+use App\Modules\Product\Dao\ProductDao;
 use Hyperf\DbConnection\Db;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\Utils\Collection;
