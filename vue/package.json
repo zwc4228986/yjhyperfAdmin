@@ -35,8 +35,7 @@
     "vuedraggable": "4.0.3",
     "vuex": "4.0.2",
     "xgplayer": "^2.31.4",
-    "xgplayer-hls": "^2.5.1",
-    "yarn": "^1.22.19"
+    "xgplayer-hls": "^2.5.1"
   },
   "devDependencies": {
     "@babel/core": "7.18.2",

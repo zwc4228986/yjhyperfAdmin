@@ -13,15 +13,18 @@ class ProductResourceModel extends ProductResource
         'product_id',
         'file_id',
         'type',
-        'url',
+        'baidu_url',
+        'baidu_code',
     ];
 
-    public function File(){
-        return $this->hasOne(\App\Model\SystemFile::class,'id','file_id');
+    public function File()
+    {
+        return $this->hasOne(\App\Model\SystemFile::class, 'id', 'file_id');
     }
 
 
-    public function Product(){
-        return $this->hasOne(\App\Model\Product::class,'id','product_id');
+    public function Product()
+    {
+        return $this->hasOne(\App\Model\Product::class, 'id', 'product_id');
     }
 }

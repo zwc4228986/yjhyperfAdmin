@@ -49,10 +49,11 @@ class ProductLogic
             $product_category_ids = $params->get('product_category_id');
 
             $this->updateProductCategoryRel($product->id, $product_category_ids);
-            $resource_id = $params->get('resource_id');
-            $baidu_resource = $params->get('baidu_resource');
-            $this->updateProductResource($product->id, $resource_id, 0);
-            $this->updateProductResource($product->id, $baidu_resource, 1);
+//            $resource_id = $params->get('resource_id');
+//            $baidu_url = $params->get('baidu_url');
+//            $baidu_code = $params->get('baidu_code');
+            $this->updateProductResource($product->id, $params, 0);
+            $this->updateProductResource($product->id, $params, 1);
             Db::commit();
         } catch (\Exception $exception) {
             Db::rollBack();
@@ -76,27 +77,34 @@ class ProductLogic
         }
     }
 
-    private function updateProductResource(int $product_id, $resource, int $type)
+    private function updateProductResource(int $product_id, Collection $params, int $type)
     {
-        if (!$resource) {
-            $this->productResourceDao->where('product_id', $product_id)
-                ->where('type', $type)->delete();
-        }
+
         if ($type == 0) {
+            $resource_id = $params->get('resource_id');
+            if ($resource_id) {
+                $this->productResourceDao->where('product_id', $product_id)
+                    ->where('type', $type)->delete();
+            }
+
             $this->productResourceDao->updateOrCreate([
                 'product_id' => $product_id,
                 'type' => $type,
             ], [
-                'file_id' => $resource
+                'file_id' => $resource_id
             ]);
         }
 
         if ($type == 1) {
+            $baidu_url = $params->get('baidu_url');
+            $baidu_code = $params->get('baidu_code');
+
             $this->productResourceDao->updateOrCreate([
                 'product_id' => $product_id,
                 'type' => $type,
             ], [
-                'url' => $resource
+                'baidu_url' => $baidu_url,
+                'baidu_code' => $baidu_code
             ]);
         }
 
@@ -123,18 +131,12 @@ class ProductLogic
         Db::beginTransaction();
         try {
             $params->offsetSet('image_id', (int)$params->get('image_ids'));
-
             $this->productDao->edit($product_id, $params);
             $this->productDescriptionDao->updateOrCreate([
                 'product_id' => $product_id,
             ], $params->only(['description'])->toArray());
-            $product_category_ids = $params->get('product_category_id');
-            $resource_id = $params->get('resource_id');
-
-            $this->updateProductCategoryRel($product_id, $product_category_ids);
-            $this->updateProductResource($product_id, $resource_id, 0);
-            $baidu_resource = $params->get('baidu_resource');
-            $this->updateProductResource($product_id, $baidu_resource, 1);
+            $this->updateProductResource($product_id, $params, 0);
+            $this->updateProductResource($product_id, $params, 1);
             Db::commit();
         } catch (\Exception $exception) {
             Db::rollBack();

@@ -20,7 +20,6 @@
 					@click="goSign"
 				  ></yj-button>
 			  </div>
-			  
 			  <div v-if="item.type == 1" style="margin-top: 10rpx;">
 			  				  <yj-button
 			  					bg="#FF9640"

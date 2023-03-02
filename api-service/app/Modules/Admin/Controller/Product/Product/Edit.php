@@ -23,8 +23,9 @@ class Edit
     #[ApiParam("image_ids")]
     #[ApiParam("status")]
     #[ApiParam("product_category_id")]
-    #[ApiParam("resource_id",'nullable')]
-    #[ApiParam("baidu_resource",'nullable')]
+    #[ApiParam("resource_id", 'nullable')]
+    #[ApiParam("baidu_url", 'nullable')]
+    #[ApiParam("baidu_code", 'nullable')]
     public function index()
     {
         $params = getParams();

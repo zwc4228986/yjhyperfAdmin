@@ -253,11 +253,20 @@
         </div>
         <div v-show="currentTab === '5'">
           <el-form ref="form" label-width="100px">
-            <el-form-item label="七牛云" >
+            <el-form-item label="七牛云">
               <yj-file v-model="formValidate.resource_id"></yj-file>
             </el-form-item>
             <el-form-item label="百度网盘">
-              <el-input  type="textarea" placeholder="" v-model="formValidate.baidu_resource"> </el-input>
+              <el-input
+                type="textarea"
+                placeholder=""
+                v-model="formValidate.baidu_url"
+              >
+              </el-input>
+            </el-form-item>
+            <el-form-item label="百度密码">
+              <el-input placeholder="" v-model="formValidate.baidu_code">
+              </el-input>
             </el-form-item>
           </el-form>
         </div>
@@ -314,7 +323,8 @@ export default {
         types: 3,
         info: "",
         description: "",
-        baidu_resource: "",
+        baidu_url: "",
+        baidu_code: "",
         is_show: 1,
         price: 1,
         product_category_id: [],
@@ -451,10 +461,8 @@ export default {
             res.product_description.description,
             "description"
           );
-          formValidate.prepend(
-            res.product_description.description,
-            "description"
-          );
+          formValidate.prepend(res.product_resource.baidu_url, "baidu_url");
+          formValidate.prepend(res.product_resource.baidu_code, "baidu_code");
           formValidate.prepend(3, "types");
           formValidate.prepend(res.product_resource?.file_id, "resource_id");
           formValidate.prepend(
