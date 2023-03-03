@@ -30,28 +30,12 @@
 		},
 		
 		{
-			"path": "pages/guide/index",
-			"style": {
-				"app-plus": {
-					"titleNView": false //禁用原生导航栏
-				}
-			}
-		},
-		{
 			"path": "pages/user/index",
 			"style": {
 				"navigationBarTitleText": "个人中心",
 				"navigationStyle": "custom"
 			}
 		},
-		//#ifdef H5
-		{
-			"path": "pages/auth/index",
-			"style": {
-				"navigationBarTitleText": ""
-			}
-		},
-		//#endif
 		{
 			"path": "pages/retrieve_password/index",
 			"style": {
@@ -74,43 +58,6 @@
 		}
     ],
 	"subPackages": [
-		
-		{
-			"root": "pages/exam",
-			"name": "exam",
-			"pages": [
-				{
-				"path": "index",
-				"style": {
-					"disableScroll": true,
-					"navigationStyle":"custom",
-					"navigationBarTitleText": "答题",
-					"enablePullDownRefresh": false
-				}
-			},{
-				"path": "main",
-				"style": {
-					"disableScroll": true,
-					"navigationBarTitleText": "答题",
-					"enablePullDownRefresh": false,
-					"navigationStyle": "custom"
-				}
-			}
-			]
-		},
-		{
-			"root": "pages/game",
-			"name": "game",
-			"pages": [{
-				"path": "index/index",
-				"style": {
-					"disableScroll": true,
-					"navigationStyle": "custom",
-					"navigationBarTitleText": "海洋动物园",
-					"enablePullDownRefresh": false
-				}
-			}]
-		},
 		{
 			"root": "pages/chat",
 			"name": "chat",
@@ -300,15 +247,6 @@
 						}
 						// #endif
 					}
-				}
-			}]
-		}, {
-			"root": "pages/live_list",
-			"name": "live_list",
-			"pages": [{
-				"path": "index",
-				"style": {
-					"navigationBarTitleText": "精彩内容"
 				}
 			}]
 		}, {
@@ -1397,39 +1335,6 @@
 					"path": "order_cancellation/index",
 					"style": {
 						"navigationBarTitleText": "订单核销",
-						"app-plus": {
-							// #ifdef APP-PLUS
-							"titleNView": {
-								"type": "default"
-							}
-							// #endif
-						}
-					}
-				}
-			]
-		},
-		{
-			"root": "pages/columnGoods",
-			"name": "columnGoods",
-			"pages": [{
-					"path": "HotNewGoods/index",
-					"style": {
-						"navigationBarTitleText": "精品推荐",
-						"app-plus": {
-							// #ifdef APP-PLUS
-							"titleNView": {
-								"type": "default"
-							}
-							// #endif
-						}
-					}
-				},
-				{
-					"path": "HotNewGoods/feedback",
-					"style": {
-						"navigationBarTitleText": "我的客服",
-						"navigationBarTextStyle": "white",
-						"navigationBarBackgroundColor": "#3A3A3A",
 						"app-plus": {
 							// #ifdef APP-PLUS
 							"titleNView": {

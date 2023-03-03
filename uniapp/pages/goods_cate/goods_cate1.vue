@@ -65,16 +65,12 @@
 		mapState,
 		mapGetters
 	} from "vuex"
-	import pageFooter from '@/components/pageFooter/index.vue'
 	import {
 		getNavigation
 	} from '@/api/public.js'
-	import tabBar from "@/pages/index/visualization/components/tabBar.vue";
 	const app = getApp();
 	export default {
 		components: {
-			pageFooter,
-			tabBar
 		},
 		data() {
 			return {

@@ -417,25 +417,7 @@
 				<!-- <view class="uni-p-b-98"></view> -->
 			</scroll-view>
 		</view>
-		<tabBar v-if="!is_diy" :pagePath="'/pages/user/index'"></tabBar>
-		<view class="foot" v-else-if="is_diy && newData.status && newData.status.status">
-			<view class="page-footer" id="target" :style="{'background-color':newData.bgColor.color[0].item}">
-				<view class="foot-item" v-for="(item,index) in newData.menuList" :key="index" @click="goRouter(item)">
-					<block v-if="item.link == activeRouter">
-						<image :src="item.imgList[0]"></image>
-						<view class="txt" :style="{color:newData.activeTxtColor.color[0].item}">{{item.name}}</view>
-					</block>
-					<block v-else>
-						<image :src="item.imgList[1]"></image>
-						<view class="txt" :style="{color:newData.txtColor.color[0].item}">{{item.name}}</view>
-					</block>
-					<div class="count-num" v-if="item.link === '/pages/order_addcart/order_addcart' && cartNum > 0">
-						{{cartNum}}
-					</div>
-				</view>
-			</view>
-		</view>
-
+	
 	</view>
 </template>
 <script>
@@ -474,14 +456,12 @@
 	import dayjs from '@/plugin/dayjs/dayjs.min.js';
 	import Routine from '@/libs/routine';
 	import colors from '@/mixins/color';
-	import tabBar from "@/pages/index/visualization/components/tabBar.vue";
 	import {
 		getCustomer
 	} from '@/utils/index.js'
 
 	export default {
 		components: {
-			tabBar,
 		},
 		// computed: mapGetters(['isLogin','cartNum']),
 		computed: {
