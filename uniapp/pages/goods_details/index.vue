@@ -446,7 +446,7 @@
 </template>
 
 <script>
-	 import dAlert from '@/uni_modules/d-alert/components/d-alert/d-alert.vue'
+	
 	let sysHeight = uni.getSystemInfoSync().statusBarHeight + 'px';
 	import {
 		getCustomer
@@ -519,7 +519,6 @@
 			mpHtml,
 			menuIcon,
 			cusPreviewImg,
-			dAlert,
 			// #ifdef MP
 			authorize,
 			// #endif
@@ -697,7 +696,7 @@
 			//#endif
 		},
 		onReady: function() {
-			 this._open_tan()
+			
 			this.isNodes++;
 			// #ifdef H5
 			this.codeVal = window.location.origin + '/pages/goods_details/index?id=' + this.id +
@@ -748,24 +747,7 @@
 			this.currentPage = !this.currentPage
 		},
 		methods: {
-			  _open_tan() {
-			                console.log('____open___')
-							return false;
-							this.$showModal({
-			                  content: '这是一个自定义弹框',
-			                  showCancel:false,
-			                  price:199,
-			                  msg:'限时活动',
-			                  time:'限时时间：2022.06.11——2022.10.01',
-			                  success(res) {
-			                    if (res.confirm) {
-			                      console.log('用户点击确定-领取成功')
-			                    } else if (res.cancel) {
-			                      console.log('用户点击取消')
-			                    }
-			                  }
-			                })
-			            },
+			       
 			goCustomer() {
 				getCustomer(`/pages/customer_list/chat?productId=${this.id}`)
 			},

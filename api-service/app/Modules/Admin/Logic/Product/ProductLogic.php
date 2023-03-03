@@ -42,7 +42,7 @@ class ProductLogic
         Db::beginTransaction();
         try {
             $params->offsetSet('image_id', (int)$params->get('image_ids'));
-            $product = $this->productDao->create($params->toArray());
+            $product = $this->productDao-> add($params);
             $this->productDescriptionDao->updateOrCreate([
                 'product_id' => $product->id,
             ], $params->only(['description'])->toArray());

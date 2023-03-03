@@ -37,23 +37,6 @@
 				}
 			}
 		},
-		
-	
-		
-		{
-			"path": "pages/order_addcart/order_addcart",
-			"style": {
-				"navigationBarTitleText": "购物车",
-				"app-plus": {
-					// #ifdef APP-PLUS
-					"titleNView": {
-						"type": "default"
-					}
-					// #endif
-				}
-
-			}
-		},
 		{
 			"path": "pages/user/index",
 			"style": {

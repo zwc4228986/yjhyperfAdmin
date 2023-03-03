@@ -32,7 +32,7 @@ class ProductModel extends Product
 
     public function ProductResource()
     {
-        return $this->hasOne(\App\Model\ProductResource::class, 'product_id', 'id');
+        return $this->hasMany(\App\Model\ProductResource::class, 'product_id', 'id');
     }
 
 }

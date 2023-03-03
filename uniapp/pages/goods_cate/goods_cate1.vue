@@ -35,40 +35,21 @@
 								<view class='line'></view>
 							</view>
 							<view class='list acea-row'>
-								<block v-for="(itemn,indexn) in item.circle" :key="indexn">
-									<navigator hover-class='none'
-										:url='"/pages/goods/goods_list/index?sid="+itemn.id+"&title="+itemn.cate_name'
+								<block v-for="(itemn,indexn) in item.circle" :key="indexn" >
+									<div  @click="goCircle(item)"
 										class='item acea-row row-column row-middle'>
 										<view class='picture'>
 											<image :src='itemn.icon.path_format' v-if="itemn.icon.path_format"></image>
 											<image src="/static/images/sort-img.png" v-else></image>
 										</view>
 										<view class='name line1'>{{(itemn.name)}}</view>
-									</navigator>
+									</div>
 								</block>
 							</view>
 						</view>
 					</block>
 					<view :style='"height:"+(height-300)+"rpx;"' v-if="number<15"></view>
 				</scroll-view>
-			</view>
-		</view>
-		<!-- <tabBar v-if="!is_diy" :pagePath="'/pages/goods_cate/goods_cate'"></tabBar> -->
-		<view class="foot" v-if="newData.menuList && newData.menuList.length">
-			<view class="page-footer" id="target" :style="{'background-color':newData.bgColor.color[0].item}">
-				<view class="foot-item" v-for="(item,index) in newData.menuList" :key="index" @click="goRouter(item)">
-					<block v-if="item.link == activeRouter">
-						<image :src="item.imgList[0]"></image>
-						<view class="txt" :style="{color:newData.activeTxtColor.color[0].item}">{{(item.name)}}</view>
-					</block>
-					<block v-else>
-						<image :src="item.imgList[1]"></image>
-						<view class="txt" :style="{color:newData.txtColor.color[0].item}">{{(item.name)}}</view>
-					</block>
-					<div class="count-num" v-if="item.link === '/pages/order_addcart/order_addcart' && cartNum > 0">
-						{{cartNum}}
-					</div>
-				</view>
 			</view>
 		</view>
 	</view>
@@ -139,6 +120,11 @@
 
 		},
 		methods: {
+			goCircle(item){
+				uni.navigateTo({
+					url:"/pages/stores/index?circle_id="+item.id
+				})
+			},
 			getNav() {
 				getNavigation().then(res => {
 					this.newData = res.data

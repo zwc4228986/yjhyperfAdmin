@@ -61,4 +61,9 @@ class ProductDao extends ProductModel
     {
 
     }
+
+    public function add($params)
+    {
+        return $this->create($params->toArray());
+    }
 }

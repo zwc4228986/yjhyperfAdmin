@@ -37,8 +37,7 @@
 					</customerService>
 					<goodList v-if="item.name == 'goodList'" :dataConfig="item" @detail="goDetail"
 						:isSortType="isSortType"></goodList>
-					<goodGrid v-if="item.name == 'goodGrid'" :dataConfig="item" @detail="goDetail"
-						:isSortType="isSortType"></goodGrid>
+		
 					<guide v-if="item.name == 'guide'" :dataConfig="item" :isSortType="isSortType"></guide>
 					<headerSerch v-if="item.name == 'headerSerch'" :dataConfig="item"></headerSerch>
 					<liveBroadcast v-if="item.name == 'liveBroadcast'" :dataConfig="item" :isSortType="isSortType">
@@ -50,13 +49,10 @@
 					<promotionList v-if="item.name == 'promotionList'" :dataConfig="item" @changeTab="changeTab"
 						:tempArr="tempArr" :iSshowH="iSshowH" @detail="goDetail" :isSortType="isSortType">
 					</promotionList>
-					<richText v-if="item.name == 'richText'" :dataConfig="item" :isSortType="isSortType"></richText>
-					<seckill v-if="item.name == 'seckill'" :dataConfig="item" :isSortType="isSortType"></seckill>
 					<swiperBg v-if="item.name == 'swiperBg'" :dataConfig="item" :isSortType="isSortType"></swiperBg>
 					<swipers v-if="item.name == 'swipers'" :dataConfig="item" :isSortType="isSortType"></swipers>
 					<tabNav v-if="item.name == 'tabNav'" :dataConfig="item" @bindHeight="bindHeighta"
 						@bindSortId="bindSortId"></tabNav>
-					<titles v-if="item.name == 'titles'" :dataConfig="item" :isSortType="isSortType"></titles>
 				</block>
 				<!-- #endif -->
 				<!-- 分类商品模块 -->
@@ -241,25 +237,22 @@
 	import activePartyPlus from './components/activePartyPlus';
 	import headerSerch from './components/headerSerch';
 	import swipers from './components/swipers';
-	import coupon from './components/coupon';
+	
 	import articleList from './components/articleList';
 	import bargain from './components/bargain';
 	import blankPage from './components/blankPage';
 	import combination from './components/combination';
 	import customerService from './components/customerService';
 	import goodList from './components/goodList';
-	import goodGrid from './components/goodGrid';
 	import guide from './components/guide';
 	import liveBroadcast from './components/liveBroadcast';
 	import menus from './components/menus';
 	import news from './components/news';
 	import pictureCube from './components/pictureCube';
 	import promotionList from './components/promotionList';
-	import richText from './components/richText';
-	import seckill from './components/seckill';
+
 	import swiperBg from './components/swiperBg';
 	import tabNav from './components/tabNav';
-	import titles from './components/titles';
 	import appUpdate from "@/components/update/app-update.vue";
 
 	import {
@@ -313,11 +306,9 @@
 			// #ifdef MP || APP-PLUS
 			authorize,
 			activeParty,
-			goodGrid,
 			activePartyPlus,
 			headerSerch,
 			swipers,
-			coupon,
 			articleList,
 			bargain,
 			blankPage,
@@ -330,11 +321,8 @@
 			pictureCube,
 			news,
 			promotionList,
-			richText,
-			seckill,
 			swiperBg,
 			tabNav,
-			titles,
 			appUpdate, //APP更新
 			// #endif
 		},
