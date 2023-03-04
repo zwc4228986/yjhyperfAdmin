@@ -146,7 +146,7 @@
 					</view>
 				</view>
 				<view class="conter">
-					<jyf-parser :content="bargainInfo.description" ref="article" :tag-style="tagStyle"></jyf-parser>
+				
 				</view>
 				<view class="lock" :style="'background-image: url('+picUrl.lock+');'"></view>
 			</view>
@@ -161,7 +161,7 @@
 					</view>
 				</view>
 				<view class="conter">
-					<jyf-parser :content="bargainInfo.rule" ref="article" :tag-style="tagStyle"></jyf-parser>
+				
 				</view>
 			</view>
 			<view class="bargainTip" :class="active == true ? 'on' : ''">
@@ -243,7 +243,7 @@
 </template>
 
 <script>
-	import zbCode from '@/components/zb-code/zb-code.vue'
+
 	import {
 		getBargainDetail,
 		postBargainStartUser,
@@ -270,7 +270,6 @@
 	// #endif
 	import countDown from '@/components/countDown';
 	import home from '@/components/home';
-	import parser from '@/components/mp-html/mp-html';
 	import {
 		silenceBindingSpread
 	} from '@/utils';
@@ -289,7 +288,6 @@
 			authorize,
 			// #endif
 			home,
-			'jyf-parser': parser
 		},
 		/**
 		 * 页面的初始数据

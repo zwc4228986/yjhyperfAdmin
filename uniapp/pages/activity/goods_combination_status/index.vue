@@ -128,7 +128,6 @@
 </template>
 <script>
 	import CountDown from '@/components/countDown';
-	import ProductWindow from '@/components/productWindow';
 	import util from '../../../utils/util.js';
 	import {
 		toLogin
@@ -160,7 +159,6 @@
 		name: NAME,
 		components: {
 			CountDown,
-			ProductWindow,
 			home,
 			// #ifdef MP
 			authorize

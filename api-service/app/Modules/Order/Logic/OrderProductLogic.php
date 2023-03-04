@@ -27,7 +27,10 @@ class OrderProductLogic
 
     public function download_detail(int $order_product_id)
     {
-        $data = $this->orderProductDao->with(['ProductResource', 'Product' => function ($query) {
+        $data = $this->orderProductDao->with(['ProductResource' => function ($query) {
+            $query->with('File');
+
+        }, 'Product' => function ($query) {
             $query->with('Image');
         }])->where('id', $order_product_id)->first();
         return $data;

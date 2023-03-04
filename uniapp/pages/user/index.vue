@@ -203,7 +203,7 @@
 				
 					
 						<view class="circle-bd">
-							<view  class="item" v-for="(item,index) in userCircle" :key="index">
+							<view  class="item" v-for="(item,index) in userCircle" @click="goCircle(item)" :key="index">
 									<view class="pic">
 										<image style="width: 100%;height: 100%;"  :src="item.icon.path_format"></image>
 									</view>
@@ -211,14 +211,15 @@
 							</view>
 						</view>
 					</view>
-					<view class="order-wrapper" :class="userInfo.svip_open?'':'height'">
-						<view class="order-hd flex">
+					
+					<view class="order-wrapper">
+						<navigator hover-class="none" url="/pages/users/order_list/index" class="order-hd flex" @click="goOrder()">
 							<view class="left">我的资源</view>
-							<navigator class="right flex" hover-class="none" url="/pages/users/order_list/index"
+							<view class="right flex" 
 								open-type="navigate">
 								<text class="iconfont icon-xiangyou" style="font-weight: bold;"></text>
-							</navigator>
-						</view>
+							</view>
+						</navigator>
 					</view>
 				<!-- 	<view class="task-wrapper" v-if="!task_hide" :class="userInfo.svip_open?'':'height'">
 						
@@ -677,6 +678,11 @@
 			this.onLoadFun();
 		},
 		methods: {
+			goCircle(item){
+				uni.navigateTo({
+					url:"/pages/stores/index?circle_id="+item.id
+				})
+			},
 			getUserCircle(){
 				getUserCircle().then(res=>{
 					this.userCircle = res;

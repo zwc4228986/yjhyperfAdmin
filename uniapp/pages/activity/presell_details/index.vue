@@ -180,9 +180,7 @@
 		<!-- 		<shareRedPackets :sharePacket="sharePacket" @listenerActionSheet="listenerActionSheet"
 			@closeChange="closeChange"></shareRedPackets> -->
 		<!-- 组件 -->
-		<productWindow :attr="attr" :isShow="0" :limitNum="1" :iSplus="1" @myevent="onMyEvent" @ChangeAttr="ChangeAttr"
-			@ChangeCartNum="ChangeCartNum" @attrVal="attrVal" @iptCartNum="iptCartNum" id="product-window"
-			:is_vip="is_vip" @getImg="showImg"></productWindow>
+	
 		<cus-previewImg ref="cusPreviewImg" :list="skuArr" @changeSwitch="changeSwitch"
 			@shareFriend="listenerActionSheet" />
 		<couponListWindow :coupon="coupon" v-if="coupon" @ChangCouponsClone="ChangCouponsClone"
@@ -266,15 +264,11 @@
 		imageBase64
 	} from '@/api/public';
 	import productConSwiper from '@/components/productConSwiper';
-	import couponListWindow from '@/components/couponListWindow';
-	import productWindow from '@/components/productWindow';
-	import userEvaluation from '@/components/userEvaluation';
 	import shareRedPackets from '@/components/shareRedPackets';
 	import kefuIcon from '@/components/kefuIcon';
 	import {
 		silenceBindingSpread
 	} from '@/utils';
-	import parser from '@/components/jyf-parser/jyf-parser';
 	import ClipboardJS from '@/plugin/clipboard/clipboard.js';
 	// #ifdef MP
 	import authorize from '@/components/Authorize';
@@ -285,12 +279,8 @@
 	export default {
 		components: {
 			productConSwiper,
-			couponListWindow,
-			productWindow,
-			userEvaluation,
 			shareRedPackets,
 			kefuIcon,
-			'jyf-parser': parser,
 			cusPreviewImg,
 			// #ifdef MP
 			authorize

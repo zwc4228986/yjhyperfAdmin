@@ -3,8 +3,8 @@
 		"^yj-(.*)": "@/yj/components/yj-$1/yj-$1.vue"
 	},
 	"pages": [ //pages数组中第一项表示应用启动页
-	{
-		"path": "pages/index/index",
+		{
+			"path": "pages/index/index",
 			"style": {
 				"navigationBarTitleText": "",
 				"navigationStyle": "custom",
@@ -14,32 +14,12 @@
 				}
 			}
 		},
-		{
-			"path": "pages/stores/index",
-			"style": {
-				"navigationBarTitleText": "商城",
-				"navigationBarTextStyle": "white",
-				"navigationStyle": "custom"
-			}
-		},
-		{
-			"path": "pages/product/download",
-			"style": {
-				"navigationBarTitleText": "下载中心"
-			}
-		},
-		
+	
 		{
 			"path": "pages/user/index",
 			"style": {
 				"navigationBarTitleText": "个人中心",
 				"navigationStyle": "custom"
-			}
-		},
-		{
-			"path": "pages/retrieve_password/index",
-			"style": {
-				"navigationBarTitleText": "找回密码"
 			}
 		},
 		{
@@ -56,8 +36,29 @@
 
 			}
 		}
-    ],
+	],
 	"subPackages": [
+		{
+			
+			"root": "pages/stores",
+			"pages": [{
+				"path": "index",
+				"style": {
+					"navigationBarTitleText": "商城",
+					"navigationBarTextStyle": "white",
+					"navigationStyle": "custom"
+				}
+			}]
+		},
+		{
+			"root": "pages/product",
+			"pages": [{
+				"path": "download",
+				"style": {
+					"navigationBarTitleText": "下载中心"
+				}
+			}]
+		},
 		{
 			"root": "pages/chat",
 			"name": "chat",
@@ -340,9 +341,9 @@
 					"path": "order_details/index",
 					"style": {
 						"navigationBarTitleText": "订单详情",
-            "navigationBarTextStyle": "white",
-            "navigationBarBackgroundColor": "#F58325",
-            // "navigationStyle": "custom",
+						"navigationBarTextStyle": "white",
+						"navigationBarBackgroundColor": "#F58325",
+						// "navigationStyle": "custom",
 						"app-plus": {
 							// #ifdef APP-PLUS
 							"titleNView": {
@@ -542,7 +543,7 @@
 							// #endif
 						}
 					}
-				},	
+				},
 				{
 					"path": "user_bind_up/index",
 					"style": {
@@ -868,9 +869,9 @@
 				{
 					"path": "order_list/index",
 					"style": {
-						"navigationBarTitleText": "我的下载",
-            "navigationBarTextStyle": "white",
-            "navigationBarBackgroundColor": "#F58325",
+						"navigationBarTitleText": "我的资源",
+						"navigationBarTextStyle": "white",
+						"navigationBarBackgroundColor": "#F58325",
 						"app-plus": {
 							// #ifdef APP-PLUS
 							"titleNView": {
@@ -1364,7 +1365,7 @@
 					"path": "vip_paid/index",
 					"style": {
 						"navigationBarTitleText": "SVIP会员",
-						"navigationStyle":"custom"
+						"navigationStyle": "custom"
 					}
 				},
 				{
@@ -1578,18 +1579,17 @@
 		}
 	],
 	"plugins": {
-	        "netdiskShare": {
-	        "version": "1.2.4",
-	        "provider": "wx8c873f830774d652"
-	        }
-	  },
+				"netdiskShare": {
+					"version": "1.2.4",
+					"provider": "wx8c873f830774d652"
+				}
+			},
 	"tabBar": {
 		"color": "#666666",
 		"selectedColor": "#F58325",
 		"borderStyle": "white",
 		"backgroundColor": "#ffffff",
-		"list": [
-			{
+		"list": [{
 				"pagePath": "pages/index/index",
 				"iconPath": "static/images/icon/0-0.png",
 				"selectedIconPath": "static/images/icon/0-1.png",

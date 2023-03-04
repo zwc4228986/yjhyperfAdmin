@@ -5,13 +5,11 @@
 </template>
 
 <script>
-	import parser from "@/components/jyf-parser/jyf-parser";
 	import {
 		getUserAgreement,
 	} from '@/api/user.js';
 	export default {
 		components: {
-			"jyf-parser": parser
 		},
 		data() {
 			return {

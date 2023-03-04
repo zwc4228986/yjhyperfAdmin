@@ -16,6 +16,7 @@ class Lists
 
     #[ApiPost]
     #[ApiParam('product_category_pid', 'nullable')]
+    #[ApiParam('product_category_id', 'nullable')]
     #[ApiParam('circle_id', 'nullable')]
     public function index()
     {

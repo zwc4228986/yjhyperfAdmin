@@ -103,8 +103,6 @@
 		CACHE_LONGITUDE,
 		CACHE_LATITUDE
 	} from '@/config/cache.js';
-	import couponListWindow from '@/components/couponListWindow';
-	import addressWindow from '@/components/addressWindow';
 	import orderGoods from '@/components/orderGoods';
 	import home from '@/components/home';
 	import {
@@ -119,8 +117,6 @@
 	import colors from "@/mixins/color";
 	export default {
 		components: {
-			couponListWindow,
-			addressWindow,
 			orderGoods,
 			home,
 			// #ifdef MP

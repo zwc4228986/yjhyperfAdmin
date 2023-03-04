@@ -16,9 +16,11 @@ class ProductCategoryDao extends ProductCategoryModel
 
     public function params($params)
     {
+
         $params->check('circle_id', function ($circle_id) {
             $this->addWhere($this->getQuery()->where('circle_id', $circle_id));
         });
+
         return $this;
     }
 

@@ -128,13 +128,12 @@
 		getIntegralProductDetail
 	} from '@/api/activity.js';
 	import productConSwiper from '@/components/productConSwiper/index.vue'
-	import productWindow from './component/productWindow.vue'
-	import userEvaluation from '@/components/userEvaluation/index.vue'
+
 	import kefuIcon from '@/components/kefuIcon';
 	// #ifdef MP
 	import authorize from '@/components/Authorize';
 	// #endif
-	import parser from "@/components/mp-html/mp-html";
+
 	import countDown from '@/components/countDown';
 	import {
 		imageBase64
@@ -234,10 +233,7 @@
 		},
 		components: {
 			productConSwiper,
-			'productWindow': productWindow,
-			userEvaluation,
 			kefuIcon,
-			"jyf-parser": parser,
 			countDown,
 			cusPreviewImg,
 			homeList,

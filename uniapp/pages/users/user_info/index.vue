@@ -213,13 +213,9 @@
 	import authorize from '@/components/Authorize';
 	// #endif
 	import colors from '@/mixins/color.js';
-	import appUpdate from "@/components/update/app-update.vue";
 import { login } from '../../../api/public';
 	export default {
 		components: {
-			// #ifdef APP-PLUS
-			appUpdate
-			// #endif
 			// #ifdef MP
 			authorize
 			// #endif

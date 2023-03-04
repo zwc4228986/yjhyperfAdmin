@@ -2,6 +2,7 @@
 
 namespace App\Modules\Admin\Dao;
 
+use App\Model\Circle;
 use App\Model\Product;
 use App\Model\ProductCategoryRel;
 use App\Modules\Admin\Model\ProductModel;
@@ -24,30 +25,24 @@ class ProductDao extends ProductModel
 
     public function params(Collection $params)
     {
-        $_this = $this;
-        if ($params->offsetExists('product_category_pid')) {
-            $_this = $this->addWhere(
+
+        $params->check('product_category_id', [0, '0', null], function ($product_category_id) {
+            dd($product_category_id);
+            $this->addWhere(
                 $this::query()->whereIn('id', app(ProductCategoryRel::class)
-                    ->where('product_category_pid', $params->get('product_category_pid'))->pluck('product_id')->toArray())
+                    ->where('product_category_id', $product_category_id)->pluck('product_id')->toArray())
             );
-        }
+        });
 
-        if ($params->offsetExists('product_category_id')) {
-            $_this = $this->addWhere(
-                $this::query()->whereIn('id', app(ProductCategoryRel::class)
-                    ->where('product_category_id', $params->get('product_category_id'))->pluck('product_id')->toArray())
+        $params->check('circle_id', [0, null], function ($circle_id) {
+            $this->addWhere(
+                $this::query()->whereIn('id', app(Circle::class)
+                    ->where('circle_id', $circle_id)->pluck('product_id')->toArray())
             );
-        }
-
-        if ($params->offsetExists('circle_id')) {
-            $_this = $this->addWhere(
-                $this::query()->whereIn('id', app(Circel::class)
-                    ->where('circle_id', $params->get('product_category_id'))->pluck('product_id')->toArray())
-            );
-        }
+        });
 
 
-        return $_this;
+        return $this;
     }
 
     public function edit(int $product_id, \Hyperf\Utils\Collection $params)

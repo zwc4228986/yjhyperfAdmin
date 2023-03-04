@@ -255,13 +255,11 @@
 		collectDel
 	} from '@/api/store.js';
 	import productConSwiper from '@/components/productConSwiper/index.vue'
-	import productWindow from '@/components/productWindow/index.vue'
-	import userEvaluation from '@/components/userEvaluation/index.vue'
 	import kefuIcon from '@/components/kefuIcon';
 	// #ifdef MP
 	import authorize from '@/components/Authorize';
 	// #endif
-	// import parser from "@/components/mp-html/mp-html";
+	
 	import countDown from '@/components/countDown';
 	import {
 		imageBase64
@@ -283,7 +281,7 @@
 	// #endif
 	import colors from '@/mixins/color.js';
 	import menuIcon from '@/components/menuIcon.vue'
-	import parser from "@/components/jyf-parser/jyf-parser";
+	
 	import cusPreviewImg from "@/components/cusPreviewImg/index.vue";
 	import {
 		sharePoster
@@ -296,13 +294,10 @@
 		mixins: [colors, sharePoster],
 		components: {
 			productConSwiper,
-			'productWindow': productWindow,
-			userEvaluation,
 			kefuIcon,
 			menuIcon,
 			countDown,
 			cusPreviewImg,
-			parser,
 			homeList,
 			// #ifdef MP
 			authorize

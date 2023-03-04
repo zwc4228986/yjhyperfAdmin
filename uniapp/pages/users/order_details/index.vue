@@ -434,13 +434,10 @@
 			:totalPrice='totalPrice' :friendPay="true"></payment>
 
 
-		<invoiceModal :aleartStatus="aleartStatus" :invoiceData="invoiceData" @close="aleartStatus=false">
-		</invoiceModal>
+	
 		<view class="mask invoice-mask" v-if="aleartStatus" @click="aleartStatus = false"></view>
 		<view class="mask more-mask" v-if="moreBtn" @click="moreBtn = false"></view>
-		<invoice-picker :inv-show="invShow" :is-special="special_invoice" :inv-checked="invChecked" :order-id='order_id'
-			:inv-list="invList" :is-order="1" @inv-close="invClose" @inv-change="invSub" @inv-cancel="invCancel">
-		</invoice-picker>
+	
 	</view>
 </template>
 
@@ -481,17 +478,11 @@
 	import authorize from '@/components/Authorize';
 	// #endif
 	import colors from "@/mixins/color";
-	import invoicePicker from '@/components/invoicePicker';
-	import invoiceModal from '@/components/invoiceModal/index.vue'
-	import zbCode from '@/components/zb-code/zb-code.vue'
 	export default {
 		components: {
 			payment,
 			home,
-			invoicePicker,
-			invoiceModal,
 			orderGoods,
-			zbCode,
 			// #ifdef MP
 			authorize
 			// #endif

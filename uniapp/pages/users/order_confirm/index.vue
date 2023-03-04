@@ -256,9 +256,7 @@
 		<!-- <authorize @onLoadFun="onLoadFun" :isAuto="isAuto" :isShowAuth="isShowAuth" @authColse="authColse"></authorize> -->
 		<!-- #endif -->
 		<home v-show="!invShow"></home>
-		<invoice-picker :inv-show="invShow" :inv-list="invList" :inv-checked="invChecked" :is-special="special_invoice"
-			:url-query="urlQuery" @inv-close="invClose" @inv-change="invChange" @inv-cancel="invCancel">
-		</invoice-picker>
+		
 		<payment :payMode="cartArr" :pay_close="pay_close" :isCall="true" :totalPrice="totalPrice.toString()"
 			@changePayType="changePayType" @onChangeFun="onChangeFun"></payment>
 		<canvas canvas-id="canvas" v-if="canvasStatus"
@@ -289,11 +287,8 @@
 		CACHE_LONGITUDE,
 		CACHE_LATITUDE
 	} from '@/config/cache.js';
-	import couponListWindow from '@/components/couponListWindow';
-	import addressWindow from '@/components/addressWindow';
 	import orderGoods from '@/components/orderGoods';
 	import home from '@/components/home';
-	import invoicePicker from '@/components/invoicePicker';
 	import {
 		toLogin
 	} from '@/libs/login.js';
@@ -308,9 +303,6 @@
 	export default {
 		components: {
 			payment,
-			invoicePicker,
-			couponListWindow,
-			addressWindow,
 			orderGoods,
 			home,
 			// #ifdef MP

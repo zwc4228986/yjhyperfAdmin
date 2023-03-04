@@ -131,7 +131,7 @@
 		orderRefund_order
 	} from "@/api/admin";
 	import Loading from '@/components/Loading/index'
-	import PriceChange from '@/components/PriceChange/index'
+	
 	import {
 		isMoney
 	} from '@/utils/validate.js'
@@ -139,7 +139,6 @@
 		name: "AdminOrderList",
 		components: {
 			Loading,
-			PriceChange
 		},
 		data() {
 			return {

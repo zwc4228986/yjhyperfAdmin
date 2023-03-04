@@ -4,6 +4,7 @@ namespace App\Modules\Admin\Logic\Product;
 
 use App\Model\ProductCategory;
 use App\Model\ProductResource;
+use App\Modules\Admin\Dao\CircleDao;
 use App\Modules\Admin\Dao\ProductCategoryDao;
 use App\Modules\Admin\Dao\ProductCategoryRelDao;
 
@@ -32,6 +33,7 @@ class ProductLogic
     #[Inject]
     protected ProductResourceDao $productResourceDao;
 
+
     public function lists(Collection $params)
     {
         return $this->productDao->newSelf()->params($params)->orderByDesc("id")->with('Image')->getList();
@@ -42,7 +44,7 @@ class ProductLogic
         Db::beginTransaction();
         try {
             $params->offsetSet('image_id', (int)$params->get('image_ids'));
-            $product = $this->productDao-> add($params);
+            $product = $this->productDao->add($params);
             $this->productDescriptionDao->updateOrCreate([
                 'product_id' => $product->id,
             ], $params->only(['description'])->toArray());
@@ -64,15 +66,19 @@ class ProductLogic
 
     private function updateProductCategoryRel($product_id, $product_category_ids)
     {
+//        dd($product_category_ids);
         //先删除
         foreach ($product_category_ids as $product_category_id) {
             //获取一级导航
-            $product_category_pid = $this->productCategoryDao->newSelf()->where('id', $product_category_id)->value('pid');
+            $circle_id = $this->productCategoryDao->newSelf()->where('id', $product_category_id)->value('circle_id');
 
+            //查看所属圈子
             $this->productCategoryRelDao->updateOrCreate([
-                'product_category_pid' => $product_category_pid,
-                'product_category_id' => $product_category_id,
                 'product_id' => $product_id
+            ], [
+                'circle_id' => $circle_id,
+                'product_category_pid' => $product_category_id,
+                'product_category_id' => $product_category_id
             ]);
         }
     }
@@ -135,6 +141,7 @@ class ProductLogic
             $this->productDescriptionDao->updateOrCreate([
                 'product_id' => $product_id,
             ], $params->only(['description'])->toArray());
+            $this->updateProductCategoryRel($product_id, $params->get('product_category_id'));
             $this->updateProductResource($product_id, $params, 0);
             $this->updateProductResource($product_id, $params, 1);
             Db::commit();

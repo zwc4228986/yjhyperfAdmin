@@ -94,7 +94,9 @@
 		async mounted() {
 			miniappLogin().then(res=>{
 				this.$emit('loadSuccess')
-				this.isActive = false;
+				setTimeout(()=>{
+					this.isActive = false;
+				},200)
 			})
 			
 		}

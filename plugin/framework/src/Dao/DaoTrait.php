@@ -1,5 +1,6 @@
 <?php
-namespace  YjHyperfAdminPligin\Framework\Dao;
+
+namespace YjHyperfAdminPligin\Framework\Dao;
 
 
 use Hyperf\Database\Model\Builder;
@@ -11,20 +12,23 @@ trait DaoTrait
 
     private $init = false;
 
-    protected function init(){
+    protected function init()
+    {
         $this->init = true;
 
         return $this;
     }
 
-    public function newSelf():self
+    protected $daoWith = [];
+
+    public function newSelf(): self
     {
         return (new self())->init();
     }
 
-    public function addWhere(\Hyperf\Database\Model\Builder $query):self
+    public function addWhere(\Hyperf\Database\Model\Builder $query): self
     {
-        if($this->init == false){
+        if ($this->init == false) {
             Error('init is false');
         }
 
@@ -33,23 +37,28 @@ trait DaoTrait
 //        }
 
         $this->getDaoquery()->getQuery()->addNestedWhereQuery($query->getQuery());
-//        dd($this->getDaoquery()->getQuery()->wheres);
+
         return $this;
     }
 
 
-    public function __call( $method, $parameters)
+    public function __call($method, $parameters)
     {
         if (in_array($method, ['increment', 'decrement'])) {
             return $this->{$method}(...$parameters);
         }
-        return $this->getDaoquery()->{$method}(...$parameters);
+        if ($method == 'with') {
+
+            $this->daoWith = $parameters;
+            return $this;
+        }
+        return $this->getDaoquery()->with($this->daoWith)->{$method}(...$parameters);
     }
 
 
-    public function getDaoquery():Builder
+    public function getDaoquery(): Builder
     {
-        if($this->daoquery == null){
+        if ($this->daoquery == null) {
             $this->setDaoquery($this->newQuery());
         }
         return $this->daoquery;
@@ -61,8 +70,9 @@ trait DaoTrait
         return $this;
     }
 
-    public function getQuery(){
-       return $this::query();
+    public function getQuery()
+    {
+        return $this::query();
     }
 
 }

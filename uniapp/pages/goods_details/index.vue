@@ -246,12 +246,7 @@
 					<view class="product-intro" id="past3">
 						<view class="title">产品介绍</view>
 						<view class="conter">
-							<!-- #ifndef APP-PLUS -->
-							<parser :html="description" ref="article" :tag-style="tagStyle"></parser>
-							<!-- #endif -->
-							<!-- #ifdef APP-PLUS -->
 							<view class="description" v-html="description"></view>
-							<!-- #endif -->
 						</view>
 					</view>
 				</scroll-view>
@@ -364,9 +359,7 @@
 				@closeChange="closeChange" :showAnimate="showAnimate" @boxStatus="boxStatus">
 			</shareRedPackets> -->
 			<!-- 组件 -->
-			<productWindow :attr="attr" :isShow="1" :iSplus="1" @myevent="onMyEvent" @ChangeAttr="ChangeAttr"
-				@ChangeCartNum="ChangeCartNum" @attrVal="attrVal" @iptCartNum="iptCartNum" id="product-window"
-				:is_vip="is_vip" @getImg="showImg" :is_virtual="storeInfo.is_virtual"></productWindow>
+		
 			<cus-previewImg ref="cusPreviewImg" :list="skuArr" @changeSwitch="changeSwitch"
 				@shareFriend="listenerActionSheet" />
 			<couponListWindow :coupon="coupon" v-if="coupon" @ChangCouponsClone="ChangCouponsClone"
@@ -440,7 +433,6 @@
 			<!-- #endif -->
 			
 			
-			<dAlert ></dAlert>
 		</view>
 	</view>
 </template>
@@ -480,9 +472,7 @@
 
 	import cusPreviewImg from "@/components/cusPreviewImg/index.vue";
 	import productConSwiper from "@/components/productConSwiper";
-	import couponListWindow from "@/components/couponListWindow";
-	import productWindow from "@/components/productWindow";
-	import userEvaluation from "@/components/userEvaluation";
+
 	// import shareRedPackets from "@/components/shareRedPackets";
 	import kefuIcon from "@/components/kefuIcon";
 	import menuIcon from "@/components/menuIcon.vue";
@@ -490,7 +480,7 @@
 		silenceBindingSpread,
 		updateURLParameter
 	} from "@/utils";
-	import mpHtml from "@/components/mp-html/mp-html";
+	
 	import ClipboardJS from "@/plugin/clipboard/clipboard.js";
 	// #ifdef MP
 	import authorize from "@/components/Authorize";
@@ -506,23 +496,17 @@
 	import {
 		sharePoster
 	} from "@/mixins/sharePoster";
-	import parser from "@/components/jyf-parser/jyf-parser";
 	import homeList from '@/components/homeList'
 	export default {
 		components: {
 			productConSwiper,
-			couponListWindow,
-			productWindow,
-			userEvaluation,
 			// shareRedPackets,
 			kefuIcon,
-			mpHtml,
 			menuIcon,
 			cusPreviewImg,
 			// #ifdef MP
 			authorize,
 			// #endif
-			parser,
 			homeList
 		},
 		directives: {
@@ -629,9 +613,7 @@
 			isLogin: {
 				handler: function(newV, oldV) {
 					if (newV == true) {
-						this.getCouponList();
-						this.getCartCount();
-						this.downloadFilePromotionCode();
+					
 					}
 				},
 				deep: true,
@@ -1351,7 +1333,7 @@
 							indexs = delCount.findIndex((item) => item === count[index]);
 						}
 						that.$set(that.coupon, "type", indexs);
-						that.getCouponList(indexs);
+						
 					} else {
 						that.$set(that.coupon, "list", res.data.list);
 					}
@@ -1413,7 +1395,7 @@
 				if (that.isLogin === false) {
 					toLogin();
 				} else {
-					that.getCouponList();
+				
 					that.$set(that.coupon, "coupon", true);
 				}
 			},
@@ -1542,12 +1524,26 @@
 					toLogin();
 				} else {
 					createOrder({product_id: this.id}).then(res=>{
-						this.$util.Tips({
-							title: "兑换成功",
-							success: () => {
-								// that.getCartCount(true);
-							},
+						this.getGoodsDetails();
+						uni.showModal({
+							title: '兑换成功',
+							content: '是否立即去下载',
+							success:  (res)=> {
+								if (res.confirm) {
+									this.goDownload();
+								} else if (res.cancel) {
+								}
+							}
 						});
+						
+						
+						// this.$util.Tips({
+						// 	title: "兑换成功",
+						// 	success: () => {
+								
+						// 		// that.getCartCount(true);
+						// 	},
+						// });
 					});
 					// this.goCat(true);
 				}

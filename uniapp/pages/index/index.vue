@@ -45,7 +45,7 @@
 			setOpenShare: function() {
 				let that = this;
 				getShare().then((res) => {
-					let data = res.data;
+					let data = res;
 					this.shareInfo = data;
 					// #ifdef H5
 					let url = location.href;

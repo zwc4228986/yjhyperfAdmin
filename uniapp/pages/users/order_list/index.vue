@@ -82,7 +82,7 @@
                   </view>
                 </view>
                 <view class="text-price row-start">
-                  <view class="huaxian">{{ item.price }}抖币</view>
+                  <!-- <view class="huaxian">{{ item.price }}抖币</view> -->
                 </view>
 							</view>
 						</view>
@@ -99,9 +99,7 @@
 							@click="goOrderDetails(item.order_id)">
 							再次购买
 						</view> -->
-						<view class="bnt cancelBnt" v-if="item._status._type == 4"
-							@click="delOrder(item.order_id, index)">删除订单</view>
-						<view class="bnt bg-color" @click="copy(item.download_url)">复制下载链接</view>
+						<view class="bnt bg-color" @click="goDownload(item)">去下载</view>
 					</view>
 				</view>
 			</view>
@@ -221,9 +219,14 @@
 			}
 		},
 		methods: {
+			goDownload(item){
+				
+				uni.navigateTo({
+					url: `/pages/product/download?id=${item.order_product.id}`,
+				});
+			},
 			onLoadFun() {
-				this.getOrderData();
-				this.getUserInfo();
+				// this.getUserInfo();
 			},
 			// 授权关闭
 			authColse: function(e) {

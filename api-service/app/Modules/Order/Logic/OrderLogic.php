@@ -30,11 +30,11 @@ class OrderLogic
         $product = $this->productDao->where('id', $product_id)->first();
         $product_price = $product->price;
         Db::beginTransaction();
-        try{
+        try {
             $order = $this->orderDao->create([
-                'order_sn'=>uniqid().rand(1000,9999),
-                'user_id'=>$userId,
-                'price'=>$product_price,
+                'order_sn' => uniqid() . rand(1000, 9999),
+                'user_id' => $userId,
+                'price' => $product_price,
             ]);
 
             $orderProductData = [new OrderProduct([
@@ -45,9 +45,9 @@ class OrderLogic
 
             $order->OrderProduct()->saveMany($orderProductData);
             //判断是否足够多的币
-            $this->userDao->opAccount($userId,   'integral',-$product_price,'buy_product');
+            $this->userDao->opAccount($userId, 'integral', -$product_price, 'buy_product');
             Db::commit();
-        }catch (\Exception $exception){
+        } catch (\Exception $exception) {
             Db::rollBack();
             Error($exception->getMessage());
         }
@@ -56,9 +56,11 @@ class OrderLogic
 
     public function lists(\Hyperf\Utils\Collection $params)
     {
-        $data = $this->orderDao->params($params)->with(['OrderProduct'=>function($query){
-            $query->with('Product');
-        }])->orderByDesc('id')->getList();
+        $data = $this->orderDao->newSelf()->params($params)->orderByDesc('id')->with(['OrderProduct' => function ($query) {
+            $query->with(['Product' => function ($query) {
+                $query->with('Image');
+            }]);
+        }])->getList();
         dump($data->toArray());
 
         return $data;

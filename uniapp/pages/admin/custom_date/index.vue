@@ -6,11 +6,9 @@
 </template>
 
 <script>
-	import uniCalendar from '@/components/uni-calendar/uni-calendar.vue';
 
 	export default {
 		components: {
-			uniCalendar
 		},
 		data() {
 			return {

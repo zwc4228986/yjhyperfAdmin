@@ -9,6 +9,7 @@ class ProductCategoryRelModel extends ProductCategoryRel
     protected array $fillable = [
         'product_id',
         'product_category_id',
+        'circle_id',
         'product_category_pid',
     ];
 }

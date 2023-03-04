@@ -201,7 +201,6 @@
 		</view>
 		<!-- #endif -->
 		
-		<popup-ad v-if="!privacyStatus"></popup-ad>
 		
 		
 	</view>
@@ -212,7 +211,7 @@
 	const app = getApp();
 	
 	import colors from "@/mixins/color";
-	import couponWindow from '@/components/couponWindow/index';
+
 	import {
 		getCouponV2,
 		getCouponNewUser,
@@ -253,7 +252,6 @@
 
 	import swiperBg from './components/swiperBg';
 	import tabNav from './components/tabNav';
-	import appUpdate from "@/components/update/app-update.vue";
 
 	import {
 		getTemlIds
@@ -286,20 +284,16 @@
 	import {
 		toLogin
 	} from '@/libs/login.js';
-	import pageFooter from '@/components/pageFooter/index.vue';
 	import Loading from '@/components/Loading/index.vue';
 	import recommend from '@/components/recommend';
-	import popupAd from './components/popupAd';
+
 	export default {
 		computed: mapGetters(['isLogin', 'uid']),
 		mixins: [colors],
 		components: {
-			popupAd,
 			recommend,
 			Loading,
-			pageFooter,
 			circle,
-			couponWindow,
 			// #ifdef H5
 			...mConfig,
 			// #endif
@@ -323,7 +317,6 @@
 			promotionList,
 			swiperBg,
 			tabNav,
-			appUpdate, //APP更新
 			// #endif
 		},
 		computed: mapGetters(['isLogin', 'cartNum']),

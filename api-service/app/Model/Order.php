@@ -4,18 +4,17 @@ declare(strict_types=1);
 
 namespace App\Model;
 
-use Hyperf\DbConnection\Model\Model;
 
 /**
- * @property int $id 
- * @property string $order_sn 
- * @property int $user_id 
- * @property string $price 
- * @property \Carbon\Carbon $create_time 
- * @property \Carbon\Carbon $update_time 
- * @property int $delete_time 
+ * @property int $id
+ * @property string $order_sn
+ * @property int $user_id
+ * @property string $price
+ * @property \Carbon\Carbon $create_time
+ * @property \Carbon\Carbon $update_time
+ * @property int $delete_time
  */
-class Order extends \App\Model\Trait\Order
+class Order extends Model
 {
     /**
      * The table associated with the model.

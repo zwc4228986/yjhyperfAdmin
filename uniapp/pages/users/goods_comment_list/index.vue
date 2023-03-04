@@ -36,7 +36,6 @@
 		getReplyList,
 		getReplyConfig
 	} from '@/api/store.js';
-	import userEvaluation from '@/components/userEvaluation';
 	import colors from '@/mixins/color.js';
 	import {
 		toLogin
@@ -46,7 +45,6 @@
 	} from "vuex";
 	export default {
 		components: {
-			userEvaluation
 		},
 		mixins: [colors],
 		computed: mapGetters(['isLogin']),

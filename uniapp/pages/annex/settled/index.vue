@@ -152,7 +152,6 @@
 	import {
 		mapGetters
 	} from "vuex";
-	import parser from "@/components/jyf-parser/jyf-parser";
 	// #ifdef MP
 	import authorize from '@/components/Authorize';
 	// #endif
@@ -160,7 +159,6 @@
 	const app = getApp();
 	export default {
 		components: {
-			"jyf-parser": parser,
 			// #ifdef MP
 			authorize,
 			// #endif

@@ -19,6 +19,7 @@ class Lists
     public function index()
     {
         $params = getParams();
+
         $data = $this->productCategoryLogic->getTreelists($params);
         Success($data);
     }

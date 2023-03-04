@@ -18,7 +18,6 @@
 </template>
 
 <script>
-	import zbCode from '@/components/zb-code/zb-code.vue'
 	import {
 		getBargainPoster,
 		getCombinationPoster,
@@ -39,7 +38,6 @@
 	import colors from '@/mixins/color.js'
 	export default {
 		components: {
-			zbCode
 		},
 		mixins: [colors],
 		data() {

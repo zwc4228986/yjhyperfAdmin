@@ -85,8 +85,9 @@ export function silenceAuth(data) {
  * @returns {*}
  */
 export function getShare() {
-	return request.get("share", {}, {
-		noAuth: true
+	return request.post("/api/config/share/home", {}, {
+		noAuth: true,
+		URL:3,
 	});
 }
 

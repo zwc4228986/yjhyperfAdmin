@@ -45,7 +45,6 @@
 </template>
 
 <script>
-	import zbCode from '@/components/zb-code/zb-code.vue'
 	import {
 		getUserInfo,
 		spreadBanner,
@@ -75,7 +74,6 @@
 			authorize,
 			// #endif
 			home,
-			zbCode
 		},
 		mixins:[colors],
 		data() {

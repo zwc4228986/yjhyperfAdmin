@@ -272,9 +272,7 @@
 		<!-- #ifdef MP -->
 		<!-- <authorize @onLoadFun="onLoadFun" :isAuto="isAuto" :isShowAuth="isShowAuth" @authColse="authColse"></authorize> -->
 		<!-- #endif -->
-		<product-window :attr='attribute' :limitNum='1' @myevent="onMyEvent" @ChangeAttr="ChangeAttr"
-			@ChangeCartNum="ChangeCartNum" @iptCartNum="iptCartNum" @attrVal="attrVal" @getImg="showImg">
-		</product-window>
+		
 		<cus-previewImg ref="cusPreviewImg" :list="skuArr" @changeSwitch="changeSwitch"
 			@shareFriend="listenerActionSheet" />
 		<kefuIcon :ids='storeInfo.product_id' :routineContact='routineContact'></kefuIcon>
@@ -310,8 +308,6 @@
 	import {
 		imageBase64
 	} from "@/api/public";
-	import productWindow from '@/components/productWindow/index.vue'
-	import userEvaluation from '@/components/userEvaluation/index.vue'
 	import countDown from '@/components/countDown/index.vue'
 	import kefuIcon from '@/components/kefuIcon';
 	import {
@@ -327,7 +323,7 @@
 	} from '@/config/app.js';
 	// #endif
 	import colors from '@/mixins/color.js';
-	import parser from "@/components/jyf-parser/jyf-parser";
+
 	import cusPreviewImg from "@/components/cusPreviewImg/index.vue";
 	import menuIcon from "@/components/menuIcon.vue";
 	import {
@@ -342,11 +338,8 @@
 			// #ifdef MP
 			authorize,
 			// #endif
-			"product-window": productWindow,
-			userEvaluation,
 			countDown,
 			cusPreviewImg,
-			parser,
 			menuIcon,
 			homeList
 		},

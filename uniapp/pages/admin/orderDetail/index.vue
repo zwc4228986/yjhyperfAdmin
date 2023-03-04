@@ -166,7 +166,7 @@
 	</view>
 </template>
 <script>
-	import PriceChange from "@/components/PriceChange";
+	
 	// #ifdef H5
 	import ClipboardJS from "@/plugin/clipboard/clipboard.js";
 	// #endif
@@ -188,7 +188,6 @@
 	export default {
 		name: "AdminOrder",
 		components: {
-			PriceChange
 		},
 		props: {},
 		data: function() {

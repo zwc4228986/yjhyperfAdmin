@@ -74,7 +74,6 @@
 	import {
 		getUserInfo
 	} from '@/api/user.js';
-	import zbCode from '@/components/zb-code/zb-code.vue'
 	import gridsLottery from '@/components/lottery/index.vue'
 	import showBox from '../components/showbox.vue'
 	import noticeBar from '../components/noticeBar.vue'
@@ -96,7 +95,6 @@
 			noticeBar,
 			lotteryAleart,
 			userAddress,
-			zbCode,
 			home
 		},
 		mixins:[colors],

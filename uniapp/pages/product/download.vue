@@ -15,12 +15,16 @@
 						@click="copy(item)"></yj-button>
 				</div>
 
-				<div v-if="item.type == 1" style="margin-top: 10rpx;">
-					<yj-button bg="#FF9640" color="white" :customStyle="{ width: '300rpx' }" shape="circle" text="百度云下载"
+				<div v-if="item.type == 1 && item.baidu_url" style="margin-top: 10rpx;">
+					
+					<yj-button bg="#FF9640" color="white" :customStyle="{ width: '300rpx' }" shape="circle" text="百度云预览"
 						@click="baidu(item)"></yj-button>
-					<div>
-
-					</div>
+						<div style="height: 20px;width: 100%;">
+						
+						</div>
+						<yj-button bg="#FF9640" color="white" :customStyle="{ width: '300rpx' }" shape="circle" text="百度云链接复制"
+							@click="baidu_copy(item)"></yj-button>
+					
 				</div>
 
 				<!-- <view>百度网盘</view> -->
@@ -47,14 +51,50 @@ export default {
 	onReady() {
 	},
 	methods: {
-		copy: function copy(value) {
+		copy: function copy(item) {
 			uni.setClipboardData({
-				data: value,
+				data: item.file.path_format,
+				showToast:false,
 				success: function success() {
 					return (
-						uni.showToast({
-							title: '复制成功'
-						}));
+					uni.showModal({
+						title: '链接复制成功',
+						content: '请在浏览器中打开',
+						showCancel:false,
+						success: function (res) {
+							if (res.confirm) {
+								console.log('用户点击确定');
+							} else if (res.cancel) {
+								console.log('用户点击取消');
+							}
+						}
+					})
+					);
+					
+				}
+			});
+		},
+		baidu_copy: function baidu_copy(item) {
+			
+			
+			uni.setClipboardData({
+				showToast:false,
+				data: item.baidu_url,
+				success: function success() {
+					return (
+					uni.showModal({
+						title: '百度云链接复制成功',
+						content: '请在浏览器中打开',
+						showCancel:false,
+						success: function (res) {
+							if (res.confirm) {
+								console.log('用户点击确定');
+							} else if (res.cancel) {
+								console.log('用户点击取消');
+							}
+						}
+					})
+					);	
 				}
 			});
 		},

@@ -70,7 +70,7 @@
 							v-if="item.activity && item.activity.type === '3'">拼团</span>
 					</view>
 					<view class='text' :class='is_switch==true?"":"on"'>
-						<view class='name line1'>{{item.name}}</view>
+						<view class='name line2'>{{item.name}}</view>
 						<view class='money font-color' :class='is_switch==true?"":"on"'><text
 								class='num'>{{item.price}}</text>抖币</view>
 						<view class='vip acea-row row-between-wrapper' :class='is_switch==true?"":"on"'>
@@ -86,36 +86,17 @@
 					<text class='loading iconfont icon-jiazai' :hidden='loading==false'></text>{{loadTitle}}
 				</view>
 			</view>
-		</view>
-		<view class='noCommodity' v-if="productList.length==0 && where.page > 1">
-			<view class='pictrue'>
-				<image :src="`${image_url}/static/images/noShopper.png`"></image>
+			<view class='noCommodity' v-if="productList.length==0 && where.page > 1">
+				<view class='pictrue'>
+					<image :src="`${image_url}/static/images/noShopper.png`"></image>
+				</view>
+			
 			</view>
-			<recommend :hostProduct="hostProduct"></recommend>
 		</view>
+		
 		<!-- #ifndef MP -->
 		<home></home>
 		<!-- #endif -->
-
-		<tabBar v-if="!is_diy" :pagePath="'/pages/user/index'"></tabBar>
-		<view class="foot" v-else-if="is_diy && newData.status && newData.status.status">
-			<view class="page-footer" id="target" :style="{'background-color':newData.bgColor.color[0].item}">
-				<view class="foot-item" v-for="(item,index) in newData.menuList" :key="index" @click="goRouter(item)">
-					<block v-if="item.link == activeRouter">
-						<image :src="item.imgList[0]"></image>
-						<view class="txt" :style="{color:newData.activeTxtColor.color[0].item}">{{item.name}}</view>
-					</block>
-					<block v-else>
-						<image :src="item.imgList[1]"></image>
-						<view class="txt" :style="{color:newData.txtColor.color[0].item}">{{item.name}}</view>
-					</block>
-					<div class="count-num" v-if="item.link === '/pages/order_addcart/order_addcart' && cartNum > 0">
-						{{cartNum}}
-					</div>
-				</view>
-			</view>
-		</view>
-
 	</view>
 </template>
 
@@ -181,6 +162,7 @@
 					priceOrder: '',
 					salesOrder: '',
 					news: 0,
+					circle_id:0,
 					page: 1,
 					limit: 20,
 					product_category_pid: 0,
@@ -221,6 +203,7 @@
 			this.getAllCategory();
 			this.where.product_category_pid = options.cid || 0;
 			this.$set(this.where, 'sid', options.sid || 0);
+			this.$set(this.where, 'circle_id', options.circle_id || 0);
 			this.title = options.title || '';
 			this.$set(this.where, 'keyword', options.searchValue || '');
 			this.$set(this.where, 'productId', options.productId || '');

@@ -3,12 +3,14 @@
 namespace App\Modules\Order\Dao;
 
 use App\Model\Order;
+use App\Modules\Order\Model\OrderModel;
 use YjHyperfAdminPligin\Framework\Dao\AddWhereQueryTrait;
+use YjHyperfAdminPligin\Framework\Dao\DaoTrait;
 
-class OrderDao extends Order
+class OrderDao extends OrderModel
 {
 
-    use AddWhereQueryTrait;
+    use DaoTrait;
 
     protected array $fillable = [
         'order_sn',
@@ -18,12 +20,10 @@ class OrderDao extends Order
 
     public function params(\Hyperf\Utils\Collection $params)
     {
-        $_this = $this;
-        if($params->offsetExists('user_id')){
-            $user_id = $params->get('user_id');
-            $_this = $this->addWhere($this::query()->where('user_id', $user_id));
-        }
-        return $_this;
+        $params->check('user_id', function ($user_id) {
+            $this->addWhere($this::query()->where('user_id', $user_id));
+        });
+        return $this;
     }
 
 }

@@ -96,14 +96,12 @@
 	// #endif
 	import home from '@/components/home';
 	import colors from '@/mixins/color.js'
-	import zbCode from '@/components/zb-code/zb-code.vue'
 	export default {
 		components: {
 			// #ifdef MP
 			authorize,
 			// #endif
 			home,
-			zbCode
 		},
 		mixins: [colors],
 		data() {

@@ -42,8 +42,8 @@
 <script>
 	const app = getApp();
 	let statusBarHeight = uni.getSystemInfoSync().statusBarHeight + 'px';
-	import mobileLogin from '@/components/login_mobile/index.vue';
-	import routinePhone from '@/components/login_mobile/routine_phone.vue';
+
+
 	import {
 		getLogo,
 		silenceAuth,
@@ -81,8 +81,6 @@
 			};
 		},
 		components: {
-			mobileLogin,
-			routinePhone
 		},
 		onLoad(options) {
 			if (uni.getUserProfile) {

@@ -36,7 +36,7 @@
 							</view>
 							<view class='list acea-row'>
 								<block v-for="(itemn,indexn) in item.circle" :key="indexn" >
-									<div  @click="goCircle(item)"
+									<div  @click="goCircle(itemn)"
 										class='item acea-row row-column row-middle'>
 										<view class='picture'>
 											<image :src='itemn.icon.path_format' v-if="itemn.icon.path_format"></image>

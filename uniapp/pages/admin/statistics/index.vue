@@ -80,8 +80,7 @@
 	</div>
 </template>
 <script>
-	import uCharts from '@/components/ucharts/ucharts'
-	import uniCalendar from '@/components/uni-calendar/uni-calendar.vue'
+
 	var canvaLineA = null;
 	// import Calendar from 'mpvue-calendar'
 	// #ifdef MP-WEIXIN
@@ -104,7 +103,6 @@
 		components: {
 			// Calendar,
 			// uCharts
-			uniCalendar
 		},
 		props: {},
 		data: function() {
