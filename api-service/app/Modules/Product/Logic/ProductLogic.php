@@ -2,6 +2,7 @@
 
 namespace App\Modules\Product\Logic;
 
+use App\Model\Product;
 use App\Model\ProductCategory;
 use App\Model\ProductResource;
 use App\Modules\Admin\Dao\ProductCategoryDao;
@@ -35,7 +36,7 @@ class ProductLogic
 
     public function lists(Collection $params)
     {
-        return $this->productDao->newSelf()->params($params)->with('Image')->orderByDesc("id")->getList();
+        return $this->productDao->newSelf()->params($params)->setWith('Image')->orderByDesc("id")->getList();
     }
 
     public function add(\Hyperf\Utils\Collection $params)

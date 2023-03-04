@@ -19,6 +19,7 @@ trait DaoTrait
         return $this;
     }
 
+
     protected $daoWith = [];
 
     public function newSelf(): self
@@ -32,26 +33,26 @@ trait DaoTrait
             Error('init is false');
         }
 
-//        if($this->daoquery == null){
-//            return $this->newSelf()->setDaoquery($this->newQuery())->addWhere($query);
-//        }
-
         $this->getDaoquery()->getQuery()->addNestedWhereQuery($query->getQuery());
 
         return $this;
     }
 
+    public function setWith($with)
+    {
+        if ($this->init == false) {
+            Error('init is false');
+        }
+        $this->daoWith = $with;
+        return $this;
+    }
 
     public function __call($method, $parameters)
     {
         if (in_array($method, ['increment', 'decrement'])) {
             return $this->{$method}(...$parameters);
         }
-        if ($method == 'with') {
 
-            $this->daoWith = $parameters;
-            return $this;
-        }
         return $this->getDaoquery()->with($this->daoWith)->{$method}(...$parameters);
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Modules\Product\Controller\Product;
 
+use App\Model\Product;
 use App\Modules\Product\Logic\ProductLogic;
 use Hyperf\Di\Annotation\Inject;
 use YjHyperfAdminPligin\Apidog\Annotations\Api;
@@ -21,6 +22,7 @@ class Lists
     public function index()
     {
         $params = getParams();
+
         $data = $this->productLogic->lists($params);
         Success($data);
     }
