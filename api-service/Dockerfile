@@ -11,7 +11,8 @@ ENV TIMEZONE=${timezone:-"Asia/Shanghai"} \
 COPY ./api-service /opt/www/api-service
 COPY ./plugin /opt/www/plugin
 
-WORKDIR cc
+
+WORKDIR /opt/www/api-service
 RUN composer install --no-dev -o && php bin/hyperf.php
 
 EXPOSE 9501
