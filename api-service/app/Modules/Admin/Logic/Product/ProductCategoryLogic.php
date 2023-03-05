@@ -56,7 +56,7 @@ class ProductCategoryLogic
 
     public function getTreelists($params)
     {
-        $data = $this->productCategoryDao->newSelf()->params($params)->with('File')->get();
+        $data = $this->productCategoryDao->newSelf()->params($params)->setWith('File')->get();
 
         return Tree($data->toArray(), 0, 'id', 'pid');
     }
