@@ -13,6 +13,10 @@ namespace App\Model;
  * @property int $collect_num 
  * @property string $info 
  * @property int $icon_id 
+ * @property int $circle_category_id 
+ * @property int $sort 
+ * @property int $is_show 
+ * @property int $view 
  */
 class Circle extends Model
 {
@@ -29,5 +33,5 @@ class Circle extends Model
     /**
      * The attributes that should be cast to native types.
      */
-    protected array $casts = ['id' => 'integer', 'create_time' => 'datetime', 'update_time' => 'datetime', 'delete_time' => 'integer', 'collect_num' => 'integer', 'icon_id' => 'integer'];
+    protected array $casts = ['id' => 'integer', 'create_time' => 'datetime', 'update_time' => 'datetime', 'delete_time' => 'integer', 'collect_num' => 'integer', 'icon_id' => 'integer', 'circle_category_id' => 'integer', 'sort' => 'integer', 'is_show' => 'integer', 'view' => 'integer'];
 }

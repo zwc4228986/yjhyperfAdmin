@@ -13,24 +13,24 @@
 								<image :src="item.img" mode="aspectFill" class="slide-image aa" :style="'height:'+ imageH +'rpx;'">
 								</image>
 							</view>
-							
 						</swiper-item>
 					</block>
 				</swiper>
-				
+
 				<view v-if="docConfig==0" class="dot acea-row" :style="{paddingLeft: paddinglr+20 + 'rpx',paddingRight: paddinglr+20 + 'rpx',justifyContent: (txtStyle==1?'center':txtStyle==2?'flex-end':'flex-start')}">
 					<view class="dot-item" :style="active==index?'background:'+ dotColor:''" v-for="(item,index) in imgUrls"></view>
 				</view>
+
 				<view v-if="docConfig==1" class="dot acea-row" :style="{paddingLeft: paddinglr+20 + 'rpx',paddingRight: paddinglr+20 + 'rpx',justifyContent: (txtStyle==1?'center':txtStyle==2?'flex-end':'flex-start')}">
 					<view class="dot-item line_dot-item" :style="active==index?'background:'+ dotColor:''" v-for="(item,index) in imgUrls"></view>
 				</view>
+
 				<view v-if="docConfig==2" class="dot acea-row" :style="{paddingLeft: paddinglr+20 + 'rpx',paddingRight: paddinglr+20 + 'rpx',justifyContent: (txtStyle==1?'center':txtStyle==2?'flex-end':'flex-start')}">
 					<view class="instruct">{{current}}/{{imgUrls.length}}</view>
 				</view>
 			</view>
 		</block>
 		<view class="hx-box">
-			
 		</view>
 	</view>
 </template>
