@@ -6,13 +6,13 @@ namespace App\Model;
 
 
 /**
- * @property int $id
- * @property string $order_sn
- * @property int $user_id
- * @property string $price
- * @property \Carbon\Carbon $create_time
- * @property \Carbon\Carbon $update_time
- * @property int $delete_time
+ * @property int $id 
+ * @property string $order_sn 
+ * @property int $user_id 
+ * @property string $price 
+ * @property \Carbon\Carbon $create_time 
+ * @property \Carbon\Carbon $update_time 
+ * @property int $delete_time 
  */
 class Order extends Model
 {

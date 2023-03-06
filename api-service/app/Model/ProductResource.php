@@ -12,6 +12,8 @@ namespace App\Model;
  * @property \Carbon\Carbon $update_time 
  * @property int $delete_time 
  * @property int $type 
+ * @property string $baidu_url 
+ * @property string $baidu_code 
  */
 class ProductResource extends Model
 {

@@ -6,16 +6,16 @@ namespace App\Model;
 
 
 /**
- * @property int $id
- * @property string $name
- * @property string $path
- * @property string $suffix
- * @property int $tags_id
- * @property string $size
- * @property \Carbon\Carbon $update_time
- * @property int $delete_time
- * @property \Carbon\Carbon $create_time
- * @property string $storage
+ * @property int $id 
+ * @property string $name 
+ * @property string $path 
+ * @property string $suffix 
+ * @property int $tags_id 
+ * @property string $size 
+ * @property \Carbon\Carbon $update_time 
+ * @property int $delete_time 
+ * @property \Carbon\Carbon $create_time 
+ * @property string $storage 
  */
 class SystemFile extends Model
 {
