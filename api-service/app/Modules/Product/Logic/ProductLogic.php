@@ -36,7 +36,7 @@ class ProductLogic
 
     public function lists(Collection $params)
     {
-        return $this->productDao->newSelf()->params($params)->setWith('Image')->orderByDesc("id")->getList();
+        return $this->productDao->newSelf()->params($params)->daoWith('Image')->orderByDesc("id")->getList();
     }
 
     public function add(\Hyperf\Utils\Collection $params)

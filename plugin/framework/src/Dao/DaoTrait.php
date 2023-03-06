@@ -47,6 +47,15 @@ trait DaoTrait
         return $this;
     }
 
+    public function daoWith($with)
+    {
+        if ($this->init == false) {
+            Error('init is false');
+        }
+        $this->daoWith = $with;
+        return $this;
+    }
+
     public function __call($method, $parameters)
     {
         if (in_array($method, ['increment', 'decrement'])) {
