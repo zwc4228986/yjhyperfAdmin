@@ -16,6 +16,10 @@ return [
             'driver' => \Hyperf\Filesystem\Adapter\LocalAdapterFactory::class,
             'root' => BASE_PATH.'/public',
         ],
+        'ziti'=>[
+            'driver' => \Hyperf\Filesystem\Adapter\LocalAdapterFactory::class,
+            'root' => BASE_PATH.'/douziyuan',
+        ],
         'local' => [
             'driver' => \Hyperf\Filesystem\Adapter\LocalAdapterFactory::class,
             'root' => __DIR__ . '/../../runtime',
