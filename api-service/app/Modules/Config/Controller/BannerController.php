@@ -14,8 +14,13 @@ class BannerController
     protected BannerLogic $bannerLogic;
 
     #[ApiPost('lists')]
-    public function lists(){
+    public function lists()
+    {
         $data = $this->bannerLogic->lists();
+        $data->transform(function ($item) {
+            $item->image_url = $item->Image->path_format;
+            return $item;
+        });
         Success($data);
     }
 }

@@ -1,30 +1,4 @@
 <template>
-	<!-- #ifdef H5 -->
-	<view v-if="isShow" class="header">
-		<view class="serch-wrapper row-middle">
-			<view class="logo">
-				<image class="skeleton-rect" :src="logoConfig" mode="heightFix"></image>
-				<view class="swiger">抖资源</view>
-			</view>
-			<view class="input acea-row row-middle fillet skeleton-rect" hover-class="none" @click="goPage"><text
-					class="iconfont icon-sousuo"></text>
-				搜索商品</view>
-		</view>
-	</view>
-	<view v-else-if="isIframe" class="header">
-		<view class="serch-wrapper acea-row row-middle">
-			<view class="logo">
-				<image :src="logoConfig" mode="heightFix"></image>
-				<view class="swiger">{{titleInfo.length ? titleInfo[0].val : ''}}</view>
-			</view>
-			<view class="input acea-row row-middle fillet" hover-class="none" @click="goPage"><text
-					class="iconfont icon-sousuo"></text>
-				搜索商品</view>
-		</view>
-	</view>
-	<!-- #endif -->
-	<!-- #ifdef MP   -->
-	<view>
 		<view class="mp-header skeleton-rect" :style="{height:headH}">
 			<view class="sys-head" :style="{height:sysHeight}"></view>
 			<view class="serch-box" style="height: 48px;">
@@ -40,27 +14,6 @@
 				</view>
 			</view>
 		</view>
-	</view>
-	<!-- #endif -->
-	<!-- #ifdef APP-PLUS   -->
-	<view>
-		<view class="mp-header skeleton-rect" :style="{height:headHeight1}">
-			<view class="sys-head" :style="{height:sysHeight}"></view>
-			<view class="serch-box" >
-				<view class="serch-wrapper row-middle">
-					<!-- <view class="logo">
-						<image class="skeleton-rect" :src="logoConfig" mode="heightFix"></image>
-						<view class="swiger">{{titleInfo.length ? titleInfo[0].val : ''}}</view>
-					</view> -->
-					<navigator url="/pages/goods_search/index" class="input acea-row row-middle fillet"
-						hover-class="none"><text class="iconfont icon-sousuo"></text>
-						搜索商品</navigator>
-				</view>
-			</view>
-		</view>
-	</view>
-	<!-- #endif -->
-
 </template>
 
 <script>

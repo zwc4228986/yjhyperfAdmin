@@ -1,185 +1,27 @@
 <template>
 	
-	<view v-if="pageShow"
+	<view 
 		class="page fullsize noRepeat repeat ysize "
 		:style="'background-color:white;min-height:'+windowHeight+'px;'">
 		
-		<view v-if="!errorNetwork" :style="colorStyle">
-			<skeleton :show="showSkeleton" :isNodes="isNodes" ref="skeleton" loading="chiaroscuro" selector="skeleton"
-				bgcolor="#FFF"></skeleton>
-			<view class="index skeleton" :style="{visibility: showSkeleton ? 'hidden' : 'visible'}">
-				<!-- #ifdef H5 -->
-				<view v-for="(item, index) in styleConfig" :key="index">
-					<component :is="item.name" :index="index" :dataConfig="item" @changeBarg="changeBarg"
-						@changeTab="changeTab" :tempArr="tempArr" :iSshowH="iSshowH" @detail="goDetail"
-						:isSortType="isSortType" @bindSortId="bindSortId" @bindHeight="bindHeight" :isFixed="isFixed">
-					</component>
-				</view>
-				<!-- #endif -->
+		<view  :style="colorStyle">
+			<view class="index skeleton">
+				 
 				<headerSerch></headerSerch>
+				<u-swiper
+						 height="180"
+						  keyName="image_url"
+				          :list="banner_lists"
+				          indicator
+				          indicatorMode="line"
+				          circular
+				  ></u-swiper>
 				<menus></menus>
-				<circle :data="user_circle_lists"></circle>
-				<!-- #ifdef MP || APP-PLUS -->
-				<block v-for="(item, index) in []" :key="index">
-					<activeParty v-if="item.name == 'activeParty'" :dataConfig="item" :isSortType="isSortType">
-					</activeParty>
-					<activePartyPlus v-if="item.name == 'activePartyPlus'" :dataConfig="item" :isSortType="isSortType">
-					</activePartyPlus>
-					<articleList v-if="item.name == 'articleList'" :dataConfig="item" :isSortType="isSortType">
-					</articleList>
-					<bargain v-if="item.name == 'bargain'" :dataConfig="item" @changeBarg="changeBarg"
-						:isSortType="isSortType"></bargain>
-					<blankPage v-if="item.name == 'blankPage'" :dataConfig="item" :isSortType="isSortType"></blankPage>
-					<combination v-if="item.name == 'combination'" :dataConfig="item" :isSortType="isSortType">
-					</combination>
-					<coupon v-if="item.name == 'coupon'" :dataConfig="item" :isSortType="isSortType"></coupon>
-					<customerService v-if="item.name == 'customerService'" :dataConfig="item" :isSortType="isSortType">
-					</customerService>
-					<goodList v-if="item.name == 'goodList'" :dataConfig="item" @detail="goDetail"
-						:isSortType="isSortType"></goodList>
-		
-					<guide v-if="item.name == 'guide'" :dataConfig="item" :isSortType="isSortType"></guide>
-					<headerSerch v-if="item.name == 'headerSerch'" :dataConfig="item"></headerSerch>
-					<liveBroadcast v-if="item.name == 'liveBroadcast'" :dataConfig="item" :isSortType="isSortType">
-					</liveBroadcast>
-					<menus v-if="item.name == 'menus'" :dataConfig="item" :isSortType="isSortType"></menus>
-					<news v-if="item.name == 'news'" :dataConfig="item" :isSortType="isSortType"></news>
-					<pictureCube v-if="item.name == 'pictureCube'" :dataConfig="item" :isSortType="isSortType">
-					</pictureCube>
-					<promotionList v-if="item.name == 'promotionList'" :dataConfig="item" @changeTab="changeTab"
-						:tempArr="tempArr" :iSshowH="iSshowH" @detail="goDetail" :isSortType="isSortType">
-					</promotionList>
-					<swiperBg v-if="item.name == 'swiperBg'" :dataConfig="item" :isSortType="isSortType"></swiperBg>
-					<swipers v-if="item.name == 'swipers'" :dataConfig="item" :isSortType="isSortType"></swipers>
-					<tabNav v-if="item.name == 'tabNav'" :dataConfig="item" @bindHeight="bindHeighta"
-						@bindSortId="bindSortId"></tabNav>
-				</block>
-				<!-- #endif -->
-				<!-- 分类商品模块 -->
-				<!-- #ifdef  APP-PLUS -->
-				<view class="sort-product" v-if="isSortType == 1" style="margin-top: 0;">
-					<scroll-view scroll-x="true" style="background: #fff;">
-						<view class="sort-box" v-if="sortList.children && sortList.children.length">
-							<view class="sort-item" v-for="(item, index) in sortList.children" :key="index"
-								@click="changeSort(item, index)" :class="{ on: curSort == index }">
-								<image :src="item.pic" mode="" v-if="item.pic"></image>
-								<image src="/static/images/sort-img.png" mode="" v-else></image>
-								<view class="txt">{{ item.cate_name }}</view>
-							</view>
-						</view>
-					</scroll-view>
-					<view class="product-list" v-if="goodList.length">
-						<view class="product-item" v-for="(item, index) in goodList" @click="goGoodsDetail(item)">
-							<image :src="item.image"></image>
-							<span class="pictrue_log_big pictrue_log_class"
-								v-if="item.activity && item.activity.type === '1'">秒杀</span>
-							<span class="pictrue_log_big pictrue_log_class"
-								v-if="item.activity && item.activity.type === '2'">砍价</span>
-							<span class="pictrue_log_big pictrue_log_class"
-								v-if="item.activity && item.activity.type === '3'">拼团</span>
-							<view class="info">
-								<view class="title line1">{{ item.store_name }}</view>
-								<view class="price-box">
-									<text>￥</text>
-									{{ item.price }}
-								</view>
-							</view>
-						</view>
-					</view>
-					<Loading :loaded="loaded" :loading="loading"></Loading>
-					<view class="" v-if="goodList.length == 0 && loaded">
-						<view class="empty-box">
-							<image src="/static/images/noShopper.png"></image>
-						</view>
-						<recommend :hostProduct="hostProduct"></recommend>
-					</view>
-				</view>
-				<!-- #endif -->
-				<!-- #ifndef  APP-PLUS -->
-				<view class="sort-product" v-if="isSortType == 1" :style="{ marginTop: sortMpTop + 'px' }">
-					<scroll-view scroll-x="true" style="background: #fff;">
-						<view class="sort-box" v-if="sortList.children && sortList.children.length">
-							<view class="sort-item" v-for="(item, index) in sortList.children" :key="index"
-								@click="changeSort(item, index)" :class="{ on: curSort == index }">
-								<image :src="item.pic" mode="" v-if="item.pic"></image>
-								<image src="/static/images/sort-img.png" mode="" v-else></image>
-								<view class="txt">{{ item.cate_name }}</view>
-							</view>
-						</view>
-					</scroll-view>
-					<view class="product-list" v-if="goodList.length">
-						<view class="product-item" v-for="(item, index) in goodList" @click="goGoodsDetail(item)">
-							<image :src="item.image"></image>
-							<span class="pictrue_log_big pictrue_log_class"
-								v-if="item.activity && item.activity.type === '1'">秒杀</span>
-							<span class="pictrue_log_big pictrue_log_class"
-								v-if="item.activity && item.activity.type === '2'">砍价</span>
-							<span class="pictrue_log_big pictrue_log_class"
-								v-if="item.activity && item.activity.type === '3'">拼团</span>
-							<span class="pictrue_log_big pictrue_log_class" v-if="item.checkCoupon">券</span>
-							<view class="info">
-								<view class="title line2">{{ item.store_name }}</view>
-								<view class="price-box">
-									<text>￥</text>
-									{{ item.price }}
-								</view>
-							</view>
-						</view>
-					</view>
-					<Loading :loaded="loaded" :loading="loading"></Loading>
-					<view class="" v-if="goodList.length == 0 && loaded">
-						<view class="empty-box">
-							<image src="/static/images/noShopper.png"></image>
-						</view>
-						<recommend :hostProduct="hostProduct"></recommend>
-					</view>
-				</view>
-				<!-- #endif -->
-				<view class="loadingicon acea-row row-center-wrapper" v-if="tempArr.length && styleConfig[styleConfig.length - 1].name == 'promotionList'">
-					<text class="loading iconfont icon-jiazai" :hidden="loading == false"></text>
-					{{ loadTitle }}
-				</view> 
+				<promotionList></promotionList>
 				<!-- #ifdef MP -->
 				<authorize @onLoadFun="onLoadFun" :isAuto="true" :isShowAuth="true" @authColse="authColse" :isGoIndex="false"></authorize>
 				<!-- #endif -->
-				<couponWindow :window="isCouponShow" @onColse="couponClose" :couponImage="couponObj.image"
-					:couponList="couponObj.list"></couponWindow>
-				<view class="uni-p-b-98" v-if="footerStatus"></view>
-				<view v-if="site_config" class="site-config" @click="goICP">{{ site_config }}</view>
-				<!-- <pageFooter v-if="footerStatus"></pageFooter> -->
-				<view class="foot" v-if="newData.status && newData.status.status">
-					<view class="page-footer" id="target" :style="{'background-color':newData.bgColor.color[0].item}">
-						<view class="foot-item" v-for="(item,index) in newData.menuList" :key="index"
-							@click="goRouter(item)">
-							<block v-if="item.link == activeRouter">
-								<image :src="item.imgList[0]"></image>
-								<view class="txt" :style="{color:newData.activeTxtColor.color[0].item}">{{item.name}}
-								</view>
-							</block>
-							<block v-else>
-								<image :src="item.imgList[1]"></image>
-								<view class="txt" :style="{color:newData.txtColor.color[0].item}">{{item.name}}</view>
-							</block>
-							<div class="count-num"
-								v-if="item.link === '/pages/order_addcart/order_addcart' && countNum > 0">
-								{{countNum}}
-							</div>
-						</view>
-					</view>
-				</view>
-			</view>
-		</view>
-		<view v-else>
-			<view class="error-network">
-				<image src="/static/images/error-network.png"></image>
-				<view class="title">网络连接断开</view>
-				<view class="con">
-					<view class="label">请检查情况：</view>
-					<view class="item">· 在设置中是否已开启网络权限</view>
-					<view class="item">· 当前是否处于弱网环境</view>
-					<view class="item">· 版本是否过低，升级试试吧</view>
-				</view>
-				<view class="btn" @click="reconnect">重新连接</view>
+	
 			</view>
 		</view>
 		<!-- #ifdef APP-PLUS -->
@@ -267,6 +109,7 @@
 	} from 'vuex';
 	import {
 		getDiy,
+		getBanner,
 		getIndexData
 	} from '@/api/api.js';
 	import {
@@ -322,6 +165,12 @@
 		computed: mapGetters(['isLogin', 'cartNum']),
 		data() {
 			return {
+				sortList:[
+					{
+						name:'test',
+					}
+				],
+				banner_lists:[],
 				isShowAuth:true,
 				showPopup: true,
 				showSkeleton: true, //骨架屏显示隐藏
@@ -345,7 +194,6 @@
 				shareInfo: {},
 				footConfig: {},
 				isSortType: 0,
-				sortList: '',
 				sortAll: [],
 				goodPage: 1,
 				goodList: [],
@@ -382,7 +230,7 @@
 			};
 		},
 		onPullDownRefresh() {
-			this.diyData();
+			
 		},
 		created(options) {
 			let that = this
@@ -393,6 +241,7 @@
 					}
 				});
 			})
+			
 			getNavigation().then(res => {
 				this.newData = res.data
 				if (this.newData.status && this.newData.status.status) {
@@ -445,8 +294,9 @@
 				});
 			}
 			// #endif
-			this.diyData();
+			// this.diyData();
 			this.getIndexData();
+			this.getBanner();
 			// #ifdef MP
 			this.getTemlIds();
 			// #endif
@@ -515,6 +365,12 @@
 		},
 		onReady() {},
 		methods: {
+			getBanner(){
+				getBanner().then(res=>{
+					this.banner_lists = res;
+				})
+				
+			},
 			// #ifdef APP-PLUS
 			// 同意隐私协议
 			confirmApp() {

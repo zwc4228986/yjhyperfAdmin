@@ -430,3 +430,14 @@ export function getOpenAdv(data) {
 		noAuth: true
 	});
 }
+
+/**
+ * 获取开屏广告
+ * @returns {*}
+ */
+export function getBanner() {
+	return request.post("/api/banner/lists", {limit:-1}, {
+		URL:3,
+	});
+}
+

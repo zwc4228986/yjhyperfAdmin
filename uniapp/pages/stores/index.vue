@@ -29,10 +29,7 @@
 		</view>
 		
 		<view class='productList'>
-			<!-- -->
-			<view class="circle">
-
-			</view>
+			
 			<view class="longTab acea-row row-middle">
 				<scroll-view scroll-x="true" style="white-space: nowrap; display: flex;height:44rpx;"
 					scroll-with-animation :scroll-left="tabLeft" show-scrollbar="true">
@@ -90,7 +87,6 @@
 				<view class='pictrue'>
 					<image :src="`${image_url}/static/images/noShopper.png`"></image>
 				</view>
-			
 			</view>
 		</view>
 		

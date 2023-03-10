@@ -1,26 +1,25 @@
 <template>
 	<view class="index-product-wrapper" :class="iSshowH?'on':''" :style="'margin-top:'+mbConfig*2+'rpx;'" v-show="!isSortType">
-		<view class="nav-bd" :style="{justifyContent:titleConfig===0?'flex-start':titleConfig===1?'space-around':'flex-end'}">
-			<view class="item" v-for="(item,index) in explosiveMoney" :index="index" @click="ProductNavTab(item.link.activeVal,index)">
-				<view class="txt" :style="{ 'color': index==ProductNavindex ? themeColor : '' }">{{item.chiild[0].val}}</view>
-				<view class="label" :style="{ 'background': index==ProductNavindex ? themeColor : '','color': index==ProductNavindex ? '#fff' : '' }">{{item.chiild[1].val}}</view>
+		<!-- <view class="nav-bd" :style="{justifyContent:titleConfig===0?'flex-start':titleConfig===1?'space-around':'flex-end'}">
+			<view class="item" v-for="(item,index) in explosiveMoney" :index="index" @click="ProductNavTab(item.id,index)">
+				<view class="txt" :style="{ 'color': index==ProductNavindex ? themeColor : '' }">{{item.name}}</view>
+				<view class="label" :style="{ 'background': index==ProductNavindex ? themeColor : '','color': index==ProductNavindex ? '#fff' : '' }">{{item.label}}</view>
 			</view>
-		</view>
+		</view> -->
+		    <u-tabs :list="explosiveMoney" @click="ProductNavTab"></u-tabs>
+		
 		<!-- 首发新品 -->
 		<view class="list-box animated" :class='tempArr.length > 0?"fadeIn on":""'>
 			<view class="item" v-for="(item,index) in tempArr" :key="index" @click="goDetail(item)">
 				<view class="pictrue">
-					<span class="pictrue_log pictrue_log_class" :style="'background-color:'+labelColor" v-if="item.activity && item.activity.type === '1'">秒杀</span>
-					<span class="pictrue_log pictrue_log_class" :style="'background-color:'+labelColor" v-if="item.activity && item.activity.type === '2'">砍价</span>
-					<span class="pictrue_log pictrue_log_class" :style="'background-color:'+labelColor" v-if="item.activity && item.activity.type === '3'">拼团</span>
-					<image :src="item.image" mode="aspectFill"></image>
+					<!-- <span class="pictrue_log pictrue_log_class" :style="'background-color:'+labelColor">新品</span> -->
+					<image :src="item.image.path_format" mode="aspectFill"></image>
 				</view>
 				<view class="text-info">
-					<view class="title line1" v-if="titleShow">{{item.store_name}}</view>
-					<view class="old-price" v-if="opriceShow">{{item.ot_price}}<text>小豆</text></view>
+					<view class="title line1">{{item.name}}</view>
 					<view class="price" :style="{color:fontColor}">
 						<view v-if="priceShow">
-							{{item.price}}<text>小豆</text>
+							{{item.price}}<text>抖币</text>
 						</view>
 						<view class="txt" :style="'border:1px solid '+labelColor+';color:'+labelColor" :class="priceShow?'':'on'" v-if="item.checkCoupon && couponShow">券</view>
 					</view>
@@ -31,6 +30,11 @@
 </template>
 
 <script>
+	import {
+		getProductslist,
+		getCircleCategoryList
+	} from '@/api/store.js';
+	let statusBarHeight = uni.getSystemInfoSync().statusBarHeight * 2 + 'rpx';
 	export default {
 		name: 'promotionList',
 		props: {
@@ -38,13 +42,9 @@
 				type: Object,
 				default: () => {}
 			},
-			tempArr: {
-				type: Array,
-				default: []
-			},
 			iSshowH: {
 				type: Boolean,
-				default: false
+				default: true
 			},
 			isSortType:{
 				type: String | Number,
@@ -53,32 +53,60 @@
 		},
 		data() {
 			return {
+				statusBarHeight:statusBarHeight,
+				tabLeft:0,
 				ProductNavindex: 0,
-				explosiveMoney: this.dataConfig.tabConfig.list,
-				numConfig: this.dataConfig.numConfig.val,
+				tempArr:[],
+				circle_category_id:0,
+				explosiveMoney: [
+					
+				],
+				numConfig: 10,
 				// imgStyle: this.dataConfig.imgStyle.type,
-				mbConfig: this.dataConfig.mbConfig.val,
-				themeColor: this.dataConfig.themeColor.color[0].item,
-				titleShow: this.dataConfig.titleShow.val, //标题是否显示
-				opriceShow: this.dataConfig.opriceShow.val, //原价是否显示
-				priceShow: this.dataConfig.priceShow.val, //价格是否显示
-				couponShow: this.dataConfig.couponShow.val,//优惠券标签是否显示
-				titleConfig: this.dataConfig.titleConfig.type, //标题位置
-				fontColor: this.dataConfig.fontColor.color[0].item,
-				labelColor: this.dataConfig.labelColor.color[0].item
+				mbConfig: 0,
+				themeColor: "#F68326",
+				titleShow: true, //标题是否显示
+				opriceShow: true, //原价是否显示
+				priceShow: true, //价格是否显示
+				couponShow: false,//优惠券标签是否显示
+				titleConfig: 0, //标题位置
+				fontColor:"#F68326" ,
+				labelColor: "#F68326" ,
 			};
 		},
 		created() {
+			
+			this.getCircleCategoryList();
+			this.getProductslist();
+		
+		
 		},
 		methods: {
-			// 首发新品切换
-			ProductNavTab(type, index) {
-				this.ProductNavindex = index;
-				this.$emit('changeTab', type);
+			getCircleCategoryList(){
+				getCircleCategoryList({limit:-1}).then(res=>{
+					res.unshift({
+						'id': 0,
+						'name': '推荐'
+					})
+					this.explosiveMoney = res;
+				})
 			},
-			goDetail(item){
-				this.$emit('detail',item);
-			}
+			getProductslist(){
+				
+				getProductslist({limit:-1,circle_category_id:this.circle_category_id,is_hot:!this.circle_category_id}).then(res=>{
+					this.tempArr = res;
+				})
+			},
+			// 首发新品切换
+			ProductNavTab(item) {
+				this.circle_category_id = item.id;
+				this.getProductslist();
+			},
+			goDetail(item) {
+					uni.navigateTo({
+						url: `/pages/goods_details/index?id=${item.id}`
+					})
+			},
 		}
 	}
 </script>
