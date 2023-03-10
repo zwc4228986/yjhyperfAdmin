@@ -1,4 +1,6 @@
 <template>
+		<view>
+		<view style="width: 100%;" :style="{height:headH}"></view>
 		<view class="mp-header skeleton-rect" :style="{height:headH}">
 			<view class="sys-head" :style="{height:sysHeight}"></view>
 			<view class="serch-box" style="height: 48px;">
@@ -14,12 +16,13 @@
 				</view>
 			</view>
 		</view>
+		</view>
 </template>
 
 <script>
 	let app = getApp();
 	let statusBarHeight = uni.getSystemInfoSync().statusBarHeight * 2 + 'rpx';
-	let headHeight = uni.getSystemInfoSync().statusBarHeight * 2 + 170 + 'rpx';
+	let headHeight = uni.getSystemInfoSync().statusBarHeight * 2 + 160 + 'rpx';
 	let headHeight1 = uni.getSystemInfoSync().statusBarHeight * 2 +120 + 'rpx';
 	import {
 		goPage
@@ -151,6 +154,7 @@
 	/* #endif */
 	/* #ifdef MP || APP-PLUS */
 	.mp-header {
+		position: fixed;
 		left: 0;
 		top: 0;
 		width: 100%;

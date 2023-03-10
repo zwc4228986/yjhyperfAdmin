@@ -6,7 +6,10 @@
 				<view class="label" :style="{ 'background': index==ProductNavindex ? themeColor : '','color': index==ProductNavindex ? '#fff' : '' }">{{item.label}}</view>
 			</view>
 		</view> -->
-		    <u-tabs :list="explosiveMoney" @click="ProductNavTab"></u-tabs>
+		<u-sticky :offset-top="h">
+			  <u-tabs :list="explosiveMoney" @click="ProductNavTab"></u-tabs>
+		</u-sticky>
+		  
 		
 		<!-- 首发新品 -->
 		<view class="list-box animated" :class='tempArr.length > 0?"fadeIn on":""'>
@@ -34,6 +37,7 @@
 		getProductslist,
 		getCircleCategoryList
 	} from '@/api/store.js';
+	let headHeight = uni.getSystemInfoSync().statusBarHeight * 2 + 160 + 'rpx';
 	let statusBarHeight = uni.getSystemInfoSync().statusBarHeight * 2 + 'rpx';
 	export default {
 		name: 'promotionList',
@@ -53,6 +57,7 @@
 		},
 		data() {
 			return {
+				h:headHeight,
 				statusBarHeight:statusBarHeight,
 				tabLeft:0,
 				ProductNavindex: 0,
