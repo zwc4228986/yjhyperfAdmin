@@ -78,20 +78,25 @@ export default {
 				elementpath: true,
 				content_style: "",
 				images_upload_handler: async (blobInfo, success, failure) => {
-					// const data = new FormData();
-					// data.append("file", blobInfo.blob(), blobInfo.filename());
-					// try {
-					// 	const res = await request().url('util/file/upload').params(data).post();
-					//
-					// 	success(res.src);
-					// } catch (error) {
-					// 	failure(error);
-					// }
-					var reader = new FileReader();
-					reader.readAsDataURL(blobInfo.blob())
-					reader.onload = function () {
-						success(this.result);
+					const data = new FormData();
+					data.append("file", blobInfo.blob(), blobInfo.filename());
+					
+					try {
+						const res = await request().url('api/utils/file/upload')
+						.params(data)
+						.addParams({type:'tinymce'})
+						.post();
+						console.log(res);
+						success(res.src);
+					} catch (error) {
+						console.log(error);
+						failure(error);
 					}
+					// var reader = new FileReader();
+					// reader.readAsDataURL(blobInfo.blob())
+					// reader.onload = function () {
+					// 	success(this.result);
+					// }
 				},
 				setup: function (editor) {
 					editor.on("init", function () {

@@ -44,12 +44,8 @@ class Upload
 
         fclose($stream);
 
-        if ($params->get('type','default') == 'tinymce') {
-            return $this->response->json(['location' => env('WEBSITE_FILE_URL') . $filePath]);
-        } else {
-            Success(['id' => $file->id, 'path' => $filePath, 'src' => getFileFullPath($file->id)]);
+        Success(['id' => $file->id, 'path' => $filePath, 'src' => getFileFullPath($file->id)->first()]);
 
-        }
     }
 
 //    #[ApiPost]
