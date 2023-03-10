@@ -2,6 +2,7 @@
 
 namespace App\Modules\Admin\Form;
 
+use App\Modules\Admin\Dao\BannerDao;
 use App\Modules\Admin\Dao\ProductCategoryDao;
 use YjHyperfAdminPligin\Apidog\Annotations\Api;
 use YjHyperfAdminPligin\Apidog\Annotations\ApiParam;
@@ -13,7 +14,8 @@ use YjHyperfAdminPligin\Form\Column\Column;
 class BannerForm extends BaseForm
 {
     public const DELETE = true;
-    public const ADD =  true;
+    public const ADD = true;
+    public const EDIT = true;
 
     protected $yjCode = 'banner';
 
@@ -22,7 +24,8 @@ class BannerForm extends BaseForm
         $colum = Column::create();
         $colum->setRules([
             Column::txt()->setLabel('ID')->setProp('id'),
-            Column::txt()->setLabel('标题')->setProp('name'),
+            Column::txt()->setLabel('标题')->setProp('title'),
+            Column::image()->setLabel('图片')->setProp('image.path_format'),
             Column::txt()->setLabel('排序')->setProp('sort'),
             Column::switch()->setLabel('状态')->setProp('is_show'),
         ]);
@@ -36,7 +39,7 @@ class BannerForm extends BaseForm
     }
 
     #[ApiPost("update")]
-    #[ApiParam("id",'nullable')]
+    #[ApiParam("id", 'nullable')]
     public function update()
     {
 
@@ -44,7 +47,10 @@ class BannerForm extends BaseForm
         $form = Elm::createForm($this->getRoute($id ? 'edit' : 'add'));
 
         $form->setRule([
-            Elm::input('name', '名称')->required(),
+
+            Elm::input('title', '标题')->required(),
+            Elm::input('link', '链接')->required(),
+            Elm::YjUpload()->field('image_id')->title('图标'),
             Elm::number('sort', '排序')->required(),
             Elm::radio('is_show', '状态')->options(function () {
                 return [
@@ -64,10 +70,10 @@ class BannerForm extends BaseForm
             Elm::hidden('id', $id)
         );
 
-        $lists = $form->setTitle($id ? '编辑' : '添加' . '商品分类')->formData(function () use ($id) {
+        $lists = $form->setTitle($id ? '编辑' : '添加' . 'banner分类')->formData(function () use ($id) {
             $formData = [];
             if ($id) {
-                $formData = app(ProductCategoryDao::class)->where('id', $id)->first();
+                $formData = app(BannerDao::class)->where('id', $id)->first();
             }
             return $formData;
         });

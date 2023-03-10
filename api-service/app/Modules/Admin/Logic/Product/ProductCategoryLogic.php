@@ -56,13 +56,15 @@ class ProductCategoryLogic
 
     public function getTreelists($params)
     {
-        $data = $this->productCategoryDao->newSelf()->params($params)->setWith('File')->with()->get();
+        $data = $this->productCategoryDao->newSelf()->params($params)->setWith('File')->get();
 
         return Tree($data->toArray(), 0, 'id', 'pid');
     }
 
+
     public function delete(int $id)
     {
+
         if ($this->productCategoryDao->hasChild($id)) {
             return Error('Product category has Child');
         }

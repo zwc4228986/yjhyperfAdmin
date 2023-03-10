@@ -361,6 +361,13 @@
 							<image src="/static/images/contact.png"></image>
 							<text>联系客服</text>
 						</button>
+						
+						<view class="item"
+							@click="goMenuPage('/pages/users/user_spread_user/index', '我的推广')">
+							<image src="/static/images/b76c1e866cf200c87dc42dc310977873.png"></image>
+							<text>我的推广</text>
+						</view>
+						
 						<!-- #endif -->
 						<!-- #ifdef APP-PLUS -->
 						<view class="item" hover-class="none" @click="goMenuPage('/pages/users/privacy/index')">

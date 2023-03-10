@@ -11,6 +11,6 @@ class BannerDao extends BannerModel
 
     public function lists()
     {
-        return $this->newSelf()->getList();
+        return $this->newSelf()->with('Image')->getList();
     }
 }
