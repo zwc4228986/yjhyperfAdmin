@@ -7,13 +7,13 @@
 				</view>
 				<view class="start-height"></view>
 				<view class="acea-row row-middle">
-					<image class="image" :src="userInfo.avatar"></image>
+					<image class="image" :src="userInfo.icon"></image>
 					<view class="text">
 						<view class="name">{{userInfo.nickname}}</view>
-						<view v-if="userInfo.is_ever_level">永久SVIP会员</view>
-						<view v-else-if="userInfo.is_money_level">SVIP会员 {{userInfo.overdue_time | dateFormat}} 到期
+						<!-- <view v-if="userInfo.is_ever_level">永久SVIP会员</view> -->
+						<view v-if="userInfo.vip_status == 3">SVIP会员 {{userInfo.overdue_time | dateFormat}} 到期
 						</view>
-						<view v-else>您与{{userInfo.shop_name}}商城的第 {{userInfo.register_days}} 天</view>
+						<view v-else>为您提供免费资源服务</view>
 						<view v-else>
 						</view>
 					</view>
@@ -35,14 +35,14 @@
 					<view v-else>开通即享会员权益</view>
 				</view>
 			</view>
-			<view class="buy" @click="pay">开通会员</view>
+			<view class="buy" @click="pay">{{userInfo.vip_status>0?'续费会员':'开通会员'}}</view>
 		</view>
 		
 		<view class="type-section" id="card">
-			<view class="title">
+			<!-- <view class="title">
 				<view class="bold">{{userInfo.is_money_level ? '续费会员' : '开通会员'}}</view>
 				<view>有效期至<text class="time">{{memberEndTime}}</text></view>
-			</view>
+			</view> -->
 			<scroll-view class="scroll" scroll-x="true">
 				<view v-for="item in memberType" :key="item.type" class="item" :class="{on: item.type === type}"
 					@click="checkType(item)">
@@ -70,8 +70,8 @@
 				<view v-for="item in memberRights" :key="item.id" class="acea-row row-middle item">
 					<image class="image" :src="item.pic"></image>
 					<view class="text">
-						<view class="name">{{item.title}}</view>
-						<view>{{item.explain}}</view>
+						<view class="name">{{item.name}}</view>
+						<view>{{item.desc}}</view>
 					</view>
 				</view>
 			</view>
@@ -127,21 +127,22 @@
 			<button class="iconfont icon-guanbi2" @click="closePopup"></button>
 		</view>
 		<payment :payMode="payMode" :pay_close="pay_close" :is-call="true" @onChangeFun="onChangeFun"
-			:order_id="pay_order_id" :totalPrice="totalPrice"></payment>
-		<!-- #ifndef MP -->
-		<home></home>
-		<!-- #endif -->
-		<view v-show="false" v-html="formContent"></view>
+			:order_id="pay_order_id" :totalPrice="totalPrice"></payment> 
+		<popupAd ref="popupAd" @success="startVideo"></popupAd>
+		<uniAdVideo ref="uniAdVideo" @success="activity(1)"></uniAdVideo>
 	</view>
 </template>
 
 <script>
+	import popupAd from '@/components/popupAd';
+	import uniAdVideo from '@/components/uniAdVideo';
 	import home from '@/components/home';
 	import payment from '@/components/payment';
 	import {
 		mapGetters
 	} from "vuex";
 	import {
+		getUserInfo,
 		memberCard,
 		memberCardDraw,
 		memberCardCreate,
@@ -162,6 +163,8 @@
 	export default {
 		components: {
 			home,
+			uniAdVideo,
+			popupAd,
 			payment
 		},
 		filters: {
@@ -224,18 +227,19 @@
 				}
 			}
 		},
-		computed: mapGetters(['isLogin']),
 		onLoad() {
-			if (this.isLogin) {
+			
+			// if (this.isLogin) {
 				this.memberCard();
-				this.groomList();
-				this.getOrderPayType();
-			} else {
-				toLogin();
-			}
+				this.getUserInfo();
+				// this.groomList();
+				// this.getOrderPayType();
+			// } else {
+			// 	toLogin();
+			// }
 		},
 		onReachBottom() {
-			this.groomList();
+			// this.groomList();
 		},
 		methods: {
 			pay() {
@@ -261,39 +265,40 @@
 			back(){
 				uni.navigateBack();
 			},
+			getUserInfo(){
+				getUserInfo().then(res=>{
+					this.userInfo = res;
+				})
+			},
 			// 付费会员数据
 			memberCard() {
 				uni.showLoading({
 					title: '正在加载…'
 				});
-				memberCard().then(res => {
+				memberCard({limit:-1}).then(res => {
 					uni.hideLoading();
 					const {
-						is_get_free,
-						member_coupons,
-						member_explain,
-						member_rights,
-						member_type
-					} = res.data;
-					this.isGetFree = is_get_free;
-					this.userInfo = is_get_free.user_info;
-					this.memberRights = member_rights;
-					this.memberType = member_type;
-					this.memberCoupons = member_coupons;
-					this.memberExplain = member_explain;
-					if (is_get_free.is_record) {
-						this.memberType = this.memberType.filter(item => item.type !== 'free');
-					};
-					this.totalPrice = this.memberType[0].pre_price;
-					this.type = this.memberType[0].type;
-					this.svip = this.memberType[0];
-					this.mc_id = this.memberType[0].mc_id;
-					memberOverdueTime({
-						member_type: this.svip.type,
-						vip_day: this.svip.vip_day
-					}).then(res => {
-						this.memberEndTime = res.data.data;
-					});
+						privilege,
+					} = res;
+					// this.isGetFree = is_get_free;
+					// this.userInfo = is_get_free.user_info;
+					this.memberRights = privilege;
+					// this.memberType = member_type;
+					// this.memberCoupons = member_coupons;
+					// this.memberExplain = member_explain;
+					// if (is_get_free.is_record) {
+					// 	this.memberType = this.memberType.filter(item => item.type !== 'free');
+					// };
+					// this.totalPrice = this.memberType[0].pre_price;
+					// this.type = this.memberType[0].type;
+					// this.svip = this.memberType[0];
+					// this.mc_id = this.memberType[0].mc_id;
+					// memberOverdueTime({
+					// 	member_type: this.svip.type,
+					// 	vip_day: this.svip.vip_day
+					// }).then(res => {
+					// 	this.memberEndTime = res.data.data;
+					// });
 				}).catch(err => {
 					uni.showToast({
 						title: err,

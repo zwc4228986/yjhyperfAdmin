@@ -2,9 +2,9 @@
 	<view>
 		<diy v-if="isDiy"></diy>
 		<ourLoading isFullScreen active @loadSuccess="loadSuccess" text="loading..."  />
-		<ad-interstitial ref="ad" adpid="1216003411" :loadnext="true" v-slot:default="{loading, error}" @load="onadload" @close="onadclose" @error="onaderror">
+		<!-- <ad-interstitial ref="ad" adpid="1216003411" :loadnext="true" v-slot:default="{loading, error}" @load="onadload" @close="onadclose" @error="onaderror">
 		   
-		</ad-interstitial>
+		</ad-interstitial> -->
 	</view>
 </template>
 

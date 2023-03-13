@@ -21,7 +21,10 @@
 				<view class="text-info">
 					<view class="title line1">{{item.name}}</view>
 					<view class="price" :style="{color:fontColor}">
-						<view v-if="priceShow">
+						<view v-if="item.price==0">
+								免费
+						</view>
+						<view v-else>
 							{{item.price}}<text>抖币</text>
 						</view>
 						<view class="txt" :style="'border:1px solid '+labelColor+';color:'+labelColor" :class="priceShow?'':'on'" v-if="item.checkCoupon && couponShow">券</view>

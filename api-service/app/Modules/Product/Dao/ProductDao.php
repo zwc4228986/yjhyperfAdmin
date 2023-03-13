@@ -42,6 +42,16 @@ class ProductDao extends ProductModel
             );
         });
 
+        $params->check('circle_category_id', [0, null], function ($circle_category_id) {
+            $circle_ids = app(Circle::class)
+                ->where('circle_category_id', $circle_category_id)->pluck('id');
+
+            $this->addWhere(
+                $this::query()->whereIn('id', app(ProductCategoryRel::class)
+                    ->whereIn('circle_id', $circle_ids->toArray())->pluck('product_id')->toArray())
+            );
+        });
+
         return $this;
     }
 

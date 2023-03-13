@@ -6,21 +6,19 @@ namespace App\Model;
 
 /**
  * @property int $id 
- * @property string $link 
+ * @property string $name 
+ * @property string $desc 
  * @property int $image_id 
- * @property string $title 
+ * @property int $delete_time 
  * @property \Carbon\Carbon $create_time 
  * @property \Carbon\Carbon $update_time 
- * @property string $delete_time 
- * @property string $video 
- * @property int $is_show 
  */
-class Banner extends Model
+class UserVipPrivilege extends Model
 {
     /**
      * The table associated with the model.
      */
-    protected ?string $table = 'banner';
+    protected ?string $table = 'user_vip_privilege';
 
     /**
      * The attributes that are mass assignable.
@@ -30,6 +28,5 @@ class Banner extends Model
     /**
      * The attributes that should be cast to native types.
      */
-    protected array $casts = ['id' => 'integer', 'image_id' => 'integer', 'create_time' => 'datetime', 'update_time' => 'datetime', 'is_show' => 'integer'];
+    protected array $casts = ['id' => 'integer', 'image_id' => 'integer', 'delete_time' => 'integer', 'create_time' => 'datetime', 'update_time' => 'datetime'];
 }
-

@@ -12,7 +12,7 @@
 					</view>
 					<navigator url="/pages/goods_search/index" class="input acea-row row-middle fillet"
 						hover-class="none"><text class="iconfont icon-sousuo"></text>
-						搜索商品</navigator>
+						搜索资源</navigator>
 				</view>
 			</view>
 		</view>

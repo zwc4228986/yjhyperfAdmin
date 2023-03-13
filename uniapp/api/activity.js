@@ -25,6 +25,7 @@ export function getCombinationList(data) {
 	});
 }
 
+
 /**
  * 拼团详情
  * 
@@ -306,3 +307,9 @@ export function orderDel(data) {
 export function getPresellList(data) {
 	return request.get("advance/list", data);
 }
+
+export function sendVip(){
+	return request.post('/api/activity/send_vip',{},{
+		URL:3
+	})
+} 

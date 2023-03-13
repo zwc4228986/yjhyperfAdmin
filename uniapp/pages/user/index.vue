@@ -130,72 +130,72 @@
 									<view class="txt">优惠券</view>
 								</view> -->
 							</view>
-							<!-- <view class="sign" @click="goSignIn">签到</view> -->
+							 <!-- <view class="sign" @click="goSignIn">签到</view> -->
 						
 						</view>
 					</view>
-				<!-- 	<view class="cardVipA-box">
-						<view class="cardVipA acea-row row-between-wrapper"
-							v-if="userInfo.svip_open && member_style==1">
-							<view class="acea-row row-middle">
-								<view class="icon">
-									<image src="@/static/images/vip-fill.png"></image>
-								</view>
-								<navigator v-if="userInfo.vip_status == 1" url="/pages/annex/vip_paid/index"
-									hover-class="none" class="btn">查看会员权益</navigator>
-								<navigator v-else url="/pages/annex/vip_paid/index" hover-class="none" class="btn">
-									{{ userInfo.overdue_time ? '立即续费' : '点击成为会员' }}
-								</navigator>
+				<view class="cardVipA-box">
+										<view class="cardVipA acea-row row-between-wrapper"
+											v-if="member_style==1">
+											<view class="acea-row row-middle">
+												<view class="icon">
+													<image src="@/static/images/vip-fill.png"></image>
+												</view>
+												<navigator v-if="userInfo.vip_status == 1" url="/pages/annex/vip_paid/index"
+													hover-class="none" class="btn">查看会员权益</navigator>
+												<navigator v-else url="/pages/annex/vip_paid/index" hover-class="none" class="btn">
+													{{ userInfo.overdue_time ? '立即续费' : '点击成为会员' }}
+												</navigator>
+											</view>
+											<view class="left-box">
+												<view v-if="userInfo.vip_status == 1" class="small">永久</view>
+												<view v-else-if="userInfo.vip_status == 3" class="small">会员到期
+													{{ userInfo.overdue_time | dateFormat }}
+												</view>
+												<view v-else-if="userInfo.vip_status == -1" class="small">已过期</view>
+												<view v-else-if="userInfo.vip_status == 2"  class="small">开通会员获得更多会员权益</view>
+											</view>
+											
+										</view>
+										
+										<view class="cardVipB acea-row row-between" v-if="  member_style==3">
+											<view class="left-box acea-row">
+												<view class="pictrue">
+													<image src="../../static/images/member01.png"></image>
+												</view>
+												<view v-if="userInfo.vip_status == 1" class="small">永久</view>
+												<view v-else-if="userInfo.vip_status == 3" class="small">会员到期
+													{{ userInfo.overdue_time | dateFormat }}
+												</view>
+												<view v-else-if="userInfo.vip_status == -1" class="small">已过期</view>
+												<view v-else-if="userInfo.vip_status == 2" class="small">未开通会员</view>
+											</view>
+											<view class="acea-row">
+												<navigator v-if="userInfo.vip_status == 1" url="/pages/annex/vip_paid/index"
+													hover-class="none" class="btn">会员可享多项权益</navigator>
+												<navigator v-else url="/pages/annex/vip_paid/index" hover-class="none" class="btn">
+													{{ userInfo.overdue_time ? '立即续费' : '立即激活' }}
+												</navigator>
+												<text class="iconfont icon-xiangyou btn"></text>
+											</view>
+										</view>
+										<view class="card-vip" v-if=" member_style==2">
+											<view class="left-box">
+												<view class="big">会员可享多项权益</view>
+												<view v-if="userInfo.vip_status == 1" class="small">永久</view>
+												<view v-else-if="userInfo.vip_status == 3" class="small">会员到期
+													{{ userInfo.overdue_time | dateFormat }}
+												</view>
+												<view v-else-if="userInfo.vip_status == -1" class="small">已过期</view>
+												<view v-else-if="userInfo.vip_status == 2" class="small">未开通会员</view>
+											</view>
+											<navigator v-if="userInfo.vip_status == 1" url="/pages/annex/vip_paid/index" hover-class="none"
+												class="btn">查看会员权益</navigator>
+											<navigator v-else url="/pages/annex/vip_paid/index" hover-class="none" class="btn">
+												{{ userInfo.overdue_time ? '立即续费' : '立即激活' }}
+											</navigator>
+										</view>
 							</view>
-							<view class="left-box">
-								<view v-if="userInfo.vip_status == 1" class="small">永久</view>
-								<view v-else-if="userInfo.vip_status == 3" class="small">会员到期
-									{{ userInfo.overdue_time | dateFormat }}
-								</view>
-								<view v-else-if="userInfo.vip_status == -1" class="small">已过期</view>
-								<view v-else-if="userInfo.vip_status == 2"  class="small">开通会员获得更多会员权益</view>
-							</view>
-							
-						</view>
-						
-						<view class="cardVipB acea-row row-between" v-if="userInfo.svip_open && member_style==3">
-							<view class="left-box acea-row">
-								<view class="pictrue">
-									<image src="../../static/images/member01.png"></image>
-								</view>
-								<view v-if="userInfo.vip_status == 1" class="small">永久</view>
-								<view v-else-if="userInfo.vip_status == 3" class="small">会员到期
-									{{ userInfo.overdue_time | dateFormat }}
-								</view>
-								<view v-else-if="userInfo.vip_status == -1" class="small">已过期</view>
-								<view v-else-if="userInfo.vip_status == 2" class="small">未开通会员</view>
-							</view>
-							<view class="acea-row">
-								<navigator v-if="userInfo.vip_status == 1" url="/pages/annex/vip_paid/index"
-									hover-class="none" class="btn">会员可享多项权益</navigator>
-								<navigator v-else url="/pages/annex/vip_paid/index" hover-class="none" class="btn">
-									{{ userInfo.overdue_time ? '立即续费' : '立即激活' }}
-								</navigator>
-								<text class="iconfont icon-xiangyou btn"></text>
-							</view>
-						</view>
-						<view class="card-vip" v-if="userInfo.svip_open && member_style==2">
-							<view class="left-box">
-								<view class="big">会员可享多项权益</view>
-								<view v-if="userInfo.vip_status == 1" class="small">永久</view>
-								<view v-else-if="userInfo.vip_status == 3" class="small">会员到期
-									{{ userInfo.overdue_time | dateFormat }}
-								</view>
-								<view v-else-if="userInfo.vip_status == -1" class="small">已过期</view>
-								<view v-else-if="userInfo.vip_status == 2" class="small">未开通会员</view>
-							</view>
-							<navigator v-if="userInfo.vip_status == 1" url="/pages/annex/vip_paid/index" hover-class="none"
-								class="btn">查看会员权益</navigator>
-							<navigator v-else url="/pages/annex/vip_paid/index" hover-class="none" class="btn">
-								{{ userInfo.overdue_time ? '立即续费' : '立即激活' }}
-							</navigator>
-						</view>
-					</view> -->
 					<view class="circle-wrapper" :class="userInfo.svip_open?'':'height'">
 						<view class="circle-hd flex">
 							<view class="left">我的关注资源分类</view>
@@ -368,6 +368,12 @@
 							<text>我的推广</text>
 						</view>
 						
+						<view class="item"
+							@click="goMenuPage('/pages/users/user_firend/index', '邀请好友')">
+							<image src="/static/images/b76c1e866cf200c87dc42dc310977873.png"></image>
+							<text>邀请好友</text>
+						</view>
+						
 						<!-- #endif -->
 						<!-- #ifdef APP-PLUS -->
 						<view class="item" hover-class="none" @click="goMenuPage('/pages/users/privacy/index')">
@@ -501,6 +507,7 @@
 		mixins: [colors],
 		data() {
 			return {
+				member_style:1,
 				RwMenus: [{
 					name: '任务中心',
 					url: "/pages/task/user/center"
@@ -603,7 +610,6 @@
 				isWeixin: Auth.isWeixin(),
 				//#endif
 				footerSee: false,
-				member_style: 1,
 				my_banner_status: 1,
 				is_diy: uni.getStorageSync('is_diy'),
 			}
@@ -1020,11 +1026,11 @@
 		height: 100%;
 	}
 	.circle-wrapper{
-		background-color: #F68326;
 		padding: 0 30rpx 20rpx 30rpx;
 		.circle-hd{
 			font-size: 28rpx;
-			color: #fff;
+			font-weight: bold;
+			color: #333;
 		}
 		.circle-bd{
 			padding: 10rpx 0;
@@ -1145,7 +1151,7 @@
 		padding:20rpx;
 	}
 	.cardVipA {
-		background: url('#{$app-url}/static/images/user_vip1.png') no-repeat;
+		background: url('#{$app-url}/miniapp/member01.png') no-repeat;
 		background-size: 100% 100%;
 		height: 84rpx;
 		left: 0;
@@ -1420,6 +1426,7 @@
 				border-radius: 16rpx;
 				position: relative;
 				border-bottom: 20rpx solid #F7F7F7;
+				border-top: 20rpx solid #F7F7F7;
 				
 				.order-hd {
 					justify-content: space-between;

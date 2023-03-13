@@ -9,7 +9,7 @@
 					</view>
 					<view class='middle acea-row row-between-wrapper'  >
 						<view class='pictrue'>
-							<image :src='userInfo.avatar'></image>
+							<image :src='userInfo.icon'></image>
 						</view>
 					</view>
 					<navigator class='right acea-row row-middle'   hover-class='none'
@@ -21,7 +21,7 @@
 			</view>
 			
 			<view class="wrap">
-				<!-- <view class="vip-card-wrap">
+				<view class="vip-card-wrap">
 					<view class="left">
 						<view class="pictrue">
 							<image src="/static/images/users/user_sgin/vip.png" />
@@ -34,7 +34,7 @@
 					<view class="right" @click="goMember">
 						<image src="/static/images/users/user_sgin/open-vip.png" />
 					</view>
-				</view> -->
+				</view>
 			
 				<view class="wrap-item">
 					<view class="title">签到 奖励送不停</view>
@@ -127,13 +127,10 @@
 			</view>
 		</view>
 		<popup ref="popup" @signAgain="goSign"></popup>
+		<uniAdVideo ref="uniAdVideo" @success="sign"></uniAdVideo>
 		<view style="position: fixed;bottom: 0;width: 100%;">
 			<ad adpid="1058113774"></ad>
 		</view>
-		<ad-rewarded-video ref="adRewardedVideo" adpid="1705716440" :preload="false" :loadnext="false" :disabled="true"
-		      v-slot:default="{loading, error}" @load="onadload" @close="onadclose" @error="onaderror">
-		      <view class="ad-error" v-if="error">{{error}}</view>
-		</ad-rewarded-video>
 	</view>
 <!-- 			<view class='wrapper'>
 				<view class='list acea-row row-between-wrapper'>
@@ -198,6 +195,7 @@
 
 <script>
 	import popup from "./popupAd.vue"
+	import uniAdVideo from "@/components/uniAdVideo.vue"
 
 	import {
 		toLogin
@@ -230,6 +228,7 @@ import { sign } from 'crypto';
 	export default {
 		components: {
 			popup,
+			uniAdVideo,
 			// #ifdef MP
 			authorize
 			// #endif
@@ -309,20 +308,7 @@ import { sign } from 'crypto';
 						this.$refs.popup.show(this.signSystemList[this.sign_index-1].point,this.tomorrow);
 				})
 			},
-			onadclose(e) {
-			        const detail = e.detail
-			        // 用户点击了【关闭广告】按钮
-			        if (detail && detail.isEnded) {
-			          // 正常播放结束
-			          console.log("onClose " + detail.isEnded);
-					  this.sign();
-			        } else {
-			          // 播放中途退出
-			          console.log("onClose " + detail.isEnded);
-			        }
-			        //this.isLoading = true;
-			        //this.$refs.adRewardedVideo.load();
-			},
+			
 			goReceive(item){
 				signTaskReceive(item.code).then(res=>{
 					this.getUserInfo();
@@ -458,7 +444,7 @@ import { sign } from 'crypto';
 						if (this.isLoading) {
 				          return
 				        }
-				        this.$refs.adRewardedVideo.show();
+				        this.$refs.uniAdVideo.show();
 				// let that = this,
 				// 	sum_sgin_day = that.userInfo.sum_sgin_day;
 				// if (that.userInfo.is_day_sgin) return this.$util.Tips({
@@ -511,7 +497,7 @@ import { sign } from 'crypto';
 				display: flex;
 				flex-direction: column;
 				justify-content: center;
-				flex-basis: 100px;
+				flex-basis: 80px;
 			
 				.bean-title {
 					font-size: 24rpx;

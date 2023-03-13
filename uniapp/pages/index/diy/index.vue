@@ -42,9 +42,8 @@
 			</view>
 		</view>
 		<!-- #endif -->
-		
-		
-		
+		<popupAd ref="popupAd" @success="startVideo"></popupAd>
+		<uniAdVideo ref="uniAdVideo" @success="activity(1)"></uniAdVideo>
 	</view>
 
 </template>
@@ -73,11 +72,13 @@
 	// #endif
 	// #ifdef MP || APP-PLUS
 	import authorize from '@/components/Authorize';
+	import uniAdVideo from '@/components/uniAdVideo';
 	import circle from './components/circle';
 	import activeParty from './components/activeParty';
 	import activePartyPlus from './components/activePartyPlus';
 	import headerSerch from './components/headerSerch';
 	import swipers from './components/swipers';
+	import popupAd from './components/popupAd';
 	
 	import articleList from './components/articleList';
 	import bargain from './components/bargain';
@@ -113,6 +114,9 @@
 		getIndexData
 	} from '@/api/api.js';
 	import {
+		sendVip
+	} from '@/api/activity.js';
+	import {
 		getGroomList,
 		getCategoryList,
 		getProductslist,
@@ -136,6 +140,8 @@
 		components: {
 			recommend,
 			Loading,
+			uniAdVideo,
+			popupAd,
 			circle,
 			// #ifdef H5
 			...mConfig,
@@ -365,6 +371,17 @@
 		},
 		onReady() {},
 		methods: {
+			activity(){
+				sendVip().then(res=>{
+					this.$refs.popupAd.hide();
+					this.$util.Tips({
+						title: '成功获取7天VIP'
+					});
+				})
+			},
+			startVideo(){
+				 this.$refs.uniAdVideo.show();
+			},
 			getBanner(){
 				getBanner().then(res=>{
 					this.banner_lists = res;

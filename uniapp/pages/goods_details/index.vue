@@ -2316,6 +2316,8 @@
 	}
 
 	.product-con .conter {
+		padding:0 20rpx;
+		background-color: #fff;
 		display: block;
 	}
 

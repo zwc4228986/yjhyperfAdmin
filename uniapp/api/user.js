@@ -517,8 +517,10 @@ export function makeUpinvoice(data) {
 /**
  * 会员卡主界面
  */
-export function memberCard() {
-	return request.get('user/member/card/index');
+export function memberCard(data) {
+	return request.post('/api/user/vip/card',data,{
+			URL:3
+	});
 }
 
 /**
