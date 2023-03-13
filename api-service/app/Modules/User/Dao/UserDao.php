@@ -19,8 +19,20 @@ class UserDao extends User
         return $this->where('id', $id)->first();
     }
 
+    public function isVip($userId){
+        $userDao = $this->read($userId);
+        $vip_status = $userDao->vip_status;
+        if($userDao->overdue_time<time()){
+            return 0;
+        }
+        return $vip_status;
+    }
+
     public function opAccount(int $userId, string $accountType, int|float $number, string $logType)
     {
+        if($number==0){
+            return true;
+        }
         Db::beginTransaction();
         try {
             dump($userId);

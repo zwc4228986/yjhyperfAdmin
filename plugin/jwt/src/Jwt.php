@@ -9,8 +9,6 @@ use Hyperf\Di\Annotation\Inject;
  */
 class Jwt
 {
-
-
     #[Inject]
     protected ConfigInterface $config;
 
@@ -20,7 +18,4 @@ class Jwt
         $manager = new Manager($config['provider'], $config['driver']);
         return $manager;
     }
-
-
-
 }

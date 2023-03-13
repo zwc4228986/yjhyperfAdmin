@@ -2,6 +2,7 @@
 
 namespace App\Modules\Product\Logic;
 
+use App\Context\Context;
 use App\Model\Product;
 use App\Model\ProductCategory;
 use App\Model\ProductResource;
@@ -34,9 +35,22 @@ class ProductLogic
     #[Inject]
     protected ProductResourceDao $productResourceDao;
 
-    public function lists(Collection $params)
+    public function lists(Collection $params,$userId=0)
     {
-        return $this->productDao->newSelf()->params($params)->daoWith('Image')->orderByDesc("id")->getList();
+        $userInfo = Context::userInfo();
+        $vipStatus = $userInfo->getVipStatus();
+        $data =  $this->productDao->newSelf()->params($params)->daoWith('Image')->orderByDesc("id")->getList();
+
+
+        $data->transaction(function($item)use ($vipStatus){
+            if($vipStatus){
+                $item->old_price = $item->price;
+                $item->price = 0;
+            }
+            return $item;
+        });
+
+        return $data;
     }
 
     public function add(\Hyperf\Utils\Collection $params)
@@ -112,6 +126,12 @@ class ProductLogic
             'ProductResource'
         ])->first();
 
+        $userInfo = Context::userInfo();
+        $vipStatus = $userInfo->getVipStatus();
+        if($vipStatus) {
+            $data->old_price = $data->price;
+            $data->price = 0;
+        }
         $imags_ids = $data->image_ids;
         $images = getFileFullPath(explode(',', $imags_ids));
         dump($images);

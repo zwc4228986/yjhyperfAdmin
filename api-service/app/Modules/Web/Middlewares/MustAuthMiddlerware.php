@@ -3,6 +3,8 @@
 namespace App\Modules\Web\Middlewares;
 
 use App\Constants\ErrorCode;
+use App\Context\UserInfoContext;
+use App\Context\UserInfoContextHandle;
 use App\Modules\User\Logic\User\TokenLogic;
 use Firebase\JWT\JWT;
 use Hyperf\Context\Context;
@@ -23,39 +25,45 @@ class MustAuthMiddlerware implements MiddlewareInterface
     private TokenLogic $tokenLogic;
 
     #[Inject]
+    protected UserInfoContextHandle $userInfoContextHandle;
+
+    #[Inject]
     protected Response $response;
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        // TODO: Implement process() method.
-//        dump('========');
-//        dump($this->session->get('token'),'111');
-
         $form_type = $request->getHeaderLine('Form-type');
-        if ($form_type == 'routine') {
-            $token = trim(ltrim($request->getHeaderLine('Authori-zation'), 'Bearer'));
-            if ($token) {
-                $userId = $this->tokenLogic->getUserId($token);
-                Context::set('user_id', $userId);
-                return $handler->handle($request);
-            } else {
-                Error(ErrorCode::CODE_ERR_AUTH);
+
+        if($form_type == 'routine'){
+             $this->routine($request);
+        }else{
+            if ($this->session->has('token')) {
+                $userId = $this->tokenLogic->getUserId($this->session->get('token'));
+            }
+            Context::set('user_id', $userId??0);
+            
+            if ($userId == 0) {
+                return $this->response->redirect('/');
             }
         }
 
-
-        $userId = $request->getQueryParams()['autouid'] ?? 7;
-
-        if ($this->session->has('token')) {
-            $userId = $this->tokenLogic->getUserId($this->session->get('token'));
-        }
-
-        if ($userId == 0) {
-            return $this->response->redirect('/');
-        }
-
-        Context::set('user_id', $userId);
         return $handler->handle($request);
+
+
     }
+
+    public function routine($request)
+    {
+        $token = trim(ltrim($request->getHeaderLine('Authori-zation'), 'Bearer'));
+        if ($token) {
+            $userInfo = $this->userInfoContextHandle->init($token);
+            Context::set('userInfo',$userInfo );
+            Context::set('user_id', $userInfo->getUserId());
+        } else {
+            Error(ErrorCode::CODE_ERR_AUTH);
+        }
+    }
+
+
 
 }

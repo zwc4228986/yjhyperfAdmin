@@ -28,7 +28,13 @@ class OrderLogic
     public function buy(int $userId, int $product_id)
     {
         $product = $this->productDao->where('id', $product_id)->first();
+
+
         $product_price = $product->price;
+        if($this->userDao->isVip($userId)){
+            $product_price = 0;
+        }
+
         Db::beginTransaction();
         try {
             $order = $this->orderDao->create([
@@ -44,8 +50,10 @@ class OrderLogic
             ])];
 
             $order->OrderProduct()->saveMany($orderProductData);
+
             //判断是否足够多的币
             $this->userDao->opAccount($userId, 'integral', -$product_price, 'buy_product');
+
             Db::commit();
         } catch (\Exception $exception) {
             Db::rollBack();

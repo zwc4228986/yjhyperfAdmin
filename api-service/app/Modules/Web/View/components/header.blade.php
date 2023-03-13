@@ -66,8 +66,22 @@
             </div>
         </nav>
     </header>
-
 </main>
+
+<nav class="navbar navbar-light bg-white  sticky-top shadow-sm" id="second_nav">
+    <div class="container">
+        <ul class="nav  justify-content-center">
+            <li class="nav-item {{$product_category_pid==0?"active":""}}">
+                <a class="nav-link nav-custom-link " aria-current="page" href="{{url('/')}}">首页</a>
+            </li>
+            @foreach ($nav as $item)
+                <li class="nav-item {{$product_category_pid==$item['id']?"active":""}}">
+                    <a class="nav-link nav-custom-link " aria-current="page" href="{{url('/?product_category_pid='.$item['id'])}}">{{$item['name']}}</a>
+                </li>
+            @endforeach
+        </ul>
+    </div>
+</nav>
 
 <nav class="navbar navbar-light bg-white  sticky-top shadow-sm" id="second_nav">
     <div class="container">
